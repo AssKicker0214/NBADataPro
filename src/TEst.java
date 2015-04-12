@@ -1,6 +1,7 @@
+import DBmanage.InitialDatabase;
 
 public class TEst {
 	public static void main(String[] args) {
-		System.out.println("test");
+        InitialDatabase.initial();
 	}
 }
