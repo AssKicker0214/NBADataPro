@@ -1,6 +1,7 @@
 package fileinput;
 
 import java.io.File;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * Created by chenghao on 15/4/13.
@@ -18,15 +19,14 @@ public class MatchInfoInputThread extends Thread {
 
     @Override
     public void run() {
+
         for (int i = start; i < end; i++) {
             if (files[i].isDirectory() == false) {
-                try {
-                    new MatchInfoInputReader().readMatch(files[i]);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    e.printStackTrace();
 
-                }
+                new MatchInfoInputReader().readMatch(files[i]);
+
             }
         }
+
     }
 }
