@@ -2,6 +2,7 @@ package fileinput;
 
 import DBmanage.InitialDatabase;
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.io.*;
 import java.sql.Connection;
@@ -11,65 +12,70 @@ import java.sql.SQLException;
  * Created by chenghao on 15/4/12.
  */
 public class PlayerFileInput {
-    private void readPlayer() {
-        File file = new File("/Users/chenghao/Downloads/players/info");
+    public void readPlayer() {
+        File file = new File("/Users/chenghao/Documents/迭代一数据/players/info");
         File[] files = file.listFiles();
         Connection connection = InitialDatabase.getConnection();
         QueryRunner queryRunner = new QueryRunner();
         try {
             for (int m = 0; m < files.length; m++) {
-                {
-                    if (!files[m].isDirectory()) {
-                        BufferedReader br = null;
-                        try {
-                            br = new BufferedReader(new InputStreamReader(
-                                    new FileInputStream(files[m])));
-                            String input = null;
-                            br.readLine();
-                            String[] buffs = new String[9];
-                            int i = 0;
-                            while ((input = br.readLine()) != null) {
-                                input = input.trim();
-                                input = input.substring(1, input.length() - 1);
-                                if (input.startsWith("═") || input.startsWith("─"))
-                                    continue;
-                                String[] ss = input.split("│");
-                                buffs[i] = ss[1].trim();
-                                i++;
-                            }
 
-                            buffs[5] = changeDate(buffs[5]);
-
-                            Object[] objects = change(buffs);
-
-                            insert(queryRunner, connection, objects);
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        } finally {
-                            if (br != null) {
-                                try {
-                                    br.close();
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-
+                if (!files[m].isDirectory()) {
+                    if (files[m].getName().startsWith("."))
+                        continue;
+                    BufferedReader br = null;
+                    try {
+                        br = new BufferedReader(new InputStreamReader(
+                                new FileInputStream(files[m])));
+                        String input = null;
+                        br.readLine();
+                        String[] buffs = new String[9];
+                        int i = 0;
+                        while ((input = br.readLine()) != null) {
+                            input = input.trim();
+                            input = input.substring(1, input.length() - 1);
+                            if (input.startsWith("═") || input.startsWith("─"))
+                                continue;
+                            String[] ss = input.split("│");
+                            buffs[i] = ss[1].trim();
+                            i++;
                         }
+                        buffs[5] = changeDate(buffs[5]);
+
+                        Object[] objects = change(buffs);
+
+                        insert(queryRunner, connection, objects);
+
+                        int pid = Integer.parseInt(String.valueOf(queryRunner.query(connection,
+                                "values IDENTITY_VAL_LOCAL()", new ScalarHandler())));
+                        PositionInput.readPosition(connection,queryRunner,pid,String.valueOf(buffs[2]));
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        if (br != null) {
+                            try {
+                                br.close();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                    }
 
                 /*
                  * for (int j = 0; j < objects.length; j++){
 				 * System.out.print(objects[j]+","); } System.out.println();
 				 */
 
-                    }
                 }
             }
 
-        }catch (Exception e){
+
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
                 connection.close();
             } catch (SQLException e) {
@@ -77,6 +83,7 @@ public class PlayerFileInput {
             }
         }
     }
+
     public static String changeDate(String s) {
         String date = "";
         String[] ss = s.split(" ");
@@ -124,14 +131,15 @@ public class PlayerFileInput {
     }
 
     public static void insert(QueryRunner queryRunner, Connection connection, Object[] objects) {
-        String sql = "insert into player values(null,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into player(name,number,position,heightfoot,heightinch,weight,birth,age,exp,school,imgsrc) values(?,?,?,?,?,?,?,?,?,?,?)";
         try {
             queryRunner.update(connection, sql, objects);
         } catch (SQLException e) {
-            String s = e.getMessage();
-            String[] ss = s.split(" ");
-            int index = getIndex(ss[6].substring(1, ss[6].length() - 1));
-            objects[index] = null;
+//            e.printStackTrace();
+            if (objects[8].equals("R"))
+                objects[8] = null;
+            if (objects[1].equals("N/A"))
+                objects[1] = null;
             insert(queryRunner, connection, objects);
 
         }
