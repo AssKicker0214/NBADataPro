@@ -38,15 +38,15 @@ public class InitialDatabase {
         }
     }
 
-    public static Connection getConnection() {
+    public static synchronized Connection getConnection() {
         if (pool.size() == 0)
             initialPool();
         return pool.remove(0);
     }
 
-    public static void initial(){
-        initialPool();
+    public static void initial() {
         initialDataBase();
+        initialPool();
     }
 
     private static void initialPool() {

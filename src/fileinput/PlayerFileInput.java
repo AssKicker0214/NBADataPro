@@ -2,6 +2,7 @@ package fileinput;
 
 import DBmanage.InitialDatabase;
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.io.*;
 import java.sql.Connection;
@@ -37,7 +38,6 @@ public class PlayerFileInput {
                                 continue;
                             String[] ss = input.split("│");
                             buffs[i] = ss[1].trim();
-                            System.out.println(buffs[i]);
                             i++;
                         }
                         buffs[5] = changeDate(buffs[5]);
@@ -46,11 +46,9 @@ public class PlayerFileInput {
 
                         insert(queryRunner, connection, objects);
 
-                        if (buffs[2].equals("")) {
-
-                        } else {
-
-                        }
+                        int pid = Integer.parseInt(String.valueOf(queryRunner.query(connection,
+                                "values IDENTITY_VAL_LOCAL()", new ScalarHandler())));
+                        PositionInput.readPosition(connection,queryRunner,pid,String.valueOf(buffs[2]));
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     } catch (IOException e) {
@@ -133,15 +131,15 @@ public class PlayerFileInput {
     }
 
     public static void insert(QueryRunner queryRunner, Connection connection, Object[] objects) {
-        String sql = "insert into player values(null,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into player(name,number,position,heightfoot,heightinch,weight,birth,age,exp,school,imgsrc) values(?,?,?,?,?,?,?,?,?,?,?)";
         try {
             queryRunner.update(connection, sql, objects);
         } catch (SQLException e) {
-            e.printStackTrace();
-            String s = e.getMessage();
-            String[] ss = s.split(" ");
-            int index = getIndex(ss[6].substring(1, ss[6].length() - 1));
-            objects[index] = null;
+//            e.printStackTrace();
+            if (objects[8].equals("R"))
+                objects[8] = null;
+            if (objects[1].equals("N/A"))
+                objects[1] = null;
             insert(queryRunner, connection, objects);
 
         }
