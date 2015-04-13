@@ -11,16 +11,10 @@ public class MatchInfoInput {
 
         File file = new File("/Users/chenghao/Documents/迭代一数据/matches");
         File[] files = file.listFiles();
-        int gap = 100;
-        int num = (int) Math.ceil(((double) files.length)/gap);
-//        for (int i = 0; i < files.length; i = i + gap) {
-//            if (i + gap < files.length)
-//                new MatchInfoInputThread(files, i, i + gap).start();
-//            else
-//                new MatchInfoInputThread(files, i, files.length).start();
-//        }
-        for (int i = 0;i < files.length;i++){
-            new MatchInfoInputReader().readMatch(files[i]);
+
+        for (int i = 0; i < files.length; i++) {
+            if (files[i].isDirectory() == false)
+                new MatchInfoInputReader().readMatch(files[i]);
         }
 
     }
