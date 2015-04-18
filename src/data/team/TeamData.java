@@ -10,17 +10,16 @@ import org.apache.commons.dbutils.handlers.ArrayListHandler;
 
 import po.teampo.TeamDataPO;
 import po.teampo.TeamInfoPO;
-import data.JDBCUtils;
 import data.Query;
 import data.TeamMaterialSql;
-import dataservice.teamdataservice.TeamDataService;
+import dataservice.team.TeamDataService;
 
 public class TeamData implements TeamDataService {
 
 	@Override
 	public TeamInfoPO findTeamInfo(int TeamId) {
 		String sql = "select * from team where tid=?";
-		QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());
+		QueryRunner queryRunner = new QueryRunner();
 		try {
 			Object[] objects = queryRunner.query(sql, new ArrayHandler(),
 					TeamId);
@@ -67,7 +66,7 @@ public class TeamData implements TeamDataService {
 		list.add("ORtg");
 		list.add("DRtg");
 		String sql = getSql(list, "a.tid=?");
-		QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());
+		QueryRunner queryRunner = new QueryRunner();
 		try {
 			Object[] objects = queryRunner.query(sql, new ArrayHandler(),
 					TeamId);
@@ -84,7 +83,7 @@ public class TeamData implements TeamDataService {
 	public ArrayList<TeamInfoPO> findTeamInfoList() {
 		String sql = "select * from team";
 		ArrayList<TeamInfoPO> arrayList = new ArrayList<TeamInfoPO>();
-		QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());
+		QueryRunner queryRunner = new QueryRunner();
 		try {
 			List<Object[]> resultList = queryRunner.query(sql,
 					new ArrayListHandler());
@@ -106,7 +105,7 @@ public class TeamData implements TeamDataService {
 		String sql = getSql(list);
 		sql += " group by a.tid order by a.tid";
 		ArrayList<TeamDataPO> arrayList = new ArrayList<TeamDataPO>();
-		QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());
+		QueryRunner queryRunner = new QueryRunner();
 		try {
 			List<Object[]> resultList = queryRunner.query(sql,
 					new ArrayListHandler());
@@ -132,7 +131,7 @@ public class TeamData implements TeamDataService {
 			sql += " desc";
 		}
 		ArrayList<TeamDataPO> arrayList = new ArrayList<TeamDataPO>();
-		QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());
+		QueryRunner queryRunner = new QueryRunner();
 		try {
 			List<Object[]> resultList = queryRunner.query(sql,
 					new ArrayListHandler());

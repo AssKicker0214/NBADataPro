@@ -73,4 +73,32 @@ public class DBDDL {
             "    score int ," +
             "    serialid int " +
             ")";
+    static final String createViewAllPid = "create view allpid(pid) as (select pid from player)";
+
+    static final String createViewPid2Tidtemp = "create view pidwithtid(pid,tid) as " +
+            "(select playerscore.pid,playerscore.tid from " +
+            "playerscore ,matchinfo where matchinfo.mid=playerscore.mid " +
+            "and matchinfo.matchtime >= all (select matchinfo.matchtime " +
+            "from matchinfo,playerscore p where p.pid = playerscore.pid " +
+            "and p.mid = matchinfo.mid ) order by pid)";
+
+    static final String createViewPid2Tnametemp = "create view pidwithtname(pid,tname) " +
+            "as (select pidwithtid.pid,team.fullname from pidwithtid natural join team)";
+
+    static final String createViewPid2SStemp = "create view pid2SStemp(pid,startSession) as " +
+            "(select pid,count(mid) from playerscore where playerscore.serialid<6 group by playerscore.pid)";
+
+    static final String createViewPid2SS = "create view pid2SS(pid,startSession) as " +
+            "(select allpid.pid,Pid2SStemp.startSession from allpid natural left outer join Pid2SStemp)";
+
+    static final String createViewPid2DDtemp = "create view pid2DDtemp(pid,DD) as " +
+            "(select pid,count(mid) as DD from playerscore where (score>10 and allbas>10)or(score>10 and helpatt>10)or" +
+            "(score>10 and interp>10)or(score>10 and block>10)or" +
+            "(allbas>10 and helpatt>10)or(allbas>10 and interp>10)or" +
+            "(allbas>10 and block>10)or(helpatt>10 and interp>10)or" +
+            "(helpatt>10 and block>10)or(interp>10 and block>10) group by pid)";
+
+    static final String createViewPid2DD = "create view pid2DD(pid,DD) as " +
+            "(select allpid.pid,pid2DDtemp.DD from allpid natural left outer join pid2DDtemp)";
+    static final String createViewAllPlayerscore = "create view allplayerscore as (select * from allpid natural left outer join playerscore)";
 }

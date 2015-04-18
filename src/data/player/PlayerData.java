@@ -10,10 +10,9 @@ import org.apache.commons.dbutils.handlers.ArrayHandler;
 import org.apache.commons.dbutils.handlers.ArrayListHandler;
 
 import po.playerpo.PlayerPO;
-import data.JDBCUtils;
 import data.PlayerMaterialSql;
 import data.Query;
-import dataservice.playerdataservice.PlayerDataService;
+import dataservice.player.PlayerDataService;
 
 public class PlayerData implements PlayerDataService {
 
@@ -57,7 +56,7 @@ public class PlayerData implements PlayerDataService {
 		arrayList.add("Avgoffensive");
 		arrayList.add("Avgdefense");
 		String sql = getSql(arrayList, "p.pid=?");
-		QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());
+		QueryRunner queryRunner = new QueryRunner();
 		try {
 			Object[] objects = queryRunner.query(sql, new ArrayHandler(),
 					playerId);
@@ -76,7 +75,7 @@ public class PlayerData implements PlayerDataService {
 		sql += " group by p.pid order by p.pid";
 		System.out.println(sql);
 		ArrayList<PlayerPO> arrayList = new ArrayList<PlayerPO>();
-		QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());
+		QueryRunner queryRunner = new QueryRunner();
 		try {
 			List<Object[]> resultList = queryRunner.query(sql,
 					new ArrayListHandler());
@@ -102,7 +101,7 @@ public class PlayerData implements PlayerDataService {
 			sql += " desc";
 		}
 		ArrayList<PlayerPO> arrayList = new ArrayList<PlayerPO>();
-		QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());
+		QueryRunner queryRunner = new QueryRunner();
 		try {
 			List<Object[]> resultList = queryRunner.query(sql,
 					new ArrayListHandler());
@@ -166,7 +165,7 @@ public class PlayerData implements PlayerDataService {
 		String sql = getSql(list);
 		sql += " group by p.pid order by " + mainProperty + " desc limit 0,50";
 		ArrayList<PlayerPO> arrayList = new ArrayList<PlayerPO>();
-		QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());
+		QueryRunner queryRunner = new QueryRunner();
 		try {
 			List<Object[]> resultList = queryRunner.query(sql,
 					new ArrayListHandler());
@@ -193,7 +192,7 @@ public class PlayerData implements PlayerDataService {
 		arrayList.add("Team");
 
 		String sql = getSql(arrayList, "p.pid=?");
-		QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());
+		QueryRunner queryRunner = new QueryRunner();
 		try {
 			Object[] objects = queryRunner.query(sql, new ArrayHandler(),
 					playerId);
@@ -569,7 +568,7 @@ public class PlayerData implements PlayerDataService {
 
 		sql += " group by p.pid order by " + mainProperty + " desc limit 0,50";
 		ArrayList<PlayerPO> arrayList = new ArrayList<PlayerPO>();
-		QueryRunner queryRunner = new QueryRunner(JDBCUtils.getDataSource());
+		QueryRunner queryRunner = new QueryRunner();
 		try {
 			List<Object[]> resultList = queryRunner.query(sql,
 					new ArrayListHandler());
