@@ -36,10 +36,16 @@ public class InitialDatabase {
             stat.execute(DBDDL.createViewPid2SS);
             stat.execute(DBDDL.createViewPid2DDtemp);
             stat.execute(DBDDL.createViewPid2DD);
-            stat.execute("create index pid_index on playerscore(pid)");
-            stat.execute("create index tid_index on playerscore(tid)");
-            stat.execute("create index mid_index on playerscore(mid)");
+            stat.execute("create index pid_index_playerscore on playerscore(pid)");
+            stat.execute("create index tid_index_playerscore on playerscore(tid)");
+            stat.execute("create index mid_index_playerscore on playerscore(mid)");
+            stat.execute("create index mid_index_matchinfo on matchinfo(mid)");
+            stat.execute("create index mid_index_team on team(tid)");
+            stat.execute("create index mid_index_player on player(pid)");
             stat.execute(DBDDL.createViewAllPlayerscore);
+            stat.execute(DBDDL.createViewPidMid2matchtime);
+            stat.execute(DBDDL.createViewPid2L5Mid);
+            stat.execute(DBDDL.createViewl5Playerscore);
             stat.close();
             connection.close();
 

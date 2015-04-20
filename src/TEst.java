@@ -22,11 +22,12 @@ public class TEst {
         System.out.println(System.currentTimeMillis() - a);
         long b = System.currentTimeMillis();
         Connection connection = InitialDatabase.getConnection();
-
+        Statement stat = connection.createStatement();
 
         QueryRunner queryRunner = new QueryRunner();
         List<Object[]> arraylist = queryRunner
-                .query(connection, "select playerscore.mid,playerscore.tid,player.pid,playerscore.position,playerscore.inplacetime,playerscore.throwin,playerscore.throwall,playerscore.throw3in,playerscore.throw3all,playerscore.penaltyin,playerscore.penaltyall,playerscore.attackbas,playerscore.defencebas,playerscore.allbas,playerscore.helpatt,playerscore.interp,playerscore.interp,playerscore.block,playerscore.mistake,playerscore.foul,playerscore.score,playerscore.serialid from player natural left outer join playerscore", new ArrayListHandler());
+                .query(connection, "select * from playerscore,pid2l5mid where playerscore.pid=pid2l5mid.pid and playerscore.mid=pid2l5mid.mid"
+                ,new ArrayListHandler());
 //        System.out.println(arraylist.size());
         for (int i = 0; i < arraylist.size(); i++) {
             Object[] objects = arraylist.get(i);

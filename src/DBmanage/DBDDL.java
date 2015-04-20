@@ -101,4 +101,11 @@ public class DBDDL {
     static final String createViewPid2DD = "create view pid2DD(pid,DD) as " +
             "(select allpid.pid,pid2DDtemp.DD from allpid natural left outer join pid2DDtemp)";
     static final String createViewAllPlayerscore = "create view allplayerscore as (select * from allpid natural left outer join playerscore)";
+    static final String createViewPidMid2matchtime = "create view pidmid2matchtime(pid,mid,matchtime) as (select playerscore.pid,playerscore.mid" +
+            ",matchinfo.matchtime from playerscore,matchinfo " +
+            "where playerscore.mid = matchinfo.mid )";
+    static final String createViewPid2L5Mid = "create view pid2l5mid(pid,mid) as (" +
+            "select a.pid,a.mid from pidmid2matchtime a,pidmid2matchtime b where a.pid=b.pid and a.matchtime<=b.matchtime group by a.pid,a.mid having count(*) <= 5)";
+    static final String createViewl5Playerscore = "create view l5playerscore as (" +
+            "select playerscore.* from (select a.pid,a.mid from pidmid2matchtime a,pidmid2matchtime b where a.pid=b.pid and a.matchtime<=b.matchtime group by a.pid,a.mid having count(*) <= 5) as pid2l5midtemp,playerscore where pid2l5midtemp.pid = playerscore.pid and pid2l5midtemp.mid = playerscore.mid)";
 }
