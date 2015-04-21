@@ -2,6 +2,7 @@ package fileinput;
 
 import DBmanage.InitialDatabase;
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.ArrayListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.io.*;
@@ -33,8 +34,7 @@ public class TeamFileInput {
                 Object[] objects = change(ss);
                 // 第三步 调用 query / update
                 queryRunner.update(connection,sql, objects);
-                Object scalar = queryRunner.query(connection,
-                        "values IDENTITY_VAL_LOCAL()", new ScalarHandler());
+
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
