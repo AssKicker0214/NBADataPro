@@ -9,7 +9,7 @@ import org.apache.commons.dbutils.handlers.ArrayHandler;
 import org.apache.commons.dbutils.handlers.ArrayListHandler;
 
 import po.teampo.TeamDataPO;
-import po.teampo.TeamInfoPO;
+import po.teampo.TeamPO;
 import data.Query;
 import data.TeamMaterialSql;
 import dataservice.team.TeamDataService;
@@ -17,13 +17,13 @@ import dataservice.team.TeamDataService;
 public class TeamData implements TeamDataService {
 
 	@Override
-	public TeamInfoPO findTeamInfo(int TeamId) {
+	public TeamPO findTeamInfo(int TeamId) {
 		String sql = "select * from team where tid=?";
 		QueryRunner queryRunner = new QueryRunner();
 		try {
 			Object[] objects = queryRunner.query(sql, new ArrayHandler(),
 					TeamId);
-			TeamInfoPO infoPO = getTeamInfoPO(objects);
+			TeamPO infoPO = getTeamInfoPO(objects);
 			return infoPO;
 
 		} catch (SQLException e) {
@@ -80,16 +80,16 @@ public class TeamData implements TeamDataService {
 	}
 
 	@Override
-	public ArrayList<TeamInfoPO> findTeamInfoList() {
+	public ArrayList<TeamPO> findTeamInfoList() {
 		String sql = "select * from team";
-		ArrayList<TeamInfoPO> arrayList = new ArrayList<TeamInfoPO>();
+		ArrayList<TeamPO> arrayList = new ArrayList<TeamPO>();
 		QueryRunner queryRunner = new QueryRunner();
 		try {
 			List<Object[]> resultList = queryRunner.query(sql,
 					new ArrayListHandler());
 			for (int i = 0; i < resultList.size(); i++) {
 				Object[] objects = resultList.get(i);
-				TeamInfoPO infoPO = getTeamInfoPO(objects);
+				TeamPO infoPO = getTeamInfoPO(objects);
 				arrayList.add(infoPO);
 			}
 		} catch (SQLException e) {
@@ -517,8 +517,8 @@ public class TeamData implements TeamDataService {
 		}
 	}
 
-	private TeamInfoPO getTeamInfoPO(Object[] objects) {
-		TeamInfoPO po = new TeamInfoPO(Integer.parseInt(String
+	private TeamPO getTeamInfoPO(Object[] objects) {
+		TeamPO po = new TeamPO(Integer.parseInt(String
 				.valueOf(objects[0])), String.valueOf(objects[2]),
 				String.valueOf(objects[1]), String.valueOf(objects[2]),
 				String.valueOf(objects[3]), String.valueOf(objects[4]),

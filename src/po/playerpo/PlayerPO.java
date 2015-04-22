@@ -1,6 +1,6 @@
 package po.playerpo;
 /*
- * 赛季数据
+ * 球员
  */
 public class PlayerPO {
 	public int id;					//球员ID
