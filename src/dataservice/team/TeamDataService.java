@@ -2,11 +2,12 @@ package dataservice.team;
 
 import java.util.ArrayList;
 
+import po.teampo.HotTeamsPO;
 import po.teampo.TeamPO;
 
 public interface TeamDataService {
 	
-	public ArrayList<TeamPO> hotTeams(String sortBy);//热点球队
+	public ArrayList<HotTeamsPO> hotTeams(int num,String sortBy);//热点球队
 	
 	public TeamPO findTeamInfo(int teamId,boolean isAvg);// 返回确切的某一个球队的基本信息
 

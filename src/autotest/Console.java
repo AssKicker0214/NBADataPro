@@ -1,7 +1,12 @@
 package autotest;
 
 import java.io.PrintStream;
+import java.util.ArrayList;
 
+import po.teampo.HotTeamsPO;
+import test.data.TeamHotInfo;
+import data.team.TeamData;
+import dataservice.team.TeamDataService;
 import de.tototec.cmdoption.CmdlineParser;
 import de.tototec.cmdoption.CmdlineParserException;
 
@@ -18,21 +23,38 @@ public class Console {
 			System.err.println("Error: " + e.getMessage() + "\nRun myprogram --help for help.");
 		}
 		
-		//Êı¾İÎ»ÖÃÃüÁî£¬´¦Àí½áÊøºó·µ»Ø
+		//è‹¥å‘½ä»¤ä¸ºè¯»å…¥æ•°æ®åˆ™è¿”å›
 		if(cp.getParsedCommandName()==null)
 			return;
 		
-		//ÇòÔ±/Çò¶ÓÄ£¿éÃüÁî
 //		System.out.println(cp.getParsedCommandName());
 		
 		if(cp.getParsedCommandName().equals("-team")){
 			TeamCommand CmdObj = (TeamCommand)cp.getParsedCommandObject();
-			CmdObj.optionHandler();
-		//	System.out.println(CmdObj.isAll+" "+CmdObj.number+CmdObj.hotNum);
+			TeamDataService tds = new TeamData();
+			if(!CmdObj.isAll){
+				ArrayList<HotTeamsPO> result = tds.hotTeams(CmdObj.hotNum,CmdObj.sortBy);
+				
+				System.out.println(CmdObj.hotNum+CmdObj.sortBy);
+			}else{
+				System.out.println(CmdObj.isAvg+" "+CmdObj.isHigh+CmdObj.hotNum+CmdObj.sortBy+CmdObj.isDesc);
+			}
 		}
 		if(cp.getParsedCommandName().equals("-player")){
 			PlayerCommand CmdObj = (PlayerCommand)cp.getParsedCommandObject();
 			System.out.println(CmdObj.isAvg+" "+CmdObj.number);
 		}
+	}
+	
+	public ArrayList<TeamHotInfo> exchange(ArrayList<HotTeamsPO> po,String field){
+		ArrayList<TeamHotInfo> result = new ArrayList<TeamHotInfo>();
+		for(int i=0;i<po.size();i++){
+			TeamHotInfo temp = new TeamHotInfo();
+			temp.setField(field);
+			temp.setLeague(po.get(i).league);
+			temp.setTeamName(po.get(i).name);
+			temp.setValue(po.get(i).value);
+		}
+		return result;
 	}
 }

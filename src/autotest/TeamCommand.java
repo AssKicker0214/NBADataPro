@@ -52,10 +52,8 @@ public class TeamCommand {
 	
 	public void optionHandler(){
 		if(!isAll){
-			//»»µ„«Ú∂”
 			System.out.println(hotNum+sortBy);
 		}else{
-			//
 			System.out.println(isAvg+" "+isHigh+hotNum+sortBy+isDesc);
 		}
 	}
