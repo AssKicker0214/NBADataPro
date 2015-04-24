@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-import po.Material;
+import vo.Material;
 
 public class TeamMaterialSql {
 	private Set<Material> setA;

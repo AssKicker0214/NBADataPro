@@ -1,6 +1,6 @@
 package data.team;
 
-import po.Material;
+import vo.Material;
 import data.TeamMaterialHandel;
 import data.TeamMaterialSql;
 

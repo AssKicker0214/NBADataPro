@@ -1,6 +1,6 @@
-package po.teampo;
+package vo.teamvo;
 
-public class HotTeamsPO {
+public class HotTeamsVO {
 	public int id;					//球队ID
 	public String league;			//球队所在联盟
 	public String photo;			//球员图片，数据王第一名全身像，其余为球员头像

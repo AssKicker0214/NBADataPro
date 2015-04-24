@@ -1,6 +1,6 @@
-package po.playerpo;
+package vo.playervo;
 
-public class HotPlayersPO {
+public class HotPlayersVO {
 	public String teamPhoto;		//所属球队图片
 	public int id;					//球员ID
 	public String photo;			//球员图片，数据王第一名全身像，其余为球员头像

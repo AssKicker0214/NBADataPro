@@ -3,8 +3,8 @@ package autotest;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
-import po.teampo.HotTeamsPO;
-import po.teampo.TeamPO;
+import vo.teamvo.HotTeamsVO;
+import vo.teamvo.TeamVO;
 import data.team.TeamData;
 import dataservice.team.TeamDataService;
 import de.tototec.cmdoption.CmdCommand;
@@ -61,18 +61,21 @@ public class TeamCommand {
 		TeamTransfer tt = new TeamTransfer();
 		TeamDataService tds = new TeamData();
 		if(isHot){
-			ArrayList<HotTeamsPO> po = tds.hotTeams(hotNum,sortBy);
-			tt.transfer_hot(out, po, sortBy);
+			ArrayList<HotTeamsVO> vo = tds.hotTeams(hotNum,sortBy);
+			tt.transfer_hot(out, vo, sortBy);
 		}else if(isHigh){
 			if(sortBy.equals("-"))
 				sortBy = "winRate";
-			ArrayList<TeamPO> po = tds.sortTeamHigh(number,sortBy, isDesc, isAvg);
-			tt.transfer_h(out, po);
+			ArrayList<TeamVO> vo = tds.sortTeamHigh(number,sortBy, isDesc);
+			tt.transfer_h(out, vo);
 		}else{
 			if(sortBy.equals("-"))
 				sortBy = "score";
-			ArrayList<TeamPO> po = tds.sortTeamNormal(number,sortBy, isDesc, isAvg);
-			tt.transfer_n(out, po);
+			ArrayList<TeamVO> vo = tds.sortTeamNormal(number,sortBy, isDesc, isAvg);
+			if(isAvg)
+				tt.transfer_avgn(out, vo);
+			else
+				tt.transfer_n(out, vo);
 		}
 	}
 }

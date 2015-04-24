@@ -3,9 +3,10 @@ package autotest;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
-import po.playerpo.*;
+import vo.playervo.*;
 import data.player.PlayerData;
 import dataservice.player.PlayerDataService;
+import dataservice.player.sortParam;
 import de.tototec.cmdoption.CmdCommand;
 import de.tototec.cmdoption.CmdOption;
 
@@ -21,7 +22,7 @@ public class PlayerCommand extends TeamCommand{
 	ArrayList<String> positionFilterField = new ArrayList<String>();
 	ArrayList<String> leagueFilterField = new ArrayList<String>();
 	ArrayList<String> ageFilterField = new ArrayList<String>();
-	ArrayList<String> sortField = new ArrayList<String>();
+	ArrayList<sortParam> sortField = new ArrayList<sortParam>();
 	
 	@CmdOption(names={"-king"},args={"sort"},description="show the king of **",
 			conflictsWith={"-avg","-total","-sort","-fliter","-hot","-all"})
@@ -39,8 +40,16 @@ public class PlayerCommand extends TeamCommand{
 	@CmdOption(names={"-sort"},args={"sort"},description="sort data")
 	public void sort(String sort){
 		String[] result = sort.split(",");
-		for(int i=0;i<result.length;i++)
-			sortField.add(result[i]);
+		for(int i=0;i<result.length;i++){
+			sortParam sp = new sortParam();
+			String[] temp = sort.split("."); 
+			sp.field = temp[0];
+			if(temp[1].equals("desc"))
+				sp.isDesc = true;
+			else
+				sp.isDesc = false;
+			sortField.add(sp);
+		}
 	}
 	@CmdOption(names={"-filter"},args={"filter"},description="filter the players")
 	public void fliter(String filter){
@@ -61,13 +70,13 @@ public class PlayerCommand extends TeamCommand{
 		PlayerTransfer pt = new PlayerTransfer();
 		PlayerDataService pds = new PlayerData();
 		if(isHot){
-			ArrayList<HotPlayersPO> po = pds.hotPlayer(hotNum, sortBy); 
+			ArrayList<HotPlayersVO> po = pds.hotPlayer(hotNum, sortBy); 
 			pt.transfer_hot(out, po, sortBy);			
 		}else if(isDailyKing){
-			ArrayList<HotPlayersPO> po = pds.DailyKing(hotNum, sortBy); 
+			ArrayList<HotPlayersVO> po = pds.DailyKing(hotNum, sortBy); 
 			pt.transfer_king(out, po, sortBy);
 		}else if(isSeasonKing){
-			ArrayList<HotPlayersPO> po = pds.SeasonKing(hotNum, sortBy); 
+			ArrayList<HotPlayersVO> po = pds.SeasonKing(hotNum, sortBy); 
 			pt.transfer_king(out, po, sortBy);
 		}else{
 			if(positionFilterField.size()==0)
@@ -79,14 +88,17 @@ public class PlayerCommand extends TeamCommand{
 			
 			if(isHigh){
 				if(sortField.size()==0)
-					sortField.add("score.desc");
-				ArrayList<PlayerPO> po = pds.filterNormal(sortField, positionFilterField, leagueFilterField, ageFilterField, number, isAvg);
+					sortField.add(new sortParam("score",true));
+				ArrayList<PlayerVO> po = pds.filterNormal(sortField, positionFilterField, leagueFilterField, ageFilterField, number, isAvg);
 				pt.transfer_h(out, po);
 			}else{
 				if(sortField.size()==0)
-					sortField.add("realShot.desc");
-				ArrayList<PlayerPO> po = pds.filterHigh(sortField, positionFilterField, leagueFilterField, ageFilterField, number, isAvg);
-				pt.transfer_n(out, po);
+					sortField.add(new sortParam("realShot",true));
+				ArrayList<PlayerVO> po = pds.filterHigh(sortField, positionFilterField, leagueFilterField, ageFilterField, number, isAvg);
+				if(isAvg)
+					pt.transfer_avgn(out, po);
+				else
+					pt.transfer_n(out, po);
 			}
 		}
 	}

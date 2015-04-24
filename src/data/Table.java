@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import po.Material;
+import vo.Material;
 
 public class Table {
 	public static String getTable(Set<Material> set, String t) {

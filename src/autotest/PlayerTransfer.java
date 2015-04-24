@@ -3,85 +3,110 @@ package autotest;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
-import po.playerpo.*;
 import test.data.PlayerHighInfo;
 import test.data.PlayerHotInfo;
 import test.data.PlayerKingInfo;
 import test.data.PlayerNormalInfo;
+import vo.playervo.*;
 
 public class PlayerTransfer {
-	public void transfer_hot(PrintStream out,ArrayList<HotPlayersPO> po,String field){
-		for(int i=0;i<po.size();i++){
+	public void transfer_hot(PrintStream out,ArrayList<HotPlayersVO> vo,String field){
+		for(int i=0;i<vo.size();i++){
 			PlayerHotInfo temp = new PlayerHotInfo();
 			temp.setField(field);
-			temp.setTeamName(po.get(i).name);
-			temp.setPosition(po.get(i).position);
-			temp.setTeamName(po.get(i).teamName);
-			temp.setUpgradeRate(po.get(i).upgradePate);
-			temp.setValue(po.get(i).value);
+			temp.setTeamName(vo.get(i).name);
+			temp.setPosition(vo.get(i).position);
+			temp.setTeamName(vo.get(i).teamName);
+			temp.setUpgradeRate(vo.get(i).upgradePate);
+			temp.setValue(vo.get(i).value);
 			
 			out.print(temp);
 		}
 	}
-	public void transfer_king(PrintStream out,ArrayList<HotPlayersPO> po,String field){
-		for(int i=0;i<po.size();i++){
+	public void transfer_king(PrintStream out,ArrayList<HotPlayersVO> vo,String field){
+		for(int i=0;i<vo.size();i++){
 			PlayerKingInfo temp = new PlayerKingInfo();
 			temp.setField(field);
-			temp.setTeamName(po.get(i).name);
-			temp.setPosition(po.get(i).position);
-			temp.setTeamName(po.get(i).teamName);
-			temp.setValue(po.get(i).value);
+			temp.setTeamName(vo.get(i).name);
+			temp.setPosition(vo.get(i).position);
+			temp.setTeamName(vo.get(i).teamName);
+			temp.setValue(vo.get(i).value);
 			
 			out.print(temp);
 		}
 	}
-	public void transfer_h(PrintStream out,ArrayList<PlayerPO> po){
-		for(int i=0;i<po.size();i++){
+	public void transfer_h(PrintStream out,ArrayList<PlayerVO> vo){
+		for(int i=0;i<vo.size();i++){
 			PlayerHighInfo temp = new PlayerHighInfo();
-			temp.setAssistEfficient(po.get(i).assistEfficient);
-			temp.setBlockShotEfficient(po.get(i).blockShotEfficient);
-			temp.setDefendReboundEfficient(po.get(i).defendReboundEfficient);
-			temp.setFaultEfficient(po.get(i).faultEfficient);
-			temp.setFrequency(po.get(i).frequency);
-			temp.setGmSc(po.get(i).gmSc);
-			temp.setLeague(po.get(i).league);
-			temp.setName(po.get(i).name);
-			temp.setOffendReboundEfficient(po.get(i).offendReboundEfficient);
-			temp.setPosition(po.get(i).position);
-			temp.setRealShot(po.get(i).realShot);
-			temp.setReboundEfficient(po.get(i).reboundEfficient);
-			temp.setShotEfficient(po.get(i).reboundEfficient);
-			temp.setStealEfficient(po.get(i).stealEfficient);
-			temp.setTeamName(po.get(i).teamName);
+			temp.setAssistEfficient(vo.get(i).assistEfficient);
+			temp.setBlockShotEfficient(vo.get(i).blockShotEfficient);
+			temp.setDefendReboundEfficient(vo.get(i).defendReboundEfficient);
+			temp.setFaultEfficient(vo.get(i).faultEfficient);
+			temp.setFrequency(vo.get(i).frequency);
+			temp.setGmSc(vo.get(i).gmSc);
+			temp.setLeague(vo.get(i).league);
+			temp.setName(vo.get(i).name);
+			temp.setOffendReboundEfficient(vo.get(i).offendReboundEfficient);
+			temp.setPosition(vo.get(i).position);
+			temp.setRealShot(vo.get(i).realShot);
+			temp.setReboundEfficient(vo.get(i).reboundEfficient);
+			temp.setShotEfficient(vo.get(i).reboundEfficient);
+			temp.setStealEfficient(vo.get(i).stealEfficient);
+			temp.setTeamName(vo.get(i).teamName);
 			
 			out.print(temp);
 		}
 	}
-	public void transfer_n(PrintStream out,ArrayList<PlayerPO> po){
-		for(int i=0;i<po.size();i++){
+	public void transfer_n(PrintStream out,ArrayList<PlayerVO> vo){
+		for(int i=0;i<vo.size();i++){
 			PlayerNormalInfo temp = new PlayerNormalInfo();
-			temp.setAge(po.get(i).age);
-			temp.setAssist(po.get(i).assist);
-			temp.setBlockShot(po.get(i).blockShot);
-			temp.setDefend(po.get(i).defend);
-			temp.setEfficiency(po.get(i).efficiency);
-			temp.setFault(po.get(i).fault);
-			temp.setFoul(po.get(i).foul);
-			temp.setMinute(po.get(i).minute);
-			temp.setName(po.get(i).name);
-			temp.setNumOfGame(po.get(i).numOfGame);
-			temp.setOffend(po.get(i).offend);
-			temp.setPenalty(po.get(i).penalty);
-			temp.setPoint(po.get(i).point);
-			temp.setRebound(po.get(i).rebound);
-			temp.setShot(po.get(i).shot);
-			temp.setStart(po.get(i).start);
-			temp.setSteal(po.get(i).steal);
-			temp.setTeamName(po.get(i).teamName);
-			temp.setThree(po.get(i).three);
+			temp.setAge(vo.get(i).age);
+			temp.setAssist(vo.get(i).assist);
+			temp.setBlockShot(vo.get(i).blockShot);
+			temp.setDefend(vo.get(i).defend);
+			temp.setEfficiency(vo.get(i).efficiency);
+			temp.setFault(vo.get(i).fault);
+			temp.setFoul(vo.get(i).foul);
+			temp.setMinute(vo.get(i).minute);
+			temp.setName(vo.get(i).name);
+			temp.setNumOfGame(vo.get(i).numOfGame);
+			temp.setOffend(vo.get(i).offend);
+			temp.setPenalty(vo.get(i).penalty);
+			temp.setPoint(vo.get(i).point);
+			temp.setRebound(vo.get(i).rebound);
+			temp.setShot(vo.get(i).shot);
+			temp.setStart(vo.get(i).start);
+			temp.setSteal(vo.get(i).steal);
+			temp.setTeamName(vo.get(i).teamName);
+			temp.setThree(vo.get(i).three);
 			
 			out.print(temp);
 		}
 	}
-
+	public void transfer_avgn(PrintStream out,ArrayList<PlayerVO> vo){
+		for(int i=0;i<vo.size();i++){
+			PlayerNormalInfo temp = new PlayerNormalInfo();
+			temp.setAge(vo.get(i).age);
+			temp.setAssist(vo.get(i).avgAssist);
+			temp.setBlockShot(vo.get(i).avgBlockShot);
+			temp.setDefend(vo.get(i).avgDefend);
+			temp.setEfficiency(vo.get(i).efficiency);
+			temp.setFault(vo.get(i).avgFault);
+			temp.setFoul(vo.get(i).avgFoul);
+			temp.setMinute(vo.get(i).avgMinute);
+			temp.setName(vo.get(i).name);
+			temp.setNumOfGame(vo.get(i).numOfGame);
+			temp.setOffend(vo.get(i).avgOffend);
+			temp.setPenalty(vo.get(i).penalty);
+			temp.setPoint(vo.get(i).avgPoint);
+			temp.setRebound(vo.get(i).avgRebound);
+			temp.setShot(vo.get(i).shot);
+			temp.setStart(vo.get(i).start);
+			temp.setSteal(vo.get(i).avgSteal);
+			temp.setTeamName(vo.get(i).teamName);
+			temp.setThree(vo.get(i).three);
+			
+			out.print(temp);
+		}
+	}
 }

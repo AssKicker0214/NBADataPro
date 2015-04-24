@@ -1,6 +1,6 @@
 package data;
 
-import po.Material;
+import vo.Material;
 
 public class Query {
 	public static final String legQA = "sum(a.sthrowallA)+0.4*sum(a.spenaltyallA)-1.07*sum(a.sattackbasA)/sum(a.sattackbasA+b.sdefencebasB)*sum(a.sthrowallA-a.sthrowinA)+1.07*sum(a.smistakeA)";

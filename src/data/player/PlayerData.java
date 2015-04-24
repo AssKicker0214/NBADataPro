@@ -9,7 +9,7 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.ArrayHandler;
 import org.apache.commons.dbutils.handlers.ArrayListHandler;
 
-import po.playerpo.PlayerPO;
+import vo.playervo.PlayerVO;
 import data.PlayerMaterialSql;
 import data.Query;
 import dataservice.player.PlayerDataService;
@@ -17,7 +17,7 @@ import dataservice.player.PlayerDataService;
 public class PlayerData implements PlayerDataService {
 
 	@Override
-	public PlayerPO findPlayerData(int playerId) {
+	public PlayerVO findPlayerData(int playerId) {
 		ArrayList<String> arrayList = new ArrayList<String>();
 		arrayList.add("timeOnCourt");
 		arrayList.add("startSession");
@@ -60,28 +60,28 @@ public class PlayerData implements PlayerDataService {
 		try {
 			Object[] objects = queryRunner.query(sql, new ArrayHandler(),
 					playerId);
-			PlayerPO dataPO = getPlayerDataPO(arrayList, objects);
+			PlayerVO dataPO = getPlayerDataPO(arrayList, objects);
 			return dataPO;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return new PlayerPO();
+		return new PlayerVO();
 	}
 
 	@Override
-	public ArrayList<PlayerPO> findPlayerList(ArrayList<String> list) {
+	public ArrayList<PlayerVO> findPlayerList(ArrayList<String> list) {
 		String sql = getSql(list);
 		sql += " group by p.pid order by p.pid";
 		System.out.println(sql);
-		ArrayList<PlayerPO> arrayList = new ArrayList<PlayerPO>();
+		ArrayList<PlayerVO> arrayList = new ArrayList<PlayerVO>();
 		QueryRunner queryRunner = new QueryRunner();
 		try {
 			List<Object[]> resultList = queryRunner.query(sql,
 					new ArrayListHandler());
 			for (int i = 0; i < resultList.size(); i++) {
 				Object[] objects = resultList.get(i);
-				PlayerPO dataPO = getPlayerDataPO(list, objects);
+				PlayerVO dataPO = getPlayerDataPO(list, objects);
 				arrayList.add(dataPO);
 			}
 		} catch (SQLException e) {
@@ -93,21 +93,21 @@ public class PlayerData implements PlayerDataService {
 	}
 
 	@Override
-	public ArrayList<PlayerPO> sortPlayerList(ArrayList<String> list,
+	public ArrayList<PlayerVO> sortPlayerList(ArrayList<String> list,
 			String mainProperty, boolean order) {
 		String sql = getSql(list);
 		sql += " group by p.pid order by " + mainProperty;
 		if (order) {
 			sql += " desc";
 		}
-		ArrayList<PlayerPO> arrayList = new ArrayList<PlayerPO>();
+		ArrayList<PlayerVO> arrayList = new ArrayList<PlayerVO>();
 		QueryRunner queryRunner = new QueryRunner();
 		try {
 			List<Object[]> resultList = queryRunner.query(sql,
 					new ArrayListHandler());
 			for (int i = 0; i < resultList.size(); i++) {
 				Object[] objects = resultList.get(i);
-				PlayerPO dataPO = getPlayerDataPO(list, objects);
+				PlayerVO dataPO = getPlayerDataPO(list, objects);
 				arrayList.add(dataPO);
 			}
 		} catch (SQLException e) {
@@ -118,7 +118,7 @@ public class PlayerData implements PlayerDataService {
 	}
 
 	@Override
-	public ArrayList<PlayerPO> findTop50(ArrayList<String> list,
+	public ArrayList<PlayerVO> findTop50(ArrayList<String> list,
 			String mainProperty, ArrayList<String> position,
 			ArrayList<String> division) {
 		String where1 = "playerposition.position='" + position.get(0) + "'";
@@ -136,7 +136,7 @@ public class PlayerData implements PlayerDataService {
 	}
 
 	@Override
-	public ArrayList<PlayerPO> findTop50_pos(ArrayList<String> list,
+	public ArrayList<PlayerVO> findTop50_pos(ArrayList<String> list,
 			String mainProperty, ArrayList<String> position) {
 		String where = "playerposition.position='" + position.get(0) + "'";
 		for (int i = 1; i < position.size(); i++) {
@@ -148,7 +148,7 @@ public class PlayerData implements PlayerDataService {
 	}
 
 	@Override
-	public ArrayList<PlayerPO> findTop50_div(ArrayList<String> list,
+	public ArrayList<PlayerVO> findTop50_div(ArrayList<String> list,
 			String mainProperty, ArrayList<String> division) {
 		String where = "team.subarea='" + division.get(0) + "'";
 		for (int i = 1; i < division.size(); i++) {
@@ -160,18 +160,18 @@ public class PlayerData implements PlayerDataService {
 	}
 
 	@Override
-	public ArrayList<PlayerPO> findTop50(ArrayList<String> list,
+	public ArrayList<PlayerVO> findTop50(ArrayList<String> list,
 			String mainProperty) {
 		String sql = getSql(list);
 		sql += " group by p.pid order by " + mainProperty + " desc limit 0,50";
-		ArrayList<PlayerPO> arrayList = new ArrayList<PlayerPO>();
+		ArrayList<PlayerVO> arrayList = new ArrayList<PlayerVO>();
 		QueryRunner queryRunner = new QueryRunner();
 		try {
 			List<Object[]> resultList = queryRunner.query(sql,
 					new ArrayListHandler());
 			for (int i = 0; i < resultList.size(); i++) {
 				Object[] objects = resultList.get(i);
-				PlayerPO dataPO = getPlayerDataPO(list, objects);
+				PlayerVO dataPO = getPlayerDataPO(list, objects);
 				arrayList.add(dataPO);
 			}
 		} catch (SQLException e) {
@@ -182,7 +182,7 @@ public class PlayerData implements PlayerDataService {
 	}
 
 	@Override
-	public PlayerPO findPlayerInfo(int playerId) {
+	public PlayerVO findPlayerInfo(int playerId) {
 		ArrayList<String> arrayList = new ArrayList<String>();
 		arrayList.add("photo");
 		arrayList.add("conference");
@@ -196,18 +196,18 @@ public class PlayerData implements PlayerDataService {
 		try {
 			Object[] objects = queryRunner.query(sql, new ArrayHandler(),
 					playerId);
-			PlayerPO dataPO = getPlayerDataPO(arrayList, objects);
+			PlayerVO dataPO = getPlayerDataPO(arrayList, objects);
 			return dataPO;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return new PlayerPO();
+		return new PlayerVO();
 	}
 	
 
-	private PlayerPO getPlayerDataPO(ArrayList<String> list, Object[] objects) {
-		PlayerPO dataPO = new PlayerPO();
+	private PlayerVO getPlayerDataPO(ArrayList<String> list, Object[] objects) {
+		PlayerVO dataPO = new PlayerVO();
 		dataPO.id = Integer.parseInt(String.valueOf(objects[0]));
 		System.out.println(dataPO.id);
 		for (int j = 0; j < list.size(); j++) {
@@ -217,7 +217,7 @@ public class PlayerData implements PlayerDataService {
 	}
 
 
-	private void setValue(PlayerPO dataPO, String string, Object object) {
+	private void setValue(PlayerVO dataPO, String string, Object object) {
 		System.out.println(string + ":" + object);
 		switch (string) {
 		case "timeOnCourt":
@@ -553,7 +553,7 @@ public class PlayerData implements PlayerDataService {
 		return "";
 	}
 
-	private ArrayList<PlayerPO> getTOP50(ArrayList<String> list,
+	private ArrayList<PlayerVO> getTOP50(ArrayList<String> list,
 			String mainProperty, String from, String where) {
 		if (mainProperty.equals("s_r_a")) {
 			mainProperty = "(p.score+p.allbas+p.helpatt)";
@@ -567,7 +567,7 @@ public class PlayerData implements PlayerDataService {
 		String sql = getSql(list, where, from);
 
 		sql += " group by p.pid order by " + mainProperty + " desc limit 0,50";
-		ArrayList<PlayerPO> arrayList = new ArrayList<PlayerPO>();
+		ArrayList<PlayerVO> arrayList = new ArrayList<PlayerVO>();
 		QueryRunner queryRunner = new QueryRunner();
 		try {
 			List<Object[]> resultList = queryRunner.query(sql,
@@ -576,7 +576,7 @@ public class PlayerData implements PlayerDataService {
 			list.remove("DD");
 			for (int i = 0; i < resultList.size(); i++) {
 				Object[] objects = resultList.get(i);
-				PlayerPO dataPO = getPlayerDataPO(list, objects);
+				PlayerVO dataPO = getPlayerDataPO(list, objects);
 				arrayList.add(dataPO);
 			}
 		} catch (SQLException e) {

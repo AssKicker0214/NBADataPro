@@ -1,6 +1,6 @@
 package data.player;
 
-import po.Material;
+import vo.Material;
 import data.PlayerMaterialHandel;
 import data.PlayerMaterialSql;
 

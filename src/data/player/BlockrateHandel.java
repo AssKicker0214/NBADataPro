@@ -1,6 +1,6 @@
 package data.player;
 
-import po.Material;
+import vo.Material;
 import data.PlayerMaterialHandel;
 import data.PlayerMaterialSql;
 //盖帽率:球员盖帽数×(球队所有球员上场时间÷5)÷球员上场时间÷对手两分球出手次数
