@@ -1376,11 +1376,38 @@ public class PlayerScoreSaver {
          * @param mid
          */
         private void insert(int pid, int mid){
-            if (isL5Mid1(pid,mid)){
-                return;
-            }else if (isL5Mid2(pid,mid)){
+            ArrayList arrayList = new ArrayList();
+            String date = matchInfoSaver.getDate(mid);
+            for (int i = 0 ; i <= pid_point; i++){
+                if (this.pid[i] == pid){
+                    if (matchInfoSaver.getDate(this.mid[i]).compareTo(date) > 0){
+                        return;
+                    }
+
+                    arrayList.add(i);
+                }
+            }
+
+            if (arrayList.size() < 5){
+                if (pid_point < size - 1) {
+                    pid_point++;
+                    length++;
+                    this.pid[pid_point] = pid;
+                    this.mid[pid_point] = mid;
+                }
                 return;
             }
+
+            int temp = (int)arrayList.get(0);
+            for (int i = 1;  i< arrayList.size(); i++){
+                int a = (int) arrayList.get(i);
+                if (matchInfoSaver.getDate(this.mid[temp]).compareTo(matchInfoSaver.getDate(this.mid[a])) > 0){
+                    temp = a;
+                }
+            }
+
+            this.pid[temp] = pid;
+            this.mid[temp] = mid;
         }
 
         /**
