@@ -13,19 +13,19 @@ public class DBDDL {
             "    area char(1) not null," +
             "    subarea char(9) not null," +
             "    homefield varchar(30)," +
-            "    establishmenttime int, PRIMARY KEY (tid)" +
+            "    establishmenttime double, PRIMARY KEY (tid)" +
             ")";
     static final String createPlayerTable = "create table player(" +
             "    pid int not null generated always as identity," +
             "    name varchar(30)," +
-            "    number int," +
+            "    number double," +
             "    position varchar(5)," +
-            "    heightfoot int," +
-            "    heightinch int," +
-            "    weight int," +
+            "    heightfoot double," +
+            "    heightinch double," +
+            "    weight double," +
             "    birth date," +
-            "    age int," +
-            "    exp int," +
+            "    age double," +
+            "    exp double," +
             "    school varchar(40)," +
             "    imgsrc varchar(30), PRIMARY KEY (pid)" +
             ")";
@@ -36,14 +36,14 @@ public class DBDDL {
             "    matchtime date," +
             "    teamf int ," +
             "    teaml int ," +
-            "    allscoref int," +
-            "    allscorel int, PRIMARY KEY (mid)" +
+            "    allscoref double," +
+            "    allscorel double, PRIMARY KEY (mid)" +
             ")";
     static final String createMatchscoreTable = "create table matchscore(" +
             "    mid int ," +
-            "    mindex int," +
-            "    scoref int," +
-            "    scorel int" +
+            "    mindex double," +
+            "    scoref double," +
+            "    scorel double" +
             ")";
     static final String createPlayerpositionTable = "create table playerposition(" +
             "    pid int," +
@@ -56,22 +56,22 @@ public class DBDDL {
             "    pid int ," +
             "    position char(3)," +
             "    inplacetime time," +
-            "    throwin int ," +
-            "    throwall int ," +
-            "    throw3in int ," +
-            "    throw3all int ," +
-            "    penaltyin int ," +
-            "    penaltyall int ," +
-            "    attackbas int ," +
-            "    defencebas int ," +
-            "    allbas int ," +
-            "    helpatt int ," +
-            "    interp int ," +
-            "    block int ," +
-            "    mistake int ," +
-            "    foul int ," +
-            "    score int ," +
-            "    serialid int " +
+            "    throwin double ," +
+            "    throwall double ," +
+            "    throw3in double ," +
+            "    throw3all double ," +
+            "    penaltyin double ," +
+            "    penaltyall double ," +
+            "    attackbas double ," +
+            "    defencebas double ," +
+            "    allbas double ," +
+            "    helpatt double ," +
+            "    interp double ," +
+            "    block double ," +
+            "    mistake double ," +
+            "    foul double ," +
+            "    score double ," +
+            "    serialid double " +
             ")";
     static final String createViewAllPid = "create view allpid(pid) as (select pid from player)";
 

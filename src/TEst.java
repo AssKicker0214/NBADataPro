@@ -38,14 +38,13 @@ public class TEst {
         System.out.println("------------------------------------------------------------");
         long b = System.currentTimeMillis();
         List<Object[]> arraylist = queryRunner
-                .query(connection, "select * from playerscore2matchinfo,pid2lmtime where playerscore2matchinfo.pid=pid2lmtime.pid,playerscore2matchinfo.matchtime=pid2lmtime.matchtime"
-                ,new ArrayListHandler());
+                .query(connection, "select * from pid2l5mid" ,new ArrayListHandler());
         System.out.println(System.currentTimeMillis() - b);
 //        System.out.println(arraylist.size());
-//        for (int i = 0; i < arraylist.size(); i++) {
-//            Object[] objects = arraylist.get(i);
-//            printArray(objects);
-//        }
+        for (int i = 0; i < arraylist.size(); i++) {
+            Object[] objects = arraylist.get(i);
+            printArray(objects);
+        }
 //        System.out.println(arraylist.size());
 //        System.out.println(System.currentTimeMillis() - b);
 //        List<Object[]> arraylist1 = queryRunner

@@ -1,22 +1,34 @@
-package fileinput;
-
-import DBmanage.InitialDatabase;
-import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.handlers.ScalarHandler;
+import org.junit.Test;
 
 import java.io.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
- * Created by chenghao on 15/4/12.
+ * Created by chenghao on 15/4/23.
  */
-public class PlayerFileInput {
-    public void readPlayer() {
-        File file = new File("/Users/chenghao/Documents/迭代一数据/players/info");
+public class PlayerTest {
+    private PlayerSaver playerSaver;
+
+
+    public PlayerTest(PlayerSaver playerSaver){
+        this.playerSaver = playerSaver;
+    }
+
+    public void test(){
+        readPlayer("/Users/chenghao/Documents/迭代一数据/players/info");
+    }
+
+    public static void main(String[] args){
+        PlayerSaver playerSaver = new PlayerSaver();
+        PlayerTest playerTest = new PlayerTest(playerSaver);
+        playerTest.readPlayer("/Users/chenghao/Documents/迭代一数据/players/info");
+        playerSaver.show();
+    }
+
+    public void readPlayer(String path) {
+        File file = new File(path);
         File[] files = file.listFiles();
-        Connection connection = InitialDatabase.getConnection();
-        QueryRunner queryRunner = new QueryRunner();
         try {
             for (int m = 0; m < files.length; m++) {
 
@@ -41,14 +53,9 @@ public class PlayerFileInput {
                             i++;
                         }
                         buffs[5] = changeDate(buffs[5]);
+                        String[] objects = change(buffs);
 
-                        Object[] objects = change(buffs);
-
-                        insert(queryRunner, connection, objects);
-
-                        int pid = Integer.parseInt(String.valueOf(queryRunner.query(connection,
-                                "values IDENTITY_VAL_LOCAL()", new ScalarHandler())));
-                        PositionInput.readPosition(connection,queryRunner,pid,String.valueOf(buffs[2]));
+                        playerSaver.insert(objects);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     } catch (IOException e) {
@@ -71,16 +78,8 @@ public class PlayerFileInput {
 
                 }
             }
-
-
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
     }
 
@@ -116,8 +115,8 @@ public class PlayerFileInput {
         return date;
     }
 
-    public static Object[] change(String[] ss) {
-        Object[] objects = new Object[11];
+    public static String[] change(String[] ss) {
+        String[] objects = new String[11];
         for (int i = 0; i < 3; i++) {
             objects[i] = ss[i];
         }
@@ -128,21 +127,6 @@ public class PlayerFileInput {
         }
         objects[10] = ss[0];
         return objects;
-    }
-
-    public static void insert(QueryRunner queryRunner, Connection connection, Object[] objects) {
-        String sql = "insert into player(name,number,position,heightfoot,heightinch,weight,birth,age,exp,school,imgsrc) values(?,?,?,?,?,?,?,?,?,?,?)";
-        try {
-            queryRunner.update(connection, sql, objects);
-        } catch (SQLException e) {
-//            e.printStackTrace();
-            if (objects[8].equals("R"))
-                objects[8] = null;
-            if (objects[1].equals("N/A"))
-                objects[1] = null;
-            insert(queryRunner, connection, objects);
-
-        }
     }
 
     public static int getIndex(String s) {
@@ -172,5 +156,4 @@ public class PlayerFileInput {
         }
         return -1;
     }
-
 }
