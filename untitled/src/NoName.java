@@ -37,15 +37,15 @@ public class NoName {
     private int sum_b_score;
     private int sum_b_serialid;
 
-    /**
-     * 根据队伍id，将sum_a_throwin设置为该队伍的总进球数
-     * @param tid
-     * @return
-     */
-    private int set_sum_a_throwin(int tid){
-        sum_a_throwin = playerScoreSaver.get_sum_a_throwin(tid);
-        return  0;
-    }
+//    /**
+//     * 根据队伍id，将sum_a_throwin设置为该队伍的总进球数
+//     * @param tid
+//     * @return
+//     */
+//    private int set_sum_a_throwin(int tid){
+//        sum_a_throwin = playerScoreSaver.get_sum_a_throwin(tid);
+//        return  0;
+//    }
 
 
 }

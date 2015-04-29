@@ -9,13 +9,16 @@ import java.sql.SQLException;
  */
 public class TeamTest {
     private TeamSaver teamSaver;
+    private String path;
+
     @Test
-    public void test(){
-        ReadTeam("/Users/chenghao/Documents/迭代一数据/teams/teams");
+    public void test() {
+        ReadTeam(path);
     }
 
-    public TeamTest(TeamSaver teamSaver){
-    this.teamSaver = teamSaver;
+    public TeamTest(TeamSaver teamSaver, String path) {
+        this.teamSaver = teamSaver;
+        this.path = path;
     }
 
     public void ReadTeam(String path) {

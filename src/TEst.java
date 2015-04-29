@@ -7,14 +7,16 @@ import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.ArrayHandler;
 import org.apache.commons.dbutils.handlers.ArrayListHandler;
 
-import java.io.File;
+import java.io.*;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
 public class TEst {
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, FileNotFoundException {
+        File file = new File("/Users/chenghao/data1.txt");
+        PrintStream pr = new PrintStream(new FileOutputStream(file));
         InitialDatabase.initial();
 
         long a = System.currentTimeMillis();
@@ -43,7 +45,7 @@ public class TEst {
 //        System.out.println(arraylist.size());
         for (int i = 0; i < arraylist.size(); i++) {
             Object[] objects = arraylist.get(i);
-            printArray(objects);
+            printArray(objects,pr);
         }
 //        System.out.println(arraylist.size());
 //        System.out.println(System.currentTimeMillis() - b);
@@ -56,12 +58,12 @@ public class TEst {
 
     }
 
-    public static void printArray(Object[] objects) {
+    public static void printArray(Object[] objects,PrintStream pr) {
         if (objects.length > 0) {
             for (int i = 0; i < objects.length - 1; i++) {
-                System.out.print(objects[i] + " ");
+                pr.print(objects[i] + " ");
             }
-            System.out.println(objects[objects.length - 1]);
+            pr.println(objects[objects.length - 1]);
         }
     }
 }

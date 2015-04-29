@@ -9,13 +9,13 @@ import java.util.regex.Pattern;
  */
 public class MatchTest {
     @Test
-    public void test() {
+    public void test() throws FileNotFoundException {
         long a = System.currentTimeMillis();
         TeamSaver teamSaver = new TeamSaver();
         PlayerSaver playerSaver = new PlayerSaver();
-        TeamTest teamTest = new TeamTest(teamSaver);
+        TeamTest teamTest = new TeamTest(teamSaver,"/Users/chenghao/Documents/迭代一数据/teams/teams");
         teamTest.test();
-        PlayerTest playerTest = new PlayerTest(playerSaver);
+        PlayerTest playerTest = new PlayerTest(playerSaver,"/Users/chenghao/Documents/迭代一数据/players/info");
         playerTest.test();
         File file = new File("/Users/chenghao/Documents/迭代一数据/matches");
         File[] files = file.listFiles();
@@ -26,13 +26,15 @@ public class MatchTest {
             if (files[i].isDirectory() == false)
                 insert(files[i], matchInfoSaver, teamSaver, playerSaver,playerScoreSaver,matchScoreSaver);
         }
+        playerScoreSaver.complete();
         long b = System.currentTimeMillis();
+        System.out.println(b - a );
 //        matchInfoSaver.show();
         //playerSaver.show();
         //teamSaver.show();
 //        playerScoreSaver.show();
         //matchScoreSaver.show();
-        System.out.println(b-a);
+//        System.out.println(b-a);
 
 //        long c = System.currentTimeMillis();
 //        int[] temp =playerScoreSaver.get_sum_b_throw3alls(30);
@@ -41,12 +43,37 @@ public class MatchTest {
 //        for (int i = 0; i < temp.length; i++){
 //            System.out.println(temp[i]);
 //        }
-        long c =System.currentTimeMillis();
-        playerScoreSaver.setPidL5Mid();
-        long d =System.currentTimeMillis();
-        System.out.println(d-c);
-        playerScoreSaver.showPIdL5Mid();
+//        long c =System.currentTimeMillis();
+//        playerScoreSaver.setPidL5Mid();
+//        long d =System.currentTimeMillis();
+//        System.out.println(d-a);
+////        playerScoreSaver.showPIdL5Mid();
+//        long e = System.currentTimeMillis();
+////        TeamData teamData = new TeamData(playerScoreSaver,matchScoreSaver,teamSaver,matchInfoSaver);
+//        long f = System.currentTimeMillis();
+//        System.out.println(f - e);
+//        double[] temp = teamData.getAssistP();
+//        for (int i = 0; i < temp.length;i++){
+//            System.out.println(temp[i]);
+//        }
+    }
 
+    public static void printArray(double[] objects,PrintStream pr) {
+        if (objects.length > 0) {
+            for (int i = 0; i < objects.length - 1; i++) {
+                pr.print(objects[i] + " ");
+            }
+            pr.println(objects[objects.length - 1]);
+        }
+    }
+
+    public static void printArray(int[] objects,PrintStream pr) {
+        if (objects.length > 0) {
+            for (int i = 0; i < objects.length - 1; i++) {
+                pr.print(objects[i] + " ");
+            }
+            pr.println(objects[objects.length - 1]);
+        }
     }
 
     public void insert(File file, MatchInfoSaver matchInfoSaver,

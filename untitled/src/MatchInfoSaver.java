@@ -90,15 +90,15 @@ public class MatchInfoSaver {
      * @return
      */
     public String getDate(int mid) {
-        if (mid <= currentPoint+1)
-            return this.matchtime[mid-1];
+        if (mid <= currentPoint + 1)
+            return this.matchtime[mid - 1];
         return null;
     }
 
     /**
      * 数据插入完成后计算最新五场比赛信息表
      */
-    public void setTidL5Mid(){
+    public void setTidL5Mid() {
         if (tidL5Mid == null)
             tidL5Mid = new TidL5Mid();
         else if (tidL5Mid.getLastModifiedTime() < this.lastModifiedTime)
@@ -107,11 +107,16 @@ public class MatchInfoSaver {
 
     /**
      * 获得最新五场比赛表
+     *
      * @return
      */
-    public TidL5Mid getTidL5Mid(){
+    public TidL5Mid getTidL5Mid() {
         setTidL5Mid();
         return tidL5Mid;
+    }
+
+    public int getNum() {
+        return currentPoint + 1;
     }
 
     private class TidL5Mid {
@@ -124,27 +129,28 @@ public class MatchInfoSaver {
         TidL5Mid() {
             tid = new int[150];
             mid = new int[150];
-            tid_point =-1;
+            tid_point = -1;
             length = 0;
-            for (int i = 0; i<= currentPoint;i++){
+            for (int i = 0; i <= currentPoint; i++) {
                 int tid1 = MatchInfoSaver.this.teamf[i];
                 int tid2 = MatchInfoSaver.this.teaml[i];
                 int mid1 = MatchInfoSaver.this.mid[i];
 
-                insert(tid1,mid1);
-                insert(tid2,mid1);
+                insert(tid1, mid1);
+                insert(tid2, mid1);
             }
         }
 
         /**
          * 插入一条记录
+         *
          * @param tid
          * @param mid
          */
-        private void insert(int tid, int mid){
-            if (isL5Mid1(tid,mid)){
+        private void insert(int tid, int mid) {
+            if (isL5Mid1(tid, mid)) {
                 return;
-            }else if (isL5Mid2(tid,mid)){
+            } else if (isL5Mid2(tid, mid)) {
                 return;
             }
         }
@@ -186,6 +192,7 @@ public class MatchInfoSaver {
 
         /**
          * 在所有比赛信息中查询是否属于最新五场比赛
+         *
          * @param tid
          * @param mid
          * @return
@@ -200,11 +207,11 @@ public class MatchInfoSaver {
                         mids.add(MatchInfoSaver.this.mid[i]);
                 }
             }
-            if (mids.size() < 5){
-                for (int i = 0; i < mids.size(); i++){
-                    insertL5Mid1(tid,(int)mids.get(i));
+            if (mids.size() < 5) {
+                for (int i = 0; i < mids.size(); i++) {
+                    insertL5Mid1(tid, (int) mids.get(i));
                 }
-                insertL5Mid1(tid,mid);
+                insertL5Mid1(tid, mid);
                 return true;
             }
             return false;
@@ -212,15 +219,25 @@ public class MatchInfoSaver {
 
         /**
          * 返回上次修改时间
+         *
          * @return
          */
-        public long getLastModifiedTime(){
+        public long getLastModifiedTime() {
             return lastModifiedTime;
         }
 
-        public int getLength(){
+        public int getLength() {
             return length;
         }
+    }
+
+    /**
+     * 返回上次修改时间
+     *
+     * @return
+     */
+    public long getLastModifiedTime() {
+        return lastModifiedTime;
     }
 
 }

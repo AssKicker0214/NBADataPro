@@ -9,22 +9,19 @@ import java.sql.SQLException;
  */
 public class PlayerTest {
     private PlayerSaver playerSaver;
+    private String path;
 
 
-    public PlayerTest(PlayerSaver playerSaver){
+    public PlayerTest(PlayerSaver playerSaver,String path){
         this.playerSaver = playerSaver;
+        this.path = path;
     }
 
     public void test(){
-        readPlayer("/Users/chenghao/Documents/迭代一数据/players/info");
+        readPlayer(path);
     }
 
-    public static void main(String[] args){
-        PlayerSaver playerSaver = new PlayerSaver();
-        PlayerTest playerTest = new PlayerTest(playerSaver);
-        playerTest.readPlayer("/Users/chenghao/Documents/迭代一数据/players/info");
-        playerSaver.show();
-    }
+
 
     public void readPlayer(String path) {
         File file = new File(path);

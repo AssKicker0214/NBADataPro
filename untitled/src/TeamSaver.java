@@ -13,6 +13,7 @@ public class TeamSaver {
     private String[] homefield;
     private int[] establishmenttime;
 
+
     public TeamSaver() {
         tid = new int[30];
         fullname = new String[30];
@@ -74,14 +75,27 @@ public class TeamSaver {
 
     /**
      * 返回缩写的对应的tid,-1代表找不到
+     *
      * @param abbreviation
      * @return
      */
-    public int getTid(String abbreviation){
-        for (int i = 0; i <= currentPoint;i++){
+    public int getTid(String abbreviation) {
+        for (int i = 0; i <= currentPoint; i++) {
             if (abbreviation.equals(this.abbreviation[i]))
                 return i + 1;
         }
         return -1;
+    }
+
+    public int getNum() {
+        return currentPoint + 1;
+    }
+
+    /**
+     * 返回上次修改时间
+     * @return
+     */
+    public long getLastModifiedTime(){
+        return lastModifiedTime;
     }
 }
