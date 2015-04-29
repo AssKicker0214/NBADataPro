@@ -8,9 +8,10 @@ public class PlayerVO {
 	public String division;			//分区
 	public String name;				//球员名称
 	public String team;				//球队名称
-	public String 	teamName;		//球队名称（缩写）
-	public String 	position;		//球员位置信息
-	public String 	league;			//球员所属联盟
+	public String teamName;		//球队名称（缩写）
+	public String position;		//球员位置信息
+	public String league;			//球员所属联盟
+	public String number;			//球员号码
 
 	//normal info
 	public int 	age;				//球员年龄
