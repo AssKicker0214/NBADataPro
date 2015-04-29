@@ -26,6 +26,7 @@ public class MatchTest {
             if (files[i].isDirectory() == false)
                 insert(files[i], matchInfoSaver, teamSaver, playerSaver,playerScoreSaver,matchScoreSaver);
         }
+        matchInfoSaver.update();
         playerScoreSaver.complete();
         long b = System.currentTimeMillis();
         System.out.println(b - a );

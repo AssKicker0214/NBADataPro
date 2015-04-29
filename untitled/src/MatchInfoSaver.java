@@ -13,6 +13,9 @@ public class MatchInfoSaver {
     private int[] allscoref;
     private int[] allscorel;
     private TidL5Mid tidL5Mid;
+    public static final int DEFAULT = 1;
+    public static final int L5MID = 2;
+    public static final int BEFORE = 3;
 
     public MatchInfoSaver() {
         int size = 4096;
@@ -125,34 +128,80 @@ public class MatchInfoSaver {
         private int[] tid;
         private int tid_point;
         private int[] mid;
+        private int[] pointInL5Mid;
+        private int size;
 
         TidL5Mid() {
-            tid = new int[150];
-            mid = new int[150];
+            this.size = 150;
+            tid = new int[size];
+            mid = new int[size];
+            pointInL5Mid = new int[size/2];
             tid_point = -1;
             length = 0;
             for (int i = 0; i <= currentPoint; i++) {
-                int tid1 = MatchInfoSaver.this.teamf[i];
-                int tid2 = MatchInfoSaver.this.teaml[i];
-                int mid1 = MatchInfoSaver.this.mid[i];
-
-                insert(tid1, mid1);
-                insert(tid2, mid1);
+                insert(i);
             }
         }
 
         /**
          * 插入一条记录
          *
-         * @param tid
-         * @param mid
          */
-        private void insert(int tid, int mid) {
-            if (isL5Mid1(tid, mid)) {
-                return;
-            } else if (isL5Mid2(tid, mid)) {
-                return;
+        private void insert(int m) {
+            int tid1 = MatchInfoSaver.this.teamf[m];
+            int tid2 = MatchInfoSaver.this.teaml[m];
+            int mid1 = MatchInfoSaver.this.mid[m];
+
+            int flag = insert(tid1, mid1);
+            insert(tid2, mid1);
+
+            if (flag > 0){
+                int pos = flag / 2;
+                pointInL5Mid[pos] = m;
             }
+
+        }
+
+        private int insert(int tid,int mid){
+            int[] arrayList = new int[5];
+            int size = 0;
+            String date = getDate(mid);
+            for (int i = 0; i <= tid_point; i++) {
+                if (this.tid[i] == tid) {
+
+                    arrayList[size] = i;
+                    size++;
+                    if (size == 5)
+                        break;
+                }
+            }
+
+            if (size < 5) {
+                if (tid_point < this.size - 1) {
+                    tid_point++;
+                    length++;
+                    this.tid[tid_point] = tid;
+                    this.mid[tid_point] = mid;
+
+                }
+                return tid_point;
+            }
+
+            int temp = arrayList[0];
+            for (int i = 0; i < size; i++) {
+                int a = arrayList[i];
+                if (getDate(this.mid[temp]).compareTo(getDate(this.mid[a])) > 0) {
+                    temp = a;
+                }
+            }
+
+            if (date.compareTo(getDate(this.mid[temp])) > 0) {
+                this.tid[temp] = tid;
+                this.mid[temp] = mid;
+                return temp;
+            }
+
+            return -1;
         }
 
         /**
@@ -171,48 +220,11 @@ public class MatchInfoSaver {
             return false;
         }
 
-        /**
-         * 在缓存中更新一条五场比赛信息
-         *
-         * @param tid
-         * @param mid
-         */
-        private void insertL5Mid1(int tid, int mid) {
-            if (tid_point < 149) {
-                for (int i = 0; i <= tid_point; i++) {
-                    if (this.tid[i] == tid && this.mid[i] == mid)
-                        return;
+        private boolean isL5Mid1(int m) {
+            for (int i = 0; i < length / 2; i++) {
+                if (pointInL5Mid[i] == m) {
+                    return true;
                 }
-                tid_point++;
-                length++;
-                this.tid[tid_point] = tid;
-                this.mid[tid_point] = mid;
-            }
-        }
-
-        /**
-         * 在所有比赛信息中查询是否属于最新五场比赛
-         *
-         * @param tid
-         * @param mid
-         * @return
-         */
-        private boolean isL5Mid2(int tid, int mid) {
-            ArrayList mids = new ArrayList();
-            String date = getDate(mid);
-            for (int i = 0; i <= currentPoint; i++) {
-                if (MatchInfoSaver.this.teamf[i] == tid ||
-                        MatchInfoSaver.this.teaml[i] == tid) {
-                    if (MatchInfoSaver.this.matchtime[i].compareTo(date) > 0)
-                        mids.add(MatchInfoSaver.this.mid[i]);
-                }
-            }
-            if (mids.size() < 5) {
-                for (int i = 0; i < mids.size(); i++) {
-                    insertL5Mid1(tid, (int) mids.get(i));
-                }
-                insertL5Mid1(tid, mid);
-                return true;
             }
             return false;
         }
@@ -229,7 +241,12 @@ public class MatchInfoSaver {
         public int getLength() {
             return length;
         }
+
+        public int[] getPointInL5Mid(){
+            return pointInL5Mid;
+        }
     }
+
 
     /**
      * 返回上次修改时间
@@ -238,6 +255,66 @@ public class MatchInfoSaver {
      */
     public long getLastModifiedTime() {
         return lastModifiedTime;
+    }
+
+    public int[][] getMatchNum(int type){
+        int[][] res = new int[2][30];
+        int[] points;
+        int length;
+        if (type == DEFAULT){
+            points = tidDefaultMid;
+            length = tidDefaultMid.length;
+        }else if (type == L5MID){
+            points = getTidL5Mid().getPointInL5Mid();
+            length = getTidL5Mid().getLength() / 2;
+        }else {
+            points = tidBeforeMid;
+            length = tidBeforeMid.length;
+        }
+
+        for (int j = 0; j < length; j++){
+            int i = points[j];
+            int mid = this.mid[i];
+            int teamf = this.teamf[i];
+            int teaml = this.teaml[i];
+
+            int score1 = this.allscoref[i];
+            int score2 = this.allscoref[i];
+
+            if (score1 > score2){
+                res[0][teamf - 1] = res[0][teamf - 1] + 1;
+            }
+
+            if (score1 < score2){
+                res[0][teaml - 1] = res[0][teaml - 1] + 1;
+            }
+
+            res[1][teamf -1] = res[1][teamf -1] + 1;
+            res[1][teaml -1] = res[1][teaml -1] + 1;
+        }
+        return  res;
+    }
+
+    private int[] tidDefaultMid;
+    private int[] tidBeforeMid;
+
+    public void setMid(){
+        tidDefaultMid = new int[getNum()];
+        tidBeforeMid = new int[getNum() - getTidL5Mid().length/2];
+
+        int m = 0;
+        for (int i = 0 ;i <= currentPoint; i++){
+            tidDefaultMid[i] = i;
+            if (getTidL5Mid().isL5Mid1(i)){
+                tidBeforeMid[m] = i;
+                m++;
+            }
+        }
+    }
+
+    public void update(){
+        setTidL5Mid();
+        setMid();
     }
 
 }

@@ -11,6 +11,10 @@ public class PlayerScoreSaver {
     private MatchInfoSaver matchInfoSaver;
     private TeamSaver teamSaver;
 
+    public static final int DEFAULT = 1;
+    public static final int L5MID = 2;
+    public static final int BEFORE = 3;
+
     private long lastModifiedTime;
     private int currentPoint;
     private int[] mid;
@@ -88,12 +92,15 @@ public class PlayerScoreSaver {
 //                setPidBeforeMid();
 //            }
 //        }.start();
-        playerDataDefault = new PlayerData(pidDefaultMid,pidDefaultMid.length);
-        teamDataDefault = new TeamData(pidDefaultMid);
+//        playerDataDefault = new PlayerData(pidDefaultMid,pidDefaultMid.length);
+//        teamDataDefault = new TeamData(DEFAULT,pidDefaultMid,pidDefaultMid.length);
+
         setPidL5Mid();
         setPidBeforeMid();
-        playerDataL5 = new PlayerData(pidL5Mid.getPointInL5Mid(),pidL5Mid.getLength());
-        playerDataBefore = new PlayerData(pidBeforeMid, pidBeforeMid.length);
+//        playerDataL5 = new PlayerData(pidL5Mid.getPointInL5Mid(),pidL5Mid.getLength());
+//        playerDataBefore = new PlayerData(pidBeforeMid, pidBeforeMid.length);
+//        teamDataDefault = new TeamData(L5MID,pidL5Mid.getPointInL5Mid(),pidL5Mid.getLength());
+//        teamDataDefault = new TeamData(BEFORE,pidBeforeMid,pidBeforeMid.length);
     }
 
     /**
@@ -2409,19 +2416,21 @@ public class PlayerScoreSaver {
         private void insert(int m) {
             int pid = PlayerScoreSaver.this.pid[m];
             int mid = PlayerScoreSaver.this.mid[m];
-            ArrayList arrayList = new ArrayList();
+            int[] arrayList = new int[5];
+            int size = 0;
             String date = matchInfoSaver.getDate(mid);
             for (int i = 0; i <= pid_point; i++) {
                 if (this.pid[i] == pid) {
 
-                    arrayList.add(i);
-                    if (arrayList.size() == 5)
+                    arrayList[size] = i;
+                    size++;
+                    if (size == 5)
                         break;
                 }
             }
 
-            if (arrayList.size() < 5) {
-                if (pid_point < size - 1) {
+            if (size < 5) {
+                if (pid_point < this.size - 1) {
                     pid_point++;
                     length++;
                     this.pid[pid_point] = pid;
@@ -2431,9 +2440,9 @@ public class PlayerScoreSaver {
                 return;
             }
 
-            int temp = (int) arrayList.get(0);
-            for (int i = 0; i < arrayList.size(); i++) {
-                int a = (int) arrayList.get(i);
+            int temp = arrayList[0];
+            for (int i = 0; i < size; i++) {
+                int a = arrayList[i];
                 if (matchInfoSaver.getDate(this.mid[temp]).compareTo(matchInfoSaver.getDate(this.mid[a])) > 0) {
                     temp = a;
                 }
@@ -2453,7 +2462,7 @@ public class PlayerScoreSaver {
          * @return
          */
         public boolean isInPointInL5Mid(int m) {
-            for (int i = 0; i < this.length; i++) {
+            for (int i = 0; i < this.length ; i++) {
                 if (m == pidL5Mid.pointInL5Mid[i])
                     return true;
             }
@@ -2585,6 +2594,8 @@ public class PlayerScoreSaver {
         private int[] a_mistake;
         private int[] a_foul;
         private int[] a_score;
+        private int[] a_matchNum;
+        private int[] a_winNum;
         private int[] b_throwin;
         private int[] b_throwall;
         private int[] b_penaltyall;
@@ -2592,7 +2603,7 @@ public class PlayerScoreSaver {
         private int[] b_defencebas;
         private int[] b_mistake;
         private int[] b_score;
-
+        private int type;
 
         private double[] FPG;
         private double[] TPSP;
@@ -2627,7 +2638,8 @@ public class PlayerScoreSaver {
             }
         }
 
-        private void setTeamDataLevel1(int[] points) {
+        private void setTeamDataLevel1() {
+
             a_throwin = new int[teamSaver.getNum()];
             a_throwall = new int[teamSaver.getNum()];
             a_throw3in = new int[teamSaver.getNum()];
@@ -2642,6 +2654,9 @@ public class PlayerScoreSaver {
             a_mistake = new int[teamSaver.getNum()];
             a_foul = new int[teamSaver.getNum()];
             a_score = new int[teamSaver.getNum()];
+//            int[][] match_temp = matchInfoSaver.getMatchNum(type);
+//            a_matchNum = match_temp[1];
+//            a_winNum = match_temp[0];
             b_throwin = new int[teamSaver.getNum()];
             b_throwall = new int[teamSaver.getNum()];
             b_penaltyall = new int[teamSaver.getNum()];
@@ -2650,7 +2665,7 @@ public class PlayerScoreSaver {
             b_mistake = new int[teamSaver.getNum()];
             b_score = new int[teamSaver.getNum()];
 
-            for (int j = 0; j < points.length; j++) {
+            for (int j = 0; j < length; j++) {
                 int i = points[j];
                 if (PlayerScoreSaver.this.throwin[i] > 0) {
                     int tid = PlayerScoreSaver.this.tid[i];
@@ -2682,10 +2697,12 @@ public class PlayerScoreSaver {
         }
 
         private int[] points;
-
-        TeamData(int[] points) {
+        private int length;
+        TeamData(int type,int[] points,int length) {
             this.points = points;
-            setTeamDataLevel1(points);
+            this.type = type;
+            this.length =length;
+            setTeamDataLevel1();
             setTeamDataLevel2();
         }
     }
@@ -2694,6 +2711,7 @@ public class PlayerScoreSaver {
     class PlayerData {
 
         private long lastModifiedTime;
+
 
         private int[] p_inplacetime;
         private int[] p_throwin;
@@ -2728,6 +2746,9 @@ public class PlayerScoreSaver {
         private int[] p_mistakeTeam;
         private int[] p_mistakeTeamB;
         private int[] p_inplacetimeTeam;
+        private int[][] p_tid;
+        private int[] p_matchNum;
+        private int[] p_startSession;
 
         private void setPlayerDataLevel2() {
             p_inplacetime = new int[playerSaver.getNum()];
@@ -2764,11 +2785,36 @@ public class PlayerScoreSaver {
             p_mistakeTeam = new int[playerSaver.getNum()];
             p_mistakeTeamB = new int[playerSaver.getNum()];
             pLegB = new double[playerSaver.getNum()];
+            p_tid = new int [playerSaver.getNum()][2];
+            p_matchNum = new int [playerSaver.getNum()];
+            p_startSession = new int [playerSaver.getNum()];
+
+            for (int i = 0; i < p_tid.length;i++){
+                p_tid[i][0] = -1;
+            }
+
             for (int j = 0; j < length; j++) {
                 int i = points[j];
                 int pid = PlayerScoreSaver.this.pid[i];
                 int tid = PlayerScoreSaver.this.tid[i];
                 int mid = PlayerScoreSaver.this.mid[i];
+
+                if (serialid[i] <= 5){
+                    p_startSession[pid - 1] = p_startSession[pid - 1] + 1;
+                }
+
+                p_matchNum[pid - 1] = p_matchNum[pid - 1] + 1;
+
+                String date = matchInfoSaver.getDate(mid);
+                if (p_tid[pid - 1][0] == -1){
+                    p_tid[pid - 1][0] = tid;
+                    p_tid[pid - 1][1] = mid;
+                }else{
+                    if (date.compareTo(matchInfoSaver.getDate(p_tid[pid - 1][1])) > 0){
+                        p_tid[pid - 1][0] = tid;
+                        p_tid[pid - 1][1] = mid;
+                    }
+                }
 
                 if (inplacetime[i] > 0) {
                     p_inplacetime[pid - 1] = p_inplacetime[pid - 1] + inplacetime[i];
@@ -3047,6 +3093,8 @@ public class PlayerScoreSaver {
         private int[][] mid_mistake;
         private int[][] mid_penaltyall;
         private int[][] mid_allbas;
+
+
 
         private void setPlayerDataLevel1() {
             mid_inplacetime = new int[matchInfoSaver.getNum()][4];
