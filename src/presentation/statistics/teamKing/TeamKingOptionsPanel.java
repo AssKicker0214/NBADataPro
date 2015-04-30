@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import ui.common.SelectLabel;
+import presentation.common.SelectLabel;
 
 public class TeamKingOptionsPanel extends JPanel {
 

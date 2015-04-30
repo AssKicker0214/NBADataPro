@@ -3,13 +3,13 @@ package presentation.player;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import ui.common.DynamicBar;
+import presentation.common.DynamicBar;
+
 
 public class SingleVSBarLabel extends JLabel{
 

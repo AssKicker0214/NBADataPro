@@ -12,7 +12,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import ui.player.SingleBarLabel;
+import presentation.player.SingleBarLabel;
+
 
 public class PlayerMiddle_ContrastLeaguePanel extends JPanel {
 	

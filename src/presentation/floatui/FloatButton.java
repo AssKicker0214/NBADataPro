@@ -1,6 +1,5 @@
 package presentation.floatui;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -14,7 +13,8 @@ import java.util.TimerTask;
 
 import javax.swing.*;
 
-import ui.main.IMainFrame;
+import presentation.main.IMainFrame;
+
 
 public class FloatButton extends JLabel implements MouseMotionListener, MouseListener, ComponentListener{
 

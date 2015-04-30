@@ -1,11 +1,11 @@
 package presentation.floatui;
 
 import java.awt.Color;
-import java.awt.Dimension;
 
 import javax.swing.*;
 
-import ui.main.IMainFrame;
+import presentation.main.IMainFrame;
+
 
 public class FloatPane extends JPanel implements IFloatPane{
 

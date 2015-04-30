@@ -1,4 +1,4 @@
-package presentation.team.teamDetail;
+package presentation.player;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -14,31 +14,32 @@ import javax.swing.JPanel;
 import presentation.common.SelectLabel;
 import presentation.table.TablePane;
 
-public class TeamMemberPanel extends JPanel{
+public class PlayerDataList  extends JPanel{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
 	JLabel TitleLabel;
 	JLabel ButtonsBGLabel;
 	
 	public SelectLabel basicInfoButton;//信息
-	public SelectLabel dataButton;//数据
+	public SelectLabel NormalInfoButton;//普通数据
+	public SelectLabel HighInfoButton;//高阶数据
 	
 	Color entered = new Color(30,80,140);
 	Color pressed = new Color(42,109,183);
 	Color exicted= new Color(26,70,122);
 
-	TablePane membersBasicInfoTable;
-	TablePane membersDataTable;
+	TablePane BasicInfoTable;
+	TablePane NormalInfoTable;
+	TablePane HighInfoTable;
 	
 	ArrayList<SelectLabel> selectLabelGroups = new ArrayList<SelectLabel>();
 	
-	public TeamMemberPanel(){
+	public PlayerDataList(){
 		this.setLayout(null);
-		this.setBounds(0,300,1280,380);
+		this.setBounds(0,160,1280,540);
 		this.setBackground(Color.WHITE);
 		setTitle();
 		setButtonsBGLabel();
@@ -49,7 +50,8 @@ public class TeamMemberPanel extends JPanel{
 	public void setSelectedGroups(SelectLabel s){
 		selectLabelGroups.clear();
 		selectLabelGroups.add(basicInfoButton);
-		selectLabelGroups.add(dataButton);
+		selectLabelGroups.add(NormalInfoButton);
+		selectLabelGroups.add(HighInfoButton);
 		for(SelectLabel sl : selectLabelGroups){
 			if(sl != s){
 				sl.setBackground(exicted);;
@@ -58,7 +60,7 @@ public class TeamMemberPanel extends JPanel{
 	}
 
 	public void setTitle(){
-		TitleLabel = new JLabel(" 球队阵容",JLabel.LEADING);
+		TitleLabel = new JLabel(" 球员列表",JLabel.LEADING);
 		TitleLabel.setFont(new Font("Dialog",1,20));
 		TitleLabel.setForeground(Color.WHITE);
 		TitleLabel.setBackground(entered);
@@ -94,16 +96,14 @@ public class TeamMemberPanel extends JPanel{
 			basicInfoButton.isSelected = true;
 			basicInfoButton.setBackground(pressed);
 			setSelectedGroups(basicInfoButton);
-			
-			if(membersBasicInfoTable==null){
-				setBasicInfoTablePanel(); 
-			}else{
-				TeamMemberPanel.this.remove(membersBasicInfoTable);
-				if(membersDataTable != null){
-					TeamMemberPanel.this.remove(membersDataTable);
-				}
-				setBasicInfoTablePanel(); 
-			}
+			if(BasicInfoTable!=null)
+				PlayerDataList.this.remove(BasicInfoTable);
+			if(NormalInfoTable!=null)
+				PlayerDataList.this.remove(NormalInfoTable);
+			if(HighInfoTable!=null)
+				PlayerDataList.this.remove(HighInfoTable);
+			setBasicInfoTablePanel(); 
+				
 			setVisible(true);
 			repaint();	
 		}
@@ -126,18 +126,18 @@ public class TeamMemberPanel extends JPanel{
 	}
 
 	
-	public void setDataButton(){
+	public void setNormalInfoButton(){
 		Point p1 = new Point(50,5);
 		Point p2 = new Point(40,30);
-		dataButton = new SelectLabel("数据",p1,p2,entered,pressed,exicted);
-		dataButton.setForeground(Color.WHITE);
-		dataButton.setBackground(exicted);
-		dataButton.addMouseListener(new DataButtonListener());
-		ButtonsBGLabel.add(dataButton);
+		NormalInfoButton = new SelectLabel("基础",p1,p2,entered,pressed,exicted);
+		NormalInfoButton.setForeground(Color.WHITE);
+		NormalInfoButton.setBackground(exicted);
+		NormalInfoButton.addMouseListener(new NormalInfoButtonListener());
+		ButtonsBGLabel.add(NormalInfoButton);
 	}
 
 	
-	public class DataButtonListener implements MouseListener{
+	public class NormalInfoButtonListener implements MouseListener{
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
@@ -152,18 +152,18 @@ public class TeamMemberPanel extends JPanel{
 
 			setVisible(false);
 			setButtonsBGLabel();
-			dataButton.isSelected = true;
-			dataButton.setBackground(pressed);
-			setSelectedGroups(dataButton);
+			NormalInfoButton.isSelected = true;
+			NormalInfoButton.setBackground(pressed);
+			setSelectedGroups(NormalInfoButton);
 			
-			if(membersDataTable==null){
-				TeamMemberPanel.this.remove(membersBasicInfoTable);
-				setDataTablePanel(); 
-			}else{
-				TeamMemberPanel.this.remove(membersDataTable);
-				TeamMemberPanel.this.remove(membersBasicInfoTable);
-				setDataTablePanel(); 
-			}
+			if(BasicInfoTable!=null)
+				PlayerDataList.this.remove(BasicInfoTable);
+			if(NormalInfoTable!=null)
+				PlayerDataList.this.remove(NormalInfoTable);
+			if(HighInfoTable!=null)
+				PlayerDataList.this.remove(HighInfoTable);
+			setNormalInfoTablePanel(); 
+			
 			setVisible(true);
 			repaint();	
 		}
@@ -171,26 +171,94 @@ public class TeamMemberPanel extends JPanel{
 		@Override
 		public void mouseReleased(MouseEvent e) {
 			// TODO Auto-generated method stub
+			
 		}
 
 		@Override
 		public void mouseEntered(MouseEvent e) {
 			// TODO Auto-generated method stub
+			
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
 			// TODO Auto-generated method stub
+			
 		}
+
+	
+	}
+	
+	public void setHighInfoButton(){
+		Point p1 = new Point(100,5);
+		Point p2 = new Point(40,30);
+		HighInfoButton = new SelectLabel("高阶",p1,p2,entered,pressed,exicted);
+		HighInfoButton.setForeground(Color.WHITE);
+		HighInfoButton.setBackground(exicted);
+		HighInfoButton.addMouseListener(new HighInfoButtonListener());
+		ButtonsBGLabel.add(HighInfoButton);
+	}
+
+	
+	public class HighInfoButtonListener implements MouseListener{
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+//			PlayerKingPanel.this.remove(TitleLabel);
+//			PlayerKingPanel.this.remove(everyDay_PlayerKingOptionsPanel);
+
+			setVisible(false);
+			setButtonsBGLabel();
+			HighInfoButton.isSelected = true;
+			HighInfoButton.setBackground(pressed);
+			setSelectedGroups(HighInfoButton);
+			if(BasicInfoTable!=null)
+				PlayerDataList.this.remove(BasicInfoTable);
+			if(NormalInfoTable!=null)
+				PlayerDataList.this.remove(NormalInfoTable);
+			if(HighInfoTable!=null)
+				PlayerDataList.this.remove(HighInfoTable);
+			setHighInfoTablePanel(); 
+			
+			setVisible(true);
+			repaint();	
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+	
 	}
 	
 	public void setButtonsBGLabel(){
 		ButtonsBGLabel = new JLabel();
 		ButtonsBGLabel.setBackground(exicted);
 		ButtonsBGLabel.setOpaque(true);
-		ButtonsBGLabel.setBounds(1105,10,95,40);
+		ButtonsBGLabel.setBounds(1055,10,145,40);
 		setBasicInfoButton();
-		setDataButton();
+		setNormalInfoButton();
+		setHighInfoButton();
 		TitleLabel.add(ButtonsBGLabel,0);
 	}
 
@@ -199,27 +267,24 @@ public class TeamMemberPanel extends JPanel{
 		ArrayList<ArrayList<String>> datas = new ArrayList<ArrayList<String>>();	
 		ArrayList<String> l = new ArrayList<String>();
 		l.add("1.png");
-		l.add("Aaron Brooks");
-		l.add("前锋");
-		l.add("5");
-		l.add("2米03");
-		l.add("96.2公斤");
-		l.add("5");
-		l.add("5");
-		l.add("Missouri");
-
+		l.add("Atlanta");
+		l.add("Hawks");
+		l.add("East");
+		l.add("Pacific");
+		l.add("Philips Arena");
+		l.add("1949");
+		
 		datas.add(l);
 			
-		String[] tbHead = {"","姓名","位置","号码","年龄","球龄","身高","体重","毕业学校"};
-		
+		String[] header = {"","所在地","名称","赛区","分区","主场","建立时间"};
 		ArrayList<Integer> wid = new ArrayList<Integer>();
-		wid.add(50);wid.add(300);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);
+		wid.add(50);wid.add(200);wid.add(200);wid.add(100);wid.add(200);wid.add(400);wid.add(100);
 		
-		membersBasicInfoTable = new TablePane(datas,tbHead,wid,0,60,1280,350,50,true);
-		this.add(membersBasicInfoTable);
+		BasicInfoTable = new TablePane(datas,header,wid,0,60,1280,350,50,true);
+		this.add(BasicInfoTable);
 	}
 		
-	public void setDataTablePanel(){
+	public void setNormalInfoTablePanel(){
 			
 		ArrayList<ArrayList<String>> datas = new ArrayList<ArrayList<String>>();	
 		ArrayList<String> l = new ArrayList<String>();
@@ -241,7 +306,7 @@ public class TeamMemberPanel extends JPanel{
 		l.add("3.3");
 		l.add("15.3");
 
-		for(int i = 0; i < 500;i++){
+		for(int i = 0; i < 50;i++){
 			datas.add(l);
 		}
 				
@@ -252,8 +317,44 @@ public class TeamMemberPanel extends JPanel{
 		wid.add(50);wid.add(150);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);
 		wid.add(50);wid.add(60);wid.add(60);wid.add(60);wid.add(60);wid.add(60);wid.add(70);wid.add(70);
 			
-		membersDataTable = new TablePane(datas,tbHead,wid,0,60,1280,320,50,true);
-		this.add(membersDataTable);
+		NormalInfoTable = new TablePane(datas,tbHead,wid,0,60,1280,320,50,true);
+		this.add(NormalInfoTable);
+	}
+	public void setHighInfoTablePanel(){
+		
+		ArrayList<ArrayList<String>> datas = new ArrayList<ArrayList<String>>();	
+		ArrayList<String> l = new ArrayList<String>();
+		l.add("1.png");
+		l.add("Aaron Brooks");
+		l.add("4");
+		l.add("4");
+		l.add("36.1");
+		l.add("48.9");
+		l.add("42.9");
+		l.add("85.7");
+		l.add("2.8");
+		l.add("5.0");
+		l.add("7.8");
+		l.add("3.3");
+		l.add("0.7");
+		l.add("0.2");
+		l.add("1.5");
+		l.add("3.3");
+		l.add("15.3");
+
+		for(int i = 0; i < 50;i++){
+			datas.add(l);
+		}
+				
+		String[] tbHead = {"","姓名","场数","先发","分钟","％","三分％","罚球％","进攻",
+					"防守","场均篮板","场均助攻","场均抢断","场均盖帽","失误","犯规","场均得分"};
+			
+		ArrayList<Integer> wid = new ArrayList<Integer>();
+		wid.add(50);wid.add(150);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);
+		wid.add(50);wid.add(60);wid.add(60);wid.add(60);wid.add(60);wid.add(60);wid.add(70);wid.add(70);
+			
+		NormalInfoTable = new TablePane(datas,tbHead,wid,0,60,1280,320,50,true);
+		this.add(NormalInfoTable);
 	}
 
 	public static void main(String[] args){
@@ -261,7 +362,8 @@ public class TeamMemberPanel extends JPanel{
 		jf.setLayout(null);
 		jf.setSize(1280,700);
 		jf.setLocationRelativeTo(null);
-		jf.add(new TeamMemberPanel());
+		jf.add(new PlayerDataList());
 		jf.setVisible(true);
 	}
+
 }

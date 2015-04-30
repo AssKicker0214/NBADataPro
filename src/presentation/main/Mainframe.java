@@ -11,12 +11,12 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
-import ui.floatui.FloatPane;
-import ui.floatui.IMainFrameSize;
-import ui.statistics.playerKing.PlayerKingPanel;
-import ui.statistics.teamKing.TeamKingPanel;
+import presentation.floatui.FloatPane;
+import presentation.floatui.IMainFrameSize;
+import presentation.statistics.playerKing.PlayerKingPanel;
+import presentation.statistics.teamKing.TeamKingPanel;
 
-public class Mainframe extends JFrame implements IMainFrame, IMainFrameSize{
+public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 
 	/**
 	 * 
