@@ -42,10 +42,10 @@ public class PlayerScoreSaver {
     private int[] d_tid;
 
     private static PlayerScoreSaver playerScoreSaver;
-
-    public static PlayerScoreSaver getPlayerScoreSaver() {
-        if (playerScoreSaver == null) {
-            playerScoreSaver = new PlayerScoreSaver(PlayerSaver.getPlayerSaver(), MatchInfoSaver.getMatchInfoSaver(), TeamSaver.getTeamSaver());
+    public static PlayerScoreSaver getPlayerScoreSaver(){
+        if (playerScoreSaver == null){
+            playerScoreSaver = new PlayerScoreSaver(PlayerSaver.getPlayerSaver(),
+                    MatchInfoSaver.getMatchInfoSaver(),TeamSaver.getTeamSaver());
         }
         return playerScoreSaver;
     }
@@ -118,16 +118,8 @@ public class PlayerScoreSaver {
     private TeamData teamDataBefore;
 
 
-    public void complete() {
-//        setPidDefaultMid();
-//        new Thread() {
-//            @Override
-//            public void run() {
-//                super.run();
-//                setPidL5Mid();
-//                setPidBeforeMid();
-//            }
-//        }.start();
+
+    public void update() {
         setPidL5Mid();
         setPidBeforeMid();
         playerDataDefault = new PlayerData(pidDefaultMid, pidDefaultMid.length);
@@ -307,2120 +299,8 @@ public class PlayerScoreSaver {
         return res;
     }
 
-    public void show() {
-        for (int i = 0; i <= currentPoint; i++) {
-            System.out.println(mid[i] + " " + pid[i] + " " + tid[i] + " "
-                    + position[i] + " " + inplacetime[i] + " " + throwin[i] + " " + throwall[i] + " "
-                    + throw3in[i] + " " + throw3all[i] + " " + penaltyin[i] + " " + penaltyall[i] + " "
-                    + attackbas[i] + " " + defencebas[i] + " " + helpatt[i] + " " + interp[i] + " " +
-                    block[i] + " " + mistake[i] + " " + foul[i] + " " + score[i] + " " + serialid[i] + " "
-                    + d_tid[i]);
-        }
-    }
-
     private void refreshTime() {
         lastModifiedTime = System.currentTimeMillis();
-    }
-
-    /**
-     * 根据队伍id，计算该队伍的总进球数
-     *
-     * @param tid
-     * @return
-     */
-    public int get_sum_a_throwin(int tid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (tid == this.tid[i]) {
-                if (this.throwin[i] > 0)
-                    result = result + this.throwin[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的队伍的总进球数
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_a_throwins(int[] points) {
-        int[] sum_a_throwins = new int[teamSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.throwin[i] > 0) {
-                int tid = this.tid[i];
-                sum_a_throwins[tid - 1] = sum_a_throwins[tid - 1] + this.throwin[i];
-            }
-        }
-        return sum_a_throwins;
-    }
-
-    /**
-     * 获得所有的队伍的每场总进球数
-     *
-     * @param points
-     * @return
-     */
-    public int[][] get_sum_mid_a_throwins(int[] points) {
-        int[][] sum_mid_a_throwins = new int[matchInfoSaver.getNum()][4];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.throwin[i] > 0) {
-                int mid = this.mid[i];
-                int tid1 = this.tid[i];
-                int tid2 = this.d_tid[i];
-                if (tid1 > tid2) {
-                    sum_mid_a_throwins[mid - 1][0] = tid1;
-                    sum_mid_a_throwins[mid - 1][1] = sum_mid_a_throwins[mid - 1][1] + this.throwin[i];
-                }
-
-                if (tid1 < tid2) {
-                    sum_mid_a_throwins[mid - 1][1] = tid2;
-                    sum_mid_a_throwins[mid - 1][2] = sum_mid_a_throwins[mid - 1][1] + this.throwin[i];
-                }
-            }
-        }
-        return sum_mid_a_throwins;
-    }
-
-    /**
-     * 根据队伍id，计算该队伍的对手总进球数
-     *
-     * @param tid
-     * @param points
-     * @return
-     */
-    public int get_sum_b_throwin(int tid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (tid == this.d_tid[i]) {
-                if (this.throwin[i] > 0)
-                    result = result + this.throwin[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * @param points int[]
-     * @return int[] 获得所有的队伍的对手总进球数
-     */
-    public int[] get_sum_b_throwins(int[] points) {
-        int[] sum_b_throwins = new int[teamSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.throwin[i] > 0) {
-                int tid = this.d_tid[i];
-                sum_b_throwins[tid - 1] = sum_b_throwins[tid - 1] + this.throwin[i];
-            }
-        }
-        return sum_b_throwins;
-    }
-
-    /**
-     * 根据队伍id，计算该队伍的总进球数
-     *
-     * @param pid
-     * @param points
-     * @return
-     */
-    public int get_sum_p_throwin(int pid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (pid == this.pid[i]) {
-                if (this.throwin[i] > 0)
-                    result = result + this.throwin[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的球员的总进球数
-     *
-     * @param points int[]
-     * @return
-     */
-    public int[] get_sum_p_throwins(int[] points) {
-        int[] sum_a_throwins = new int[playerSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.throwin[i] > 0) {
-                int pid = this.pid[i];
-                sum_a_throwins[pid - 1] = sum_a_throwins[pid - 1] + this.throwin[i];
-            }
-        }
-        return sum_a_throwins;
-    }
-
-    /**
-     * 根据队伍id，计算该队伍的总投球数
-     *
-     * @param tid
-     * @param points
-     * @return
-     */
-    public int get_sum_a_throwall(int tid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (tid == this.tid[i]) {
-                if (this.throwall[i] > 0)
-                    result = result + this.throwall[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的队伍的总投球数
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_a_throwalls(int[] points) {
-        int[] sum_a_throwalls = new int[teamSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.throwall[i] > 0) {
-                int tid = this.tid[i];
-                sum_a_throwalls[tid - 1] = sum_a_throwalls[tid - 1] + this.throwall[i];
-            }
-        }
-        return sum_a_throwalls;
-    }
-
-    /**
-     * 获得所有的队伍的每场总投球球数
-     *
-     * @param points
-     * @return
-     */
-    public int[][] get_sum_mid_a_throwalls(int[] points) {
-        int[][] res = new int[matchInfoSaver.getNum()][4];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.throwall[i] > 0) {
-                int mid = this.mid[i];
-                int tid1 = this.tid[i];
-                int tid2 = this.d_tid[i];
-                if (tid1 > tid2) {
-                    res[mid - 1][0] = tid1;
-                    res[mid - 1][1] = res[mid - 1][1] + this.throwall[i];
-                }
-
-                if (tid1 < tid2) {
-                    res[mid - 1][1] = tid2;
-                    res[mid - 1][2] = res[mid - 1][1] + this.throwin[i];
-                }
-            }
-        }
-        return res;
-    }
-
-    /**
-     * 根据队伍id，计算该队伍的对手总投球数
-     *
-     * @param tid
-     * @param points
-     * @return
-     */
-    public int get_sum_b_throwall(int tid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (tid == this.d_tid[i]) {
-                if (this.throwall[i] > 0)
-                    result = result + this.throwall[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的队伍的对手总投球数
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_b_throwalls(int[] points) {
-        int[] sum_b_throwalls = new int[teamSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.throwall[i] > 0) {
-                int tid = this.d_tid[i];
-                sum_b_throwalls[tid - 1] = sum_b_throwalls[tid - 1] + this.throwall[i];
-            }
-        }
-        return sum_b_throwalls;
-    }
-
-    /**
-     * 根据球员id，计算该球员的总投球数
-     *
-     * @param pid
-     * @param points
-     * @return
-     */
-    public int get_sum_p_throwall(int pid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (pid == this.pid[i]) {
-                if (this.throwall[i] > 0)
-                    result = result + this.throwall[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的球员的总投球数
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_p_throwalls(int[] points) {
-        int[] sum_a_throwalls = new int[playerSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.throwall[i] > 0) {
-                int pid = this.pid[i];
-                sum_a_throwalls[pid - 1] = sum_a_throwalls[pid - 1] + this.throwall[i];
-            }
-        }
-        return sum_a_throwalls;
-    }
-
-    /**
-     * 根据队伍id，计算该队伍的总三分进球数
-     *
-     * @param tid
-     * @param points
-     * @return
-     */
-    public int get_sum_a_throw3in(int tid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (tid == this.tid[i]) {
-                if (this.throw3in[i] > 0)
-                    result = result + this.throw3in[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的队伍的总三分进球数
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_a_throw3ins(int[] points) {
-        int[] sum_a_throw3ins = new int[teamSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.throw3in[i] > 0) {
-                int tid = this.tid[i];
-                sum_a_throw3ins[tid - 1] = sum_a_throw3ins[tid - 1] + this.throw3in[i];
-            }
-        }
-        return sum_a_throw3ins;
-    }
-
-    /**
-     * 获得所有的队伍的每场总投球球数
-     *
-     * @param points
-     * @return
-     */
-    public int[][] get_sum_mid_a_throw3ins(int[] points) {
-        int[][] res = new int[matchInfoSaver.getNum()][4];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.throw3in[i] > 0) {
-                int mid = this.mid[i];
-                int tid1 = this.tid[i];
-                int tid2 = this.d_tid[i];
-                if (tid1 > tid2) {
-                    res[mid - 1][0] = tid1;
-                    res[mid - 1][1] = res[mid - 1][1] + this.throw3in[i];
-                }
-
-                if (tid1 < tid2) {
-                    res[mid - 1][1] = tid2;
-                    res[mid - 1][2] = res[mid - 1][1] + this.throw3in[i];
-                }
-            }
-        }
-        return res;
-    }
-
-    /**
-     * 根据队伍id，计算该队伍的对手总三分进球数
-     *
-     * @param tid
-     * @param points
-     * @return
-     */
-    public int get_sum_b_throw3in(int tid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (tid == this.d_tid[i]) {
-                if (this.throw3in[i] > 0)
-                    result = result + this.throw3in[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的队伍的对手总三分进球数
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_b_throw3ins(int[] points) {
-        int[] sum_b_throw3ins = new int[teamSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.throw3in[i] > 0) {
-                int tid = this.d_tid[i];
-                sum_b_throw3ins[tid - 1] = sum_b_throw3ins[tid - 1] + this.throw3in[i];
-            }
-        }
-        return sum_b_throw3ins;
-    }
-
-    /**
-     * 根据队伍id，计算该球员的总三分进球数
-     *
-     * @param pid
-     * @param points
-     * @return
-     */
-    public int get_sum_p_throw3in(int pid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (pid == this.pid[i]) {
-                if (this.throw3in[i] > 0)
-                    result = result + this.throw3in[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的球员的总三分进球数
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_p_throw3ins(int[] points) {
-        int[] sum_a_throw3ins = new int[playerSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.throw3in[i] > 0) {
-                int pid = this.pid[i];
-                sum_a_throw3ins[pid - 1] = sum_a_throw3ins[pid - 1] + this.throw3in[i];
-            }
-        }
-        return sum_a_throw3ins;
-    }
-
-    /**
-     * 根据队伍id，计算该队伍的总三分投球数
-     *
-     * @param tid
-     * @param points
-     * @return
-     */
-    public int get_sum_a_throw3all(int tid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (tid == this.tid[i]) {
-                if (this.throw3all[i] > 0)
-                    result = result + this.throw3all[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的队伍的总投球数
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_a_throw3alls(int[] points) {
-        int[] sum_a_throw3alls = new int[teamSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.throw3all[i] > 0) {
-                int tid = this.tid[i];
-                sum_a_throw3alls[tid - 1] = sum_a_throw3alls[tid - 1] + this.throw3all[i];
-            }
-        }
-        return sum_a_throw3alls;
-    }
-
-    /**
-     * 获得所有的队伍的每场总三分投球球数
-     *
-     * @param points
-     * @return
-     */
-    public int[][] get_sum_mid_a_throw3alls(int[] points) {
-        int[][] res = new int[matchInfoSaver.getNum()][4];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.throw3all[i] > 0) {
-                int mid = this.mid[i];
-                int tid1 = this.tid[i];
-                int tid2 = this.d_tid[i];
-                if (tid1 > tid2) {
-                    res[mid - 1][0] = tid1;
-                    res[mid - 1][1] = res[mid - 1][1] + this.throw3all[i];
-                }
-
-                if (tid1 < tid2) {
-                    res[mid - 1][1] = tid2;
-                    res[mid - 1][2] = res[mid - 1][1] + this.throw3all[i];
-                }
-            }
-        }
-        return res;
-    }
-
-    /**
-     * 根据队伍id，计算该队伍的对手总三分投球数
-     *
-     * @param tid
-     * @param points
-     * @return
-     */
-    public int get_sum_b_throw3all(int tid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (tid == this.d_tid[i]) {
-                if (this.throw3all[i] > 0)
-                    result = result + this.throw3all[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的队伍的对手总投球数
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_b_throw3alls(int[] points) {
-        int[] sum_b_throw3alls = new int[teamSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.throw3all[i] > 0) {
-                int tid = this.d_tid[i];
-                sum_b_throw3alls[tid - 1] = sum_b_throw3alls[tid - 1] + this.throw3all[i];
-            }
-        }
-        return sum_b_throw3alls;
-    }
-
-    /**
-     * 根据球员id，计算该球员的总三分投球数
-     *
-     * @param pid
-     * @param points
-     * @return
-     */
-    public int get_sum_p_throw3all(int pid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (pid == this.pid[i]) {
-                if (this.throw3all[i] > 0)
-                    result = result + this.throw3all[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的球员的总投球数
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_p_throw3alls(int[] points) {
-        int[] sum_a_throw3alls = new int[playerSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.throw3all[i] > 0) {
-                int pid = this.pid[i];
-                sum_a_throw3alls[pid - 1] = sum_a_throw3alls[pid - 1] + this.throw3all[i];
-            }
-        }
-        return sum_a_throw3alls;
-    }
-
-
-    /**
-     * 根据队伍id，计算该队伍的总罚进球数
-     *
-     * @param tid
-     * @param points
-     * @return
-     */
-    public int get_sum_a_penaltyin(int tid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (tid == this.tid[i]) {
-                if (this.penaltyin[i] > 0)
-                    result = result + this.penaltyin[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的队伍的总罚进球数
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_a_penaltyins(int[] points) {
-        int[] sum_a_throwins = new int[teamSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.penaltyin[i] > 0) {
-                int tid = this.tid[i];
-                sum_a_throwins[tid - 1] = sum_a_throwins[tid - 1] + this.penaltyin[i];
-            }
-        }
-        return sum_a_throwins;
-    }
-
-    /**
-     * 获得所有的队伍的每场总罚球进球数
-     *
-     * @param points
-     * @return
-     */
-    public int[][] get_sum_mid_a_penaltyins(int[] points) {
-        int[][] res = new int[matchInfoSaver.getNum()][4];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.penaltyin[i] > 0) {
-                int mid = this.mid[i];
-                int tid1 = this.tid[i];
-                int tid2 = this.d_tid[i];
-                if (tid1 > tid2) {
-                    res[mid - 1][0] = tid1;
-                    res[mid - 1][1] = res[mid - 1][1] + this.penaltyin[i];
-                }
-
-                if (tid1 < tid2) {
-                    res[mid - 1][1] = tid2;
-                    res[mid - 1][2] = res[mid - 1][1] + this.penaltyin[i];
-                }
-            }
-        }
-        return res;
-    }
-
-    /**
-     * 根据队伍id，计算该队伍的对手总罚进球数
-     *
-     * @param tid
-     * @return
-     */
-    public int get_sum_b_penaltyin(int tid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (tid == this.d_tid[i]) {
-                if (this.penaltyin[i] > 0)
-                    result = result + this.penaltyin[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的队伍的对手总罚进球数
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_b_penaltyins(int[] points) {
-        int[] sum_b_penaltyins = new int[teamSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.penaltyin[i] > 0) {
-                int tid = this.d_tid[i];
-                sum_b_penaltyins[tid - 1] = sum_b_penaltyins[tid - 1] + this.penaltyin[i];
-            }
-        }
-        return sum_b_penaltyins;
-    }
-
-    /**
-     * 根据球员id，计算该球员的总罚进球数
-     *
-     * @param pid
-     * @param points
-     * @return
-     */
-    public int get_sum_p_penaltyin(int pid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (pid == this.pid[i]) {
-                if (this.penaltyin[i] > 0)
-                    result = result + this.penaltyin[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的球员的总罚进球数
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_p_penaltyins(int[] points) {
-        int[] sum_a_throwins = new int[playerSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.penaltyin[i] > 0) {
-                int pid = this.pid[i];
-                sum_a_throwins[pid - 1] = sum_a_throwins[pid - 1] + this.penaltyin[i];
-            }
-        }
-        return sum_a_throwins;
-    }
-
-    /**
-     * 根据队伍id，计算该队伍的总罚球数
-     *
-     * @param tid
-     * @param points
-     * @return
-     */
-    public int get_sum_a_penaltyall(int tid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (tid == this.tid[i]) {
-                if (this.penaltyall[i] > 0)
-                    result = result + this.penaltyall[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的队伍的总罚进球数
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_a_penaltyalls(int[] points) {
-        int[] sum_a_penaltyall = new int[teamSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.penaltyall[i] > 0) {
-                int tid = this.tid[i];
-                sum_a_penaltyall[tid - 1] = sum_a_penaltyall[tid - 1] + this.penaltyall[i];
-            }
-        }
-        return sum_a_penaltyall;
-    }
-
-    /**
-     * 获得所有的队伍的每场总罚球投球球数
-     *
-     * @param points
-     * @return
-     */
-    public int[][] get_sum_mid_a_penaltyalls(int[] points) {
-        int[][] res = new int[matchInfoSaver.getNum()][4];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.penaltyall[i] > 0) {
-                int mid = this.mid[i];
-                int tid1 = this.tid[i];
-                int tid2 = this.d_tid[i];
-                if (tid1 > tid2) {
-                    res[mid - 1][0] = tid1;
-                    res[mid - 1][1] = res[mid - 1][1] + this.penaltyall[i];
-                }
-
-                if (tid1 < tid2) {
-                    res[mid - 1][1] = tid2;
-                    res[mid - 1][2] = res[mid - 1][1] + this.penaltyall[i];
-                }
-            }
-        }
-        return res;
-    }
-
-    /**
-     * 根据队伍id，计算该队伍的对手总罚进球数
-     *
-     * @param tid
-     * @param points
-     * @return
-     */
-    public int get_sum_b_penaltyall(int tid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (tid == this.d_tid[i]) {
-                if (this.penaltyall[i] > 0)
-                    result = result + this.penaltyall[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的队伍的对手总罚进球数
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_b_penaltyalls(int[] points) {
-        int[] sum_b_penaltyalls = new int[teamSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.penaltyall[i] > 0) {
-                int tid = this.d_tid[i];
-                sum_b_penaltyalls[tid - 1] = sum_b_penaltyalls[tid - 1] + this.penaltyall[i];
-            }
-        }
-        return sum_b_penaltyalls;
-    }
-
-    /**
-     * 根据队伍id，计算该球员的总罚球数
-     *
-     * @param pid
-     * @param points
-     * @return
-     */
-    public int get_sum_p_penaltyall(int pid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (pid == this.pid[i]) {
-                if (this.penaltyall[i] > 0)
-                    result = result + this.penaltyall[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的球员的总罚进球数
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_p_penaltyalls(int[] points) {
-        int[] sum_a_penaltyall = new int[playerSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.penaltyall[i] > 0) {
-                int pid = this.pid[i];
-                sum_a_penaltyall[pid - 1] = sum_a_penaltyall[pid - 1] + this.penaltyall[i];
-            }
-        }
-        return sum_a_penaltyall;
-    }
-
-    /**
-     * 根据队伍id，计算该队伍的总进攻篮板数
-     *
-     * @param tid
-     * @param points
-     * @return
-     */
-    public int get_sum_a_attackbas(int tid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (tid == this.tid[i]) {
-                if (this.attackbas[i] > 0)
-                    result = result + this.attackbas[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的队伍的总进攻篮板数
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_a_attackbass(int[] points) {
-        int[] sum_a_attackbass = new int[teamSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.attackbas[i] > 0) {
-                int tid = this.tid[i];
-                sum_a_attackbass[tid - 1] = sum_a_attackbass[tid - 1] + this.attackbas[i];
-            }
-        }
-        return sum_a_attackbass;
-    }
-
-    /**
-     * 获得所有的队伍的每场总进攻篮板数
-     *
-     * @param points
-     * @return
-     */
-    public int[][] get_sum_mid_a_attackbass(int[] points) {
-        int[][] res = new int[matchInfoSaver.getNum()][4];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.attackbas[i] > 0) {
-                int mid = this.mid[i];
-                int tid1 = this.tid[i];
-                int tid2 = this.d_tid[i];
-                if (tid1 > tid2) {
-                    res[mid - 1][0] = tid1;
-                    res[mid - 1][1] = res[mid - 1][1] + this.attackbas[i];
-                }
-
-                if (tid1 < tid2) {
-                    res[mid - 1][1] = tid2;
-                    res[mid - 1][2] = res[mid - 1][1] + this.attackbas[i];
-                }
-            }
-        }
-        return res;
-    }
-
-    /**
-     * 根据队伍id，计算该队伍的对手总进攻篮板数
-     *
-     * @param tid
-     * @param points
-     * @return
-     */
-    public int get_sum_b_attackbas(int tid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (tid == this.d_tid[i]) {
-                if (this.attackbas[i] > 0)
-                    result = result + this.attackbas[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的队伍的对手总进攻篮板数
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_b_attackbass(int[] points) {
-        int[] sum_b_attackbass = new int[teamSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.attackbas[i] > 0) {
-                int tid = this.d_tid[i];
-                sum_b_attackbass[tid - 1] = sum_b_attackbass[tid - 1] + this.attackbas[i];
-            }
-        }
-        return sum_b_attackbass;
-    }
-
-    /**
-     * 根据球员id，计算该球员的总进攻篮板数
-     *
-     * @param pid
-     * @param points
-     * @return
-     */
-    public int get_sum_p_attackbas(int pid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (pid == this.pid[i]) {
-                if (this.attackbas[i] > 0)
-                    result = result + this.attackbas[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的球员的总进攻篮板数
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_p_attackbass(int[] points) {
-        int[] sum_a_attackbass = new int[playerSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.attackbas[i] > 0) {
-                int pid = this.pid[i];
-                sum_a_attackbass[pid - 1] = sum_a_attackbass[pid - 1] + this.attackbas[i];
-            }
-        }
-        return sum_a_attackbass;
-    }
-
-    /**
-     * 根据队伍id，计算该队伍的总防守篮板数
-     *
-     * @param tid
-     * @param points
-     * @return
-     */
-    public int get_sum_a_defencebas(int tid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (tid == this.tid[i]) {
-                if (this.defencebas[i] > 0)
-                    result = result + this.defencebas[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的队伍的总防守篮板数
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_a_defencebass(int[] points) {
-        int[] sum_a_defencebass = new int[teamSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.defencebas[i] > 0) {
-                int tid = this.tid[i];
-                sum_a_defencebass[tid - 1] = sum_a_defencebass[tid - 1] + this.defencebas[i];
-            }
-        }
-        return sum_a_defencebass;
-    }
-
-    /**
-     * 获得所有的队伍的每场总进攻篮板数
-     *
-     * @param points
-     * @return
-     */
-    public int[][] get_sum_mid_a_defencebass(int[] points) {
-        int[][] res = new int[matchInfoSaver.getNum()][4];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.defencebas[i] > 0) {
-                int mid = this.mid[i];
-                int tid1 = this.tid[i];
-                int tid2 = this.d_tid[i];
-                if (tid1 > tid2) {
-                    res[mid - 1][0] = tid1;
-                    res[mid - 1][1] = res[mid - 1][1] + this.defencebas[i];
-                }
-
-                if (tid1 < tid2) {
-                    res[mid - 1][1] = tid2;
-                    res[mid - 1][2] = res[mid - 1][1] + this.defencebas[i];
-                }
-            }
-        }
-        return res;
-    }
-
-    /**
-     * 根据队伍id，计算该队伍的对手总防守篮板数
-     *
-     * @param tid
-     * @param points
-     * @return
-     */
-    public int get_sum_b_defencebas(int tid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (tid == this.d_tid[i]) {
-                if (this.defencebas[i] > 0)
-                    result = result + this.defencebas[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的队伍的对手总防守篮板数
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_b_defencebass(int[] points) {
-        int[] sum_b_defencebass = new int[teamSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.defencebas[i] > 0) {
-                int tid = this.d_tid[i];
-                sum_b_defencebass[tid - 1] = sum_b_defencebass[tid - 1] + this.defencebas[i];
-            }
-        }
-        return sum_b_defencebass;
-    }
-
-    /**
-     * 根据队伍id，计算该队伍的总防守篮板数
-     *
-     * @param pid
-     * @param points
-     * @return
-     */
-    public int get_sum_p_defencebas(int pid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (pid == this.pid[i]) {
-                if (this.defencebas[i] > 0)
-                    result = result + this.defencebas[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的队伍的总防守篮板数
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_p_defencebass(int[] points) {
-        int[] sum_a_defencebass = new int[playerSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.defencebas[i] > 0) {
-                int pid = this.pid[i];
-                sum_a_defencebass[pid - 1] = sum_a_defencebass[pid - 1] + this.defencebas[i];
-            }
-        }
-        return sum_a_defencebass;
-    }
-
-
-    /**
-     * 根据队伍id，计算该队伍的总篮板数
-     *
-     * @param tid
-     * @param points
-     * @return
-     */
-    public int get_sum_a_allbas(int tid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (tid == this.tid[i]) {
-                if (this.allbas[i] > 0)
-                    result = result + this.allbas[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的队伍的总篮板数
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_a_allbass(int[] points) {
-        int[] sum_a_allbass = new int[teamSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.allbas[i] > 0) {
-                int tid = this.tid[i];
-                sum_a_allbass[tid - 1] = sum_a_allbass[tid - 1] + this.allbas[i];
-            }
-        }
-        return sum_a_allbass;
-    }
-
-    /**
-     * 获得所有的队伍的每场总进攻篮板数
-     *
-     * @param points
-     * @return
-     */
-    public int[][] get_sum_mid_a_allbass(int[] points) {
-        int[][] res = new int[matchInfoSaver.getNum()][4];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.allbas[i] > 0) {
-                int mid = this.mid[i];
-                int tid1 = this.tid[i];
-                int tid2 = this.d_tid[i];
-                if (tid1 > tid2) {
-                    res[mid - 1][0] = tid1;
-                    res[mid - 1][1] = res[mid - 1][1] + this.allbas[i];
-                }
-
-                if (tid1 < tid2) {
-                    res[mid - 1][1] = tid2;
-                    res[mid - 1][2] = res[mid - 1][1] + this.allbas[i];
-                }
-            }
-        }
-        return res;
-    }
-
-    /**
-     * 根据队伍id，计算该队伍的对手总篮板数
-     *
-     * @param tid
-     * @param points
-     * @return
-     */
-    public int get_sum_b_allbas(int tid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (tid == this.d_tid[i]) {
-                if (this.allbas[i] > 0)
-                    result = result + this.allbas[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的队伍的对手总篮板数
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_b_allbass(int[] points) {
-        int[] sum_b_allbass = new int[teamSaver.getNum()];
-        for (int i = 0; i < currentPoint; i++) {
-            if (this.allbas[i] > 0) {
-                int tid = this.d_tid[i];
-                sum_b_allbass[tid - 1] = sum_b_allbass[tid - 1] + this.allbas[i];
-            }
-        }
-        return sum_b_allbass;
-    }
-
-    /**
-     * 根据队伍id，计算该队伍的总篮板数
-     *
-     * @param pid
-     * @param points
-     * @return
-     */
-    public int get_sum_p_allbas(int pid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (pid == this.pid[i]) {
-                if (this.allbas[i] > 0)
-                    result = result + this.allbas[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的队伍的总篮板数
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_p_allbass(int[] points) {
-        int[] sum_a_allbass = new int[playerSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.allbas[i] > 0) {
-                int pid = this.pid[i];
-                sum_a_allbass[pid - 1] = sum_a_allbass[pid - 1] + this.allbas[i];
-            }
-        }
-        return sum_a_allbass;
-    }
-
-    /**
-     * 根据队伍id，计算该队伍的总助攻数
-     *
-     * @param tid
-     * @param points
-     * @return
-     */
-    public int get_sum_a_helpatt(int tid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (tid == this.tid[i]) {
-                if (this.helpatt[i] > 0)
-                    result = result + this.helpatt[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的队伍的总助攻数
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_a_helpatts(int[] points) {
-        int[] sum_a_helpatts = new int[teamSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.helpatt[i] > 0) {
-                int tid = this.tid[i];
-                sum_a_helpatts[tid - 1] = sum_a_helpatts[tid - 1] + this.helpatt[i];
-            }
-        }
-        return sum_a_helpatts;
-    }
-
-    /**
-     * 获得所有的队伍的每场总助攻数
-     *
-     * @param points
-     * @return
-     */
-    public int[][] get_sum_mid_a_helpatts(int[] points) {
-        int[][] res = new int[matchInfoSaver.getNum()][4];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.helpatt[i] > 0) {
-                int mid = this.mid[i];
-                int tid1 = this.tid[i];
-                int tid2 = this.d_tid[i];
-                if (tid1 > tid2) {
-                    res[mid - 1][0] = tid1;
-                    res[mid - 1][1] = res[mid - 1][1] + this.helpatt[i];
-                }
-
-                if (tid1 < tid2) {
-                    res[mid - 1][1] = tid2;
-                    res[mid - 1][2] = res[mid - 1][1] + this.helpatt[i];
-                }
-            }
-        }
-        return res;
-    }
-
-    /**
-     * 根据队伍id，计算该队伍的对手总助攻数
-     *
-     * @param tid
-     * @param points
-     * @return
-     */
-    public int get_sum_b_helpatt(int tid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (tid == this.d_tid[i]) {
-                if (this.helpatt[i] > 0)
-                    result = result + this.helpatt[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的队伍的对手总助攻数
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_b_helpatts(int[] points) {
-        int[] sum_b_helpatts = new int[teamSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.helpatt[i] > 0) {
-                int tid = this.d_tid[i];
-                sum_b_helpatts[tid - 1] = sum_b_helpatts[tid - 1] + this.helpatt[i];
-            }
-        }
-        return sum_b_helpatts;
-    }
-
-    /**
-     * 根据球员id，计算该球员的总助攻数
-     *
-     * @param pid
-     * @param points
-     * @return
-     */
-    public int get_sum_p_helpatt(int pid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (pid == this.pid[i]) {
-                if (this.helpatt[i] > 0)
-                    result = result + this.helpatt[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的球员的总助攻数
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_p_helpatts(int[] points) {
-        int[] sum_a_helpatts = new int[playerSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.helpatt[i] > 0) {
-                int pid = this.pid[i];
-                sum_a_helpatts[pid - 1] = sum_a_helpatts[pid - 1] + this.helpatt[i];
-            }
-        }
-        return sum_a_helpatts;
-    }
-
-    /**
-     * 根据队伍id，计算该队伍的总抢断数
-     *
-     * @param tid
-     * @param points
-     * @return
-     */
-    public int get_sum_a_interp(int tid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (tid == this.tid[i]) {
-                if (this.interp[i] > 0)
-                    result = result + this.interp[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的队伍的总抢断数
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_a_interps(int[] points) {
-        int[] sum_a_interps = new int[teamSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.interp[i] > 0) {
-                int tid = this.tid[i];
-                sum_a_interps[tid - 1] = sum_a_interps[tid - 1] + this.interp[i];
-            }
-        }
-        return sum_a_interps;
-    }
-
-    /**
-     * 获得所有的队伍的每场总抢断数
-     *
-     * @param points
-     * @return
-     */
-    public int[][] get_sum_mid_a_interps(int[] points) {
-        int[][] res = new int[matchInfoSaver.getNum()][4];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.interp[i] > 0) {
-                int mid = this.mid[i];
-                int tid1 = this.tid[i];
-                int tid2 = this.d_tid[i];
-                if (tid1 > tid2) {
-                    res[mid - 1][0] = tid1;
-                    res[mid - 1][1] = res[mid - 1][1] + this.interp[i];
-                }
-
-                if (tid1 < tid2) {
-                    res[mid - 1][1] = tid2;
-                    res[mid - 1][2] = res[mid - 1][1] + this.interp[i];
-                }
-            }
-        }
-        return res;
-    }
-
-
-    /**
-     * 根据队伍id，计算该队伍的对手总抢断数
-     *
-     * @param tid
-     * @param points
-     * @return
-     */
-    public int get_sum_b_interp(int tid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (tid == this.d_tid[i]) {
-                if (this.interp[i] > 0)
-                    result = result + this.interp[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的队伍的对手总抢断数
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_b_interps(int[] points) {
-        int[] sum_b_interps = new int[teamSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.interp[i] > 0) {
-                int tid = this.d_tid[i];
-                sum_b_interps[tid - 1] = sum_b_interps[tid - 1] + this.interp[i];
-            }
-        }
-        return sum_b_interps;
-    }
-
-    /**
-     * 根据球员id，计算该球员的总抢断数
-     *
-     * @param pid
-     * @param points
-     * @return
-     */
-    public int get_sum_p_interp(int pid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (pid == this.pid[i]) {
-                if (this.interp[i] > 0)
-                    result = result + this.interp[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的球员的总抢断数
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_p_interps(int[] points) {
-        int[] sum_a_interps = new int[playerSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.interp[i] > 0) {
-                int pid = this.pid[i];
-                sum_a_interps[pid - 1] = sum_a_interps[pid - 1] + this.interp[i];
-            }
-        }
-        return sum_a_interps;
-    }
-
-    /**
-     * 根据队伍id，计算该队伍的总盖帽数
-     *
-     * @param tid
-     * @param points
-     * @return
-     */
-    public int get_sum_a_block(int tid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (tid == this.tid[i]) {
-                if (this.block[i] > 0)
-                    result = result + this.block[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的队伍的总盖帽数
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_a_blocks(int[] points) {
-        int[] sum_a_blocks = new int[teamSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.block[i] > 0) {
-                int tid = this.tid[i];
-                sum_a_blocks[tid - 1] = sum_a_blocks[tid - 1] + this.block[i];
-            }
-        }
-        return sum_a_blocks;
-    }
-
-    /**
-     * 获得所有的队伍的每场总盖帽数
-     *
-     * @param points
-     * @return
-     */
-    public int[][] get_sum_mid_a_blocks(int[] points) {
-        int[][] res = new int[matchInfoSaver.getNum()][4];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.block[i] > 0) {
-                int mid = this.mid[i];
-                int tid1 = this.tid[i];
-                int tid2 = this.d_tid[i];
-                if (tid1 > tid2) {
-                    res[mid - 1][0] = tid1;
-                    res[mid - 1][1] = res[mid - 1][1] + this.block[i];
-                }
-
-                if (tid1 < tid2) {
-                    res[mid - 1][1] = tid2;
-                    res[mid - 1][2] = res[mid - 1][1] + this.block[i];
-                }
-            }
-        }
-        return res;
-    }
-
-    /**
-     * 根据队伍id，计算该队伍的对手总盖帽数
-     *
-     * @param tid    int
-     * @param points int[]
-     * @return sum_b_block
-     */
-    public int get_sum_b_block(int tid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (tid == this.d_tid[i]) {
-                if (this.block[i] > 0)
-                    result = result + this.block[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的队伍的对手总盖帽数
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_b_blocks(int[] points) {
-        int[] sum_b_blocks = new int[teamSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.block[i] > 0) {
-                int tid = this.d_tid[i];
-                sum_b_blocks[tid - 1] = sum_b_blocks[tid - 1] + this.block[i];
-            }
-        }
-        return sum_b_blocks;
-    }
-
-    /**
-     * 根据球员id，计算该球员的总盖帽数
-     *
-     * @param pid
-     * @param points
-     * @return
-     */
-    public int get_sum_p_block(int pid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (pid == this.pid[i]) {
-                if (this.block[i] > 0)
-                    result = result + this.block[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的球员的总盖帽数
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_p_blocks(int[] points) {
-        int[] sum_a_blocks = new int[playerSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.block[i] > 0) {
-                int pid = this.pid[i];
-                sum_a_blocks[pid - 1] = sum_a_blocks[pid - 1] + this.block[i];
-            }
-        }
-        return sum_a_blocks;
-    }
-
-    /**
-     * 根据队伍id，计算该队伍的总失误数
-     *
-     * @param tid
-     * @param points
-     * @return
-     */
-    public int get_sum_a_mistake(int tid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (tid == this.tid[i]) {
-                if (this.mistake[i] > 0)
-                    result = result + this.mistake[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的队伍的总失误数
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_a_mistakes(int[] points) {
-        int[] sum_a_mistakes = new int[teamSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.mistake[i] > 0) {
-                int tid = this.tid[i];
-                sum_a_mistakes[tid - 1] = sum_a_mistakes[tid - 1] + this.mistake[i];
-            }
-        }
-        return sum_a_mistakes;
-    }
-
-    /**
-     * 获得所有的队伍的每场总失误数
-     *
-     * @param points
-     * @return
-     */
-    public int[][] get_sum_mid_a_mistakes(int[] points) {
-        int[][] res = new int[matchInfoSaver.getNum()][4];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.mistake[i] > 0) {
-                int mid = this.mid[i];
-                int tid1 = this.tid[i];
-                int tid2 = this.d_tid[i];
-                if (tid1 > tid2) {
-                    res[mid - 1][0] = tid1;
-                    res[mid - 1][1] = res[mid - 1][1] + this.mistake[i];
-                }
-
-                if (tid1 < tid2) {
-                    res[mid - 1][1] = tid2;
-                    res[mid - 1][2] = res[mid - 1][1] + this.mistake[i];
-                }
-            }
-        }
-        return res;
-    }
-
-    /**
-     * 根据队伍id，计算该队伍的对手总失误数
-     *
-     * @param tid
-     * @param points
-     * @return
-     */
-    public int get_sum_b_mistake(int tid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (tid == this.d_tid[i]) {
-                if (this.mistake[i] > 0)
-                    result = result + this.mistake[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的队伍的对手总失误数
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_b_mistakes(int[] points) {
-        int[] sum_b_mistakes = new int[teamSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.mistake[i] > 0) {
-                int tid = this.d_tid[i];
-                sum_b_mistakes[tid - 1] = sum_b_mistakes[tid - 1] + this.mistake[i];
-            }
-        }
-        return sum_b_mistakes;
-    }
-
-    /**
-     * 根据球员id，计算该球员的总失误数
-     *
-     * @param pid
-     * @param points
-     * @return
-     */
-    public int get_sum_p_mistake(int pid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (pid == this.pid[i]) {
-                if (this.mistake[i] > 0)
-                    result = result + this.mistake[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的球员的总失误数
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_p_mistakes(int[] points) {
-        int[] sum_a_mistakes = new int[playerSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.mistake[i] > 0) {
-                int pid = this.pid[i];
-                sum_a_mistakes[pid - 1] = sum_a_mistakes[pid - 1] + this.mistake[i];
-            }
-        }
-        return sum_a_mistakes;
-    }
-
-    /**
-     * 根据队伍id，计算该队伍的总罚球数
-     *
-     * @param tid
-     * @param points
-     * @return
-     */
-    public int get_sum_a_foul(int tid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (tid == this.tid[i]) {
-                if (this.foul[i] > 0)
-                    result = result + this.foul[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的队伍的总犯规数
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_a_fouls(int[] points) {
-        int[] sum_a_fouls = new int[teamSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.foul[i] > 0) {
-                int tid = this.tid[i];
-                sum_a_fouls[tid - 1] = sum_a_fouls[tid - 1] + this.foul[i];
-            }
-        }
-        return sum_a_fouls;
-    }
-
-    /**
-     * 获得所有的队伍的每场总犯规数
-     *
-     * @param points
-     * @return
-     */
-    public int[][] get_sum_mid_a_fouls(int[] points) {
-        int[][] res = new int[matchInfoSaver.getNum()][4];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.foul[i] > 0) {
-                int mid = this.mid[i];
-                int tid1 = this.tid[i];
-                int tid2 = this.d_tid[i];
-                if (tid1 > tid2) {
-                    res[mid - 1][0] = tid1;
-                    res[mid - 1][1] = res[mid - 1][1] + this.foul[i];
-                }
-
-                if (tid1 < tid2) {
-                    res[mid - 1][1] = tid2;
-                    res[mid - 1][2] = res[mid - 1][1] + this.foul[i];
-                }
-            }
-        }
-        return res;
-    }
-
-
-    /**
-     * 根据队伍id，计算该队伍的对手总罚球数
-     *
-     * @param tid
-     * @param points
-     * @return
-     */
-    public int get_sum_b_foul(int tid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (tid == this.d_tid[i]) {
-                if (this.foul[i] > 0)
-                    result = result + this.foul[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的队伍的对手总罚球数
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_b_fouls(int[] points) {
-        int[] sum_b_fouls = new int[teamSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.foul[i] > 0) {
-                int tid = this.d_tid[i];
-                sum_b_fouls[tid - 1] = sum_b_fouls[tid - 1] + this.foul[i];
-            }
-        }
-        return sum_b_fouls;
-    }
-
-    /**
-     * 根据球员id，计算该球员的总罚球数
-     *
-     * @param pid
-     * @param points
-     * @return
-     */
-    public int get_sum_p_foul(int pid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (pid == this.pid[i]) {
-                if (this.foul[i] > 0)
-                    result = result + this.foul[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的球员的总罚球数
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_p_fouls(int[] points) {
-        int[] sum_a_fouls = new int[playerSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.foul[i] > 0) {
-                int pid = this.pid[i];
-                sum_a_fouls[pid - 1] = sum_a_fouls[pid - 1] + this.foul[i];
-            }
-        }
-        return sum_a_fouls;
-    }
-
-
-    /**
-     * 根据队伍id，计算该队伍的总分
-     *
-     * @param tid
-     * @param points
-     * @return
-     */
-    public int get_sum_a_score(int tid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (tid == this.tid[i]) {
-                if (this.score[i] > 0)
-                    result = result + this.score[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的队伍的总分
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_a_scores(int[] points) {
-        int[] sum_a_scores = new int[teamSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.score[i] > 0) {
-                int tid = this.tid[i];
-                sum_a_scores[tid - 1] = sum_a_scores[tid - 1] + this.score[i];
-            }
-        }
-        return sum_a_scores;
-    }
-
-    /**
-     * 根据队伍id，计算该队伍的对手总分
-     *
-     * @param tid
-     * @return
-     */
-    public int get_sum_b_score(int tid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (tid == this.d_tid[i]) {
-                if (this.score[i] > 0)
-                    result = result + this.score[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的队伍的对手总分
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_b_scores(int[] points) {
-        int[] sum_b_scores = new int[teamSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.score[i] > 0) {
-                int tid = this.d_tid[i];
-                sum_b_scores[tid - 1] = sum_b_scores[tid - 1] + this.score[i];
-            }
-        }
-        return sum_b_scores;
-    }
-
-    /**
-     * 根据球员id，计算该球员的总分
-     *
-     * @param pid
-     * @param points
-     * @return
-     */
-    public int get_sum_p_score(int pid, int[] points) {
-        int result = 0;
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (pid == this.pid[i]) {
-                if (this.score[i] > 0)
-                    result = result + this.score[i];
-            }
-
-        }
-        return result;
-    }
-
-    /**
-     * 获得所有的球员的总分
-     *
-     * @param points
-     * @return
-     */
-    public int[] get_sum_p_scores(int[] points) {
-        int[] sum_a_scores = new int[playerSaver.getNum()];
-        for (int j = 0; j < points.length; j++) {
-            int i = points[j];
-            if (this.score[i] > 0) {
-                int pid = this.pid[i];
-                sum_a_scores[pid - 1] = sum_a_scores[pid - 1] + this.score[i];
-            }
-        }
-        return sum_a_scores;
     }
 
     private class PidL5Mid {
@@ -2556,43 +436,13 @@ public class PlayerScoreSaver {
         return pidL5Mid;
     }
 
-    /**
-     *
-     */
-    public void showPIdL5Mid() throws FileNotFoundException {
-        int[] pointL5Mid = pidL5Mid.getPointInL5Mid();
-        int length = pidL5Mid.getLength();
-        for (int i = 0; i < length; i++) {
-            int m = pointL5Mid[i];
-            System.out.println(mid[m] + " " + pid[m] + " " + tid[m] + " "
-                    + position[m] + " " + inplacetime[m] + " " + throwin[m] + " " + throwall[m] + " "
-                    + throw3in[m] + " " + throw3all[m] + " " + penaltyin[m] + " " + penaltyall[m] + " "
-                    + attackbas[m] + " " + defencebas[m] + " " + helpatt[m] + " " + interp[m] + " " +
-                    block[m] + " " + mistake[m] + " " + foul[m] + " " + score[m] + " " + serialid[m] + " "
-                    + d_tid[m]);
-        }
-    }
-
     private int[] pidDefaultMid;
-    private boolean pidDefaultMidFlag = false;
-
-    /**
-     * 默认比赛信息表
-     */
-    public void setPidDefaultMid() {
-        pidDefaultMid = new int[currentPoint + 1];
-        for (int i = 0; i < pidDefaultMid.length; i++) {
-            pidDefaultMid[i] = i;
-        }
-        pidDefaultMidFlag = true;
-    }
 
     public int[] getPidDefaultMid() {
         return pidDefaultMid;
     }
 
     private int[] pidBeforeMid;
-    private boolean pidBeforeMidFlag = false;
 
     /**
      * 默认比赛信息表
@@ -2610,7 +460,6 @@ public class PlayerScoreSaver {
                 m++;
             }
         }
-        pidBeforeMidFlag = true;
     }
 
     public int[] getPidBeforeMid() {
@@ -2666,10 +515,7 @@ public class PlayerScoreSaver {
         private double[] avgRebound;
         private double[] avgSteal;
         private double[] defendReboundEfficient;
-        private double[] offendEfficient;
         private double[] offendReboundEfficient;
-        private double[] offendRound;
-        private double[] stealEfficient;
         private double[] winRate;
 
         private void setTeamDataLevel2() {
@@ -2790,7 +636,7 @@ public class PlayerScoreSaver {
         private int[] points;
         private int length;
 
-        TeamData(int type, int[] points, int length) {
+        private TeamData(int type, int[] points, int length) {
             this.points = points;
             this.type = type;
             this.length = length;
@@ -2910,11 +756,11 @@ public class PlayerScoreSaver {
             return leg;
         }
 
-        public double[] getStealEfficient() {
+        public double[] getStealEfficient(){
             return stealP;
         }
 
-        public double[] getWinRate() {
+        public double[] getWinRate(){
             return winRate;
         }
     }
@@ -2958,7 +804,7 @@ public class PlayerScoreSaver {
         private int[] p_mistakeTeam;
         private int[] p_mistakeTeamB;
         private int[] p_inplacetimeTeam;
-        private int[][] p_tid;
+        private int[][] p_tid_mid;
         private int[] p_matchNum;
         private int[] p_startSession;
 
@@ -2997,12 +843,12 @@ public class PlayerScoreSaver {
             p_mistakeTeam = new int[playerSaver.getNum()];
             p_mistakeTeamB = new int[playerSaver.getNum()];
             pLegB = new double[playerSaver.getNum()];
-            p_tid = new int[playerSaver.getNum()][2];
+            p_tid_mid = new int[playerSaver.getNum()][2];
             p_matchNum = new int[playerSaver.getNum()];
             p_startSession = new int[playerSaver.getNum()];
 
-            for (int i = 0; i < p_tid.length; i++) {
-                p_tid[i][0] = -1;
+            for (int i = 0; i < p_tid_mid.length; i++) {
+                p_tid_mid[i][0] = -1;
             }
 
             for (int j = 0; j < length; j++) {
@@ -3018,13 +864,13 @@ public class PlayerScoreSaver {
                 p_matchNum[pid - 1] = p_matchNum[pid - 1] + 1;
 
                 String date = matchInfoSaver.getDate(mid);
-                if (p_tid[pid - 1][0] == -1) {
-                    p_tid[pid - 1][0] = tid;
-                    p_tid[pid - 1][1] = mid;
+                if (p_tid_mid[pid - 1][0] == -1) {
+                    p_tid_mid[pid - 1][0] = tid;
+                    p_tid_mid[pid - 1][1] = mid;
                 } else {
-                    if (date.compareTo(matchInfoSaver.getDate(p_tid[pid - 1][1])) > 0) {
-                        p_tid[pid - 1][0] = tid;
-                        p_tid[pid - 1][1] = mid;
+                    if (date.compareTo(matchInfoSaver.getDate(p_tid_mid[pid - 1][1])) > 0) {
+                        p_tid_mid[pid - 1][0] = tid;
+                        p_tid_mid[pid - 1][1] = mid;
                     }
                 }
 
@@ -3258,29 +1104,19 @@ public class PlayerScoreSaver {
                 } else {
                     p_FTP[i] = -1;
                 }
-//                p_avgAssist = new double[playerSaver.getNum()];
-//                p_avgBlockShot = new double[playerSaver.getNum()];
-//                p_avgDefend = new double[playerSaver.getNum()];
-//                p_avgFault = new double[playerSaver.getNum()];
-//                p_avgFoul = new double[playerSaver.getNum()];
-//                p_avgMinute = new double[playerSaver.getNum()];
-//                p_avgOffend = new double[playerSaver.getNum()];
-//                p_avgPoint = new double[playerSaver.getNum()];
-//                p_avgRebound = new double[playerSaver.getNum()];
-//                p_avgSteal = new double[playerSaver.getNum()];
 
-                if (p_matchNum[i] > 0) {
-                    p_avgAssist[i] = (double) p_helpatt[i] / p_matchNum[i];
-                    p_avgBlockShot[i] = (double) p_block[i] / p_matchNum[i];
-                    p_avgDefend[i] = (double) p_defencebas[i] / p_matchNum[i];
-                    p_avgFault[i] = (double) p_mistake[i] / p_matchNum[i];
-                    p_avgFoul[i] = (double) p_foul[i] / p_matchNum[i];
-                    p_avgMinute[i] = (double) p_inplacetime[i] / p_matchNum[i];
-                    p_avgOffend[i] = (double) p_attackbas[i] / p_matchNum[i];
-                    p_avgPoint[i] = (double) p_score[i] / p_matchNum[i];
-                    p_avgRebound[i] = (double) p_allbas[i] / p_matchNum[i];
-                    p_avgSteal[i] = (double) p_interp[i] / p_matchNum[i];
-                } else {
+                if (p_matchNum[i] > 0){
+                    p_avgAssist[i] = (double)p_helpatt[i] / p_matchNum[i];
+                    p_avgBlockShot[i] = (double)p_block[i] / p_matchNum[i];
+                    p_avgDefend[i] = (double)p_defencebas[i] / p_matchNum[i];
+                    p_avgFault[i] = (double)p_mistake[i] / p_matchNum[i];
+                    p_avgFoul[i] = (double)p_foul[i] / p_matchNum[i];
+                    p_avgMinute[i] = (double)p_inplacetime[i] / p_matchNum[i];
+                    p_avgOffend[i] = (double)p_attackbas[i] / p_matchNum[i];
+                    p_avgPoint[i] = (double)p_score[i] / p_matchNum[i];
+                    p_avgRebound[i] = (double)p_allbas[i] / p_matchNum[i];
+                    p_avgSteal[i] = (double)p_interp[i] / p_matchNum[i];
+                }else{
                     p_avgAssist[i] = -1;
                     p_avgBlockShot[i] = -1;
                     p_avgDefend[i] = -1;
@@ -3463,7 +1299,7 @@ public class PlayerScoreSaver {
         private int[] points;
         private int length;
 
-        PlayerData(int[] points, int length) {
+        private PlayerData(int[] points, int length) {
             this.points = points;
             this.length = length;
             setPlayerDataLevel1();
@@ -3476,144 +1312,144 @@ public class PlayerScoreSaver {
             return lastModifiedTime;
         }
 
-        public int[] getAssist() {
+        public int[] getAssist(){
             return p_helpatt;
         }
 
-        public int[] getBlockShot() {
+        public int[] getBlockShot(){
             return p_block;
         }
 
-        public double[] getEfficiency() {
+        public double[] getEfficiency(){
             return p_effiency;
         }
 
-        public int[] getFault() {
+        public int[] getFault(){
             return p_mistake;
         }
 
-        public int[] getFoul() {
+        public int[] getFoul(){
             return p_foul;
         }
 
-        public int[] getMinute() {
+        public int[] getMinute(){
             return p_inplacetime;
         }
 
-        public int[] getOffend() {
+        public int[] getOffend(){
             return p_attackbas;
         }
 
-        public double[] getPenalty() {
+        public double[] getPenalty(){
             return p_FTP;
         }
 
-        public int[] getPoint() {
+        public int[] getPoint(){
             return p_score;
         }
 
-        public int[] getRebound() {
+        public int[] getRebound(){
             return p_allbas;
         }
 
-        public double[] getShot() {
+        public double[] getShot(){
             return p_FGP;
         }
 
-        public int[] getStart() {
+        public int[] getStart(){
             return p_startSession;
         }
 
-        public int[] getSteal() {
+        public int[] getSteal(){
             return p_interp;
         }
 
-        public double[] getThree() {
+        public double[] getThree(){
             return p_TPSP;
         }
 
-        public double[] getAvgAssist() {
+        public double[] getAvgAssist(){
             return p_avgAssist;
         }
 
-        public double[] getAvgBlockShot() {
+        public double[] getAvgBlockShot(){
             return p_avgBlockShot;
         }
 
-        public double[] getAvgDefend() {
+        public double[] getAvgDefend(){
             return p_avgDefend;
         }
 
-        public double[] getAvgFault() {
+        public double[] getAvgFault(){
             return p_avgFault;
         }
 
-        public double[] getAvgFoul() {
+        public double[] getAvgFoul(){
             return p_avgFoul;
         }
 
-        public double[] getAvgMinute() {
+        public double[] getAvgMinute(){
             return p_avgMinute;
         }
 
-        public double[] getAvgOffend() {
+        public double[] getAvgOffend(){
             return p_avgOffend;
         }
 
-        public double[] getAvgPoint() {
+        public double[] getAvgPoint(){
             return p_avgPoint;
         }
 
-        public double[] getAvgRebound() {
+        public double[] getAvgRebound(){
             return p_avgRebound;
         }
 
-        public double[] getAvgSteal() {
+        public double[] getAvgSteal(){
             return p_avgSteal;
         }
 
-        public double[] getAssistEfficient() {
+        public double[] getAssistEfficient(){
             return p_assistP;
         }
 
-        public double[] getBlockShotEfficient() {
+        public double[] getBlockShotEfficient(){
             return p_BSP;
         }
 
-        public double[] getDefendReboundEfficient() {
+        public double[] getDefendReboundEfficient(){
             return p_DREB;
         }
 
-        public double[] getFaultEfficient() {
+        public double[] getFaultEfficient(){
             return p_turnoverP;
         }
 
-        public double[] getFrequency() {
+        public double[] getFrequency(){
             return p_utiliation;
         }
 
-        public double[] getGmSc() {
+        public double[] getGmSc(){
             return p_GmSc;
         }
 
-        public double[] getOffendReboundEfficient() {
+        public double[] getOffendReboundEfficient(){
             return p_OREB;
         }
 
-        public double[] getRealShot() {
+        public double[] getRealShot(){
             return p_TSP;
         }
 
-        public double[] getReboundEfficient() {
+        public double[] getReboundEfficient(){
             return p_reboundP;
         }
 
 
-        public double[] getShotEfficient() {
+        public double[] getShotEfficient(){
             return p_OSE;
         }
 
-        public double[] getStealEfficient() {
+        public double[] getStealEfficient(){
             return p_stealP;
         }
     }
