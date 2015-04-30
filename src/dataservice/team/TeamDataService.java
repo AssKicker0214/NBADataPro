@@ -74,7 +74,7 @@ public interface TeamDataService {
 	 * @Param league: 联盟  参数范围：E; W;
 	 * @Return TeamVO中attributes指示的属性的联盟平均值
 	 */
-	public TeamVO avgLeague(ArrayList<String> attributes, char league);//联盟平均数据
+//	public TeamVO avgLeague(ArrayList<String> attributes, char league);//联盟平均数据
 
 
 	

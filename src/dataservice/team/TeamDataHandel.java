@@ -1,5 +1,6 @@
 package dataservice.team;
 
+import data.TeamDataManager;
 import data.saver.PlayerScoreSaver;
 import vo.playervo.PlayerVO;
 import vo.teamvo.HotTeamsVO;
@@ -12,16 +13,7 @@ import java.util.ArrayList;
  */
 public class TeamDataHandel implements TeamDataService {
 
-    private PlayerScoreSaver playerScoreSaver;
 
-    private PlayerScoreSaver.TeamData teamDataDefault;
-    private PlayerScoreSaver.TeamData teamDataL5;
-    private PlayerScoreSaver.TeamData teamDataBefore;
-
-    public TeamDataHandel(PlayerScoreSaver playerScoreSaver) {
-        this.playerScoreSaver = playerScoreSaver;
-        update();
-    }
 
     @Override
     public ArrayList<HotTeamsVO> hotTeams(int num, String sortBy) {
@@ -30,22 +22,26 @@ public class TeamDataHandel implements TeamDataService {
 
     @Override
     public TeamVO findTeamInfo(int teamId) {
-        return null;
+        TeamVO teamVO = new TeamDataManager().getTeamVO(getAllInformation(), TeamDataManager.DEFAULT, teamId);
+        return teamVO;
     }
 
     @Override
     public ArrayList<TeamVO> findTeamNormal() {
-        return null;
+        ArrayList<TeamVO> teamVOs = new TeamDataManager().getTeamVOs(getNormalInfo(), TeamDataManager.DEFAULT);
+        return teamVOs;
     }
 
     @Override
     public ArrayList<TeamVO> findTeamNormalAvg() {
-        return null;
+        ArrayList<TeamVO> teamVOs = new TeamDataManager().getTeamVOs(getAvgNormalInfo(), TeamDataManager.DEFAULT);
+        return teamVOs;
     }
 
     @Override
     public ArrayList<TeamVO> findTeamBasic() {
-        return null;
+        ArrayList<TeamVO> teamVOs = new TeamDataManager().getTeamVOs(getInformation(), TeamDataManager.DEFAULT);
+        return teamVOs;
     }
 
     public TeamVO findTeamInfo(int teamId, boolean isAvg) {
@@ -82,38 +78,31 @@ public class TeamDataHandel implements TeamDataService {
 
     @Override
     public ArrayList<TeamVO> findTeamHigh() {
-        ArrayList<TeamVO> arrayList = new ArrayList<>();
-        for (int i = 0; i < teamDataDefault.getNum(); i++) {
-            TeamVO teamVO = new TeamVO();
-            teamVO.id = i + 1;
-            setTeamVO(getHighInfo(),teamVO,teamDataDefault);
-            arrayList.add(teamVO);
-        }
-        return arrayList;
+        ArrayList<TeamVO> teamVOs = new TeamDataManager().getTeamVOs(getHighInfo(), TeamDataManager.DEFAULT);
+        return teamVOs;
     }
 
     @Override
-    public ArrayList<TeamVO> sortTeamNormal(int num, String sortBy, boolean desc, boolean isAvg) {
+    public ArrayList<TeamVO> sortTeamNormal(int num, String sortBy, boolean desc) {
+        return sortTeam(getNormalInfo(),num,sortBy,desc);
+    }
+
+    @Override
+    public ArrayList<TeamVO> sortTeamNormalAvg(int num, String sortBy, boolean desc) {
+        return sortTeam(getAvgNormalInfo(),num,sortBy,desc);
+    }
+
+    private ArrayList<TeamVO> sortTeam(ArrayList<String> attributes,int num, String sortBy, boolean desc){
         TeamVO[] vos = new TeamVO[num + 1];
         int length = 0;
         ArrayList<TeamVO> arrayList = new ArrayList<>();
-
-        if (isAvg) {
-            for (int i = 0; i < teamDataDefault.getNum(); i++) {
-                TeamVO teamVO = new TeamVO();
-                teamVO.id = i + 1;
-                setTeamVO(getAvgNormalInfo(),teamVO,teamDataDefault);
-                length = serial(vos, length <= num ? length : num, teamVO, sortBy, desc);
-            }
-        } else {
-            for (int i = 0; i < teamDataDefault.getNum(); i++) {
-                TeamVO teamVO = new TeamVO();
-                teamVO.id = i + 1;
-                setTeamVO(getNormalInfo(),teamVO,teamDataDefault);
-                length = serial(vos, length <= num ? length : num, teamVO, sortBy, desc);
-            }
+        TeamDataManager teamDataManager  = new TeamDataManager();
+        for (int i = 0; i < teamDataManager.getNum(); i++) {
+            TeamVO teamVO = new TeamVO();
+            teamVO.id = i + 1;
+            teamDataManager.setTeamVO(attributes, teamVO, TeamDataManager.DEFAULT);
+            length = serial(vos, length <= num ? length : num, teamVO, sortBy, desc);
         }
-
         for (int i = 0; i < num; i++) {
             arrayList.add(vos[i]);
         }
@@ -206,26 +195,33 @@ public class TeamDataHandel implements TeamDataService {
 
     @Override
     public ArrayList<TeamVO> sortTeamHigh(int num, String sortBy, boolean desc) {
-        TeamVO[] vos = new TeamVO[num + 1];
-        int length = 0;
-        ArrayList<TeamVO> arrayList = new ArrayList<>();
-
-        for (int i = 0; i < teamDataDefault.getNum(); i++) {
-            TeamVO teamVO = new TeamVO();
-            teamVO.id = i + 1;
-            setTeamVO(getHighInfo(),teamVO,teamDataDefault);
-            length = serial(vos, length <= num ? length : num, teamVO, sortBy, desc);
-        }
-        for (int i = 0; i < num; i++) {
-            arrayList.add(vos[i]);
-        }
-        return arrayList;
+        return sortTeam(getHighInfo(),num,sortBy,desc);
     }
 
-    @Override
+//    @Override
+//    public TeamVO avgLeague(ArrayList<String> attributes, char league) {
+//        ArrayList<String> temp = (ArrayList<String>) attributes.clone();
+//        attributes.add("league");
+//        TeamDataManager teamDataManager = new TeamDataManager();
+//        ArrayList<TeamVO> arrayList = teamDataManager.getTeamVOs(temp,TeamDataManager.DEFAULT);
+//        TeamVO teamVO = new TeamVO();
+//        int num = 0 ;
+//        for (int i = 0; i < arrayList.size(); i++ ){
+//            if (arrayList.get(i).league == league){
+////                teamDataManager.se
+//                num++;
+//                for (int j = 0; j < attributes.size(); j++){
+//                    teamDataManager.setAttribute(attributes.get(j),teamVO,arrayList.get(i));
+//                }
+//            }
+//        }
+//        return a
+//    }
+
     public TeamVO avgLeague(ArrayList<String> attributes,String league) {
+        ArrayList<String> temp = (ArrayList<String>) attributes.clone();
         attributes.add("league");
-        ArrayList<TeamVO> arrayList = getDefault(attributes);
+        ArrayList<TeamVO> arrayList = getDefault(temp);
         TeamVO teamVO = new TeamVO();
         int num = 0 ;
         for (int i = 0; i <  arrayList.size();i++){
@@ -304,13 +300,6 @@ public class TeamDataHandel implements TeamDataService {
     @Override
     public ArrayList<PlayerVO> teamMemberList(int teamID) {
         return null;
-    }
-
-    public void update() {
-//        playerData = playerScoreSaver.get
-        teamDataDefault = playerScoreSaver.getTeamDataBefore();
-        teamDataL5 = playerScoreSaver.getTeamDataL5();
-        teamDataBefore = playerScoreSaver.getTeamDataBefore();
     }
 
     private ArrayList<TeamVO> getDefault(ArrayList<String> arrayList){
@@ -399,6 +388,8 @@ public class TeamDataHandel implements TeamDataService {
     private static ArrayList<String> getHighInfo(){
         if (highInfo == null){
             highInfo = new ArrayList<String>();
+            highInfo.add("photo");
+            highInfo.add("teamName");
             highInfo.add("assistEfficient");
             highInfo.add("defendEfficient");
             highInfo.add("defendReboundEfficient");
@@ -416,11 +407,13 @@ public class TeamDataHandel implements TeamDataService {
         if (avgNormalInfo == null){
             avgNormalInfo = new ArrayList<>();
             avgNormalInfo.add("teamName");
+            avgNormalInfo.add("photo");
             avgNormalInfo.add("avgAssist");
             avgNormalInfo.add("avgBlockShot");
             avgNormalInfo.add("avgDefendRebound");
             avgNormalInfo.add("avgFault");
             avgNormalInfo.add("avgFoul");
+            avgNormalInfo.add("numOfGame");
             avgNormalInfo.add("avgOffendRebound");
             avgNormalInfo.add("avgPoint");
             avgNormalInfo.add("avgRebound");
@@ -437,6 +430,8 @@ public class TeamDataHandel implements TeamDataService {
         if (normalInfo == null){
             normalInfo = new ArrayList<>();
             normalInfo.add("assist");
+            normalInfo.add("teamName");
+            normalInfo.add("photo");
             normalInfo.add("teamName");
             normalInfo.add("blockShot");
             normalInfo.add("defendRebound");
@@ -475,10 +470,35 @@ public class TeamDataHandel implements TeamDataService {
     private static ArrayList<String> getAllInformation(){
         if (allInformation == null){
             allInformation = new ArrayList<>();
-            allInformation.addAll(getInformation());
-            allInformation.addAll(getNormalInfo());
-            allInformation.addAll(getAvgNormalInfo());
-            allInformation.addAll(getHighInfo());
+            allInformation.add("photo");
+            allInformation.add("teamName");
+            allInformation.add("abridge");
+            allInformation.add("location");
+            allInformation.add("league");
+            allInformation.add("division");
+            allInformation.add("homeCourt");
+            allInformation.add("foundTime");
+            allInformation.add("avgAssist");
+            allInformation.add("avgBlockShot");
+            allInformation.add("avgDefendRebound");
+            allInformation.add("avgFault");
+            allInformation.add("avgFoul");
+            allInformation.add("numOfGame");
+            allInformation.add("avgOffendRebound");
+            allInformation.add("avgPoint");
+            allInformation.add("avgRebound");
+            allInformation.add("avgSteal");
+            allInformation.add("penalty");
+            allInformation.add("shot");
+            allInformation.add("three");
+            allInformation.add("assistEfficient");
+            allInformation.add("defendEfficient");
+            allInformation.add("defendReboundEfficient");
+            allInformation.add("offendEfficient");
+            allInformation.add("offendReboundEfficient");
+            allInformation.add("offendRound");
+            allInformation.add("stealEfficient");
+            allInformation.add("winRate");
         }
         return allInformation;
     }

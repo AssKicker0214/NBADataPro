@@ -125,12 +125,8 @@ public class TeamSaver {
         return location;
     }
 
-    public String[] getLeague() {
-        String[] res = new String[area.length];
-        for (int i = 0; i < res.length ; i++){
-            res[i] = String.valueOf(area[i]);
-        }
-        return res;
+    public char[] getLeague() {
+        return area;
     }
 
     public String[] getDivision() {

@@ -784,7 +784,7 @@ public class PlayerScoreSaver {
             return teamSaver.getLocation();
         }
 
-        public String[] getLeague(){
+        public char[] getLeague(){
             return teamSaver.getLeague();
         }
 
