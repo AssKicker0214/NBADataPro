@@ -8,9 +8,9 @@ import vo.playervo.PlayerVO;
 public interface PlayerDataService {
 			
 	public PlayerVO findPlayerData(int playerId, boolean isAvg);//返回确切的某一个球员；true表示场均数据
-	
-	public ArrayList<PlayerVO> findPlayerNormal(boolean isAvg);//返回球员信息列表，按id升序排列
-	public ArrayList<PlayerVO> findPlayerHigh(boolean isAvg);//返回球员信息列表，按id升序排列
+	public ArrayList<PlayerVO> findPlayerData(String msg);//返回确切的某一个球员；true表示场均数据
+
+	public ArrayList<PlayerVO> findPlayer();//返回球员信息列表，按id升序排列
 
 	//排序球员列表
 	public ArrayList<PlayerVO> sortPlayerNormal(ArrayList<sortParam> sortBy, boolean isAvg);
