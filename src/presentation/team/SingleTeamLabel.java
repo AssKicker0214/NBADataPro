@@ -11,7 +11,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import ui.PhotoLabel;
+import presentation.common.PhotoLabel;
+
+
 
 public class SingleTeamLabel extends JLabel{
 

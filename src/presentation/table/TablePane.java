@@ -90,7 +90,7 @@ public class TablePane extends JPanel{
 		
 		if(hasIndex){
 			JLabel cLabel = new JLabel(" ",JLabel.CENTER);
-			cLabel.setPreferredSize(new Dimension(20, 30));
+			cLabel.setPreferredSize(new Dimension(30, 30));
 			header.add(cLabel);
 		}
 		for(int i=0;i<column;i++){
