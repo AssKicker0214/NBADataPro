@@ -763,6 +763,10 @@ public class PlayerScoreSaver {
         public double[] getWinRate(){
             return winRate;
         }
+
+        public int getNum() {
+            return teamSaver.getNum();
+        }
     }
 
     //--------------------------------------------------------------------------------------//

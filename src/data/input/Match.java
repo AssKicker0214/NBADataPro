@@ -25,7 +25,7 @@ public class Match {
                     insert(files[i], matchInfoSaver, TeamSaver.getTeamSaver(), PlayerSaver.getPlayerSaver(), playerScoreSaver, matchScoreSaver);
             }
             matchInfoSaver.update();
-            playerScoreSaver.complete();
+            playerScoreSaver.update();
             isInit = true;
         }
     }

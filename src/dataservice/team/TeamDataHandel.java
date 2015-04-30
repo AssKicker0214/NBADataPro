@@ -1,8 +1,6 @@
 package dataservice.team;
 
-import data.input.Team;
 import data.saver.PlayerScoreSaver;
-import sun.security.util.Length;
 import vo.playervo.PlayerVO;
 import vo.teamvo.HotTeamsVO;
 import vo.teamvo.TeamVO;
@@ -15,9 +13,7 @@ import java.util.ArrayList;
 public class TeamDataHandel implements TeamDataService {
 
     private PlayerScoreSaver playerScoreSaver;
-    //    private PlayerScoreSaver.PlayerData playerDataDefault;
-//    private PlayerScoreSaver.PlayerData playerDataL5;
-//    private PlayerScoreSaver.PlayerData playerDataBefore;
+
     private PlayerScoreSaver.TeamData teamDataDefault;
     private PlayerScoreSaver.TeamData teamDataL5;
     private PlayerScoreSaver.TeamData teamDataBefore;
@@ -35,31 +31,11 @@ public class TeamDataHandel implements TeamDataService {
     @Override
     public TeamVO findTeamInfo(int teamId, boolean isAvg) {
         TeamVO teamVO = new TeamVO();
+        teamVO.id = teamId;
         if (isAvg) {
-            teamVO.avgAssist = teamDataDefault.getAvgAssist()[teamId];            //助攻数
-            teamVO.avgBlockShot = teamDataDefault.getAvgBlockShot()[teamId];        //盖帽数
-            teamVO.avgDefendRebound = teamDataDefault.getAvgDefendRebound()[teamId];    //防守篮板数
-            teamVO.avgFault = teamDataDefault.getAvgFault()[teamId];            //失误数
-            teamVO.avgFoul = teamDataDefault.getAvgFoul()[teamId];            //犯规数
-            teamVO.avgOffendRebound = teamDataDefault.getAvgOffendRebound()[teamId];    //进攻篮板数
-            teamVO.avgPoint = teamDataDefault.getAvgPoint()[teamId];            //得分
-            teamVO.avgRebound = teamDataDefault.getAvgRebound()[teamId];            //篮板数
-            teamVO.avgSteal = teamDataDefault.getAvgSteal()[teamId];            //抢断数
-
+            setTeamVO(getAvgNormalInfo(),teamVO,teamDataDefault);
         } else {
-            teamVO.assist = teamDataDefault.getAssist()[teamId];
-            teamVO.blockShot = teamDataDefault.getBlockShot()[teamId];
-            teamVO.defendRebound = teamDataBefore.getDefendRebound()[teamId];
-            teamVO.fault = teamDataDefault.getFault()[teamId];
-            teamVO.foul = teamDataDefault.getFoul()[teamId];
-            teamVO.numOfGame = teamDataDefault.getNumOfGame()[teamId];
-            teamVO.offendRebound = teamDataDefault.getOffendRebound()[teamId];
-            teamVO.penalty = teamDataDefault.getPenalty()[teamId];
-            teamVO.point = teamDataDefault.getPoint()[teamId];
-            teamVO.rebound = teamDataDefault.getRebound()[teamId];
-            teamVO.shot = teamDataDefault.getShot()[teamId];
-            teamVO.steal = teamDataDefault.getSteal()[teamId];
-            teamVO.three = teamDataDefault.getThree()[teamId];
+            setTeamVO(getNormalInfo(),teamVO,teamDataDefault);
         }
         return teamVO;
     }
@@ -68,87 +44,31 @@ public class TeamDataHandel implements TeamDataService {
     public ArrayList<TeamVO> findTeamNormal(boolean isAvg) {
         ArrayList<TeamVO> arrayList = new ArrayList<>();
         if (isAvg) {
-            double[] avgAssist = teamDataDefault.getAvgAssist();            //助攻数
-            double[] avgBlockShot = teamDataDefault.getAvgBlockShot();        //盖帽数
-            double[] avgDefendRebound = teamDataDefault.getAvgDefendRebound();    //防守篮板数
-            double[] avgFault = teamDataDefault.getAvgFault();            //失误数
-            double[] avgFoul = teamDataDefault.getAvgFoul();            //犯规数
-            double[] avgOffendRebound = teamDataDefault.getAvgOffendRebound();    //进攻篮板数
-            double[] avgPoint = teamDataDefault.getAvgPoint();            //得分
-            double[] avgRebound = teamDataDefault.getAvgRebound();            //篮板数
-            double[] avgSteal = teamDataDefault.getAvgSteal();            //抢断数
-
-            for (int i = 0; i < avgAssist.length; i++) {
+            for (int i = 0; i < teamDataDefault.getNum(); i++) {
                 TeamVO teamVO = new TeamVO();
-                teamVO.avgAssist = avgAssist[i];
-                teamVO.avgBlockShot = avgBlockShot[i];
-                teamVO.avgDefendRebound = avgDefendRebound[i];
-                teamVO.avgFault = avgFault[i];
-                teamVO.avgFoul = avgFoul[i];
-                teamVO.avgOffendRebound = avgOffendRebound[i];
-                teamVO.avgPoint = avgPoint[i];
-                teamVO.avgRebound = avgRebound[i];
-                teamVO.avgSteal = avgSteal[i];
+                teamVO.id = i + 1;
+                setTeamVO(getAvgNormalInfo(),teamVO,teamDataDefault);
                 arrayList.add(teamVO);
             }
             return arrayList;
         } else {
-            int[] assist = teamDataDefault.getAssist();
-            int[] blockShot = teamDataDefault.getBlockShot();
-            int[] defendRebound = teamDataBefore.getDefendRebound();
-            int[] fault = teamDataDefault.getFault();
-            int[] foul = teamDataDefault.getFoul();
-            int[] numOfGame = teamDataDefault.getNumOfGame();
-            int[] offendRebound = teamDataDefault.getOffendRebound();
-            double[] penalty = teamDataDefault.getPenalty();
-            int[] point = teamDataDefault.getPoint();
-            int[] rebound = teamDataDefault.getRebound();
-            double[] shot = teamDataDefault.getShot();
-            int[] steal = teamDataDefault.getSteal();
-            double[] three = teamDataDefault.getThree();
-
-            for (int i = 0; i < assist.length; i++) {
+            for (int i = 0; i < teamDataDefault.getNum(); i++) {
                 TeamVO teamVO = new TeamVO();
-
-                teamVO.assist = assist[i];
-                teamVO.blockShot = blockShot[i];
-                teamVO.defendRebound = defendRebound[i];
-                teamVO.fault = fault[i];
-                teamVO.foul = foul[i];
-                teamVO.numOfGame = numOfGame[i];
-                teamVO.offendRebound = offendRebound[i];
-                teamVO.penalty = penalty[i];
-                teamVO.point = point[i];
-                teamVO.rebound = rebound[i];
-                teamVO.shot = shot[i];
-                teamVO.steal = steal[i];
-                teamVO.three = three[i];
+                teamVO.id = i + 1;
+                setTeamVO(getNormalInfo(),teamVO,teamDataDefault);
+                arrayList.add(teamVO);
             }
         }
-        return null;
+        return arrayList;
     }
 
     @Override
     public ArrayList<TeamVO> findTeamHigh() {
-        double[] assistEfficient = teamDataDefault.getAssistEfficient();
-        double[] defendEfficient = teamDataDefault.getDefendEfficient();
-        double[] defendReboundEfficient = teamDataDefault.getDefendReboundEfficient();
-        double[] offendEfficient = teamDataDefault.getOffendEfficient();
-        double[] offendReboundEfficient = teamDataDefault.getOffendReboundEfficient();
-        double[] offendRound = teamDataDefault.getOffendRound();
-        double[] stealEfficient = teamDataDefault.getStealEfficient();
-        double[] winRate = teamDataDefault.getWinRate();
         ArrayList<TeamVO> arrayList = new ArrayList<>();
-        for (int i = 0; i < assistEfficient.length; i++) {
+        for (int i = 0; i < teamDataDefault.getNum(); i++) {
             TeamVO teamVO = new TeamVO();
-            teamVO.assistEfficient = assistEfficient[i];
-            teamVO.defendEfficient = defendEfficient[i];
-            teamVO.defendReboundEfficient = defendReboundEfficient[i];
-            teamVO.offendEfficient = offendEfficient[i];
-            teamVO.offendReboundEfficient = offendReboundEfficient[i];
-            teamVO.offendRound = offendRound[i];
-            teamVO.stealEfficient = stealEfficient[i];
-            teamVO.winRate = winRate[i];
+            teamVO.id = i + 1;
+            setTeamVO(getHighInfo(),teamVO,teamDataDefault);
             arrayList.add(teamVO);
         }
         return arrayList;
@@ -161,62 +81,17 @@ public class TeamDataHandel implements TeamDataService {
         ArrayList<TeamVO> arrayList = new ArrayList<>();
 
         if (isAvg) {
-            double[] avgAssist = teamDataDefault.getAvgAssist();            //助攻数
-            double[] avgBlockShot = teamDataDefault.getAvgBlockShot();        //盖帽数
-            double[] avgDefendRebound = teamDataDefault.getAvgDefendRebound();    //防守篮板数
-            double[] avgFault = teamDataDefault.getAvgFault();            //失误数
-            double[] avgFoul = teamDataDefault.getAvgFoul();            //犯规数
-            double[] avgOffendRebound = teamDataDefault.getAvgOffendRebound();    //进攻篮板数
-            double[] avgPoint = teamDataDefault.getAvgPoint();            //得分
-            double[] avgRebound = teamDataDefault.getAvgRebound();            //篮板数
-            double[] avgSteal = teamDataDefault.getAvgSteal();            //抢断数
-
-            for (int i = 0; i < avgAssist.length; i++) {
+            for (int i = 0; i < teamDataDefault.getNum(); i++) {
                 TeamVO teamVO = new TeamVO();
-                teamVO.avgAssist = avgAssist[i];
-                teamVO.avgBlockShot = avgBlockShot[i];
-                teamVO.avgDefendRebound = avgDefendRebound[i];
-                teamVO.avgFault = avgFault[i];
-                teamVO.avgFoul = avgFoul[i];
-                teamVO.avgOffendRebound = avgOffendRebound[i];
-                teamVO.avgPoint = avgPoint[i];
-                teamVO.avgRebound = avgRebound[i];
-                teamVO.avgSteal = avgSteal[i];
-
+                teamVO.id = i + 1;
+                setTeamVO(getAvgNormalInfo(),teamVO,teamDataDefault);
                 length = serial(vos, length <= num ? length : num, teamVO, sortBy, desc);
             }
         } else {
-            int[] assist = teamDataDefault.getAssist();
-            int[] blockShot = teamDataDefault.getBlockShot();
-            int[] defendRebound = teamDataBefore.getDefendRebound();
-            int[] fault = teamDataDefault.getFault();
-            int[] foul = teamDataDefault.getFoul();
-            int[] numOfGame = teamDataDefault.getNumOfGame();
-            int[] offendRebound = teamDataDefault.getOffendRebound();
-            double[] penalty = teamDataDefault.getPenalty();
-            int[] point = teamDataDefault.getPoint();
-            int[] rebound = teamDataDefault.getRebound();
-            double[] shot = teamDataDefault.getShot();
-            int[] steal = teamDataDefault.getSteal();
-            double[] three = teamDataDefault.getThree();
-
-            for (int i = 0; i < assist.length; i++) {
+            for (int i = 0; i < teamDataDefault.getNum(); i++) {
                 TeamVO teamVO = new TeamVO();
-
-                teamVO.assist = assist[i];
-                teamVO.blockShot = blockShot[i];
-                teamVO.defendRebound = defendRebound[i];
-                teamVO.fault = fault[i];
-                teamVO.foul = foul[i];
-                teamVO.numOfGame = numOfGame[i];
-                teamVO.offendRebound = offendRebound[i];
-                teamVO.penalty = penalty[i];
-                teamVO.point = point[i];
-                teamVO.rebound = rebound[i];
-                teamVO.shot = shot[i];
-                teamVO.steal = steal[i];
-                teamVO.three = three[i];
-
+                teamVO.id = i + 1;
+                setTeamVO(getNormalInfo(),teamVO,teamDataDefault);
                 length = serial(vos, length <= num ? length : num, teamVO, sortBy, desc);
             }
         }
@@ -316,24 +191,11 @@ public class TeamDataHandel implements TeamDataService {
         TeamVO[] vos = new TeamVO[num + 1];
         int length = 0;
         ArrayList<TeamVO> arrayList = new ArrayList<>();
-        double[] assistEfficient = teamDataDefault.getAssistEfficient();
-        double[] defendEfficient = teamDataDefault.getDefendEfficient();
-        double[] defendReboundEfficient = teamDataDefault.getDefendReboundEfficient();
-        double[] offendEfficient = teamDataDefault.getOffendEfficient();
-        double[] offendReboundEfficient = teamDataDefault.getOffendReboundEfficient();
-        double[] offendRound = teamDataDefault.getOffendRound();
-        double[] stealEfficient = teamDataDefault.getStealEfficient();
-        double[] winRate = teamDataDefault.getWinRate();
-        for (int i = 0; i < assistEfficient.length; i++) {
+
+        for (int i = 0; i < teamDataDefault.getNum(); i++) {
             TeamVO teamVO = new TeamVO();
-            teamVO.assistEfficient = assistEfficient[i];
-            teamVO.defendEfficient = defendEfficient[i];
-            teamVO.defendReboundEfficient = defendReboundEfficient[i];
-            teamVO.offendEfficient = offendEfficient[i];
-            teamVO.offendReboundEfficient = offendReboundEfficient[i];
-            teamVO.offendRound = offendRound[i];
-            teamVO.stealEfficient = stealEfficient[i];
-            teamVO.winRate = winRate[i];
+            teamVO.id = i + 1;
+            setTeamVO(getHighInfo(),teamVO,teamDataDefault);
             length = serial(vos, length <= num ? length : num, teamVO, sortBy, desc);
         }
         for (int i = 0; i < num; i++) {
@@ -357,5 +219,171 @@ public class TeamDataHandel implements TeamDataService {
         teamDataDefault = playerScoreSaver.getTeamDataBefore();
         teamDataL5 = playerScoreSaver.getTeamDataL5();
         teamDataBefore = playerScoreSaver.getTeamDataBefore();
+    }
+
+    private ArrayList<TeamVO> getDefault(ArrayList<String> arrayList){
+        int size = teamDataDefault.getNum();
+        ArrayList<TeamVO> res = new ArrayList<>();
+        for (int i = 0; i < size; i++){
+            TeamVO teamVO = new TeamVO();
+            setTeamVO(arrayList,teamVO,teamDataDefault);
+            res.add(teamVO);
+        }
+        return res;
+    }
+
+    private void setTeamVO(ArrayList<String> arrayList,TeamVO teamVO,PlayerScoreSaver.TeamData teamData){
+        for (String s : arrayList){
+            setAttribute(s,teamVO,teamData);
+        }
+    }
+
+    private void setAttribute(String s , TeamVO teamVO,PlayerScoreSaver.TeamData teamData){
+        switch (s){
+            case "assist":
+                teamVO.assist = teamData.getAssist()[teamVO.id - 1];return;
+            case "blockShot":
+                teamVO.blockShot = teamData.getBlockShot()[teamVO.id - 1];return;
+            case "defendRebound":
+                teamVO.defendRebound = teamData.getDefendRebound()[teamVO.id - 1];return;
+            case "fault":
+                teamVO.fault = teamData.getFault()[teamVO.id - 1];return;
+            case "numOfGame":
+                teamVO.numOfGame = teamData.getNumOfGame()[teamVO.id - 1];return;
+            case "offendRebound":
+                teamVO.offendRebound = teamData.getOffendRebound()[teamVO.id - 1];return;
+            case "penalty":
+                teamVO.penalty = teamData.getPenalty()[teamVO.id - 1];return;
+            case "point":
+                teamVO.point = teamData.getPoint()[teamVO.id - 1];return;
+            case "rebound":
+                teamVO.rebound = teamData.getRebound()[teamVO.id - 1];return;
+            case "shot":
+                teamVO.shot = teamData.getShot()[teamVO.id - 1];return;
+            case "steal":
+                teamVO.steal = teamData.getSteal()[teamVO.id - 1];return;
+            case "three":
+                teamVO.three = teamData.getThree()[teamVO.id - 1];return;
+
+            case "avgAssist":
+                teamVO.avgAssist = teamData.getAvgAssist()[teamVO.id - 1];return;
+            case "avgBlockShot":
+                teamVO.avgBlockShot = teamData.getAvgBlockShot()[teamVO.id - 1];return;
+            case "avgDefendRebound":
+                teamVO.avgDefendRebound = teamData.getAvgDefendRebound()[teamVO.id - 1];return;
+            case "avgFault":
+                teamVO.avgFault = teamData.getAvgFault()[teamVO.id - 1];return;
+            case "avgFoul":
+                teamVO.avgFoul = teamData.getAvgFoul()[teamVO.id - 1];return;
+            case "avgOffendRebound":
+                teamVO.avgOffendRebound = teamData.getAvgOffendRebound()[teamVO.id - 1];return;
+            case "avgPoint":
+                teamVO.avgPoint = teamData.getAvgPoint()[teamVO.id - 1];return;
+            case "avgRebound":
+                teamVO.avgRebound = teamData.getAvgRebound()[teamVO.id - 1];return;
+            case "avgSteal":
+                teamVO.avgSteal = teamData.getAvgSteal()[teamVO.id - 1];return;
+
+            case "assistEfficient":
+                teamVO.assistEfficient = teamData.getAssistEfficient()[teamVO.id - 1];return;
+            case "defendEfficient":
+                teamVO.defendEfficient = teamData.getDefendEfficient()[teamVO.id - 1];return;
+            case "defendReboundEfficient":
+                teamVO.defendReboundEfficient = teamData.getDefendReboundEfficient()[teamVO.id - 1];return;
+            case "offendEfficient":
+                teamVO.offendEfficient = teamData.getOffendEfficient()[teamVO.id - 1];return;
+            case "offendReboundEfficient":
+                teamVO.offendReboundEfficient = teamData.getOffendReboundEfficient()[teamVO.id - 1];return;
+            case "offendRound":
+                teamVO.offendRound = teamData.getOffendRound()[teamVO.id - 1];return;
+            case "stealEfficient":
+                teamVO.stealEfficient = teamData.getStealEfficient()[teamVO.id - 1];return;
+            case "winRate":
+                teamVO.stealEfficient = teamData.getWinRate()[teamVO.id - 1];return;
+        }
+    }
+
+    private static ArrayList<String> highInfo;
+    private static ArrayList<String> getHighInfo(){
+        if (highInfo == null){
+            highInfo = new ArrayList<String>();
+            highInfo.add("assistEfficient");
+            highInfo.add("defendEfficient");
+            highInfo.add("defendReboundEfficient");
+            highInfo.add("offendEfficient");
+            highInfo.add("offendReboundEfficient");
+            highInfo.add("offendRound");
+            highInfo.add("stealEfficient");
+            highInfo.add("winRate");
+        }
+        return highInfo;
+    }
+
+    private static ArrayList<String> avgNormalInfo;
+    private static ArrayList<String> getAvgNormalInfo(){
+        if (avgNormalInfo == null){
+            avgNormalInfo = new ArrayList<>();
+            avgNormalInfo.add("avgAssist");
+            avgNormalInfo.add("avgBlockShot");
+            avgNormalInfo.add("avgDefendRebound");
+            avgNormalInfo.add("avgFault");
+            avgNormalInfo.add("avgFoul");
+            avgNormalInfo.add("avgOffendRebound");
+            avgNormalInfo.add("avgPoint");
+            avgNormalInfo.add("avgRebound");
+            avgNormalInfo.add("avgSteal");
+        }
+        return avgNormalInfo;
+    }
+
+    private static ArrayList<String> normalInfo;
+    private static ArrayList<String> getNormalInfo(){
+        if (normalInfo == null){
+            normalInfo = new ArrayList<>();
+            normalInfo.add("assist");
+            normalInfo.add("blockShot");
+            normalInfo.add("defendRebound");
+            normalInfo.add("fault");
+            normalInfo.add("foul");
+            normalInfo.add("numOfGame");
+            normalInfo.add("offendRebound");
+            normalInfo.add("offendRebound");
+            normalInfo.add("penalty");
+            normalInfo.add("point");
+            normalInfo.add("rebound");
+            normalInfo.add("shot");
+            normalInfo.add("steal");
+            normalInfo.add("three");
+        }
+        return normalInfo;
+    }
+
+    private static ArrayList<String> information;
+    private static ArrayList<String> getInformation(){
+        if (information == null){
+            information = new ArrayList<>();
+            information.add("photo");
+            information.add("teamName");
+            information.add("abridge");
+            information.add("location");
+            information.add("league");
+            information.add("division");
+            information.add("homeCourt");
+            information.add("foundTime");
+        }
+
+        return information;
+    }
+
+    private static ArrayList<String> allInformation;
+    private static ArrayList<String> getAllInformation(){
+        if (allInformation == null){
+            allInformation = new ArrayList<>();
+            allInformation.addAll(getInformation());
+            allInformation.addAll(getNormalInfo());
+            allInformation.addAll(getAvgNormalInfo());
+            allInformation.addAll(getHighInfo());
+        }
+        return allInformation;
     }
 }
