@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import ui.common.SelectLabel;
+import presentation.common.SelectLabel;
 
 public class PlayerMiddlePanel extends JPanel{
 

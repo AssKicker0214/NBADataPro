@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import ui.common.SelectLabel;
+import presentation.common.SelectLabel;
 
 public class EveryDay_PlayerKingOptionsPanel extends JPanel{
 

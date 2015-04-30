@@ -9,7 +9,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import ui.table.TablePane;
+import presentation.table.TablePane;
+
 
 public class PlayerMiddle_SeasonDataPanel extends JPanel {
 

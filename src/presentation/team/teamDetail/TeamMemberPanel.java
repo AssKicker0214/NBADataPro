@@ -11,8 +11,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import ui.common.SelectLabel;
-import ui.table.TablePane;
+import presentation.common.SelectLabel;
+import presentation.table.TablePane;
 
 public class TeamMemberPanel extends JPanel{
 

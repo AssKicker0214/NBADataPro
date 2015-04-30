@@ -13,7 +13,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import ui.PhotoLabel;
+import presentation.common.PhotoLabel;
+
 
 public class PlayerDetailTopPanel extends JPanel{
 

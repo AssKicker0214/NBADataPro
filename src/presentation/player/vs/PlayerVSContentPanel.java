@@ -10,7 +10,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import ui.player.SingleVSBarLabel;
+import presentation.player.SingleVSBarLabel;
+
 
 public class PlayerVSContentPanel extends JPanel{
 
