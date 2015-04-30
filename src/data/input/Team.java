@@ -1,6 +1,5 @@
 package data.input;
 
-import org.junit.Test;
 import data.saver.TeamSaver;
 
 import java.io.*;
@@ -12,13 +11,12 @@ public class Team {
     private TeamSaver teamSaver;
     private String path;
 
-    @Test
-    public void test() {
+    public void init() {
         ReadTeam(path);
     }
 
-    public Team(TeamSaver teamSaver, String path) {
-        this.teamSaver = teamSaver;
+    public Team(String path) {
+        this.teamSaver = TeamSaver.getTeamSaver();
         this.path = path;
     }
 

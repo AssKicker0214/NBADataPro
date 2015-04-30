@@ -1,7 +1,6 @@
 package data.input;
 
 import data.saver.*;
-import org.junit.Test;
 
 import java.io.*;
 import java.util.regex.Matcher;
@@ -11,69 +10,36 @@ import java.util.regex.Pattern;
  * Created by chenghao on 15/4/23.
  */
 public class Match {
-    public static void main(String[] args){
-        try {
-            new Match().test();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+
+    private static boolean isInit = false;
+
+    public void init() {
+        if (isInit == false){
+            File file = new File(path);
+            File[] files = file.listFiles();
+            MatchInfoSaver matchInfoSaver = MatchInfoSaver.getMatchInfoSaver();
+            PlayerScoreSaver playerScoreSaver = PlayerScoreSaver.getPlayerScoreSaver();
+            MatchScoreSaver matchScoreSaver = MatchScoreSaver.getMatchScoreSaver();
+            for (int i = 0; i < files.length; i++) {
+                if (files[i].isDirectory() == false)
+                    insert(files[i], matchInfoSaver, TeamSaver.getTeamSaver(), PlayerSaver.getPlayerSaver(), playerScoreSaver, matchScoreSaver);
+            }
+            matchInfoSaver.update();
+            playerScoreSaver.complete();
+            isInit = true;
         }
     }
 
-    @Test
-    public void test() throws FileNotFoundException {
-        long a = System.currentTimeMillis();
-        TeamSaver teamSaver = new TeamSaver();
-        PlayerSaver playerSaver = new PlayerSaver();
-        Team teamTest = new Team(teamSaver,"H:\\迭代一数据\\teams\\teams");
-        teamTest.test();
-        Player playerTest = new Player(playerSaver,"H:\\迭代一数据\\players\\info");
-        playerTest.test();
-        File file = new File("H:\\迭代一数据\\matches");
-        File[] files = file.listFiles();
-        MatchInfoSaver matchInfoSaver = new MatchInfoSaver();
-        PlayerScoreSaver playerScoreSaver = new PlayerScoreSaver(playerSaver,matchInfoSaver,teamSaver);
-        MatchScoreSaver matchScoreSaver = new MatchScoreSaver();
-        for (int i = 0; i < files.length; i++) {
-            if (files[i].isDirectory() == false)
-                insert(files[i], matchInfoSaver, teamSaver, playerSaver,playerScoreSaver,matchScoreSaver);
-        }
-        matchInfoSaver.update();
-//        playerScoreSaver.complete();
-        long b = System.currentTimeMillis();
-        System.out.println(b - a );
-//        matchInfoSaver.show();
-        //playerSaver.show();
-        //teamSaver.show();
-//        playerScoreSaver.show();
-        //matchScoreSaver.show();
-//        System.out.println(b-a);
+    private String path;
 
-//        long c = System.currentTimeMillis();
-//        int[] temp =playerScoreSaver.get_sum_b_throw3alls(30);
-//        long d = System.currentTimeMillis();
-//        System.out.println(d-c);
-//        for (int i = 0; i < temp.length; i++){
-//            System.out.println(temp[i]);
-//        }
-//        long c =System.currentTimeMillis();
-//        playerScoreSaver.setPidL5Mid();
-//        long d =System.currentTimeMillis();
-//        System.out.println(d-a);
-////        playerScoreSaver.showPIdL5Mid();
-//        long e = System.currentTimeMillis();
-////        TeamData teamData = new TeamData(playerScoreSaver,matchScoreSaver,teamSaver,matchInfoSaver);
-//        long f = System.currentTimeMillis();
-//        System.out.println(f - e);
-//        double[] temp = teamData.getAssistP();
-//        for (int i = 0; i < temp.length;i++){
-//            System.out.println(temp[i]);
-//        }
+    public Match(String path) {
+        this.path = path;
     }
 
-    public void insert(File file, MatchInfoSaver matchInfoSaver,
-                       TeamSaver teamSaver, PlayerSaver playerSaver,
-                       PlayerScoreSaver playerScoreSaver,
-                       MatchScoreSaver matchScoreSaver) {
+    public static void insert(File file, MatchInfoSaver matchInfoSaver,
+                              TeamSaver teamSaver, PlayerSaver playerSaver,
+                              PlayerScoreSaver playerScoreSaver,
+                              MatchScoreSaver matchScoreSaver) {
         BufferedReader br = null;
         try {
             String title = file.getName();
@@ -84,12 +50,12 @@ public class Match {
             String[] matchinfo = getMatchInfo(title, input);
             int teamf = teamSaver.getTid(matchinfo[1]);
             if (teamf == -1) {
-                System.err.println("CAN NOT FOUND TEAM "+matchinfo[1]);
+                System.err.println("CAN NOT FOUND TEAM " + matchinfo[1]);
             }
             matchinfo[1] = String.valueOf(teamf);
             int teaml = teamSaver.getTid(matchinfo[2]);
             if (teaml == -1) {
-                System.err.println("CAN NOT FOUND TEAM "+matchinfo[2]);
+                System.err.println("CAN NOT FOUND TEAM " + matchinfo[2]);
             }
             matchinfo[2] = String.valueOf(teaml);
             String mid = String.valueOf(matchInfoSaver.insert(matchinfo));
@@ -114,7 +80,7 @@ public class Match {
                     continue;
                 }
 
-                String[] playerInfos = getPlayerInfo(mid, tid, input, serialId,d_tid);
+                String[] playerInfos = getPlayerInfo(mid, tid, input, serialId, d_tid);
                 int pid = playerSaver.getPid(playerInfos[2]);
 
                 if (pid == -1) {
@@ -143,7 +109,7 @@ public class Match {
 
     }
 
-    public String[] getMatchInfo(String title, String s) {
+    public static String[] getMatchInfo(String title, String s) {
         String[] ss = s.split(";");
         String[] titles = title.split("_");
         String[] objects = new String[5];
@@ -166,7 +132,7 @@ public class Match {
         return objects;
     }
 
-    public String[] getPlayerInfo(String mid, String tid, String info, int serialId,String d_tid) {
+    public static String[] getPlayerInfo(String mid, String tid, String info, int serialId, String d_tid) {
         String[] infos = info.split(";");
         String[] objects = null;
         int all = Integer.parseInt(infos[3].trim());
@@ -200,7 +166,7 @@ public class Match {
         return objects;
     }
 
-    public String format(String time) {
+    public static String format(String time) {
         Pattern pattern = Pattern.compile("[0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}");
         Matcher matcher = pattern.matcher(time);
         boolean b = matcher.matches();

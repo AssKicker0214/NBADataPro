@@ -11,7 +11,15 @@ public class MatchScoreSaver {
     private int[] scoref;
     private int[] scorel;
 
-    public MatchScoreSaver(){
+    private static MatchScoreSaver matchScoreSaver;
+    public static MatchScoreSaver getMatchScoreSaver(){
+        if (matchScoreSaver == null){
+            matchScoreSaver = new MatchScoreSaver();
+        }
+        return matchScoreSaver;
+    }
+
+    private MatchScoreSaver(){
         int size = 10000;
         mid = new int[size];
         mindex = new int[size];
@@ -20,6 +28,7 @@ public class MatchScoreSaver {
         currentPoint = -1;
         refreshTime();
     }
+
 
     /**
      * When the data modified,update the lastModifiedTime

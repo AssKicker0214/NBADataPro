@@ -15,8 +15,16 @@ public class TeamSaver {
     private String[] homefield;
     private int[] establishmenttime;
 
+    private static TeamSaver teamSaver;
+    public static TeamSaver getTeamSaver(){
+        if (teamSaver == null){
+            teamSaver = new TeamSaver();
+        }
+        return teamSaver;
+    }
 
-    public TeamSaver() {
+
+    private TeamSaver() {
         tid = new int[30];
         fullname = new String[30];
         abbreviation = new String[30];

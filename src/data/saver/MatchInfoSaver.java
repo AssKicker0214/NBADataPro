@@ -17,7 +17,9 @@ public class MatchInfoSaver {
     public static final int L5MID = 2;
     public static final int BEFORE = 3;
 
-    public MatchInfoSaver() {
+    private static MatchInfoSaver matchInfoSaver;
+
+    private MatchInfoSaver() {
         int size = 4096;
         mid = new int[size];
         matchtime = new String[size];
@@ -27,6 +29,13 @@ public class MatchInfoSaver {
         allscorel = new int[size];
         currentPoint = -1;
         refreshTime();
+    }
+
+    public static MatchInfoSaver getMatchInfoSaver(){
+        if (matchInfoSaver == null){
+            matchInfoSaver = new MatchInfoSaver();
+        }
+        return matchInfoSaver;
     }
 
     /**
