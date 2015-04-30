@@ -80,10 +80,12 @@ public class PlayerScoreSaver {
     private PlayerData playerDataL5;
     private PlayerData playerDataBefore;
     private TeamData teamDataDefault;
+    private TeamData teamDataL5;
+    private TeamData teamDataBefore;
 
 
     public void complete() {
-        setPidDefaultMid();
+//        setPidDefaultMid();
 //        new Thread() {
 //            @Override
 //            public void run() {
@@ -92,15 +94,16 @@ public class PlayerScoreSaver {
 //                setPidBeforeMid();
 //            }
 //        }.start();
-//        playerDataDefault = new PlayerData(pidDefaultMid,pidDefaultMid.length);
-//        teamDataDefault = new TeamData(DEFAULT,pidDefaultMid,pidDefaultMid.length);
-
         setPidL5Mid();
         setPidBeforeMid();
-//        playerDataL5 = new PlayerData(pidL5Mid.getPointInL5Mid(),pidL5Mid.getLength());
-//        playerDataBefore = new PlayerData(pidBeforeMid, pidBeforeMid.length);
-//        teamDataDefault = new TeamData(L5MID,pidL5Mid.getPointInL5Mid(),pidL5Mid.getLength());
-//        teamDataDefault = new TeamData(BEFORE,pidBeforeMid,pidBeforeMid.length);
+        playerDataDefault = new PlayerData(pidDefaultMid, pidDefaultMid.length);
+        teamDataDefault = new TeamData(DEFAULT, pidDefaultMid, pidDefaultMid.length);
+
+
+        playerDataL5 = new PlayerData(pidL5Mid.getPointInL5Mid(), pidL5Mid.getLength());
+        playerDataBefore = new PlayerData(pidBeforeMid, pidBeforeMid.length);
+        teamDataL5 = new TeamData(L5MID, pidL5Mid.getPointInL5Mid(), pidL5Mid.getLength());
+        teamDataBefore = new TeamData(BEFORE, pidBeforeMid, pidBeforeMid.length);
     }
 
     /**
@@ -2397,6 +2400,7 @@ public class PlayerScoreSaver {
         private int[] pointInL5Mid;
 
         private PidL5Mid() {
+            System.out.println("-------------------------- create pid l5 mid------------");
             size = playerSaver.getNum() * 5;
             pid = new int[size];
             mid = new int[size];
@@ -2462,7 +2466,7 @@ public class PlayerScoreSaver {
          * @return
          */
         public boolean isInPointInL5Mid(int m) {
-            for (int i = 0; i < this.length ; i++) {
+            for (int i = 0; i < this.length; i++) {
                 if (m == pidL5Mid.pointInL5Mid[i])
                     return true;
             }
@@ -2560,13 +2564,17 @@ public class PlayerScoreSaver {
      * 默认比赛信息表
      */
     public void setPidBeforeMid() {
+        pidDefaultMid = new int[currentPoint + 1];
+//        System.out.println(pidL5Mid.getLength());
         pidBeforeMid = new int[pidDefaultMid.length - pidL5Mid.getLength()];
         int m = 0;
         for (int i = 0; i <= currentPoint; i++) {
-            if (pidL5Mid.isInPointInL5Mid(i))
-                continue;
-            pidBeforeMid[m] = i;
-            m++;
+            pidDefaultMid[i] = i;
+            if (!pidL5Mid.isInPointInL5Mid(i)) {
+
+                pidBeforeMid[m] = i;
+                m++;
+            }
         }
         pidBeforeMidFlag = true;
     }
@@ -2605,7 +2613,7 @@ public class PlayerScoreSaver {
         private int[] b_score;
         private int type;
 
-        private double[] FPG;
+        private double[] FGP;
         private double[] TPSP;
         private double[] FTP;
         private double[] leg;
@@ -2614,9 +2622,24 @@ public class PlayerScoreSaver {
         private double[] stealP;
         private double[] ORtg;
         private double[] DRtg;
+        private double[] avgAssist;
+        private double[] avgBlockShot;
+        private double[] avgDefendRebound;
+        private double[] avgFault;
+        private double[] avgFoul;
+        private double[] avgOffendRebound;
+        private double[] avgPoint;
+        private double[] avgRebound;
+        private double[] avgSteal;
+        private double[] defendReboundEfficient;
+        private double[] offendEfficient;
+        private double[] offendReboundEfficient;
+        private double[] offendRound;
+        private double[] stealEfficient;
+        private double[] winRate;
 
         private void setTeamDataLevel2() {
-            FPG = new double[teamSaver.getNum()];
+            FGP = new double[teamSaver.getNum()];
             TPSP = new double[teamSaver.getNum()];
             leg = new double[teamSaver.getNum()];
             legB = new double[teamSaver.getNum()];
@@ -2625,8 +2648,26 @@ public class PlayerScoreSaver {
             ORtg = new double[teamSaver.getNum()];
             DRtg = new double[teamSaver.getNum()];
             FTP = new double[teamSaver.getNum()];
+            avgAssist = new double[teamSaver.getNum()];
+            avgBlockShot = new double[teamSaver.getNum()];
+            avgDefendRebound = new double[teamSaver.getNum()];
+            avgFault = new double[teamSaver.getNum()];
+            avgFoul = new double[teamSaver.getNum()];
+            avgOffendRebound = new double[teamSaver.getNum()];
+            avgPoint = new double[teamSaver.getNum()];
+            avgRebound = new double[teamSaver.getNum()];
+            avgSteal = new double[teamSaver.getNum()];
+            defendReboundEfficient = new double[teamSaver.getNum()];
+            offendReboundEfficient = new double[teamSaver.getNum()];
+            winRate = new double[teamSaver.getNum()];
+            avgSteal = new double[teamSaver.getNum()];
+            avgSteal = new double[teamSaver.getNum()];
+
+            FTP = new double[teamSaver.getNum()];
+            FTP = new double[teamSaver.getNum()];
+            FTP = new double[teamSaver.getNum()];
             for (int i = 0; i < teamSaver.getNum(); i++) {
-                FPG[i] = ((double) a_throwin[i]) / a_throwall[i];
+                FGP[i] = ((double) a_throwin[i]) / a_throwall[i];
                 TPSP[i] = ((double) a_throw3in[i]) / a_throw3all[i];
                 leg[i] = a_throwall[i] + 0.4 * a_penaltyall[i] - 1.07 * (a_attackbas[i] / ((a_attackbas[i] + b_defencebas[i]) * (double) (a_throwall[i] - a_throwin[i]))) + 1.07 * a_mistake[i];
                 legB[i] = b_throwall[i] + 0.4 * b_penaltyall[i] - 1.07 * (b_attackbas[i] / ((b_attackbas[i] + a_defencebas[i]) * (double) (b_throwall[i] - b_throwin[i]))) + 1.07 * b_mistake[i];
@@ -2635,8 +2676,22 @@ public class PlayerScoreSaver {
                 ORtg[i] = 100 * a_score[i] / leg[i];
                 DRtg[i] = 100 * b_score[i] / legB[i];
                 FTP[i] = ((double) a_penaltyin[i]) / a_penaltyall[i];
+                defendReboundEfficient[i] = ((double) a_defencebas[i]) / (a_defencebas[i] + b_attackbas[i]);
+                offendReboundEfficient[i] = ((double) a_attackbas[i]) / (a_attackbas[i] + b_defencebas[i]);
+                winRate[i] = ((double) a_winNum[i]) / (a_matchNum[i]);
+                avgAssist[i] = ((double) a_helpatt[i]) / a_matchNum[i];
+                avgBlockShot[i] = ((double) a_block[i]) / a_matchNum[i];
+                avgDefendRebound[i] = ((double) a_defencebas[i]) / a_matchNum[i];
+                avgFault[i] = ((double) a_mistake[i]) / a_matchNum[i];
+                avgOffendRebound[i] = ((double) a_attackbas[i]) / a_matchNum[i];
+                avgPoint[i] = ((double) a_score[i]) / a_matchNum[i];
+                avgRebound[i] = ((double) a_allbas[i]) / a_matchNum[i];
+                avgSteal[i] = ((double) a_interp[i]) / a_matchNum[i];
+                avgFoul[i] = ((double) a_foul[i]) / a_matchNum[i];
             }
         }
+
+        private int[] a_block;
 
         private void setTeamDataLevel1() {
 
@@ -2654,9 +2709,11 @@ public class PlayerScoreSaver {
             a_mistake = new int[teamSaver.getNum()];
             a_foul = new int[teamSaver.getNum()];
             a_score = new int[teamSaver.getNum()];
-//            int[][] match_temp = matchInfoSaver.getMatchNum(type);
-//            a_matchNum = match_temp[1];
-//            a_winNum = match_temp[0];
+            a_block = new int[teamSaver.getNum()];
+
+            int[][] match_temp = matchInfoSaver.getMatchNum(type);
+            a_matchNum = match_temp[1];
+            a_winNum = match_temp[0];
             b_throwin = new int[teamSaver.getNum()];
             b_throwall = new int[teamSaver.getNum()];
             b_penaltyall = new int[teamSaver.getNum()];
@@ -2698,12 +2755,129 @@ public class PlayerScoreSaver {
 
         private int[] points;
         private int length;
-        TeamData(int type,int[] points,int length) {
+
+        TeamData(int type, int[] points, int length) {
             this.points = points;
             this.type = type;
-            this.length =length;
+            this.length = length;
             setTeamDataLevel1();
             setTeamDataLevel2();
+        }
+
+        public int[] getAssist() {
+            return a_helpatt;
+        }
+
+        public int[] getBlockShot() {
+            return a_block;
+        }
+
+        public int[] getDefendRebound() {
+            return a_defencebas;
+        }
+
+        public int[] getFault() {
+            return a_mistake;
+        }
+
+        public int[] getFoul() {
+            return a_foul;
+        }
+
+        public int[] getNumOfGame() {
+            return a_matchNum;
+        }
+
+        public int[] getOffendRebound() {
+            return a_attackbas;
+        }
+
+        public double[] getPenalty() {
+            return FTP;
+        }
+
+        public int[] getPoint() {
+            return a_score;
+        }
+
+        public int[] getRebound() {
+            return a_allbas;
+        }
+
+        public double[] getShot() {
+            return FGP;
+        }
+
+        public int[] getSteal() {
+            return a_interp;
+        }
+
+        public double[] getThree() {
+            return TPSP;
+        }
+
+        public double[] getAvgAssist() {
+            return avgAssist;
+        }
+
+        public double[] getAvgBlockShot() {
+            return avgBlockShot;
+        }
+
+        public double[] getAvgDefendRebound() {
+            return avgDefendRebound;
+        }
+
+        public double[] getAvgFault() {
+            return avgFault;
+        }
+
+        public double[] getAvgFoul() {
+            return avgFoul;
+        }
+
+        public double[] getAvgOffendRebound() {
+            return avgOffendRebound;
+        }
+
+        public double[] getAvgPoint() {
+            return avgPoint;
+        }
+
+        public double[] getAvgRebound() {
+            return avgRebound;
+        }
+
+        public double[] getAvgSteal() {
+            return avgSteal;
+        }
+
+        public double[] getAssistEfficient() {
+            return assistP;
+        }
+
+        public double[] getDefendEfficient() {
+            return DRtg;
+        }
+
+        public double[] getDefendReboundEfficient() {
+            return defendReboundEfficient;
+        }
+
+        public double[] getOffendEfficient() {
+            return ORtg;
+        }
+
+        public double[] getOffendReboundEfficient() {
+            return offendReboundEfficient;
+        }
+
+        public double[] getOffendRound() {
+            return leg;
+        }
+
+        public double[] getStealEfficient(){
+            return stealP;
         }
     }
 
@@ -2785,11 +2959,11 @@ public class PlayerScoreSaver {
             p_mistakeTeam = new int[playerSaver.getNum()];
             p_mistakeTeamB = new int[playerSaver.getNum()];
             pLegB = new double[playerSaver.getNum()];
-            p_tid = new int [playerSaver.getNum()][2];
-            p_matchNum = new int [playerSaver.getNum()];
-            p_startSession = new int [playerSaver.getNum()];
+            p_tid = new int[playerSaver.getNum()][2];
+            p_matchNum = new int[playerSaver.getNum()];
+            p_startSession = new int[playerSaver.getNum()];
 
-            for (int i = 0; i < p_tid.length;i++){
+            for (int i = 0; i < p_tid.length; i++) {
                 p_tid[i][0] = -1;
             }
 
@@ -2799,18 +2973,18 @@ public class PlayerScoreSaver {
                 int tid = PlayerScoreSaver.this.tid[i];
                 int mid = PlayerScoreSaver.this.mid[i];
 
-                if (serialid[i] <= 5){
+                if (serialid[i] <= 5) {
                     p_startSession[pid - 1] = p_startSession[pid - 1] + 1;
                 }
 
                 p_matchNum[pid - 1] = p_matchNum[pid - 1] + 1;
 
                 String date = matchInfoSaver.getDate(mid);
-                if (p_tid[pid - 1][0] == -1){
+                if (p_tid[pid - 1][0] == -1) {
                     p_tid[pid - 1][0] = tid;
                     p_tid[pid - 1][1] = mid;
-                }else{
-                    if (date.compareTo(matchInfoSaver.getDate(p_tid[pid - 1][1])) > 0){
+                } else {
+                    if (date.compareTo(matchInfoSaver.getDate(p_tid[pid - 1][1])) > 0) {
                         p_tid[pid - 1][0] = tid;
                         p_tid[pid - 1][1] = mid;
                     }
@@ -2982,6 +3156,17 @@ public class PlayerScoreSaver {
         private double[] p_OSE;
         private double[] p_utiliation;
         private double[] p_assistP;
+        private double[] p_avgAssist;
+        private double[] p_avgBlockShot;
+        private double[] p_avgDefend;
+        private double[] p_avgFault;
+        private double[] p_avgFoul;
+        private double[] p_avgMinute;
+        private double[] p_avgOffend;
+        private double[] p_avgPoint;
+        private double[] p_avgRebound;
+        private double[] p_avgSteal;
+
 
         private void setPlayerDataLevel3() {
 
@@ -3001,6 +3186,17 @@ public class PlayerScoreSaver {
             p_TSP = new double[playerSaver.getNum()];
             p_OSE = new double[playerSaver.getNum()];
             p_utiliation = new double[playerSaver.getNum()];
+            p_avgAssist = new double[playerSaver.getNum()];
+            p_avgBlockShot = new double[playerSaver.getNum()];
+            p_avgDefend = new double[playerSaver.getNum()];
+            p_avgFault = new double[playerSaver.getNum()];
+            p_avgFoul = new double[playerSaver.getNum()];
+            p_avgMinute = new double[playerSaver.getNum()];
+            p_avgOffend = new double[playerSaver.getNum()];
+            p_avgPoint = new double[playerSaver.getNum()];
+            p_avgRebound = new double[playerSaver.getNum()];
+            p_avgSteal = new double[playerSaver.getNum()];
+
 
             for (int i = 0; i < playerSaver.getNum(); i++) {
 
@@ -3023,6 +3219,40 @@ public class PlayerScoreSaver {
                     p_FTP[i] = this.p_penaltyin[i] / (double) this.p_penaltyall[i];
                 } else {
                     p_FTP[i] = -1;
+                }
+//                p_avgAssist = new double[playerSaver.getNum()];
+//                p_avgBlockShot = new double[playerSaver.getNum()];
+//                p_avgDefend = new double[playerSaver.getNum()];
+//                p_avgFault = new double[playerSaver.getNum()];
+//                p_avgFoul = new double[playerSaver.getNum()];
+//                p_avgMinute = new double[playerSaver.getNum()];
+//                p_avgOffend = new double[playerSaver.getNum()];
+//                p_avgPoint = new double[playerSaver.getNum()];
+//                p_avgRebound = new double[playerSaver.getNum()];
+//                p_avgSteal = new double[playerSaver.getNum()];
+
+                if (p_matchNum[i] > 0){
+                    p_avgAssist[i] = (double)p_helpatt[i] / p_matchNum[i];
+                    p_avgBlockShot[i] = (double)p_block[i] / p_matchNum[i];
+                    p_avgDefend[i] = (double)p_defencebas[i] / p_matchNum[i];
+                    p_avgFault[i] = (double)p_mistake[i] / p_matchNum[i];
+                    p_avgFoul[i] = (double)p_foul[i] / p_matchNum[i];
+                    p_avgMinute[i] = (double)p_inplacetime[i] / p_matchNum[i];
+                    p_avgOffend[i] = (double)p_attackbas[i] / p_matchNum[i];
+                    p_avgPoint[i] = (double)p_score[i] / p_matchNum[i];
+                    p_avgRebound[i] = (double)p_allbas[i] / p_matchNum[i];
+                    p_avgSteal[i] = (double)p_interp[i] / p_matchNum[i];
+                }else{
+                    p_avgAssist[i] = -1;
+                    p_avgBlockShot[i] = -1;
+                    p_avgDefend[i] = -1;
+                    p_avgFault[i] = -1;
+                    p_avgFoul[i] = -1;
+                    p_avgMinute[i] = -1;
+                    p_avgOffend[i] = -1;
+                    p_avgPoint[i] = -1;
+                    p_avgRebound[i] = -1;
+                    p_avgSteal[i] = -1;
                 }
 
                 if (this.p_inplacetime[i] > 0) {
@@ -3093,7 +3323,6 @@ public class PlayerScoreSaver {
         private int[][] mid_mistake;
         private int[][] mid_penaltyall;
         private int[][] mid_allbas;
-
 
 
         private void setPlayerDataLevel1() {
@@ -3207,6 +3436,147 @@ public class PlayerScoreSaver {
 
         public long getLastModifiedTime() {
             return lastModifiedTime;
+        }
+
+        public int[] getAssist(){
+            return p_helpatt;
+        }
+
+        public int[] getBlockShot(){
+            return p_block;
+        }
+
+        public double[] getEfficiency(){
+            return p_effiency;
+        }
+
+        public int[] getFault(){
+            return p_mistake;
+        }
+
+        public int[] getFoul(){
+            return p_foul;
+        }
+
+        public int[] getMinute(){
+            return p_inplacetime;
+        }
+
+        public int[] getOffend(){
+            return p_attackbas;
+        }
+
+        public double[] getPenalty(){
+            return p_FTP;
+        }
+
+        public int[] getPoint(){
+            return p_score;
+        }
+
+        public int[] getRebound(){
+            return p_allbas;
+        }
+
+        public double[] getShot(){
+            return p_FGP;
+        }
+
+        public int[] getStart(){
+            return p_startSession;
+        }
+
+        public int[] getSteal(){
+            return p_interp;
+        }
+
+        public double[] getThree(){
+            return p_TPSP;
+        }
+
+        public double[] getAvgAssist(){
+            return p_avgAssist;
+        }
+
+        public double[] getAvgBlockShot(){
+            return p_avgBlockShot;
+        }
+
+        public double[] getAvgDefend(){
+            return p_avgDefend;
+        }
+
+        public double[] getAvgFault(){
+            return p_avgFault;
+        }
+
+        public double[] getAvgFoul(){
+            return p_avgFoul;
+        }
+
+        public double[] getAvgMinute(){
+            return p_avgMinute;
+        }
+
+        public double[] getAvgOffend(){
+            return p_avgOffend;
+        }
+
+        public double[] getAvgPoint(){
+            return p_avgPoint;
+        }
+
+        public double[] getAvgRebound(){
+            return p_avgRebound;
+        }
+
+        public double[] getAvgSteal(){
+            return p_avgSteal;
+        }
+
+        public double[] getAssistEfficient(){
+            return p_assistP;
+        }
+
+        public double[] getBlockShotEfficient(){
+            return p_BSP;
+        }
+
+        public double[] getDefendReboundEfficient(){
+            return p_DREB;
+        }
+
+        public double[] getFaultEfficient(){
+            return p_turnoverP;
+        }
+
+        public double[] getFrequency(){
+            return p_utiliation;
+        }
+
+        public double[] getGmSc(){
+            return p_GmSc;
+        }
+
+        public double[] getOffendReboundEfficient(){
+            return p_OREB;
+        }
+
+        public double[] getRealShot(){
+            return p_TSP;
+        }
+
+        public double[] getReboundEfficient(){
+            return p_reboundP;
+        }
+
+
+        public double[] getShotEfficient(){
+            return p_OSE;
+        }
+
+        public double[] getStealEfficient(){
+            return p_stealP;
         }
     }
 

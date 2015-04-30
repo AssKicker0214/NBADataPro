@@ -104,8 +104,8 @@ public class MatchInfoSaver {
     public void setTidL5Mid() {
         if (tidL5Mid == null)
             tidL5Mid = new TidL5Mid();
-        else if (tidL5Mid.getLastModifiedTime() < this.lastModifiedTime)
-            tidL5Mid = new TidL5Mid();
+//        else if (tidL5Mid.getLastModifiedTime() < this.lastModifiedTime)
+//            tidL5Mid = new TidL5Mid();
     }
 
     /**
@@ -130,12 +130,16 @@ public class MatchInfoSaver {
         private int[] mid;
         private int[] pointInL5Mid;
         private int size;
+//        private int[] pointInDefaultMid;
+//        private int[] pointInBeforeMid;
 
         TidL5Mid() {
+            System.out.println("---------------------------------------- create tid mid-------------");
             this.size = 150;
             tid = new int[size];
             mid = new int[size];
-            pointInL5Mid = new int[size/2];
+            pointInL5Mid = new int[size / 2];
+//            pointInDefaultMid = new int[MatchInfoSaver.this.getNum()];
             tid_point = -1;
             length = 0;
             for (int i = 0; i <= currentPoint; i++) {
@@ -145,24 +149,75 @@ public class MatchInfoSaver {
 
         /**
          * 插入一条记录
-         *
          */
         private void insert(int m) {
             int tid1 = MatchInfoSaver.this.teamf[m];
             int tid2 = MatchInfoSaver.this.teaml[m];
             int mid1 = MatchInfoSaver.this.mid[m];
 
-            int flag = insert(tid1, mid1);
-            insert(tid2, mid1);
+//            int flag = insert(tid1, mid1);
+//            insert(tid2, mid1);
+//
+//            if (flag > 0){
+//                int pos = flag / 2;
+//                pointInL5Mid[pos] = m;
+//            }
 
-            if (flag > 0){
-                int pos = flag / 2;
-                pointInL5Mid[pos] = m;
+            int[] arrayList = new int[5];
+            int size = 0;
+            String date = getDate(mid1);
+            for (int i = 0; i <= tid_point; i++) {
+                if (this.tid[i] == tid1) {
+
+                    arrayList[size] = i;
+                    size++;
+                    if (size == 5)
+                        break;
+                }
+            }
+
+            if (size < 5) {
+                if (tid_point < this.size - 1) {
+                    tid_point++;
+                    length++;
+                    this.tid[tid_point] = tid1;
+                    this.mid[tid_point] = mid1;
+                    tid_point++;
+                    length++;
+                    this.tid[tid_point] = tid2;
+                    this.mid[tid_point] = mid1;
+                    this.pointInL5Mid[tid_point / 2] = m;
+                }
+                return;
+            }
+
+            int temp = arrayList[0];
+            for (int i = 0; i < size; i++) {
+                int a = arrayList[i];
+                if (getDate(this.mid[temp]).compareTo(getDate(this.mid[a])) > 0) {
+                    temp = a;
+                }
+            }
+
+            if (date.compareTo(getDate(this.mid[temp])) > 0) {
+                if (temp % 2 == 0) {
+                    this.tid[temp] = tid1;
+                    this.mid[temp] = mid1;
+                    this.tid[temp + 1] = tid2;
+                    this.mid[temp + 1] = mid1;
+                }else{
+                    this.tid[temp] = tid1;
+                    this.mid[temp] = mid1;
+                    this.tid[temp - 1] = tid2;
+                    this.mid[temp - 1] = mid1;
+                }
+                this.pointInL5Mid[temp / 2] = m;
+                return;
             }
 
         }
 
-        private int insert(int tid,int mid){
+        private int insert(int tid, int mid) {
             int[] arrayList = new int[5];
             int size = 0;
             String date = getDate(mid);
@@ -242,7 +297,7 @@ public class MatchInfoSaver {
             return length;
         }
 
-        public int[] getPointInL5Mid(){
+        public int[] getPointInL5Mid() {
             return pointInL5Mid;
         }
     }
@@ -257,22 +312,22 @@ public class MatchInfoSaver {
         return lastModifiedTime;
     }
 
-    public int[][] getMatchNum(int type){
+    public int[][] getMatchNum(int type) {
         int[][] res = new int[2][30];
         int[] points;
         int length;
-        if (type == DEFAULT){
+        if (type == DEFAULT) {
             points = tidDefaultMid;
             length = tidDefaultMid.length;
-        }else if (type == L5MID){
+        } else if (type == L5MID) {
             points = getTidL5Mid().getPointInL5Mid();
             length = getTidL5Mid().getLength() / 2;
-        }else {
+        } else {
             points = tidBeforeMid;
             length = tidBeforeMid.length;
         }
 
-        for (int j = 0; j < length; j++){
+        for (int j = 0; j < length; j++) {
             int i = points[j];
             int mid = this.mid[i];
             int teamf = this.teamf[i];
@@ -281,38 +336,38 @@ public class MatchInfoSaver {
             int score1 = this.allscoref[i];
             int score2 = this.allscoref[i];
 
-            if (score1 > score2){
+            if (score1 > score2) {
                 res[0][teamf - 1] = res[0][teamf - 1] + 1;
             }
 
-            if (score1 < score2){
+            if (score1 < score2) {
                 res[0][teaml - 1] = res[0][teaml - 1] + 1;
             }
 
-            res[1][teamf -1] = res[1][teamf -1] + 1;
-            res[1][teaml -1] = res[1][teaml -1] + 1;
+            res[1][teamf - 1] = res[1][teamf - 1] + 1;
+            res[1][teaml - 1] = res[1][teaml - 1] + 1;
         }
-        return  res;
+        return res;
     }
 
     private int[] tidDefaultMid;
     private int[] tidBeforeMid;
 
-    public void setMid(){
+    public void setMid() {
         tidDefaultMid = new int[getNum()];
-        tidBeforeMid = new int[getNum() - getTidL5Mid().length/2];
+        tidBeforeMid = new int[getNum() - (getTidL5Mid().length / 2) ];
 
         int m = 0;
-        for (int i = 0 ;i <= currentPoint; i++){
+        for (int i = 0; i <= currentPoint; i++) {
             tidDefaultMid[i] = i;
-            if (getTidL5Mid().isL5Mid1(i)){
+            if (!getTidL5Mid().isL5Mid1(i)) {
                 tidBeforeMid[m] = i;
                 m++;
             }
         }
     }
 
-    public void update(){
+    public void update() {
         setTidL5Mid();
         setMid();
     }

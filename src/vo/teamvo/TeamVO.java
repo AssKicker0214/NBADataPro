@@ -20,7 +20,7 @@ public class TeamVO {
 	public int 	defendRebound;	//防守篮板数
 	public int 	fault;			//失误数
 	public int 	foul;			//犯规数
-	public int 		numOfGame;	//比赛场数
+	public int 	numOfGame;	//比赛场数
 	public int 	offendRebound;	//进攻篮板数
 	public double 	penalty;	//罚球命中率
 	public int 	point;			//得分

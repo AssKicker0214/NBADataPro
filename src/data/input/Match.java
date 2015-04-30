@@ -24,9 +24,9 @@ public class Match {
         long a = System.currentTimeMillis();
         TeamSaver teamSaver = new TeamSaver();
         PlayerSaver playerSaver = new PlayerSaver();
-        TeamTest teamTest = new TeamTest(teamSaver,"H:\\迭代一数据\\teams\\teams");
+        Team teamTest = new Team(teamSaver,"H:\\迭代一数据\\teams\\teams");
         teamTest.test();
-        PlayerTest playerTest = new PlayerTest(playerSaver,"H:\\迭代一数据\\players\\info");
+        Player playerTest = new Player(playerSaver,"H:\\迭代一数据\\players\\info");
         playerTest.test();
         File file = new File("H:\\迭代一数据\\matches");
         File[] files = file.listFiles();
@@ -38,7 +38,7 @@ public class Match {
                 insert(files[i], matchInfoSaver, teamSaver, playerSaver,playerScoreSaver,matchScoreSaver);
         }
         matchInfoSaver.update();
-        playerScoreSaver.complete();
+//        playerScoreSaver.complete();
         long b = System.currentTimeMillis();
         System.out.println(b - a );
 //        matchInfoSaver.show();
@@ -68,24 +68,6 @@ public class Match {
 //        for (int i = 0; i < temp.length;i++){
 //            System.out.println(temp[i]);
 //        }
-    }
-
-    public static void printArray(double[] objects,PrintStream pr) {
-        if (objects.length > 0) {
-            for (int i = 0; i < objects.length - 1; i++) {
-                pr.print(objects[i] + " ");
-            }
-            pr.println(objects[objects.length - 1]);
-        }
-    }
-
-    public static void printArray(int[] objects,PrintStream pr) {
-        if (objects.length > 0) {
-            for (int i = 0; i < objects.length - 1; i++) {
-                pr.print(objects[i] + " ");
-            }
-            pr.println(objects[objects.length - 1]);
-        }
     }
 
     public void insert(File file, MatchInfoSaver matchInfoSaver,

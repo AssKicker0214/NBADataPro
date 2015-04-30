@@ -8,16 +8,24 @@ import java.util.regex.Pattern;
  * Created by chenghao on 15/4/23.
  */
 public class MatchTest {
+    public static void main(String[] args){
+        try {
+            new MatchTest().test();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Test
     public void test() throws FileNotFoundException {
         long a = System.currentTimeMillis();
         TeamSaver teamSaver = new TeamSaver();
         PlayerSaver playerSaver = new PlayerSaver();
-        TeamTest teamTest = new TeamTest(teamSaver,"/Users/chenghao/Documents/迭代一数据/teams/teams");
+        TeamTest teamTest = new TeamTest(teamSaver,"H:\\迭代一数据\\teams\\teams");
         teamTest.test();
-        PlayerTest playerTest = new PlayerTest(playerSaver,"/Users/chenghao/Documents/迭代一数据/players/info");
+        PlayerTest playerTest = new PlayerTest(playerSaver,"H:\\迭代一数据\\players\\info");
         playerTest.test();
-        File file = new File("/Users/chenghao/Documents/迭代一数据/matches");
+        File file = new File("H:\\迭代一数据\\matches");
         File[] files = file.listFiles();
         MatchInfoSaver matchInfoSaver = new MatchInfoSaver();
         PlayerScoreSaver playerScoreSaver = new PlayerScoreSaver(playerSaver,matchInfoSaver,teamSaver);
