@@ -41,7 +41,16 @@ public class PlayerScoreSaver {
     private int[] serialid;
     private int[] d_tid;
 
-    public PlayerScoreSaver(PlayerSaver playerSaver,
+    private static PlayerScoreSaver playerScoreSaver;
+    public static PlayerScoreSaver getPlayerScoreSaver(){
+        if (playerScoreSaver == null){
+            playerScoreSaver = new PlayerScoreSaver(PlayerSaver.getPlayerSaver(),
+                    MatchInfoSaver.getMatchInfoSaver(),TeamSaver.getTeamSaver());
+        }
+        return playerScoreSaver;
+    }
+
+    private PlayerScoreSaver(PlayerSaver playerSaver,
                             MatchInfoSaver matchInfoSaver,
                             TeamSaver teamSaver) {
 
@@ -795,7 +804,7 @@ public class PlayerScoreSaver {
         private int[] p_mistakeTeam;
         private int[] p_mistakeTeamB;
         private int[] p_inplacetimeTeam;
-        private int[][] p_tid;
+        private int[][] p_tid_mid;
         private int[] p_matchNum;
         private int[] p_startSession;
 
@@ -834,12 +843,12 @@ public class PlayerScoreSaver {
             p_mistakeTeam = new int[playerSaver.getNum()];
             p_mistakeTeamB = new int[playerSaver.getNum()];
             pLegB = new double[playerSaver.getNum()];
-            p_tid = new int[playerSaver.getNum()][2];
+            p_tid_mid = new int[playerSaver.getNum()][2];
             p_matchNum = new int[playerSaver.getNum()];
             p_startSession = new int[playerSaver.getNum()];
 
-            for (int i = 0; i < p_tid.length; i++) {
-                p_tid[i][0] = -1;
+            for (int i = 0; i < p_tid_mid.length; i++) {
+                p_tid_mid[i][0] = -1;
             }
 
             for (int j = 0; j < length; j++) {
@@ -855,13 +864,13 @@ public class PlayerScoreSaver {
                 p_matchNum[pid - 1] = p_matchNum[pid - 1] + 1;
 
                 String date = matchInfoSaver.getDate(mid);
-                if (p_tid[pid - 1][0] == -1) {
-                    p_tid[pid - 1][0] = tid;
-                    p_tid[pid - 1][1] = mid;
+                if (p_tid_mid[pid - 1][0] == -1) {
+                    p_tid_mid[pid - 1][0] = tid;
+                    p_tid_mid[pid - 1][1] = mid;
                 } else {
-                    if (date.compareTo(matchInfoSaver.getDate(p_tid[pid - 1][1])) > 0) {
-                        p_tid[pid - 1][0] = tid;
-                        p_tid[pid - 1][1] = mid;
+                    if (date.compareTo(matchInfoSaver.getDate(p_tid_mid[pid - 1][1])) > 0) {
+                        p_tid_mid[pid - 1][0] = tid;
+                        p_tid_mid[pid - 1][1] = mid;
                     }
                 }
 

@@ -34,8 +34,34 @@ public class TeamDataHandel implements TeamDataService {
 
     @Override
     public TeamVO findTeamInfo(int teamId, boolean isAvg) {
+        TeamVO teamVO = new TeamVO();
+        if (isAvg) {
+            teamVO.avgAssist = teamDataDefault.getAvgAssist()[teamId];            //助攻数
+            teamVO.avgBlockShot = teamDataDefault.getAvgBlockShot()[teamId];        //盖帽数
+            teamVO.avgDefendRebound = teamDataDefault.getAvgDefendRebound()[teamId];    //防守篮板数
+            teamVO.avgFault = teamDataDefault.getAvgFault()[teamId];            //失误数
+            teamVO.avgFoul = teamDataDefault.getAvgFoul()[teamId];            //犯规数
+            teamVO.avgOffendRebound = teamDataDefault.getAvgOffendRebound()[teamId];    //进攻篮板数
+            teamVO.avgPoint = teamDataDefault.getAvgPoint()[teamId];            //得分
+            teamVO.avgRebound = teamDataDefault.getAvgRebound()[teamId];            //篮板数
+            teamVO.avgSteal = teamDataDefault.getAvgSteal()[teamId];            //抢断数
 
-        return null;
+        } else {
+            teamVO.assist = teamDataDefault.getAssist()[teamId];
+            teamVO.blockShot = teamDataDefault.getBlockShot()[teamId];
+            teamVO.defendRebound = teamDataBefore.getDefendRebound()[teamId];
+            teamVO.fault = teamDataDefault.getFault()[teamId];
+            teamVO.foul = teamDataDefault.getFoul()[teamId];
+            teamVO.numOfGame = teamDataDefault.getNumOfGame()[teamId];
+            teamVO.offendRebound = teamDataDefault.getOffendRebound()[teamId];
+            teamVO.penalty = teamDataDefault.getPenalty()[teamId];
+            teamVO.point = teamDataDefault.getPoint()[teamId];
+            teamVO.rebound = teamDataDefault.getRebound()[teamId];
+            teamVO.shot = teamDataDefault.getShot()[teamId];
+            teamVO.steal = teamDataDefault.getSteal()[teamId];
+            teamVO.three = teamDataDefault.getThree()[teamId];
+        }
+        return teamVO;
     }
 
     @Override
