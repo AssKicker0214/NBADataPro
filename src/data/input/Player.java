@@ -12,12 +12,12 @@ public class Player {
     private String path;
 
 
-    public Player(PlayerSaver playerSaver, String path){
-        this.playerSaver = playerSaver;
+    public Player( String path){
+        this.playerSaver = PlayerSaver.getPlayerSaver();
         this.path = path;
     }
 
-    public void test(){
+    public void init(){
         readPlayer(path);
     }
 

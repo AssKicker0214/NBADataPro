@@ -41,8 +41,16 @@ public class PlayerScoreSaver {
     private int[] serialid;
     private int[] d_tid;
 
+    private static PlayerScoreSaver playerScoreSaver;
 
-    public PlayerScoreSaver(PlayerSaver playerSaver,
+    public static PlayerScoreSaver getPlayerScoreSaver() {
+        if (playerScoreSaver == null) {
+            playerScoreSaver = new PlayerScoreSaver(PlayerSaver.getPlayerSaver(), MatchInfoSaver.getMatchInfoSaver(), TeamSaver.getTeamSaver());
+        }
+        return playerScoreSaver;
+    }
+
+    private PlayerScoreSaver(PlayerSaver playerSaver,
                             MatchInfoSaver matchInfoSaver,
                             TeamSaver teamSaver) {
 
@@ -108,7 +116,6 @@ public class PlayerScoreSaver {
     private TeamData teamDataDefault;
     private TeamData teamDataL5;
     private TeamData teamDataBefore;
-
 
 
     public void complete() {
@@ -2903,11 +2910,11 @@ public class PlayerScoreSaver {
             return leg;
         }
 
-        public double[] getStealEfficient(){
+        public double[] getStealEfficient() {
             return stealP;
         }
 
-        public double[] getWinRate(){
+        public double[] getWinRate() {
             return winRate;
         }
     }
@@ -3262,18 +3269,18 @@ public class PlayerScoreSaver {
 //                p_avgRebound = new double[playerSaver.getNum()];
 //                p_avgSteal = new double[playerSaver.getNum()];
 
-                if (p_matchNum[i] > 0){
-                    p_avgAssist[i] = (double)p_helpatt[i] / p_matchNum[i];
-                    p_avgBlockShot[i] = (double)p_block[i] / p_matchNum[i];
-                    p_avgDefend[i] = (double)p_defencebas[i] / p_matchNum[i];
-                    p_avgFault[i] = (double)p_mistake[i] / p_matchNum[i];
-                    p_avgFoul[i] = (double)p_foul[i] / p_matchNum[i];
-                    p_avgMinute[i] = (double)p_inplacetime[i] / p_matchNum[i];
-                    p_avgOffend[i] = (double)p_attackbas[i] / p_matchNum[i];
-                    p_avgPoint[i] = (double)p_score[i] / p_matchNum[i];
-                    p_avgRebound[i] = (double)p_allbas[i] / p_matchNum[i];
-                    p_avgSteal[i] = (double)p_interp[i] / p_matchNum[i];
-                }else{
+                if (p_matchNum[i] > 0) {
+                    p_avgAssist[i] = (double) p_helpatt[i] / p_matchNum[i];
+                    p_avgBlockShot[i] = (double) p_block[i] / p_matchNum[i];
+                    p_avgDefend[i] = (double) p_defencebas[i] / p_matchNum[i];
+                    p_avgFault[i] = (double) p_mistake[i] / p_matchNum[i];
+                    p_avgFoul[i] = (double) p_foul[i] / p_matchNum[i];
+                    p_avgMinute[i] = (double) p_inplacetime[i] / p_matchNum[i];
+                    p_avgOffend[i] = (double) p_attackbas[i] / p_matchNum[i];
+                    p_avgPoint[i] = (double) p_score[i] / p_matchNum[i];
+                    p_avgRebound[i] = (double) p_allbas[i] / p_matchNum[i];
+                    p_avgSteal[i] = (double) p_interp[i] / p_matchNum[i];
+                } else {
                     p_avgAssist[i] = -1;
                     p_avgBlockShot[i] = -1;
                     p_avgDefend[i] = -1;
@@ -3469,144 +3476,144 @@ public class PlayerScoreSaver {
             return lastModifiedTime;
         }
 
-        public int[] getAssist(){
+        public int[] getAssist() {
             return p_helpatt;
         }
 
-        public int[] getBlockShot(){
+        public int[] getBlockShot() {
             return p_block;
         }
 
-        public double[] getEfficiency(){
+        public double[] getEfficiency() {
             return p_effiency;
         }
 
-        public int[] getFault(){
+        public int[] getFault() {
             return p_mistake;
         }
 
-        public int[] getFoul(){
+        public int[] getFoul() {
             return p_foul;
         }
 
-        public int[] getMinute(){
+        public int[] getMinute() {
             return p_inplacetime;
         }
 
-        public int[] getOffend(){
+        public int[] getOffend() {
             return p_attackbas;
         }
 
-        public double[] getPenalty(){
+        public double[] getPenalty() {
             return p_FTP;
         }
 
-        public int[] getPoint(){
+        public int[] getPoint() {
             return p_score;
         }
 
-        public int[] getRebound(){
+        public int[] getRebound() {
             return p_allbas;
         }
 
-        public double[] getShot(){
+        public double[] getShot() {
             return p_FGP;
         }
 
-        public int[] getStart(){
+        public int[] getStart() {
             return p_startSession;
         }
 
-        public int[] getSteal(){
+        public int[] getSteal() {
             return p_interp;
         }
 
-        public double[] getThree(){
+        public double[] getThree() {
             return p_TPSP;
         }
 
-        public double[] getAvgAssist(){
+        public double[] getAvgAssist() {
             return p_avgAssist;
         }
 
-        public double[] getAvgBlockShot(){
+        public double[] getAvgBlockShot() {
             return p_avgBlockShot;
         }
 
-        public double[] getAvgDefend(){
+        public double[] getAvgDefend() {
             return p_avgDefend;
         }
 
-        public double[] getAvgFault(){
+        public double[] getAvgFault() {
             return p_avgFault;
         }
 
-        public double[] getAvgFoul(){
+        public double[] getAvgFoul() {
             return p_avgFoul;
         }
 
-        public double[] getAvgMinute(){
+        public double[] getAvgMinute() {
             return p_avgMinute;
         }
 
-        public double[] getAvgOffend(){
+        public double[] getAvgOffend() {
             return p_avgOffend;
         }
 
-        public double[] getAvgPoint(){
+        public double[] getAvgPoint() {
             return p_avgPoint;
         }
 
-        public double[] getAvgRebound(){
+        public double[] getAvgRebound() {
             return p_avgRebound;
         }
 
-        public double[] getAvgSteal(){
+        public double[] getAvgSteal() {
             return p_avgSteal;
         }
 
-        public double[] getAssistEfficient(){
+        public double[] getAssistEfficient() {
             return p_assistP;
         }
 
-        public double[] getBlockShotEfficient(){
+        public double[] getBlockShotEfficient() {
             return p_BSP;
         }
 
-        public double[] getDefendReboundEfficient(){
+        public double[] getDefendReboundEfficient() {
             return p_DREB;
         }
 
-        public double[] getFaultEfficient(){
+        public double[] getFaultEfficient() {
             return p_turnoverP;
         }
 
-        public double[] getFrequency(){
+        public double[] getFrequency() {
             return p_utiliation;
         }
 
-        public double[] getGmSc(){
+        public double[] getGmSc() {
             return p_GmSc;
         }
 
-        public double[] getOffendReboundEfficient(){
+        public double[] getOffendReboundEfficient() {
             return p_OREB;
         }
 
-        public double[] getRealShot(){
+        public double[] getRealShot() {
             return p_TSP;
         }
 
-        public double[] getReboundEfficient(){
+        public double[] getReboundEfficient() {
             return p_reboundP;
         }
 
 
-        public double[] getShotEfficient(){
+        public double[] getShotEfficient() {
             return p_OSE;
         }
 
-        public double[] getStealEfficient(){
+        public double[] getStealEfficient() {
             return p_stealP;
         }
     }
