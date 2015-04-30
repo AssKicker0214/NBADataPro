@@ -4,6 +4,7 @@ package vo.teamvo;
  */
 public class TeamVO {
 	
+	//basic info
 	public int id;					//球队ID
 	public String photo;			//球队图片
 	public String teamName;			//球队名称
