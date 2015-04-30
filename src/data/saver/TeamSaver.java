@@ -108,4 +108,40 @@ public class TeamSaver {
     public long getLastModifiedTime(){
         return lastModifiedTime;
     }
+
+    public String[] getPhoto() {
+        return abbreviation;
+    }
+
+    public String[] getTeamName() {
+        return fullname;
+    }
+
+    public String[] getAbridge() {
+        return abbreviation;
+    }
+
+    public String[] getLocation() {
+        return location;
+    }
+
+    public String[] getLeague() {
+        String[] res = new String[area.length];
+        for (int i = 0; i < res.length ; i++){
+            res[i] = String.valueOf(area[i]);
+        }
+        return res;
+    }
+
+    public String[] getDivision() {
+        return subarea;
+    }
+
+    public String[] getHomeCourt() {
+        return homefield;
+    }
+
+    public int[] getFoundTime() {
+        return establishmenttime;
+    }
 }

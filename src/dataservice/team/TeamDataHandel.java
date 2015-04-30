@@ -29,6 +29,25 @@ public class TeamDataHandel implements TeamDataService {
     }
 
     @Override
+    public TeamVO findTeamInfo(int teamId) {
+        return null;
+    }
+
+    @Override
+    public ArrayList<TeamVO> findTeamNormal() {
+        return null;
+    }
+
+    @Override
+    public ArrayList<TeamVO> findTeamNormalAvg() {
+        return null;
+    }
+
+    @Override
+    public ArrayList<TeamVO> findTeamBasic() {
+        return null;
+    }
+
     public TeamVO findTeamInfo(int teamId, boolean isAvg) {
         TeamVO teamVO = new TeamVO();
         teamVO.id = teamId;
@@ -40,7 +59,6 @@ public class TeamDataHandel implements TeamDataService {
         return teamVO;
     }
 
-    @Override
     public ArrayList<TeamVO> findTeamNormal(boolean isAvg) {
         ArrayList<TeamVO> arrayList = new ArrayList<>();
         if (isAvg) {
@@ -205,8 +223,82 @@ public class TeamDataHandel implements TeamDataService {
     }
 
     @Override
-    public TeamVO avgLeague(ArrayList<String> attributes) {
-        return null;
+    public TeamVO avgLeague(ArrayList<String> attributes,String league) {
+        attributes.add("league");
+        ArrayList<TeamVO> arrayList = getDefault(attributes);
+        TeamVO teamVO = new TeamVO();
+        int num = 0 ;
+        for (int i = 0; i <  arrayList.size();i++){
+            if (arrayList.get(i).league.equals(league)){
+                num++;
+                for (String s:attributes){
+                    switch (s){
+                        case "assist":
+                            teamVO.assist += arrayList.get(i).assist;
+                        case "blockShot":
+                            teamVO.blockShot += arrayList.get(i).blockShot;
+                        case "defendRebound":
+                            teamVO.defendRebound += arrayList.get(i).defendRebound;
+                        case "fault":
+                            teamVO.fault += arrayList.get(i).fault;
+                        case "numOfGame":
+                            teamVO.numOfGame += arrayList.get(i).numOfGame;
+                        case "offendRebound":
+                            teamVO.offendRebound += arrayList.get(i).offendRebound;
+                        case "penalty":
+                            teamVO.penalty += arrayList.get(i).penalty;
+                        case "point":
+                            teamVO.point += arrayList.get(i).point;
+                        case "rebound":
+                            teamVO.rebound += arrayList.get(i).rebound;
+                        case "shot":
+                            teamVO.shot += arrayList.get(i).shot;
+                        case "steal":
+                            teamVO.steal += arrayList.get(i).steal;
+                        case "three":
+                            teamVO.three += arrayList.get(i).three;
+                        case "avgAssist":
+                            teamVO.avgAssist += arrayList.get(i).avgAssist;
+                        case "avgBlockShot":
+                            teamVO.avgBlockShot += arrayList.get(i).avgBlockShot;
+                        case "avgDefendRebound":
+                            teamVO.avgDefendRebound += arrayList.get(i).avgDefendRebound;
+                        case "avgFault":
+                            teamVO.avgFault += arrayList.get(i).avgFault;
+                        case "avgFoul":
+                            teamVO.avgFoul += arrayList.get(i).avgFoul;
+                        case "avgOffendRebound":
+                            teamVO.avgOffendRebound += arrayList.get(i).avgOffendRebound;
+                        case "avgPoint":
+                            teamVO.avgPoint += arrayList.get(i).avgPoint;
+                        case "avgRebound":
+                            teamVO.avgRebound += arrayList.get(i).avgRebound;
+                        case "avgSteal":
+                            teamVO.avgSteal += arrayList.get(i).avgSteal;
+
+                        case "assistEfficient":
+                            teamVO.assistEfficient += arrayList.get(i).assistEfficient;
+                        case "defendEfficient":
+                            teamVO.defendEfficient += arrayList.get(i).defendEfficient;
+                        case "defendReboundEfficient":
+                            teamVO.defendReboundEfficient += arrayList.get(i).defendReboundEfficient;
+                        case "offendEfficient":
+                            teamVO.offendEfficient += arrayList.get(i).offendEfficient;
+                        case "offendReboundEfficient":
+                            teamVO.offendReboundEfficient += arrayList.get(i).offendReboundEfficient;
+                        case "offendRound":
+                            teamVO.offendRound += arrayList.get(i).offendRound;
+                        case "stealEfficient":
+                            teamVO.stealEfficient += arrayList.get(i).stealEfficient;
+                        case "winRate":
+                            teamVO.stealEfficient += arrayList.get(i).stealEfficient;
+                    }
+                }
+            }
+        }
+        
+
+        return teamVO;
     }
 
     @Override
@@ -323,6 +415,7 @@ public class TeamDataHandel implements TeamDataService {
     private static ArrayList<String> getAvgNormalInfo(){
         if (avgNormalInfo == null){
             avgNormalInfo = new ArrayList<>();
+            avgNormalInfo.add("teamName");
             avgNormalInfo.add("avgAssist");
             avgNormalInfo.add("avgBlockShot");
             avgNormalInfo.add("avgDefendRebound");
@@ -332,6 +425,9 @@ public class TeamDataHandel implements TeamDataService {
             avgNormalInfo.add("avgPoint");
             avgNormalInfo.add("avgRebound");
             avgNormalInfo.add("avgSteal");
+            avgNormalInfo.add("penalty");
+            avgNormalInfo.add("shot");
+            avgNormalInfo.add("three");
         }
         return avgNormalInfo;
     }
@@ -341,12 +437,12 @@ public class TeamDataHandel implements TeamDataService {
         if (normalInfo == null){
             normalInfo = new ArrayList<>();
             normalInfo.add("assist");
+            normalInfo.add("teamName");
             normalInfo.add("blockShot");
             normalInfo.add("defendRebound");
             normalInfo.add("fault");
             normalInfo.add("foul");
             normalInfo.add("numOfGame");
-            normalInfo.add("offendRebound");
             normalInfo.add("offendRebound");
             normalInfo.add("penalty");
             normalInfo.add("point");

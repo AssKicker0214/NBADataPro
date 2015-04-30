@@ -66,6 +66,7 @@ public interface TeamDataService {
 	 */
 	public ArrayList<TeamVO> sortTeamHigh(int num,String sortBy, boolean desc);
 	
+
 	/**
 	 * 返回球队联盟总数据
 	 * @Param attributes：需要返回的属性列表
@@ -73,6 +74,7 @@ public interface TeamDataService {
 	 * @Return TeamVO中attributes指示的属性的联盟平均值
 	 */
 	public TeamVO avgLeague(ArrayList<String> attributes, char league);//联盟平均数据
+
 	
 	/**
 	 * 返回球队联盟总数据

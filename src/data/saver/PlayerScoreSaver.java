@@ -767,6 +767,38 @@ public class PlayerScoreSaver {
         public int getNum() {
             return teamSaver.getNum();
         }
+
+        public String[] getPhoto(){
+            return teamSaver.getPhoto();
+        }
+
+        public String[] getTeamName(){
+            return teamSaver.getTeamName();
+        }
+
+        public String[] getAbridge(){
+            return teamSaver.getAbridge();
+        }
+
+        public String[] getLocation() {
+            return teamSaver.getLocation();
+        }
+
+        public String[] getLeague(){
+            return teamSaver.getLeague();
+        }
+
+        public String[] getDivision(){
+            return teamSaver.getDivision();
+        }
+
+        public String[] getHomeCourt() {
+            return teamSaver.getHomeCourt();
+        }
+
+        public int[] getFoundTime() {
+            return teamSaver.getFoundTime();
+        }
     }
 
     //--------------------------------------------------------------------------------------//
