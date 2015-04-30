@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.geom.Line2D;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -15,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import presentation.common.PhotoLabel;
+import vo.playervo.HotPlayersVO;
 
 
 public class HotPlayerPanel  extends JPanel{
@@ -24,11 +26,13 @@ public class HotPlayerPanel  extends JPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	ArrayList<HotPlayersVO> vo;
 	JPanel FirstPlayer;
 	JPanel placePanel;
 	JPanel top5;
 	
-	public HotPlayerPanel(){
+	public HotPlayerPanel(ArrayList<HotPlayersVO> v){
+		this.vo = v;
 		this.setLayout(null);
 		this.setBounds(0, 30, 1280,500);
 		this.setBackground(Color.white);
@@ -53,7 +57,7 @@ public class HotPlayerPanel  extends JPanel{
 		FirstPlayer.setBounds(0,0,1280,200);
 		FirstPlayer.setBackground(Color.WHITE);
 		//添加数据王图片
-		PhotoLabel firstPlayerPhotoLabel = new PhotoLabel(new ImageIcon("1.png").getImage());
+		PhotoLabel firstPlayerPhotoLabel = new PhotoLabel(new ImageIcon(vo.get(0).photo+".png").getImage());
 		firstPlayerPhotoLabel.setBounds(10,15,240,200);
 		firstPlayerPhotoLabel.setBackground(Color.WHITE);
 		firstPlayerPhotoLabel.setOpaque(true);
@@ -66,13 +70,13 @@ public class HotPlayerPanel  extends JPanel{
 		place.setBounds(480,45,100,120);
 		FirstPlayer.add(place);
 		//添加球员名称
-		JLabel name = new JLabel("Aaron-Brooks");
+		JLabel name = new JLabel(vo.get(0).name);
 		name.setFont(new Font("Vrinda",1,25));
 		name.setForeground(Color.DARK_GRAY);
 		name.setBounds(600,45,300,25);
 		FirstPlayer.add(name);		
 		//添加球员信息
-		JLabel info = new JLabel("num"+" "+"pos"+"/"+"teamName");
+		JLabel info = new JLabel(vo.get(0).number+" "+vo.get(0).position+"/"+vo.get(0).teamName);
 		info.setFont(new Font("Vrinda",1,20));
 		info.setForeground(Color.GRAY);
 		info.setBounds(600,70,300,20);
@@ -84,7 +88,7 @@ public class HotPlayerPanel  extends JPanel{
 		field.setForeground(Color.LIGHT_GRAY);
 		field.setBounds(600,110,200,15);
 		FirstPlayer.add(field);
-		JLabel value = new JLabel("3.9");
+		JLabel value = new JLabel(vo.get(0).value+"");
 		value.setFont(new Font("Vrinda",1,40));
 		value.setForeground(Color.DARK_GRAY);
 		value.setBounds(600,130,100,40);
@@ -94,13 +98,13 @@ public class HotPlayerPanel  extends JPanel{
 		slash.setForeground(Color.LIGHT_GRAY);
 		slash.setBounds(700,150,20,20);
 		FirstPlayer.add(slash);
-		JLabel upRate = new JLabel("-39.28%");
+		JLabel upRate = new JLabel(vo.get(0).upgradeRate+"%");
 		upRate.setFont(new Font("Vrinda",1,20));
 		upRate.setForeground(new Color(39,64,139));
 		upRate.setBounds(720,150,100,20);
 		FirstPlayer.add(upRate);
 		//添加球队图片
-		PhotoLabel teamPic = new PhotoLabel(new ImageIcon("teamsPNG/ATL.png").getImage());
+		PhotoLabel teamPic = new PhotoLabel(new ImageIcon("teamsPNG/"+vo.get(0).teamPhoto+".png").getImage());
 		teamPic.setBounds(1100,110,90,90);
 		teamPic.setBackground(Color.WHITE);
 		teamPic.setOpaque(true);
@@ -175,10 +179,8 @@ public class HotPlayerPanel  extends JPanel{
 		top5.setLayout(new BoxLayout(top5,BoxLayout.Y_AXIS));
 		top5.setBounds(220,230,1030,270);
 		top5.setBackground(Color.WHITE);
-		top5.add(player("1.png","fName-lName","num"+" "+"pos"+"/"+"teamName","3.9","-39.78","teamsPNG/ATL.png"));
-		top5.add(player("1.png","fName-lName","num"+" "+"pos"+"/"+"teamName","3.9","-39.78","teamsPNG/DET.png"));
-		top5.add(player("1.png","fName-lName","num"+" "+"pos"+"/"+"teamName","3.9","-39.78","teamsPNG/IND.png"));
-		top5.add(player("1.png","fName-lName","num"+" "+"pos"+"/"+"teamName","3.9","-39.78","teamsPNG/OKC.png"));
+		for(int i=1;i<5;i++)
+			top5.add(player(vo.get(i).photo+".png",vo.get(i).name,vo.get(i).number+" "+vo.get(i).position+"/"+vo.get(i).teamName,vo.get(i).value+"",vo.get(i).upgradeRate+"%","teamsPNG/"+vo.get(i).teamPhoto+".png"));
 		
 		this.add(top5);
 		
@@ -247,7 +249,7 @@ public class HotPlayerPanel  extends JPanel{
 		jf.setLayout(null);
 		jf.setSize(1280,700);
 		jf.setLocationRelativeTo(null);
-		jf.add(new HotPlayerPanel());
+//		jf.add(new HotPlayerPanel());
 		jf.setVisible(true);
 	}
 	

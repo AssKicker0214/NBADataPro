@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import dataservice.player.PlayerDataService;
+import dataservice.player.PlayerData_stub;
 import presentation.common.SelectLabel;
 
 public class Season_PlayerKingOptionsPanel extends JPanel {
@@ -65,8 +67,9 @@ public class Season_PlayerKingOptionsPanel extends JPanel {
 	}
 
 	
-	public void setPlayerKingContentPanel(){
-		playerKingContentPanel = new PlayerKingContentPanel();
+	public void setPlayerKingContentPanel(String sortBy){
+		PlayerDataService pds = new PlayerData_stub();
+		playerKingContentPanel = new PlayerKingContentPanel(pds.SeasonKing(5, sortBy));		
 		this.add(playerKingContentPanel);
 		repaint();
 	}
@@ -82,7 +85,7 @@ public class Season_PlayerKingOptionsPanel extends JPanel {
 			public void mousePressed(MouseEvent e) {
 				setOptionsSelectedGroups(AvgFildScoreButton);
 				setVisible(false);
-				setPlayerKingContentPanel();
+				setPlayerKingContentPanel("avgPoint");
 				setVisible(true);
 				repaint();
 			}

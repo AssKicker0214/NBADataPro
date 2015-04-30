@@ -6,4 +6,5 @@ public class HotTeamsVO {
 	public String photo;			//球员图片，数据王第一名全身像，其余为球员头像
 	public String name;		//球队名称全名
 	public double value;		//热门属性值
+	public String location;		//球队所在地
 }

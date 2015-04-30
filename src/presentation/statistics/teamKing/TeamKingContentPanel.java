@@ -3,6 +3,7 @@ package presentation.statistics.teamKing;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -11,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import presentation.common.PhotoLabel;
+import vo.teamvo.HotTeamsVO;
 
 
 public class TeamKingContentPanel  extends JPanel{
@@ -19,11 +21,14 @@ public class TeamKingContentPanel  extends JPanel{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	ArrayList<HotTeamsVO> vo;
 	JPanel FirstTeam;
 	JPanel placePanel;
 	JPanel top5;
 	
-	public TeamKingContentPanel(){
+	public TeamKingContentPanel(ArrayList<HotTeamsVO> v){
+		this.vo = v;
 		this.setLayout(null);
 		this.setBounds(0, 52, 1130,372);
 		this.setBackground(Color.white);
@@ -38,7 +43,7 @@ public class TeamKingContentPanel  extends JPanel{
 		FirstTeam.setBounds(0,0,600,300);
 		FirstTeam.setBackground(Color.WHITE);
 		//添加数据王图片
-		PhotoLabel firstPlayerPhotoLabel = new PhotoLabel(new ImageIcon("teamsPNG/HOU.png").getImage());
+		PhotoLabel firstPlayerPhotoLabel = new PhotoLabel(new ImageIcon("teamsPNG/"+vo.get(0).photo+".png").getImage());
 		firstPlayerPhotoLabel.setBounds(0,10,240,240);
 		firstPlayerPhotoLabel.setBackground(Color.WHITE);
 		firstPlayerPhotoLabel.setOpaque(true);
@@ -51,26 +56,26 @@ public class TeamKingContentPanel  extends JPanel{
 		place.setBounds(260,55,120,120);
 		FirstTeam.add(place);
 		//添加球队所在地
-		JLabel firstName = new JLabel("Atlanta");
+		JLabel firstName = new JLabel(vo.get(0).location);
 		firstName.setFont(new Font("Vrinda",1,20));
 		firstName.setForeground(Color.DARK_GRAY);
 		firstName.setBounds(340,70,100,20);
 		FirstTeam.add(firstName);
 		//添加球队名称
-		JLabel lastName = new JLabel("Hawks");
+		JLabel lastName = new JLabel(vo.get(0).name);
 		lastName.setFont(new Font("Vrinda",1,20));
 		lastName.setForeground(Color.DARK_GRAY);
 		lastName.setBounds(340,90,100,40);
 		FirstTeam.add(lastName);
 		//添加球员联盟
-		JLabel info = new JLabel("league: "+"East");
+		JLabel info = new JLabel("league: "+vo.get(0).league);
 		info.setFont(new Font("Vrinda",1,15));
 		info.setForeground(Color.GRAY);
 		info.setBounds(340,130,150,15);
 		FirstTeam.add(info);
 		this.add(FirstTeam);
 		//添加数据值
-		JLabel value = new JLabel("119.7");
+		JLabel value = new JLabel(vo.get(0).value+"");
 		value.setFont(new Font("Vrinda",1,60));
 		value.setForeground(Color.DARK_GRAY);
 		value.setBounds(260,230,200,60);
@@ -116,10 +121,9 @@ public class TeamKingContentPanel  extends JPanel{
 		top5.setLayout(new BoxLayout(top5,BoxLayout.Y_AXIS));
 		top5.setBounds(610,0,530,372);
 		top5.setBackground(Color.WHITE);
-		top5.add(team("teamsPNG/ATL.png","Atlanta-Hawks","East","119.7"));
-		top5.add(team("teamsPNG/BKN.png","Location-Name","League","value"));
-		top5.add(team("teamsPNG/BOS.png","Location-Name","League","value"));
-		top5.add(team("teamsPNG/NYK.png","Location-Name","League","value"));
+		for(int i=1;i<5;i++)
+			top5.add(team("teamsPNG/"+vo.get(i).photo+".png",vo.get(i).location+"-"+vo.get(i).name,vo.get(i).league,vo.get(i).value+""));
+	
 		
 		this.add(top5);
 		
@@ -171,7 +175,7 @@ public class TeamKingContentPanel  extends JPanel{
 		jf.setLayout(null);
 		jf.setSize(1280,700);
 		jf.setLocationRelativeTo(null);
-		jf.add(new TeamKingContentPanel());
+//		jf.add(new TeamKingContentPanel());
 		jf.setVisible(true);
 	}
 	

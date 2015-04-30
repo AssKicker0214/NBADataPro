@@ -3,6 +3,7 @@ package presentation.statistics.playerKing;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -11,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import presentation.common.PhotoLabel;
+import vo.playervo.HotPlayersVO;
 
 public class PlayerKingContentPanel extends JPanel{
 
@@ -19,12 +21,13 @@ public class PlayerKingContentPanel extends JPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	
+	ArrayList<HotPlayersVO> vo;
 	JPanel FirstPlayer;
 	JPanel placePanel;
 	JPanel top5;
 	
-	public PlayerKingContentPanel(){
+	public PlayerKingContentPanel(ArrayList<HotPlayersVO> v){
+		this.vo = v;
 		this.setLayout(null);
 		this.setBounds(0, 52, 1280,372);
 		this.setBackground(Color.white);
@@ -34,12 +37,15 @@ public class PlayerKingContentPanel extends JPanel{
 	}
 	//数据王
 	public void setFirstPlayer(){
+		
+		String[] name = vo.get(0).name.split(" ");
+		
 		FirstPlayer = new JPanel();
 		FirstPlayer.setLayout(null);
 		FirstPlayer.setBounds(0,0,520,345);
 		FirstPlayer.setBackground(Color.WHITE);
 		//添加数据王图片
-		PhotoLabel firstPlayerPhotoLabel = new PhotoLabel(new ImageIcon("Aaron Brooks.png").getImage());
+		PhotoLabel firstPlayerPhotoLabel = new PhotoLabel(new ImageIcon(vo.get(0).photo+".png").getImage());
 		firstPlayerPhotoLabel.setBounds(0,15,195,340);
 		firstPlayerPhotoLabel.setBackground(Color.WHITE);
 		firstPlayerPhotoLabel.setOpaque(true);
@@ -52,31 +58,31 @@ public class PlayerKingContentPanel extends JPanel{
 		place.setBounds(180,50,115,120);
 		FirstPlayer.add(place);
 		//添加球员名称
-		JLabel firstName = new JLabel("Aaron");
+		JLabel firstName = new JLabel(name[1]);
 		firstName.setFont(new Font("Vrinda",1,20));
 		firstName.setForeground(Color.DARK_GRAY);
 		firstName.setBounds(270,70,100,20);
 		FirstPlayer.add(firstName);
-		JLabel lastName = new JLabel("Brooks");
+		JLabel lastName = new JLabel(name[1]);
 		lastName.setFont(new Font("Vrinda",1,20));
 		lastName.setForeground(Color.DARK_GRAY);
 		lastName.setBounds(270,90,100,40);
 		FirstPlayer.add(lastName);
 		//添加球员信息
-		JLabel info = new JLabel("num"+" "+"pos"+"/"+"teamName");
+		JLabel info = new JLabel(vo.get(0).number+" "+vo.get(0).position+"/"+vo.get(0).teamName);
 		info.setFont(new Font("Vrinda",1,15));
 		info.setForeground(Color.GRAY);
 		info.setBounds(270,130,200,15);
 		FirstPlayer.add(info);
 		this.add(FirstPlayer);
 		//添加数据值
-		JLabel value = new JLabel("39");
+		JLabel value = new JLabel(vo.get(0).value+"");
 		value.setFont(new Font("Vrinda",1,60));
 		value.setForeground(Color.DARK_GRAY);
 		value.setBounds(270,200,200,60);
 		FirstPlayer.add(value);
 		//添加球队图片
-		PhotoLabel teamPic = new PhotoLabel(new ImageIcon("teamsPNG/ATL.png").getImage());
+		PhotoLabel teamPic = new PhotoLabel(new ImageIcon("teamsPNG/"+vo.get(0).teamPhoto+".png").getImage());
 		teamPic.setBounds(370,0,120,120);
 		teamPic.setBackground(Color.WHITE);
 		teamPic.setOpaque(true);
@@ -122,11 +128,9 @@ public class PlayerKingContentPanel extends JPanel{
 		top5.setLayout(new BoxLayout(top5,BoxLayout.Y_AXIS));
 		top5.setBounds(630,0,510,372);
 		top5.setBackground(Color.WHITE);
-		top5.add(player("1.png","fName-lName","num"+" "+"pos"+"/"+"teamName","39","teamsPNG/ATL.png"));
-		top5.add(player("1.png","fName-lName","num"+" "+"pos"+"/"+"teamName","39","teamsPNG/DET.png"));
-		top5.add(player("1.png","fName-lName","num"+" "+"pos"+"/"+"teamName","39","teamsPNG/IND.png"));
-		top5.add(player("1.png","fName-lName","num"+" "+"pos"+"/"+"teamName","39","teamsPNG/OKC.png"));
-		
+		for(int i=1;i<5;i++)
+			top5.add(player(vo.get(i).photo+".png",vo.get(i).name,vo.get(i).number+" "+vo.get(i).position+"/"+vo.get(i).teamName,vo.get(i).value+"","teamsPNG/"+vo.get(i).teamPhoto+".png"));
+	
 		this.add(top5);
 		
 	}
@@ -162,7 +166,7 @@ public class PlayerKingContentPanel extends JPanel{
 				JLabel value = new JLabel(v);
 				value.setFont(new Font("Vrinda",1,40));
 				value.setForeground(Color.DARK_GRAY);
-				value.setBounds(425,25,105,40);
+				value.setBounds(400,25,105,40);
 				playerP.add(value);
 				//添加球队图片
 				PhotoLabel teamPic = new PhotoLabel(new ImageIcon(t).getImage());
@@ -184,7 +188,7 @@ public class PlayerKingContentPanel extends JPanel{
 		jf.setLayout(null);
 		jf.setSize(1280,700);
 		jf.setLocationRelativeTo(null);
-		jf.add(new PlayerKingContentPanel());
+//		jf.add(new PlayerKingContentPanel());
 		jf.setVisible(true);
 	}
 }
