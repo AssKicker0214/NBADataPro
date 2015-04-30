@@ -20,7 +20,7 @@ public interface TeamDataService {
 	public ArrayList<TeamVO> sortTeamNormal(int num,String sortBy, boolean desc, boolean isAvg);// 排序球队基本信息列表，true表示降序
 	public ArrayList<TeamVO> sortTeamHigh(int num,String sortBy, boolean desc);// 排序球队高阶信息列表，true表示降序
 	
-	public TeamVO avgLeague(ArrayList<String> attributes);//联盟平均数据
+	public TeamVO avgLeague(ArrayList<String> attributes,String league);//联盟平均数据
 	
 	public ArrayList<PlayerVO> teamMemberList(int teamID);//某球队球员的基本信息
 }
