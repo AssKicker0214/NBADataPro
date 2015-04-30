@@ -11,28 +11,20 @@ import java.util.regex.Pattern;
  * Created by chenghao on 15/4/23.
  */
 public class Match {
-    public static void main(String[] args){
-        try {
-            new Match().test();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
     @Test
     public void test() throws FileNotFoundException {
         long a = System.currentTimeMillis();
-        TeamSaver teamSaver = new TeamSaver();
-        PlayerSaver playerSaver = new PlayerSaver();
-        TeamTest teamTest = new TeamTest(teamSaver,"H:\\迭代一数据\\teams\\teams");
+        TeamSaver teamSaver = TeamSaver.getTeamSaver();
+        PlayerSaver playerSaver = PlayerSaver.getPlayerSaver();
+        Team teamTest = new Team(teamSaver,"H:\\迭代一数据\\teams\\teams");
         teamTest.test();
-        PlayerTest playerTest = new PlayerTest(playerSaver,"H:\\迭代一数据\\players\\info");
+        Player playerTest = new Player(playerSaver,"H:\\迭代一数据\\players\\info");
         playerTest.test();
-        File file = new File("H:\\迭代一数据\\matches");
+        File file = new File("/迭代一数据/matches");
         File[] files = file.listFiles();
-        MatchInfoSaver matchInfoSaver = new MatchInfoSaver();
+        MatchInfoSaver matchInfoSaver = MatchInfoSaver.getMatchInfoSaver();
         PlayerScoreSaver playerScoreSaver = new PlayerScoreSaver(playerSaver,matchInfoSaver,teamSaver);
-        MatchScoreSaver matchScoreSaver = new MatchScoreSaver();
+        MatchScoreSaver matchScoreSaver = MatchScoreSaver.getMatchScoreSaver();
         for (int i = 0; i < files.length; i++) {
             if (files[i].isDirectory() == false)
                 insert(files[i], matchInfoSaver, teamSaver, playerSaver,playerScoreSaver,matchScoreSaver);
@@ -68,24 +60,6 @@ public class Match {
 //        for (int i = 0; i < temp.length;i++){
 //            System.out.println(temp[i]);
 //        }
-    }
-
-    public static void printArray(double[] objects,PrintStream pr) {
-        if (objects.length > 0) {
-            for (int i = 0; i < objects.length - 1; i++) {
-                pr.print(objects[i] + " ");
-            }
-            pr.println(objects[objects.length - 1]);
-        }
-    }
-
-    public static void printArray(int[] objects,PrintStream pr) {
-        if (objects.length > 0) {
-            for (int i = 0; i < objects.length - 1; i++) {
-                pr.print(objects[i] + " ");
-            }
-            pr.println(objects[objects.length - 1]);
-        }
     }
 
     public void insert(File file, MatchInfoSaver matchInfoSaver,

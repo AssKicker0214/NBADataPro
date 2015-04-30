@@ -34,7 +34,15 @@ public class PlayerSaver {
     private String[] school;
     private String[] imgsrc;
 
-    public PlayerSaver() {
+    private static PlayerSaver playerSaver;
+    public static PlayerSaver getPlayerSaver(){
+        if (playerSaver == null){
+            playerSaver = new PlayerSaver();
+        }
+        return playerSaver;
+    }
+
+    private PlayerSaver() {
         pid = new int[500];
         name = new String[500];
         number = new int[500];

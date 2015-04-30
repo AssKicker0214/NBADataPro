@@ -22,5 +22,7 @@
     <orderEntry type="library" name="commons-dbutils-1.6 (2)" level="project" />
     <orderEntry type="library" name="derby (2)" level="project" />
     <orderEntry type="library" name="h2-1.4.186 (2)" level="project" />
+    <orderEntry type="library" name="de.tototec.cmdoption-0.3.2" level="project" />
+    <orderEntry type="library" name="testData" level="project" />
   </component>
 </module>
