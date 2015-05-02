@@ -9,4 +9,5 @@ public class sortParam {
 		field = f;
 		isDesc = d;
 	}
+
 }

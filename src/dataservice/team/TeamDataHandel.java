@@ -44,38 +44,6 @@ public class TeamDataHandel implements TeamDataService {
         return teamVOs;
     }
 
-    public TeamVO findTeamInfo(int teamId, boolean isAvg) {
-        TeamVO teamVO = new TeamVO();
-        teamVO.id = teamId;
-        if (isAvg) {
-            setTeamVO(getAvgNormalInfo(),teamVO,teamDataDefault);
-        } else {
-            setTeamVO(getNormalInfo(),teamVO,teamDataDefault);
-        }
-        return teamVO;
-    }
-
-    public ArrayList<TeamVO> findTeamNormal(boolean isAvg) {
-        ArrayList<TeamVO> arrayList = new ArrayList<>();
-        if (isAvg) {
-            for (int i = 0; i < teamDataDefault.getNum(); i++) {
-                TeamVO teamVO = new TeamVO();
-                teamVO.id = i + 1;
-                setTeamVO(getAvgNormalInfo(),teamVO,teamDataDefault);
-                arrayList.add(teamVO);
-            }
-            return arrayList;
-        } else {
-            for (int i = 0; i < teamDataDefault.getNum(); i++) {
-                TeamVO teamVO = new TeamVO();
-                teamVO.id = i + 1;
-                setTeamVO(getNormalInfo(),teamVO,teamDataDefault);
-                arrayList.add(teamVO);
-            }
-        }
-        return arrayList;
-    }
-
     @Override
     public ArrayList<TeamVO> findTeamHigh() {
         ArrayList<TeamVO> teamVOs = new TeamDataManager().getTeamVOs(getHighInfo(), TeamDataManager.DEFAULT);
@@ -200,189 +168,108 @@ public class TeamDataHandel implements TeamDataService {
 
 //    @Override
 //    public TeamVO avgLeague(ArrayList<String> attributes, char league) {
+////        ArrayList<String> temp = (ArrayList<String>) attributes.clone();
+////        attributes.add("league");
+////        TeamDataManager teamDataManager = new TeamDataManager();
+////        ArrayList<TeamVO> arrayList = teamDataManager.getTeamVOs(temp,TeamDataManager.DEFAULT);
+////        TeamVO teamVO = new TeamVO();
+////        int num = 0 ;
+////        for (int i = 0; i < arrayList.size(); i++ ){
+////            if (arrayList.get(i).league == league){
+//////                teamDataManager.se
+////                num++;
+////                for (int j = 0; j < attributes.size(); j++){
+////                    teamDataManager.setAttribute(attributes.get(j),teamVO,arrayList.get(i));
+////                }
+////            }
+////        }
+//        return null;
+//    }
+
+//    public TeamVO avgLeague(ArrayList<String> attributes,String league) {
 //        ArrayList<String> temp = (ArrayList<String>) attributes.clone();
 //        attributes.add("league");
-//        TeamDataManager teamDataManager = new TeamDataManager();
-//        ArrayList<TeamVO> arrayList = teamDataManager.getTeamVOs(temp,TeamDataManager.DEFAULT);
+//        ArrayList<TeamVO> arrayList = getDefault(temp);
 //        TeamVO teamVO = new TeamVO();
 //        int num = 0 ;
-//        for (int i = 0; i < arrayList.size(); i++ ){
-//            if (arrayList.get(i).league == league){
-////                teamDataManager.se
+//        for (int i = 0; i <  arrayList.size();i++){
+//            if (arrayList.get(i).league.equals(league)){
 //                num++;
-//                for (int j = 0; j < attributes.size(); j++){
-//                    teamDataManager.setAttribute(attributes.get(j),teamVO,arrayList.get(i));
+//                for (String s:attributes){
+//                    switch (s){
+//                        case "assist":
+//                            teamVO.assist += arrayList.get(i).assist;
+//                        case "blockShot":
+//                            teamVO.blockShot += arrayList.get(i).blockShot;
+//                        case "defendRebound":
+//                            teamVO.defendRebound += arrayList.get(i).defendRebound;
+//                        case "fault":
+//                            teamVO.fault += arrayList.get(i).fault;
+//                        case "numOfGame":
+//                            teamVO.numOfGame += arrayList.get(i).numOfGame;
+//                        case "offendRebound":
+//                            teamVO.offendRebound += arrayList.get(i).offendRebound;
+//                        case "penalty":
+//                            teamVO.penalty += arrayList.get(i).penalty;
+//                        case "point":
+//                            teamVO.point += arrayList.get(i).point;
+//                        case "rebound":
+//                            teamVO.rebound += arrayList.get(i).rebound;
+//                        case "shot":
+//                            teamVO.shot += arrayList.get(i).shot;
+//                        case "steal":
+//                            teamVO.steal += arrayList.get(i).steal;
+//                        case "three":
+//                            teamVO.three += arrayList.get(i).three;
+//                        case "avgAssist":
+//                            teamVO.avgAssist += arrayList.get(i).avgAssist;
+//                        case "avgBlockShot":
+//                            teamVO.avgBlockShot += arrayList.get(i).avgBlockShot;
+//                        case "avgDefendRebound":
+//                            teamVO.avgDefendRebound += arrayList.get(i).avgDefendRebound;
+//                        case "avgFault":
+//                            teamVO.avgFault += arrayList.get(i).avgFault;
+//                        case "avgFoul":
+//                            teamVO.avgFoul += arrayList.get(i).avgFoul;
+//                        case "avgOffendRebound":
+//                            teamVO.avgOffendRebound += arrayList.get(i).avgOffendRebound;
+//                        case "avgPoint":
+//                            teamVO.avgPoint += arrayList.get(i).avgPoint;
+//                        case "avgRebound":
+//                            teamVO.avgRebound += arrayList.get(i).avgRebound;
+//                        case "avgSteal":
+//                            teamVO.avgSteal += arrayList.get(i).avgSteal;
+//
+//                        case "assistEfficient":
+//                            teamVO.assistEfficient += arrayList.get(i).assistEfficient;
+//                        case "defendEfficient":
+//                            teamVO.defendEfficient += arrayList.get(i).defendEfficient;
+//                        case "defendReboundEfficient":
+//                            teamVO.defendReboundEfficient += arrayList.get(i).defendReboundEfficient;
+//                        case "offendEfficient":
+//                            teamVO.offendEfficient += arrayList.get(i).offendEfficient;
+//                        case "offendReboundEfficient":
+//                            teamVO.offendReboundEfficient += arrayList.get(i).offendReboundEfficient;
+//                        case "offendRound":
+//                            teamVO.offendRound += arrayList.get(i).offendRound;
+//                        case "stealEfficient":
+//                            teamVO.stealEfficient += arrayList.get(i).stealEfficient;
+//                        case "winRate":
+//                            teamVO.stealEfficient += arrayList.get(i).stealEfficient;
+//                    }
 //                }
 //            }
 //        }
-//        return a
+//
+//
+//        return teamVO;
 //    }
-
-    public TeamVO avgLeague(ArrayList<String> attributes,String league) {
-        ArrayList<String> temp = (ArrayList<String>) attributes.clone();
-        attributes.add("league");
-        ArrayList<TeamVO> arrayList = getDefault(temp);
-        TeamVO teamVO = new TeamVO();
-        int num = 0 ;
-        for (int i = 0; i <  arrayList.size();i++){
-            if (arrayList.get(i).league.equals(league)){
-                num++;
-                for (String s:attributes){
-                    switch (s){
-                        case "assist":
-                            teamVO.assist += arrayList.get(i).assist;
-                        case "blockShot":
-                            teamVO.blockShot += arrayList.get(i).blockShot;
-                        case "defendRebound":
-                            teamVO.defendRebound += arrayList.get(i).defendRebound;
-                        case "fault":
-                            teamVO.fault += arrayList.get(i).fault;
-                        case "numOfGame":
-                            teamVO.numOfGame += arrayList.get(i).numOfGame;
-                        case "offendRebound":
-                            teamVO.offendRebound += arrayList.get(i).offendRebound;
-                        case "penalty":
-                            teamVO.penalty += arrayList.get(i).penalty;
-                        case "point":
-                            teamVO.point += arrayList.get(i).point;
-                        case "rebound":
-                            teamVO.rebound += arrayList.get(i).rebound;
-                        case "shot":
-                            teamVO.shot += arrayList.get(i).shot;
-                        case "steal":
-                            teamVO.steal += arrayList.get(i).steal;
-                        case "three":
-                            teamVO.three += arrayList.get(i).three;
-                        case "avgAssist":
-                            teamVO.avgAssist += arrayList.get(i).avgAssist;
-                        case "avgBlockShot":
-                            teamVO.avgBlockShot += arrayList.get(i).avgBlockShot;
-                        case "avgDefendRebound":
-                            teamVO.avgDefendRebound += arrayList.get(i).avgDefendRebound;
-                        case "avgFault":
-                            teamVO.avgFault += arrayList.get(i).avgFault;
-                        case "avgFoul":
-                            teamVO.avgFoul += arrayList.get(i).avgFoul;
-                        case "avgOffendRebound":
-                            teamVO.avgOffendRebound += arrayList.get(i).avgOffendRebound;
-                        case "avgPoint":
-                            teamVO.avgPoint += arrayList.get(i).avgPoint;
-                        case "avgRebound":
-                            teamVO.avgRebound += arrayList.get(i).avgRebound;
-                        case "avgSteal":
-                            teamVO.avgSteal += arrayList.get(i).avgSteal;
-
-                        case "assistEfficient":
-                            teamVO.assistEfficient += arrayList.get(i).assistEfficient;
-                        case "defendEfficient":
-                            teamVO.defendEfficient += arrayList.get(i).defendEfficient;
-                        case "defendReboundEfficient":
-                            teamVO.defendReboundEfficient += arrayList.get(i).defendReboundEfficient;
-                        case "offendEfficient":
-                            teamVO.offendEfficient += arrayList.get(i).offendEfficient;
-                        case "offendReboundEfficient":
-                            teamVO.offendReboundEfficient += arrayList.get(i).offendReboundEfficient;
-                        case "offendRound":
-                            teamVO.offendRound += arrayList.get(i).offendRound;
-                        case "stealEfficient":
-                            teamVO.stealEfficient += arrayList.get(i).stealEfficient;
-                        case "winRate":
-                            teamVO.stealEfficient += arrayList.get(i).stealEfficient;
-                    }
-                }
-            }
-        }
-        
-
-        return teamVO;
-    }
 
     @Override
     public ArrayList<PlayerVO> teamMemberList(int teamID) {
         return null;
     }
 
-    private ArrayList<TeamVO> getDefault(ArrayList<String> arrayList){
-        int size = teamDataDefault.getNum();
-        ArrayList<TeamVO> res = new ArrayList<>();
-        for (int i = 0; i < size; i++){
-            TeamVO teamVO = new TeamVO();
-            setTeamVO(arrayList,teamVO,teamDataDefault);
-            res.add(teamVO);
-        }
-        return res;
-    }
-
-    private void setTeamVO(ArrayList<String> arrayList,TeamVO teamVO,PlayerScoreSaver.TeamData teamData){
-        for (String s : arrayList){
-            setAttribute(s,teamVO,teamData);
-        }
-    }
-
-    private void setAttribute(String s , TeamVO teamVO,PlayerScoreSaver.TeamData teamData){
-        switch (s){
-            case "assist":
-                teamVO.assist = teamData.getAssist()[teamVO.id - 1];return;
-            case "blockShot":
-                teamVO.blockShot = teamData.getBlockShot()[teamVO.id - 1];return;
-            case "defendRebound":
-                teamVO.defendRebound = teamData.getDefendRebound()[teamVO.id - 1];return;
-            case "fault":
-                teamVO.fault = teamData.getFault()[teamVO.id - 1];return;
-            case "numOfGame":
-                teamVO.numOfGame = teamData.getNumOfGame()[teamVO.id - 1];return;
-            case "offendRebound":
-                teamVO.offendRebound = teamData.getOffendRebound()[teamVO.id - 1];return;
-            case "penalty":
-                teamVO.penalty = teamData.getPenalty()[teamVO.id - 1];return;
-            case "point":
-                teamVO.point = teamData.getPoint()[teamVO.id - 1];return;
-            case "rebound":
-                teamVO.rebound = teamData.getRebound()[teamVO.id - 1];return;
-            case "shot":
-                teamVO.shot = teamData.getShot()[teamVO.id - 1];return;
-            case "steal":
-                teamVO.steal = teamData.getSteal()[teamVO.id - 1];return;
-            case "three":
-                teamVO.three = teamData.getThree()[teamVO.id - 1];return;
-
-            case "avgAssist":
-                teamVO.avgAssist = teamData.getAvgAssist()[teamVO.id - 1];return;
-            case "avgBlockShot":
-                teamVO.avgBlockShot = teamData.getAvgBlockShot()[teamVO.id - 1];return;
-            case "avgDefendRebound":
-                teamVO.avgDefendRebound = teamData.getAvgDefendRebound()[teamVO.id - 1];return;
-            case "avgFault":
-                teamVO.avgFault = teamData.getAvgFault()[teamVO.id - 1];return;
-            case "avgFoul":
-                teamVO.avgFoul = teamData.getAvgFoul()[teamVO.id - 1];return;
-            case "avgOffendRebound":
-                teamVO.avgOffendRebound = teamData.getAvgOffendRebound()[teamVO.id - 1];return;
-            case "avgPoint":
-                teamVO.avgPoint = teamData.getAvgPoint()[teamVO.id - 1];return;
-            case "avgRebound":
-                teamVO.avgRebound = teamData.getAvgRebound()[teamVO.id - 1];return;
-            case "avgSteal":
-                teamVO.avgSteal = teamData.getAvgSteal()[teamVO.id - 1];return;
-
-            case "assistEfficient":
-                teamVO.assistEfficient = teamData.getAssistEfficient()[teamVO.id - 1];return;
-            case "defendEfficient":
-                teamVO.defendEfficient = teamData.getDefendEfficient()[teamVO.id - 1];return;
-            case "defendReboundEfficient":
-                teamVO.defendReboundEfficient = teamData.getDefendReboundEfficient()[teamVO.id - 1];return;
-            case "offendEfficient":
-                teamVO.offendEfficient = teamData.getOffendEfficient()[teamVO.id - 1];return;
-            case "offendReboundEfficient":
-                teamVO.offendReboundEfficient = teamData.getOffendReboundEfficient()[teamVO.id - 1];return;
-            case "offendRound":
-                teamVO.offendRound = teamData.getOffendRound()[teamVO.id - 1];return;
-            case "stealEfficient":
-                teamVO.stealEfficient = teamData.getStealEfficient()[teamVO.id - 1];return;
-            case "winRate":
-                teamVO.stealEfficient = teamData.getWinRate()[teamVO.id - 1];return;
-        }
-    }
 
     private static ArrayList<String> highInfo;
     private static ArrayList<String> getHighInfo(){

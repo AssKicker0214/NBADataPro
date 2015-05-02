@@ -180,4 +180,20 @@ public class PlayerSaver {
     public int getNum() {
         return currentPoint + 1;
     }
+
+    public String[] getPhoto() {
+        return imgsrc;
+    }
+
+    public String[] getName() {
+        return name;
+    }
+
+    public int[] getNumber() {
+        return number;
+    }
+
+    public int[] getAge() {
+        return exp;
+    }
 }
