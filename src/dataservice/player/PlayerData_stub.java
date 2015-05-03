@@ -92,7 +92,7 @@ public class PlayerData_stub implements PlayerDataService{
 		vo2.position = "F";
 		vo2.teamName = "Hawks";
 		vo2.teamPhoto = "ATL";
-		vo.upgradeRate = 39.98;
+		vo2.upgradeRate = 39.98;
 
 		vo2.value = 39;
 		result.add(vo2);

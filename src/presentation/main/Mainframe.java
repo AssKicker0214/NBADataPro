@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 
 import presentation.floatui.FloatPane;
 import presentation.floatui.IMainFrameSize;
+import presentation.statistics.hotPlayer.HotPlayerPanel;
 import presentation.statistics.playerKing.PlayerKingPanel;
 import presentation.statistics.teamKing.TeamKingPanel;
 
@@ -26,6 +27,7 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 	
 	JPanel playerKing;
 	JPanel teamKing;
+	JPanel hotPlayer;
 	ArrayList<JPanel> mainParts = new ArrayList<JPanel>();
 	
 	public  Mainframe(){ 
@@ -125,8 +127,13 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 		this.add(teamKing);
 		teamKing.setVisible(false);
 		
+		hotPlayer = new HotPlayerPanel();
+		this.add(hotPlayer);
+		hotPlayer.setVisible(false);
+		
 		mainParts.add(playerKing);
 		mainParts.add(teamKing);
+		mainParts.add(hotPlayer);
 	}
 	
 	private void changeMainPart(JPanel target){
@@ -157,7 +164,7 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 		switch(s){
 			case "热点球员": changeMainPart(playerKing); System.out.println(s);break;
 			case "热点球队": changeMainPart(teamKing);break;
-			case "进步球员": break;
+			case "进步球员": changeMainPart(hotPlayer);break;
 			default: break;
 		}
 	}
