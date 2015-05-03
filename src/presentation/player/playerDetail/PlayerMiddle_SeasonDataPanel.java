@@ -2,7 +2,6 @@ package presentation.player.playerDetail;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -23,14 +22,6 @@ public class PlayerMiddle_SeasonDataPanel extends JPanel {
 	
 	JLabel tabelLabel;
 	
-	JLabel titlesLabel;
-	JLabel SeansonAvgLabel;
-	JLabel SeansonAvgContentLabel;
-	JLabel SeasonTotalLabel;
-	JLabel SeasonTotalConetentLabel;
-	
-	
-
 	public PlayerMiddle_SeasonDataPanel(ArrayList<String> avg,ArrayList<String> total){
 		this.setLayout(null);
 		this.setBounds(0, 430, 1280,220);
@@ -55,13 +46,6 @@ public class PlayerMiddle_SeasonDataPanel extends JPanel {
 	public void setTabel(ArrayList<String> avg,ArrayList<String> total ){
 		String[] columns = {"年度","球队","场数","先发","分钟","％","三分％","罚球％",
 				"进攻","防守","场均篮板","场均助攻","场均抢断","场均盖帽","失误","犯规","场均得分"};
-		ArrayList<String> items = new ArrayList<String>();
-		items.add("年度"); items.add("球队");items.add("场数");
-		items.add("先发"); items.add("分钟");items.add("％");
-		items.add("三分％"); items.add("罚球％"); items.add("进攻");
-		items.add("防守"); items.add("场均篮板"); items.add("场均助攻");
-		items.add("场均抢断"); items.add("场均盖帽"); items.add("失误");
-		items.add("犯规"); items.add("场均得分");
 		
 		ArrayList<String> seasonAvgItem = new ArrayList<String>();
 		seasonAvgItem.add("赛季平均"); 

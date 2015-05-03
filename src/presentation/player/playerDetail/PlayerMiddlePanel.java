@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import presentation.common.SelectLabel;
+import presentation.player.vs.PlayerVSContentPanel;
+import presentation.player.vs.PlayersVSTopPanel;
 
 public class PlayerMiddlePanel extends JPanel{
 
@@ -37,9 +39,12 @@ public class PlayerMiddlePanel extends JPanel{
 	
 	PlayerMiddle_ContrastLeaguePanel contrastPanel;
 	PlayerMiddle_SeasonDataPanel seasonDataPanel;
-
+	PlayerMiddle_Recent5Match recent5MatchPanel;
+	PlayerMiddle_PastPanel pastPanel;
+	PlayerVSContentPanel vsContentPanel;
+	
+	PlayersVSTopPanel vsTopPanel;
 	JPanel playerDetailTopPanel;
-
 	
 	ArrayList<SelectLabel> selectLabelGroups = new ArrayList<SelectLabel>();
 	
@@ -64,7 +69,8 @@ public class PlayerMiddlePanel extends JPanel{
 		selectLabelGroups.add(ComparePalyersLabel);
 		for(SelectLabel sl : selectLabelGroups){
 			if(sl != s){
-				sl.setBackground(Color.black);;
+				sl.setBackground(Color.black);
+				sl.isSelected = false;
 			}
 		}
 	}
@@ -85,7 +91,27 @@ public class PlayerMiddlePanel extends JPanel{
 			public void mousePressed(MouseEvent e) {
 				setSelectedGroups(ContrastLabel);
 				setVisible(false);
-//				remove(contrastPanel);
+				if(contrastPanel != null){
+					remove(contrastPanel);
+				}
+				if(pastPanel != null){
+					remove(pastPanel);
+				}
+				if(recent5MatchPanel != null){
+					remove(recent5MatchPanel);
+				}
+				if(vsContentPanel != null){
+					remove(vsContentPanel);
+				}
+				if(vsTopPanel != null){
+					remove(vsTopPanel);
+				}
+				if(playerDetailTopPanel != null){
+					remove(playerDetailTopPanel);
+					setTopPanel();
+				}else{
+					setTopPanel();
+				}
 				setContrastPanel(player,leagueAvg);
 				setSeasonPanel(avg,total);
 				setVisible(true);
@@ -105,6 +131,31 @@ public class PlayerMiddlePanel extends JPanel{
 			@Override
 			public void mousePressed(MouseEvent e) {
 				setSelectedGroups(LatestMatchLabel);
+				setVisible(false);
+				if(contrastPanel != null){
+					remove(contrastPanel);
+				}
+				if(pastPanel != null){
+					remove(pastPanel);
+				}
+				if(recent5MatchPanel != null){
+					remove(recent5MatchPanel);
+				}
+				if(vsContentPanel != null){
+					remove(vsContentPanel);
+				}
+				if(vsTopPanel != null){
+					remove(vsTopPanel);
+				}
+				if(playerDetailTopPanel != null){
+					remove(playerDetailTopPanel);
+					setTopPanel();
+				}else{
+					setTopPanel();
+				}
+				setRecent5MatchPanel();
+				setVisible(true);
+				repaint();
 			}
 		});
 
@@ -120,7 +171,31 @@ public class PlayerMiddlePanel extends JPanel{
 			@Override
 			public void mousePressed(MouseEvent e) {
 				setSelectedGroups(PastLabel);
-				
+				setVisible(false);
+				if(contrastPanel != null){
+					remove(contrastPanel);
+				}
+				if(pastPanel != null){
+					remove(pastPanel);
+				}
+				if(recent5MatchPanel != null){
+					remove(recent5MatchPanel);
+				}
+				if(vsContentPanel != null){
+					remove(vsContentPanel);
+				}
+				if(vsTopPanel != null){
+					remove(vsTopPanel);
+				}
+				if(playerDetailTopPanel != null){
+					remove(playerDetailTopPanel);
+					setTopPanel();
+				}else{
+					setTopPanel();
+				}
+				setPastPanel();
+				setVisible(true);
+				repaint();
 			}
 		});
 
@@ -137,6 +212,37 @@ public class PlayerMiddlePanel extends JPanel{
 			@Override
 			public void mousePressed(MouseEvent e) {
 				setSelectedGroups(ComparePalyersLabel);
+				setVisible(false);
+//				if(pastPanel != null){
+//					remove(pastPanel);
+//				}
+				if(contrastPanel != null){
+					remove(contrastPanel);
+				}
+				if(pastPanel != null){
+					remove(pastPanel);
+				}
+				if(recent5MatchPanel != null){
+					remove(recent5MatchPanel);
+				}
+				if(vsContentPanel != null){
+					remove(vsContentPanel);
+				}
+				if(playerDetailTopPanel != null){
+					remove(playerDetailTopPanel);
+				}
+				if(vsTopPanel != null){
+					remove(vsTopPanel);
+				}
+				if(vsTopPanel != null){
+					remove(vsTopPanel);
+					setVSTopPanel(); 
+				}else{
+					setVSTopPanel(); 
+				}
+				setVSPanel();
+				setVisible(true);
+				repaint();
 			}
 			
 		});
@@ -145,16 +251,51 @@ public class PlayerMiddlePanel extends JPanel{
 
 	public void setContrastPanel(ArrayList<Double> player,ArrayList<Double> leagueAvg){
 		contrastPanel = new PlayerMiddle_ContrastLeaguePanel(player,leagueAvg);
-		this.add(contrastPanel);
+		this.add(contrastPanel,0);
 		repaint();
 	}
 	
 	public void setSeasonPanel(ArrayList<String> avg,ArrayList<String> total){
 		seasonDataPanel = new PlayerMiddle_SeasonDataPanel(avg, total);
-		this.add(seasonDataPanel);
+		this.add(seasonDataPanel,0);
 		repaint();
 	}
 	
+	public void setRecent5MatchPanel(){
+		recent5MatchPanel = new PlayerMiddle_Recent5Match();
+		this.add(recent5MatchPanel,0);
+		repaint();
+	}
+
+	public void setPastPanel(){
+		pastPanel = new PlayerMiddle_PastPanel();
+		this.add(pastPanel,0);
+		repaint();
+	}
+	
+	public void setVSPanel(){
+		//
+		ArrayList<String> itemsNeedAdd = new ArrayList<String>();
+		ArrayList<Double> avg1 = new ArrayList<Double>();
+		ArrayList<Double> avg2 = new ArrayList<Double>();
+		
+		itemsNeedAdd.add("场均得分"); avg1.add(5.9); avg2.add(10.043);
+		itemsNeedAdd.add("场均助攻"); avg1.add(1.0); avg2.add(2.159);
+		itemsNeedAdd.add("场均篮板"); avg1.add(4.4); avg2.add(4.469);
+		itemsNeedAdd.add("三分％"); 	avg1.add(30.0); avg2.add(34.5);
+		itemsNeedAdd.add("罚球％");	avg1.add(78.4); avg2.add(74.3);
+		//
+		vsContentPanel = new PlayerVSContentPanel(itemsNeedAdd,avg1,avg2);
+		this.add(vsContentPanel,0);
+		repaint();
+	}
+	
+	public void setVSTopPanel(){
+		vsTopPanel = new PlayersVSTopPanel();
+		this.add(vsTopPanel,0);
+		repaint();
+	}
+
 
 	public static void main(String[] args){
 		JFrame jf = new JFrame();
