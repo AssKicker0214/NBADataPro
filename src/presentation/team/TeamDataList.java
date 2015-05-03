@@ -280,7 +280,7 @@ public class TeamDataList extends JPanel{
 		ArrayList<Integer> wid = new ArrayList<Integer>();
 		wid.add(50);wid.add(200);wid.add(200);wid.add(100);wid.add(200);wid.add(400);wid.add(100);
 		
-		BasicInfoTable = new TablePane(datas,header,wid,0,60,1280,350,50,true);
+		BasicInfoTable = new TablePane(datas,header,wid,0,60,1280,350,50,true,false);
 		this.add(BasicInfoTable);
 	}
 		
@@ -317,7 +317,7 @@ public class TeamDataList extends JPanel{
 		wid.add(50);wid.add(150);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);
 		wid.add(50);wid.add(60);wid.add(60);wid.add(60);wid.add(60);wid.add(60);wid.add(70);wid.add(70);
 			
-		NormalInfoTable = new TablePane(datas,tbHead,wid,0,60,1280,320,50,true);
+		NormalInfoTable = new TablePane(datas,tbHead,wid,0,60,1280,320,50,true,true);
 		this.add(NormalInfoTable);
 	}
 	public void setHighInfoTablePanel(){
@@ -353,7 +353,7 @@ public class TeamDataList extends JPanel{
 		wid.add(50);wid.add(150);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);
 		wid.add(50);wid.add(60);wid.add(60);wid.add(60);wid.add(60);wid.add(60);wid.add(70);wid.add(70);
 			
-		NormalInfoTable = new TablePane(datas,tbHead,wid,0,60,1280,320,50,true);
+		NormalInfoTable = new TablePane(datas,tbHead,wid,0,60,1280,320,50,true,true);
 		this.add(NormalInfoTable);
 	}
 

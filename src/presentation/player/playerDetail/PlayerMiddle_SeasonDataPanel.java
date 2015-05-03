@@ -44,7 +44,7 @@ public class PlayerMiddle_SeasonDataPanel extends JPanel {
 		seasonDataTitleLabel.setFont(new Font("Dialog",1,20));
 		seasonDataTitleLabel.setForeground(Color.WHITE);
 //		seasonDataTitleLabel.setBackground(new Color(33,82,138));
-		seasonDataTitleLabel.setBackground(Color.BLACK);
+		seasonDataTitleLabel.setBackground(Color.DARK_GRAY);
 		seasonDataTitleLabel.setOpaque(true);
 		seasonDataTitleLabel.setBounds(0,0,1280,50);
 		this.add(seasonDataTitleLabel);
