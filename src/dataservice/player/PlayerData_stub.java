@@ -7,36 +7,7 @@ import vo.playervo.PlayerVO;
 
 public class PlayerData_stub implements PlayerDataService{
 
-	@Override
-	public PlayerVO findPlayerData(int playerId, boolean isAvg) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<PlayerVO> findPlayerData(String msg) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<PlayerVO> findPlayer() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<PlayerVO> sortPlayerNormal(ArrayList<sortParam> sortBy,
-			boolean isAvg) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<PlayerVO> sortPlayerHigh(ArrayList<sortParam> sortBy) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 
 	@Override
@@ -133,25 +104,79 @@ public class PlayerData_stub implements PlayerDataService{
 	}
 
 	@Override
-	public PlayerVO avgLeague(ArrayList<String> attributes) {
+	public PlayerVO findPlayerData(int playerId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<PlayerVO> findPlayerData(String msg) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<PlayerVO> sortPlayerInfo(ArrayList<sortParam> sortBy) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<PlayerVO> sortPlayerNormal(ArrayList<sortParam> sortBy) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<PlayerVO> sortPlayerNormalAvg(ArrayList<sortParam> sortBy) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<PlayerVO> sortPlayerHigh(ArrayList<sortParam> sortBy) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<PlayerVO> filterInfo(ArrayList<sortParam> sortBy,
+			ArrayList<String> position, ArrayList<String> league, int numS,
+			int numE) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public ArrayList<PlayerVO> filterNormal(ArrayList<sortParam> sortBy,
-			ArrayList<String> position, ArrayList<String> league,
-			ArrayList<String> age, int numS, int numE, boolean isAvg) {
+			ArrayList<String> position, ArrayList<String> league, int numS,
+			int numE) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<PlayerVO> filterNormalAvg(ArrayList<sortParam> sortBy,
+			ArrayList<String> position, ArrayList<String> league, int numS,
+			int numE) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public ArrayList<PlayerVO> filterHigh(ArrayList<sortParam> sortBy,
-			ArrayList<String> position, ArrayList<String> league,
-			ArrayList<String> age, int numS, int numE, boolean isAvg) {
+			ArrayList<String> position, ArrayList<String> league, int numS,
+			int numE) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public PlayerVO avgLeague(ArrayList<String> attributes) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 
 }
