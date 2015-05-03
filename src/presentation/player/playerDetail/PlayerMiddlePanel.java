@@ -36,6 +36,7 @@ public class PlayerMiddlePanel extends JPanel{
 	JLabel LeagueAvgTextLabel;
 	
 	PlayerMiddle_ContrastLeaguePanel contrastPanel;
+	PlayerMiddle_SeasonDataPanel seasonDataPanel;
 
 	JPanel playerDetailTopPanel;
 
@@ -43,12 +44,13 @@ public class PlayerMiddlePanel extends JPanel{
 	ArrayList<SelectLabel> selectLabelGroups = new ArrayList<SelectLabel>();
 	
 	
-	public PlayerMiddlePanel(){
+	public PlayerMiddlePanel(ArrayList<Double> player,ArrayList<Double> leagueAvg,
+									ArrayList<String> avg,ArrayList<String> total){
 		this.setLayout(null);
 		this.setBounds(0, 35, 1280,670);
 		this.setBackground(Color.WHITE);
 		setTopPanel();
-		setContrastLabel();
+		setContrastLabel(player,leagueAvg,avg,total);
 		setLatestMatchLabel();
 		setPastLabel();
 		setComparePalyersLabel();
@@ -73,7 +75,8 @@ public class PlayerMiddlePanel extends JPanel{
 		this.add(playerDetailTopPanel);
 	}
 	
-	public void setContrastLabel(){
+	public void setContrastLabel(ArrayList<Double> player,ArrayList<Double> leagueAvg,
+			ArrayList<String> avg,ArrayList<String> total){
 		Point location = new Point(0,200);
 		Point size = new Point(320,50);
 		ContrastLabel = new SelectLabel("资料",location,size);
@@ -83,7 +86,8 @@ public class PlayerMiddlePanel extends JPanel{
 				setSelectedGroups(ContrastLabel);
 				setVisible(false);
 //				remove(contrastPanel);
-				setContrastPanel();
+				setContrastPanel(player,leagueAvg);
+				setSeasonPanel(avg,total);
 				setVisible(true);
 				repaint();
 			}
@@ -139,9 +143,15 @@ public class PlayerMiddlePanel extends JPanel{
 		this.add(ComparePalyersLabel);
 	}
 
-	public void setContrastPanel(){
-		contrastPanel = new PlayerMiddle_ContrastLeaguePanel();
+	public void setContrastPanel(ArrayList<Double> player,ArrayList<Double> leagueAvg){
+		contrastPanel = new PlayerMiddle_ContrastLeaguePanel(player,leagueAvg);
 		this.add(contrastPanel);
+		repaint();
+	}
+	
+	public void setSeasonPanel(ArrayList<String> avg,ArrayList<String> total){
+		seasonDataPanel = new PlayerMiddle_SeasonDataPanel(avg, total);
+		this.add(seasonDataPanel);
 		repaint();
 	}
 	
@@ -151,7 +161,25 @@ public class PlayerMiddlePanel extends JPanel{
 		jf.setLayout(null);
 		jf.setSize(1280,700);
 		jf.setLocationRelativeTo(null);
-		jf.add(new PlayerMiddlePanel());
+		ArrayList<Double> player = new ArrayList<Double>();
+		ArrayList<Double> leagueAvg = new ArrayList<Double>();
+		ArrayList<String> avg = new ArrayList<String>();
+		ArrayList<String> total = new ArrayList<String>();
+		player.add(20.5);leagueAvg.add(30.7);
+		player.add(20.5);leagueAvg.add(30.7);
+		player.add(20.5);leagueAvg.add(30.7);
+		player.add(20.5);leagueAvg.add(30.7);
+		player.add(20.5);leagueAvg.add(30.7);
+		
+		for(int i = 0; i < 16 ; i++){
+			avg.add("11.11");
+		}
+		for(int i = 0; i < 16 ; i++){
+			total.add("22.11");
+		}
+
+		
+		jf.add(new PlayerMiddlePanel(player,leagueAvg,avg,total));
 		jf.setVisible(true);
 	}
 	
