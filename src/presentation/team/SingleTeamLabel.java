@@ -5,8 +5,6 @@ package presentation.team;
  */
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GridLayout;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -26,14 +24,16 @@ public class SingleTeamLabel extends JLabel{
 	JLabel TeamPicLabel;
 	JLabel ItemsJLabel;
 	
-	public SingleTeamLabel(String path,String TeamName){
+	
+	public SingleTeamLabel(String path,String location,String TeamName, Color color){
 		this.setLayout(null);
 		this.setBounds(0, 80, 188,78);
 		this.setOpaque(true);
-		this.setBackground(Color.LIGHT_GRAY);
+		this.setBackground(color);
 		this.setVisible(true);
-		setItemLabel();
+//		setItemLabel();
 		setTeamNameLabel(TeamName);
+		setTeamLocationLabel(location);
 		setTeamPicLabel(path);
 	}
 	
@@ -41,8 +41,6 @@ public class SingleTeamLabel extends JLabel{
 	public void setTeamPicLabel(String path){
 		TeamPicLabel = new PhotoLabel(new ImageIcon(path).getImage());
 		TeamPicLabel.setBounds(0,0,140,75);
-		TeamPicLabel.setBackground(Color.LIGHT_GRAY);
-		TeamPicLabel.setOpaque(true);
 		TeamPicLabel.setVisible(true);
 		this.add(TeamPicLabel);
 	}
@@ -52,58 +50,26 @@ public class SingleTeamLabel extends JLabel{
 		JLabel TeamNameLabel = new JLabel(TeamName);
 		TeamNameLabel.setFont(new Font("Dialog",1,15));
 		TeamNameLabel.setForeground(Color.GRAY);
-		TeamNameLabel.setBounds(80,0,150,30);
+		TeamNameLabel.setBounds(90,40,150,30);
 		this.add(TeamNameLabel);
 
 	}
-	
-	public void setItemLabel(){
-		
-		ItemsJLabel = new JLabel();
-		ItemsJLabel.setLayout(new GridLayout(2,2,0,0));
-		ItemsJLabel.setBounds(85,30,90,40);
-		ItemsJLabel.setBackground(Color.LIGHT_GRAY);
-		ItemsJLabel.setOpaque(true);
-
-		JLabel TeamDataLabel = new JLabel("数据");
-		TeamDataLabel.setFont(new Font("Dialog",1,12));
-		TeamDataLabel.setSize(10, 10);
-		TeamDataLabel.setForeground(Color.GRAY);
-		ItemsJLabel.add(TeamDataLabel);
-		
-		JLabel TeamDataKingLabel = new JLabel("数据王");
-		TeamDataKingLabel.setFont(new Font("Dialog",1,12));
-		TeamDataKingLabel.setForeground(Color.GRAY);
-		TeamDataLabel.setSize(10, 10);
-
-		ItemsJLabel.add(TeamDataKingLabel);
-
-		JLabel TeamMemberLabel = new JLabel("阵容");
-		TeamMemberLabel.setFont(new Font("Dialog",1,12));
-		TeamMemberLabel.setForeground(Color.GRAY);
-		TeamDataLabel.setSize(10, 10);
-
-		ItemsJLabel.add(TeamMemberLabel);
-
-		JLabel TeamMatchLabel = new JLabel("赛程");
-		TeamMatchLabel.setFont(new Font("Dialog",1,12));
-		TeamMatchLabel.setForeground(Color.GRAY);
-		TeamDataLabel.setSize(10, 10);
-
-		ItemsJLabel.add(TeamMatchLabel);
-		
-		ItemsJLabel.setVisible(true);
-		this.add(ItemsJLabel);
+	public void setTeamLocationLabel(String location){
+		JLabel TeamLocationLabel = new JLabel(location);
+		TeamLocationLabel.setFont(new Font("Dialog",1,15));
+		TeamLocationLabel.setForeground(Color.GRAY);
+		TeamLocationLabel.setBounds(90,10,150,30);
+		this.add(TeamLocationLabel);
 
 	}
-	//length 188  height 78
+	
 	
 	public static void main(String[] args){
 		JFrame jf = new JFrame();
 		jf.setLayout(null);
 		jf.setSize(1280,700);
 		jf.setLocationRelativeTo(null);
-		jf.getContentPane().add(new SingleTeamLabel("teamsPNG/ATL.png","亚特兰大 老鹰"));
+		jf.getContentPane().add(new SingleTeamLabel("teamsPNG/ATL.png","亚特兰大","老鹰",Color.WHITE));
 		jf.setVisible(true);
 	}
 }
