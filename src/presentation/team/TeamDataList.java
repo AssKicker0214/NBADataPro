@@ -11,8 +11,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import dataservice.team.TeamDataService;
+import dataservice.team.TeamData_stub;
 import presentation.common.SelectLabel;
 import presentation.table.TablePane;
+import vo.teamvo.TeamVO;
 
 public class TeamDataList extends JPanel{
 
@@ -262,19 +265,19 @@ public class TeamDataList extends JPanel{
 		TitleLabel.add(ButtonsBGLabel,0);
 	}
 
+	
 	public void setBasicInfoTablePanel(){
-			
+		TeamDataService tds = new TeamData_stub();
+		ArrayList<TeamVO> vo = tds.findTeamBasic();
 		ArrayList<ArrayList<String>> datas = new ArrayList<ArrayList<String>>();	
-		ArrayList<String> l = new ArrayList<String>();
-		l.add("1.png");
-		l.add("Atlanta");
-		l.add("Hawks");
-		l.add("East");
-		l.add("Pacific");
-		l.add("Philips Arena");
-		l.add("1949");
+		ArrayList<String> temp = new ArrayList<String>();
+		for(int i=0;i<vo.size();i++){
+			temp.add("1.png");
+			temp.add("Atlanta");
 		
-		datas.add(l);
+		
+			datas.add(temp);
+		}
 			
 		String[] header = {"","所在地","名称","赛区","分区","主场","建立时间"};
 		ArrayList<Integer> wid = new ArrayList<Integer>();
