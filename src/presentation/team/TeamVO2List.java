@@ -7,8 +7,8 @@ import vo.teamvo.TeamVO;
 public class TeamVO2List {
 	public ArrayList<ArrayList<String>> basicInfo(ArrayList<TeamVO> vo){
 		ArrayList<ArrayList<String>> datas = new ArrayList<ArrayList<String>>();	
-		ArrayList<String> temp = new ArrayList<String>();
 		for(int i=0;i<vo.size();i++){
+			ArrayList<String> temp = new ArrayList<String>();
 			temp.add("teamsPNG/"+vo.get(i).photo+".png");
 			temp.add(vo.get(i).location);
 			temp.add(vo.get(i).teamName);
@@ -24,8 +24,8 @@ public class TeamVO2List {
 	
 	public ArrayList<ArrayList<String>> normalData(ArrayList<TeamVO> vo){
 		ArrayList<ArrayList<String>> datas = new ArrayList<ArrayList<String>>();	
-		ArrayList<String> temp = new ArrayList<String>();
 		for(int i=0;i<vo.size();i++){
+			ArrayList<String> temp = new ArrayList<String>();
 			temp.add("teamsPNG/"+vo.get(i).photo+".png");
 			temp.add(vo.get(i).teamName);
 			temp.add(vo.get(i).assist+"");
@@ -48,8 +48,8 @@ public class TeamVO2List {
 	}
 	public ArrayList<ArrayList<String>> avgNormalData(ArrayList<TeamVO> vo){
 		ArrayList<ArrayList<String>> datas = new ArrayList<ArrayList<String>>();	
-		ArrayList<String> temp = new ArrayList<String>();
 		for(int i=0;i<vo.size();i++){
+			ArrayList<String> temp = new ArrayList<String>();
 			temp.add("teamsPNG/"+vo.get(i).photo+".png");
 			temp.add(vo.get(i).teamName);
 			temp.add(vo.get(i).avgAssist+"");
@@ -72,8 +72,8 @@ public class TeamVO2List {
 	}
 	public ArrayList<ArrayList<String>> highData(ArrayList<TeamVO> vo){
 		ArrayList<ArrayList<String>> datas = new ArrayList<ArrayList<String>>();	
-		ArrayList<String> temp = new ArrayList<String>();
 		for(int i=0;i<vo.size();i++){
+			ArrayList<String> temp = new ArrayList<String>();
 			temp.add("teamsPNG/"+vo.get(i).photo+".png");
 			temp.add(vo.get(i).teamName);
 			temp.add(vo.get(i).assistEfficient+"");

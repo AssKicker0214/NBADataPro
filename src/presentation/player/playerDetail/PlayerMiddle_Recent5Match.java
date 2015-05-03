@@ -22,15 +22,15 @@ public class PlayerMiddle_Recent5Match extends JPanel{
 	JLabel tabelLabel;
 
 	
-	public PlayerMiddle_Recent5Match(){
+	public PlayerMiddle_Recent5Match(String playerName){
 		this.setLayout(null);
 		this.setBounds(0, 255,1280,400);
-		setRecent5MactchTitleLabel();
+		setRecent5MactchTitleLabel(playerName);
 		this.setBackground(Color.WHITE);
 		setTabel();
 	}
 	
-	public void setRecent5MactchTitleLabel(){
+	public void setRecent5MactchTitleLabel(String playerName){
 		Recent5MatchLabel = new JLabel("  最近5场比赛",JLabel.LEADING);
 		Recent5MatchLabel.setFont(new Font("Dialog",1,20));
 		Recent5MatchLabel.setForeground(Color.WHITE);
@@ -69,7 +69,7 @@ public class PlayerMiddle_Recent5Match extends JPanel{
 		jf.setSize(1280,700);
 		jf.setLocationRelativeTo(null);
 		
-		jf.add(new PlayerMiddle_Recent5Match());
+//		jf.add(new PlayerMiddle_Recent5Match());
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jf.setVisible(true);
 	}

@@ -370,7 +370,7 @@ public class TeamDataList extends JPanel{
 	public void setHighInfoTablePanel(){
 				ArrayList<TeamVO> vo = tds.findTeamBasic();
 		TeamVO2List v2l = new TeamVO2List();
-		ArrayList<ArrayList<String>> datas = v2l.basicInfo(vo);
+		ArrayList<ArrayList<String>> datas = v2l.highData(vo);
 				String[] tbHead = {"","姓名","助攻效率","抢断效率","防守效率","进攻效率","防守篮板率","进攻篮板率","进攻回合",
 					"抢断效率","胜率"};
 			

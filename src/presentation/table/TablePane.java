@@ -96,7 +96,7 @@ public class TablePane extends JPanel{
 		
 		if(hasIndex){
 			JLabel cLabel = new JLabel(" ",JLabel.CENTER);
-			cLabel.setPreferredSize(new Dimension(20, 30));
+			cLabel.setPreferredSize(new Dimension(30, 30));
 			header.add(cLabel);
 		}
 		for(int i=0;i<column;i++){
@@ -185,7 +185,7 @@ public class TablePane extends JPanel{
 		f.setLocationRelativeTo(null);
 	
 		ArrayList<String> l1 = new ArrayList<String>();
-//		l1.add("teamsPNG/ATL.png");
+		l1.add("bg.png");
 		l1.add("0.1");
 		l1.add("0.2");
 		l1.add("0.1");
@@ -202,9 +202,9 @@ public class TablePane extends JPanel{
 		a.add(l1);
 		a.add(l1);
 		a.add(l1);
-		String[] b = {"**","**","**","**"};
+		String[] b = {"","**","**","**","**"};
 		ArrayList<Integer> w = new ArrayList<Integer>();
-//		w.add(50);
+		w.add(50);
 		w.add(100);
 		w.add(200);
 		w.add(300);

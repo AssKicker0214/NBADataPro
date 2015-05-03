@@ -12,6 +12,9 @@ public class PlayerVO {
 	public String position;		//球员位置信息
 	public char league;			//球员所属联盟
 	public int number;			//球员号码
+	public String hight;		//身高
+	public String weigth;		//体重
+	public String school;		//毕业学校
 
 	//normal info
 	public int 	age;				//球员年龄

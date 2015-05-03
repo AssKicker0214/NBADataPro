@@ -42,7 +42,7 @@ public class PlayerDetailFrame extends JFrame{
 	}
 */	
 	public void setPlayerMiddlePanel(){
-		this.add(new PlayerMiddlePanel());
+//		this.add(new PlayerMiddlePanel());
 	}
 	
 	public static void main(String[] args){

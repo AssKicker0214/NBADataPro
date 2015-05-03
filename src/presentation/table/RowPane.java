@@ -43,7 +43,7 @@ public class RowPane extends JPanel {
 	
 	public void setPhotoLabel(String photo,int w){
 		photoLabel = new PhotoLabel(new Dimension(w, TablePane.height));
-		((PhotoLabel) photoLabel).setImage(new ImageIcon("teamsPNG/ATL.png").getImage());
+		((PhotoLabel) photoLabel).setImage(new ImageIcon(photo).getImage());
 		add(photoLabel);
 	}
 	

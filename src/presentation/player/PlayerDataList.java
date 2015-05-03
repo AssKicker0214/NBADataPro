@@ -11,8 +11,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import dataservice.player.PlayerDataService;
+import dataservice.player.PlayerData_stub;
+import dataservice.player.sortParam;
 import presentation.common.SelectLabel;
 import presentation.table.TablePane;
+import vo.playervo.PlayerVO;
 
 public class PlayerDataList  extends JPanel{
 
@@ -25,7 +29,10 @@ public class PlayerDataList  extends JPanel{
 	
 	public SelectLabel basicInfoButton;//信息
 	public SelectLabel NormalInfoButton;//普通数据
+	public SelectLabel AvgNormalInfoButton;//平均普通数据
 	public SelectLabel HighInfoButton;//高阶数据
+	
+	PlayerDataService pds = new PlayerData_stub();
 	
 	Color entered = new Color(30,80,140);
 	Color pressed = new Color(42,109,183);
@@ -51,6 +58,7 @@ public class PlayerDataList  extends JPanel{
 		selectLabelGroups.clear();
 		selectLabelGroups.add(basicInfoButton);
 		selectLabelGroups.add(NormalInfoButton);
+		selectLabelGroups.add(AvgNormalInfoButton);
 		selectLabelGroups.add(HighInfoButton);
 		for(SelectLabel sl : selectLabelGroups){
 			if(sl != s){
@@ -162,7 +170,7 @@ public class PlayerDataList  extends JPanel{
 				PlayerDataList.this.remove(NormalInfoTable);
 			if(HighInfoTable!=null)
 				PlayerDataList.this.remove(HighInfoTable);
-			setNormalInfoTablePanel(); 
+			setNormalInfoTablePanel(false); 
 			
 			setVisible(true);
 			repaint();	
@@ -188,9 +196,68 @@ public class PlayerDataList  extends JPanel{
 
 	
 	}
-	
-	public void setHighInfoButton(){
+	public void setAvgNormalInfoButton(){
 		Point p1 = new Point(100,5);
+		Point p2 = new Point(40,30);
+		AvgNormalInfoButton = new SelectLabel("场均",p1,p2,entered,pressed,exicted);
+		AvgNormalInfoButton.setForeground(Color.WHITE);
+		AvgNormalInfoButton.setBackground(exicted);
+		AvgNormalInfoButton.addMouseListener(new AvgNormalInfoButtonListener());
+		ButtonsBGLabel.add(AvgNormalInfoButton);
+	}
+
+	
+	public class AvgNormalInfoButtonListener implements MouseListener{
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+
+			setVisible(false);
+			setButtonsBGLabel();
+			NormalInfoButton.isSelected = true;
+			NormalInfoButton.setBackground(pressed);
+			setSelectedGroups(NormalInfoButton);
+			
+			if(BasicInfoTable!=null)
+				PlayerDataList.this.remove(BasicInfoTable);
+			if(NormalInfoTable!=null)
+				PlayerDataList.this.remove(NormalInfoTable);
+			if(HighInfoTable!=null)
+				PlayerDataList.this.remove(HighInfoTable);
+			setNormalInfoTablePanel(true); 
+			
+			setVisible(true);
+			repaint();	
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+	
+	}
+	public void setHighInfoButton(){
+		Point p1 = new Point(150,5);
 		Point p2 = new Point(40,30);
 		HighInfoButton = new SelectLabel("高阶",p1,p2,entered,pressed,exicted);
 		HighInfoButton.setForeground(Color.WHITE);
@@ -255,103 +322,71 @@ public class PlayerDataList  extends JPanel{
 		ButtonsBGLabel = new JLabel();
 		ButtonsBGLabel.setBackground(exicted);
 		ButtonsBGLabel.setOpaque(true);
-		ButtonsBGLabel.setBounds(1055,10,145,40);
+		ButtonsBGLabel.setBounds(1005,10,195,40);
 		setBasicInfoButton();
 		setNormalInfoButton();
+		setAvgNormalInfoButton();
 		setHighInfoButton();
 		TitleLabel.add(ButtonsBGLabel,0);
 	}
 
 	public void setBasicInfoTablePanel(){
+		sortParam s = new sortParam("point",true);
+		ArrayList<sortParam> sortBy = new ArrayList<sortParam>();
+		sortBy.add(s);
+		ArrayList<PlayerVO> vo = pds.sortPlayerInfo(sortBy);
+		PlayerVO2List v2l = new PlayerVO2List();
+		ArrayList<ArrayList<String>> datas = v2l.basicInfo(vo);
 			
-		ArrayList<ArrayList<String>> datas = new ArrayList<ArrayList<String>>();	
-		ArrayList<String> l = new ArrayList<String>();
-		l.add("1.png");
-		l.add("Atlanta");
-		l.add("Hawks");
-		l.add("East");
-		l.add("Pacific");
-		l.add("Philips Arena");
-		l.add("1949");
-		
-		datas.add(l);
-			
-		String[] header = {"","所在地","名称","赛区","分区","主场","建立时间"};
+		String[] header = {"","名称","所属球队","联盟","号码","球员位置","球员年龄","身高","体重","毕业学校"};
 		ArrayList<Integer> wid = new ArrayList<Integer>();
-		wid.add(50);wid.add(200);wid.add(200);wid.add(100);wid.add(200);wid.add(400);wid.add(100);
+		wid.add(50);wid.add(150);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(200);
 		
 		BasicInfoTable = new TablePane(datas,header,wid,0,60,1280,350,50,true,false);
 		this.add(BasicInfoTable);
 	}
 		
-	public void setNormalInfoTablePanel(){
+	public void setNormalInfoTablePanel(boolean isAvg){
 			
-		ArrayList<ArrayList<String>> datas = new ArrayList<ArrayList<String>>();	
-		ArrayList<String> l = new ArrayList<String>();
-		l.add("1.png");
-		l.add("Aaron Brooks");
-		l.add("4");
-		l.add("4");
-		l.add("36.1");
-		l.add("48.9");
-		l.add("42.9");
-		l.add("85.7");
-		l.add("2.8");
-		l.add("5.0");
-		l.add("7.8");
-		l.add("3.3");
-		l.add("0.7");
-		l.add("0.2");
-		l.add("1.5");
-		l.add("3.3");
-		l.add("15.3");
-
-		for(int i = 0; i < 50;i++){
-			datas.add(l);
+		sortParam s = new sortParam("point",true);
+		ArrayList<sortParam> sortBy = new ArrayList<sortParam>();
+		sortBy.add(s);
+		ArrayList<PlayerVO> vo = new ArrayList<PlayerVO>();
+		ArrayList<ArrayList<String>> datas = new ArrayList<ArrayList<String>>();			
+		PlayerVO2List v2l = new PlayerVO2List();
+		if(isAvg){
+			vo = pds.sortPlayerNormalAvg(sortBy);
+			datas = v2l.avgNormalData(vo);
+		}else{
+			vo = pds.sortPlayerNormal(sortBy);
+			datas = v2l.normalData(vo);
 		}
-				
-		String[] tbHead = {"","姓名","场数","先发","分钟","％","三分％","罚球％","进攻",
-					"防守","场均篮板","场均助攻","场均抢断","场均盖帽","失误","犯规","场均得分"};
+
+		String[] tbHead = {"","姓名","首发","效率","上场次数","分钟","％","三分％","罚球％","进攻",
+					"防守","篮板","助攻","抢断","盖帽","失误","犯规","得分"};
 			
 		ArrayList<Integer> wid = new ArrayList<Integer>();
 		wid.add(50);wid.add(150);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);
-		wid.add(50);wid.add(60);wid.add(60);wid.add(60);wid.add(60);wid.add(60);wid.add(70);wid.add(70);
+		wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);
 			
 		NormalInfoTable = new TablePane(datas,tbHead,wid,0,60,1280,320,50,true,true);
 		this.add(NormalInfoTable);
 	}
 	public void setHighInfoTablePanel(){
 		
-		ArrayList<ArrayList<String>> datas = new ArrayList<ArrayList<String>>();	
-		ArrayList<String> l = new ArrayList<String>();
-		l.add("1.png");
-		l.add("Aaron Brooks");
-		l.add("4");
-		l.add("4");
-		l.add("36.1");
-		l.add("48.9");
-		l.add("42.9");
-		l.add("85.7");
-		l.add("2.8");
-		l.add("5.0");
-		l.add("7.8");
-		l.add("3.3");
-		l.add("0.7");
-		l.add("0.2");
-		l.add("1.5");
-		l.add("3.3");
-		l.add("15.3");
-
-		for(int i = 0; i < 50;i++){
-			datas.add(l);
-		}
+		sortParam s = new sortParam("point",true);
+		ArrayList<sortParam> sortBy = new ArrayList<sortParam>();
+		sortBy.add(s);
+		ArrayList<PlayerVO> vo = pds.sortPlayerHigh(sortBy);
+		PlayerVO2List v2l = new PlayerVO2List();
+		ArrayList<ArrayList<String>> datas = v2l.highData(vo);
 				
-		String[] tbHead = {"","姓名","场数","先发","分钟","％","三分％","罚球％","进攻",
-					"防守","场均篮板","场均助攻","场均抢断","场均盖帽","失误","犯规","场均得分"};
+		String[] tbHead = {"","姓名","助攻率","盖帽率","抢断率","防守篮板率","进攻篮板率","失误率","使用率","GmSc",
+					"真实命中率","篮板率","投篮效率"};
 			
 		ArrayList<Integer> wid = new ArrayList<Integer>();
-		wid.add(50);wid.add(150);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);
-		wid.add(50);wid.add(60);wid.add(60);wid.add(60);wid.add(60);wid.add(60);wid.add(70);wid.add(70);
+		wid.add(50);wid.add(150);wid.add(50);wid.add(50);wid.add(50);wid.add(100);wid.add(100);wid.add(50);wid.add(50);wid.add(50);
+		wid.add(100);wid.add(50);wid.add(70);
 			
 		NormalInfoTable = new TablePane(datas,tbHead,wid,0,60,1280,320,50,true,true);
 		this.add(NormalInfoTable);

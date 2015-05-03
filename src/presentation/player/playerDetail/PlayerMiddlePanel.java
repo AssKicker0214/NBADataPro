@@ -10,9 +10,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import dataservice.player.PlayerDataService;
+import dataservice.player.PlayerData_stub;
 import presentation.common.SelectLabel;
 import presentation.player.vs.PlayerVSContentPanel;
 import presentation.player.vs.PlayersVSTopPanel;
+import vo.playervo.PlayerVO;
 
 public class PlayerMiddlePanel extends JPanel{
 
@@ -46,19 +49,47 @@ public class PlayerMiddlePanel extends JPanel{
 	PlayersVSTopPanel vsTopPanel;
 	JPanel playerDetailTopPanel;
 	
+	String playerName;
+	
+	ArrayList<Double> player = new ArrayList<Double>();
+	ArrayList<Double> leagueAvg = new ArrayList<Double>();
+	ArrayList<String> avg = new ArrayList<String>();
+	ArrayList<String> total = new ArrayList<String>();
 	ArrayList<SelectLabel> selectLabelGroups = new ArrayList<SelectLabel>();
 	
 	
-	public PlayerMiddlePanel(ArrayList<Double> player,ArrayList<Double> leagueAvg,
-									ArrayList<String> avg,ArrayList<String> total){
+	public PlayerMiddlePanel(String name){
+		this.playerName = name;
 		this.setLayout(null);
 		this.setBounds(0, 35, 1280,670);
 		this.setBackground(Color.WHITE);
 		setTopPanel();
-		setContrastLabel(player,leagueAvg,avg,total);
+		setAttri();
+		setContrastLabel();
 		setLatestMatchLabel();
 		setPastLabel();
 		setComparePalyersLabel();
+	}
+	
+	public void setAttri(){
+		PlayerDataService pds = new PlayerData_stub();
+		ArrayList<String> attributes = new ArrayList<String>();
+		attributes.add("avgPoint");attributes.add("avgRebound");attributes.add("avgAssist");attributes.add("three");attributes.add("penalty");
+		PlayerVO voL = pds.avgLeague(attributes); 
+		PlayerVO voP = pds.findPlayerData(playerName); 
+		player.add(voP.avgPoint);player.add(voP.avgRebound);player.add(voP.avgAssist);
+		player.add(voP.three);player.add(voP.penalty);
+		leagueAvg.add(voL.avgPoint);leagueAvg.add(voL.avgRebound);leagueAvg.add(voL.avgAssist);
+		leagueAvg.add(voL.three);leagueAvg.add(voL.penalty);
+		//"年度","球队","场数","先发","分钟","％","三分％","罚球％",
+		//"进攻","防守","场均篮板","场均助攻","场均抢断","场均盖帽","失误","犯规","场均得分"
+		avg.add(voP.team);avg.add(voP.numOfGame+"");avg.add(voP.start+"");avg.add(voP.avgMinute+"");avg.add(voP.shot+"");avg.add(voP.three+"");
+		avg.add(voP.penalty+"");avg.add(voP.avgOffend+"");avg.add(voP.avgDefend+"");avg.add(voP.avgRebound+"");avg.add(voP.avgAssist+"");avg.add(voP.avgSteal+"");
+		avg.add(voP.avgBlockShot+"");avg.add(voP.avgFault+"");avg.add(voP.avgFoul+"");avg.add(voP.avgPoint+"");
+		total.add(voP.team);total.add(voP.numOfGame+"");total.add(voP.start+"");total.add(voP.minute+"");total.add(voP.shot+"");total.add(voP.three+"");
+		total.add(voP.penalty+"");total.add(voP.offend+"");total.add(voP.defend+"");total.add(voP.rebound+"");total.add(voP.assist+"");total.add(voP.steal+"");
+		total.add(voP.blockShot+"");total.add(voP.fault+"");total.add(voP.foul+"");total.add(voP.point+"");
+
 	}
 	
 	public void setSelectedGroups(SelectLabel s){
@@ -81,8 +112,7 @@ public class PlayerMiddlePanel extends JPanel{
 		this.add(playerDetailTopPanel);
 	}
 	
-	public void setContrastLabel(ArrayList<Double> player,ArrayList<Double> leagueAvg,
-			ArrayList<String> avg,ArrayList<String> total){
+	public void setContrastLabel(){
 		Point location = new Point(0,200);
 		Point size = new Point(320,50);
 		ContrastLabel = new SelectLabel("资料",location,size);
@@ -112,8 +142,9 @@ public class PlayerMiddlePanel extends JPanel{
 				}else{
 					setTopPanel();
 				}
-				setContrastPanel(player,leagueAvg);
-				setSeasonPanel(avg,total);
+				
+				setContrastPanel();
+				setSeasonPanel();
 				setVisible(true);
 				repaint();
 			}
@@ -249,26 +280,26 @@ public class PlayerMiddlePanel extends JPanel{
 		this.add(ComparePalyersLabel);
 	}
 
-	public void setContrastPanel(ArrayList<Double> player,ArrayList<Double> leagueAvg){
+	public void setContrastPanel(){
 		contrastPanel = new PlayerMiddle_ContrastLeaguePanel(player,leagueAvg);
 		this.add(contrastPanel,0);
 		repaint();
 	}
 	
-	public void setSeasonPanel(ArrayList<String> avg,ArrayList<String> total){
+	public void setSeasonPanel(){
 		seasonDataPanel = new PlayerMiddle_SeasonDataPanel(avg, total);
 		this.add(seasonDataPanel,0);
 		repaint();
 	}
 	
 	public void setRecent5MatchPanel(){
-		recent5MatchPanel = new PlayerMiddle_Recent5Match();
+		recent5MatchPanel = new PlayerMiddle_Recent5Match(playerName);
 		this.add(recent5MatchPanel,0);
 		repaint();
 	}
 
 	public void setPastPanel(){
-		pastPanel = new PlayerMiddle_PastPanel();
+		pastPanel = new PlayerMiddle_PastPanel(playerName);
 		this.add(pastPanel,0);
 		repaint();
 	}
@@ -320,7 +351,7 @@ public class PlayerMiddlePanel extends JPanel{
 		}
 
 		
-		jf.add(new PlayerMiddlePanel(player,leagueAvg,avg,total));
+//		jf.add(new PlayerMiddlePanel(player,leagueAvg,avg,total));
 		jf.setVisible(true);
 	}
 	

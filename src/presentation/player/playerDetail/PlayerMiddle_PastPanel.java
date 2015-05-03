@@ -22,14 +22,14 @@ public class PlayerMiddle_PastPanel extends JPanel{
 	
 	JLabel tabelLabel;
 	
-	public PlayerMiddle_PastPanel(){
+	public PlayerMiddle_PastPanel(String playerName){
 		this.setLayout(null);
 		this.setBounds(0, 255,1280,420);
 		setPastTitleLabel();
 		setBeginDate();
 		setEndDate();
 		this.setBackground(Color.WHITE);
-		setTabel();
+		setTabel(playerName);
 	}
 	
 	public void setPastTitleLabel(){
@@ -57,7 +57,7 @@ public class PlayerMiddle_PastPanel extends JPanel{
 	}
 
 	
-	public void setTabel(){
+	public void setTabel(String playerName){
 		String[] columns = {"日期","对手","分钟","％","命中","出手","三分％","罚球％",
 				"进攻","防守","篮板","助攻","抢断","盖帽","失误","犯规","得分"};
 				
@@ -85,7 +85,7 @@ public class PlayerMiddle_PastPanel extends JPanel{
 		jf.setSize(1280,700);
 		jf.setLocationRelativeTo(null);
 		
-		jf.add(new PlayerMiddle_PastPanel());
+//		jf.add(new PlayerMiddle_PastPanel());
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jf.setVisible(true);
 	}

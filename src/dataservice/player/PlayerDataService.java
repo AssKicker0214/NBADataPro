@@ -8,9 +8,11 @@ import vo.playervo.PlayerVO;
 public interface PlayerDataService {
 			
 	public PlayerVO findPlayerData(int playerId);//返回确切的某一个球员，默认场均
+	public PlayerVO findPlayerData(String name);//返回确切的某一个球员，默认场均
 	
 	//返回姓名包含输入的字符串的球员列表，返回值包括id,name,photo
-	public ArrayList<PlayerVO> findPlayerData(String msg);
+	public ArrayList<PlayerVO> findPlayers(String msg);
+	
 
 	//排序球员列表
 	public ArrayList<PlayerVO> sortPlayerInfo(ArrayList<sortParam> sortBy);
