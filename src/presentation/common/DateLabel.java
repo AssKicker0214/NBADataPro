@@ -89,7 +89,7 @@ public class DateLabel extends JLabel{
             public void mouseExited(MouseEvent me){
                 if(self.isEnabled()){
                 	self.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
-                	self.setForeground(Color.BLACK);
+                	self.setForeground(Color.WHITE);
                 }
             }
             public void mousePressed(MouseEvent me){
@@ -104,7 +104,7 @@ public class DateLabel extends JLabel{
             }
             public void mouseReleased(MouseEvent me){
                 if(self.isEnabled()){
-                	self.setForeground(Color.BLACK);
+                	self.setForeground(Color.WHITE);
                 }
             }
         });

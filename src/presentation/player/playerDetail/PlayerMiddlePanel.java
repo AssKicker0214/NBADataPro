@@ -37,6 +37,8 @@ public class PlayerMiddlePanel extends JPanel{
 	
 	PlayerMiddle_ContrastLeaguePanel contrastPanel;
 	PlayerMiddle_SeasonDataPanel seasonDataPanel;
+	PlayerMiddle_Recent5Match recent5MatchPanel;
+	PlayerMiddle_PastPanel pastPanel;
 
 	JPanel playerDetailTopPanel;
 
@@ -64,7 +66,8 @@ public class PlayerMiddlePanel extends JPanel{
 		selectLabelGroups.add(ComparePalyersLabel);
 		for(SelectLabel sl : selectLabelGroups){
 			if(sl != s){
-				sl.setBackground(Color.black);;
+				sl.setBackground(Color.black);
+				sl.isSelected = false;
 			}
 		}
 	}
@@ -85,7 +88,9 @@ public class PlayerMiddlePanel extends JPanel{
 			public void mousePressed(MouseEvent e) {
 				setSelectedGroups(ContrastLabel);
 				setVisible(false);
-//				remove(contrastPanel);
+				if(contrastPanel != null){
+					remove(contrastPanel);
+				}
 				setContrastPanel(player,leagueAvg);
 				setSeasonPanel(avg,total);
 				setVisible(true);
@@ -105,6 +110,13 @@ public class PlayerMiddlePanel extends JPanel{
 			@Override
 			public void mousePressed(MouseEvent e) {
 				setSelectedGroups(LatestMatchLabel);
+				setVisible(false);
+				if(recent5MatchPanel != null){
+					remove(recent5MatchPanel);
+				}
+				setRecent5MatchPanel();
+				setVisible(true);
+				repaint();
 			}
 		});
 
@@ -120,7 +132,13 @@ public class PlayerMiddlePanel extends JPanel{
 			@Override
 			public void mousePressed(MouseEvent e) {
 				setSelectedGroups(PastLabel);
-				
+				setVisible(false);
+				if(pastPanel != null){
+					remove(pastPanel);
+				}
+				setPastPanel();
+				setVisible(true);
+				repaint();
 			}
 		});
 
@@ -145,16 +163,27 @@ public class PlayerMiddlePanel extends JPanel{
 
 	public void setContrastPanel(ArrayList<Double> player,ArrayList<Double> leagueAvg){
 		contrastPanel = new PlayerMiddle_ContrastLeaguePanel(player,leagueAvg);
-		this.add(contrastPanel);
+		this.add(contrastPanel,0);
 		repaint();
 	}
 	
 	public void setSeasonPanel(ArrayList<String> avg,ArrayList<String> total){
 		seasonDataPanel = new PlayerMiddle_SeasonDataPanel(avg, total);
-		this.add(seasonDataPanel);
+		this.add(seasonDataPanel,0);
 		repaint();
 	}
 	
+	public void setRecent5MatchPanel(){
+		recent5MatchPanel = new PlayerMiddle_Recent5Match();
+		this.add(recent5MatchPanel,0);
+		repaint();
+	}
+
+	public void setPastPanel(){
+		pastPanel = new PlayerMiddle_PastPanel();
+		this.add(pastPanel,0);
+		repaint();
+	}
 
 	public static void main(String[] args){
 		JFrame jf = new JFrame();

@@ -54,14 +54,15 @@ public class SelectLabel extends JLabel {
 		@Override
 		public void mouseClicked(MouseEvent e) {
 			// TODO Auto-generated method stub
-			
+			isSelected = true;
+			SelectLabel l = (SelectLabel) e.getSource();
+			l.setBackground(pressed);
+
 		}
 
 		@Override
 		public void mousePressed(MouseEvent e) {
-			isSelected = true;
-			SelectLabel l = (SelectLabel) e.getSource();
-			l.setBackground(pressed);
+	
 		}
 
 		@Override

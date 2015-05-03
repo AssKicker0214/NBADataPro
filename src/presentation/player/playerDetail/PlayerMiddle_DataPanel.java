@@ -3,7 +3,6 @@ package presentation.player.playerDetail;
 import java.awt.Color;
 import java.util.ArrayList;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 //资料
