@@ -76,11 +76,11 @@ public class TeamData_stub implements TeamDataService{
 		return null;
 	}
 
-	@Override
+/*	@Override
 	public TeamVO avgLeague(ArrayList<String> attributes, char league) {
 		// TODO Auto-generated method stub
 		return null;
-	}
+	}*/
 
 	@Override
 	public ArrayList<PlayerVO> teamMemberList(int teamID) {

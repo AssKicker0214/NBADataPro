@@ -38,21 +38,6 @@ public class PlayerData_stub implements PlayerDataService{
 		return null;
 	}
 
-	@Override
-	public ArrayList<PlayerVO> filterNormal(ArrayList<sortParam> sortBy,
-			ArrayList<String> position, ArrayList<String> league,
-			ArrayList<String> age, int num, boolean isAvg) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<PlayerVO> filterHigh(ArrayList<sortParam> sortBy,
-			ArrayList<String> position, ArrayList<String> league,
-			ArrayList<String> age, int num, boolean isAvg) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public ArrayList<HotPlayersVO> DailyKing(int num, String sortBy) {
@@ -149,6 +134,22 @@ public class PlayerData_stub implements PlayerDataService{
 
 	@Override
 	public PlayerVO avgLeague(ArrayList<String> attributes) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<PlayerVO> filterNormal(ArrayList<sortParam> sortBy,
+			ArrayList<String> position, ArrayList<String> league,
+			ArrayList<String> age, int numS, int numE, boolean isAvg) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<PlayerVO> filterHigh(ArrayList<sortParam> sortBy,
+			ArrayList<String> position, ArrayList<String> league,
+			ArrayList<String> age, int numS, int numE, boolean isAvg) {
 		// TODO Auto-generated method stub
 		return null;
 	}
