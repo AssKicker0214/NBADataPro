@@ -45,6 +45,7 @@ public class TeamKingOptionsPanel extends JPanel {
 		setStealButton();
 		setFGPButton();
 		setFTPButton();
+		setTeamKingContentPanel("avgPoint");
 	}
 	
 	public void setOptionsSelectedGroups(SelectLabel s){
@@ -83,6 +84,7 @@ public class TeamKingOptionsPanel extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				setOptionsSelectedGroups(FildScoreButton);
+				remove(teamKingContentPanel);
 				setVisible(false);
 				setTeamKingContentPanel("avgPoint");
 				setVisible(true);
@@ -103,6 +105,11 @@ public class TeamKingOptionsPanel extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				setOptionsSelectedGroups(REBButton);
+				remove(teamKingContentPanel);
+				setVisible(false);
+				setTeamKingContentPanel("avgRebound");
+				setVisible(true);
+				repaint();
 			}
 		});
 
@@ -119,6 +126,11 @@ public class TeamKingOptionsPanel extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				setOptionsSelectedGroups(AssitButton);
+				remove(teamKingContentPanel);
+				setVisible(false);
+				setTeamKingContentPanel("avgAssist");
+				setVisible(true);
+				repaint();
 			}
 		});
 
@@ -135,6 +147,11 @@ public class TeamKingOptionsPanel extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				setOptionsSelectedGroups(BSButton);
+				remove(teamKingContentPanel);
+				setVisible(false);
+				setTeamKingContentPanel("avgBlockShot");
+				setVisible(true);
+				repaint();
 			}
 		});
 
@@ -151,6 +168,11 @@ public class TeamKingOptionsPanel extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				setOptionsSelectedGroups(TPSPButton);
+				remove(teamKingContentPanel);
+				setVisible(false);
+				setTeamKingContentPanel("avgSteal");
+				setVisible(true);
+				repaint();
 			}
 		});
 
@@ -167,6 +189,11 @@ public class TeamKingOptionsPanel extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				setOptionsSelectedGroups(StealButton);
+				remove(teamKingContentPanel);
+				setVisible(false);
+				setTeamKingContentPanel("three");
+				setVisible(true);
+				repaint();
 			}
 		});
 
@@ -183,6 +210,11 @@ public class TeamKingOptionsPanel extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				setOptionsSelectedGroups(FGPButton);
+				remove(teamKingContentPanel);
+				setVisible(false);
+				setTeamKingContentPanel("shot");
+				setVisible(true);
+				repaint();
 			}
 		});
 
@@ -199,6 +231,11 @@ public class TeamKingOptionsPanel extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				setOptionsSelectedGroups(FTPButton);
+				remove(teamKingContentPanel);
+				setVisible(false);
+				setTeamKingContentPanel("penalty");
+				setVisible(true);
+				repaint();
 			}
 		});
 

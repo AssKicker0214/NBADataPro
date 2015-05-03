@@ -35,6 +35,7 @@ public class HotPlayerOptionsPanel extends JPanel{
 		setAvgFildScoreButton();
 		setAvgREBButton();
 		setAvgAssitButton();
+		setHotPlayerContentPanel("avgPoint");
 	}
 	
 	public void setOptionsSelectedGroups(SelectLabel s){
@@ -45,7 +46,7 @@ public class HotPlayerOptionsPanel extends JPanel{
 
 		for(SelectLabel sl : selectLabelGroups){
 			if(sl != s){
-				sl.setBackground(Color.black);;
+				sl.setBackground(Color.black);
 			}
 		}
 	}
@@ -68,6 +69,7 @@ public class HotPlayerOptionsPanel extends JPanel{
 			@Override
 			public void mousePressed(MouseEvent e) {
 				setOptionsSelectedGroups(AvgFildScoreButton);
+				remove(hotPlayerContentPanel);
 				setVisible(false);
 				setHotPlayerContentPanel("avgPoint");
 				setVisible(true);
@@ -88,6 +90,11 @@ public class HotPlayerOptionsPanel extends JPanel{
 			@Override
 			public void mousePressed(MouseEvent e) {
 				setOptionsSelectedGroups(AvgREBButton);
+				remove(hotPlayerContentPanel);
+				setVisible(false);
+				setHotPlayerContentPanel("avgRebound");
+				setVisible(true);
+				repaint();
 			}
 		});
 
@@ -104,6 +111,11 @@ public class HotPlayerOptionsPanel extends JPanel{
 			@Override
 			public void mousePressed(MouseEvent e) {
 				setOptionsSelectedGroups(AvgAssitButton);
+				remove(hotPlayerContentPanel);
+				setVisible(false);
+				setHotPlayerContentPanel("avgAssist");
+				setVisible(true);
+				repaint();
 			}
 		});
 

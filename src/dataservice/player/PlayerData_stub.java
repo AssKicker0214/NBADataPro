@@ -19,10 +19,21 @@ public class PlayerData_stub implements PlayerDataService{
 		vo.photo = "Aaron Brooks";
 		vo.position = "F";
 		vo.teamName = "Hawks";
-		vo.teamPhoto = "ATL";
+		vo.teamPhoto = "BKN";
 		vo.value = 39;
+		HotPlayersVO vo3 = new HotPlayersVO();
+		vo3.name = "Aaron Brooks";
+		vo3.number = 12;
+		vo3.photo = "Aaron Brooks";
+		vo3.position = "F";
+		vo3.teamName = "Hawks";
+		vo3.teamPhoto = "ATL";
+		vo3.value = 39;
 		
-		result.add(vo);
+		if(sortBy.equals("avgPoint"))
+			result.add(vo);
+		else
+			result.add(vo3);
 		
 		HotPlayersVO vo2 = new HotPlayersVO();
 		vo2.name = "Aaron Brooks";
@@ -51,8 +62,19 @@ public class PlayerData_stub implements PlayerDataService{
 		vo.teamName = "Hawks";
 		vo.teamPhoto = "ATL";
 		vo.value = 39;
+		HotPlayersVO vo3 = new HotPlayersVO();
+		vo3.name = "Aaron Brooks";
+		vo3.number = 12;
+		vo3.photo = "Aaron Brooks";
+		vo3.position = "F";
+		vo3.teamName = "Hawks";
+		vo3.teamPhoto = "BKN";
+		vo3.value = 39;
 		
-		result.add(vo);
+		if(sortBy.equals("avgPoint"))
+			result.add(vo);
+		else
+			result.add(vo3);
 		
 		HotPlayersVO vo2 = new HotPlayersVO();
 		vo2.name = "Aaron Brooks";
@@ -83,7 +105,20 @@ public class PlayerData_stub implements PlayerDataService{
 		vo.upgradeRate = 39.98;
 		vo.value = 39;
 		
-		result.add(vo);
+		HotPlayersVO vo3 = new HotPlayersVO();
+		vo3.name = "Aaron Brooks";
+		vo3.number = 12;
+		vo3.photo = "Aaron Brooks";
+		vo3.position = "F";
+		vo3.teamName = "Hawks";
+		vo.upgradeRate = 39.98;
+		vo3.teamPhoto = "BKN";
+		vo3.value = 39;
+		
+		if(sortBy.equals("avgPoint"))
+			result.add(vo);
+		else
+			result.add(vo3);
 		
 		HotPlayersVO vo2 = new HotPlayersVO();
 		vo2.name = "Aaron Brooks";

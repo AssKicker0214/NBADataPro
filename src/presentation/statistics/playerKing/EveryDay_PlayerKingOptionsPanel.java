@@ -39,6 +39,7 @@ public class EveryDay_PlayerKingOptionsPanel extends JPanel{
 		setAssitButton();
 		setBSButton();
 		setStealButton();
+		setPlayerKingContentPanel("avgPoint");
 	}
 	
 	public void setOptionsSelectedGroups(SelectLabel s){
@@ -73,7 +74,9 @@ public class EveryDay_PlayerKingOptionsPanel extends JPanel{
 
 			@Override
 			public void mousePressed(MouseEvent e) {
+				
 				setOptionsSelectedGroups(ScoreButton);
+				remove(playerKingContentPanel);
 				setVisible(false);
 				setPlayerKingContentPanel("avgPoint");
 				setVisible(true);
@@ -95,6 +98,11 @@ public class EveryDay_PlayerKingOptionsPanel extends JPanel{
 			@Override
 			public void mousePressed(MouseEvent e) {
 				setOptionsSelectedGroups(REBButton);
+				remove(playerKingContentPanel);
+				setVisible(false);
+				setPlayerKingContentPanel("avgRebound");
+				setVisible(true);
+				repaint();
 			}
 		});
 
@@ -111,6 +119,11 @@ public class EveryDay_PlayerKingOptionsPanel extends JPanel{
 			@Override
 			public void mousePressed(MouseEvent e) {
 				setOptionsSelectedGroups(AssitButton);
+				remove(playerKingContentPanel);
+				setVisible(false);
+				setPlayerKingContentPanel("avgAssist");
+				setVisible(true);
+				repaint();
 			}
 		});
 
@@ -127,6 +140,11 @@ public class EveryDay_PlayerKingOptionsPanel extends JPanel{
 			@Override
 			public void mousePressed(MouseEvent e) {
 				setOptionsSelectedGroups(BSButton);
+				remove(playerKingContentPanel);
+				setVisible(false);
+				setPlayerKingContentPanel("avgBlockShot");
+				setVisible(true);
+				repaint();
 			}
 		});
 
@@ -144,6 +162,11 @@ public class EveryDay_PlayerKingOptionsPanel extends JPanel{
 			@Override
 			public void mousePressed(MouseEvent e) {
 				setOptionsSelectedGroups(StealButton);
+				remove(playerKingContentPanel);
+				setVisible(false);
+				setPlayerKingContentPanel("avgSteal");
+				setVisible(true);
+				repaint();
 			}
 		});
 

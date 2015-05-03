@@ -46,6 +46,7 @@ public class Season_PlayerKingOptionsPanel extends JPanel {
 		setAvgStealButton();
 		setFGPButton();
 		setFTPButton();
+		setPlayerKingContentPanel("avgPoint");
 	}
 		
 	public void setOptionsSelectedGroups(SelectLabel s){
@@ -84,6 +85,7 @@ public class Season_PlayerKingOptionsPanel extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				setOptionsSelectedGroups(AvgFildScoreButton);
+				remove(playerKingContentPanel);
 				setVisible(false);
 				setPlayerKingContentPanel("avgPoint");
 				setVisible(true);
@@ -104,6 +106,11 @@ public class Season_PlayerKingOptionsPanel extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				setOptionsSelectedGroups(AvgREBButton);
+				remove(playerKingContentPanel);
+				setVisible(false);
+				setPlayerKingContentPanel("avgRebound");
+				setVisible(true);
+				repaint();
 			}
 		});
 
@@ -120,6 +127,11 @@ public class Season_PlayerKingOptionsPanel extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				setOptionsSelectedGroups(AvgAssitButton);
+				remove(playerKingContentPanel);
+				setVisible(false);
+				setPlayerKingContentPanel("avgAssist");
+				setVisible(true);
+				repaint();
 			}
 		});
 
@@ -136,6 +148,11 @@ public class Season_PlayerKingOptionsPanel extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				setOptionsSelectedGroups(AvgBSButton);
+				remove(playerKingContentPanel);
+				setVisible(false);
+				setPlayerKingContentPanel("avgBlockShot");
+				setVisible(true);
+				repaint();
 			}
 		});
 
@@ -152,6 +169,11 @@ public class Season_PlayerKingOptionsPanel extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				setOptionsSelectedGroups(TPSPButton);
+				remove(playerKingContentPanel);
+				setVisible(false);
+				setPlayerKingContentPanel("avgSteal");
+				setVisible(true);
+				repaint();
 			}
 		});
 
@@ -168,6 +190,11 @@ public class Season_PlayerKingOptionsPanel extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				setOptionsSelectedGroups(AvgStealButton);
+				remove(playerKingContentPanel);
+				setVisible(false);
+				setPlayerKingContentPanel("three");
+				setVisible(true);
+				repaint();
 			}
 		});
 
@@ -185,6 +212,11 @@ public class Season_PlayerKingOptionsPanel extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				setOptionsSelectedGroups(FGPButton);
+				remove(playerKingContentPanel);
+				setVisible(false);
+				setPlayerKingContentPanel("shot");
+				setVisible(true);
+				repaint();
 			}
 		});
 
@@ -201,6 +233,11 @@ public class Season_PlayerKingOptionsPanel extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				setOptionsSelectedGroups(FTPButton);
+				remove(playerKingContentPanel);
+				setVisible(false);
+				setPlayerKingContentPanel("penalty");
+				setVisible(true);
+				repaint();
 			}
 		});
 
