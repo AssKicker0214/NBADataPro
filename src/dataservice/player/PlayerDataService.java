@@ -17,9 +17,9 @@ public interface PlayerDataService {
 	public ArrayList<PlayerVO> sortPlayerHigh(ArrayList<sortParam> sortBy);//排序球员列表
 
 	//返回筛选球员普通数据列表
-	public ArrayList<PlayerVO> filterNormal(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league,ArrayList<String> age,int numS,int numE,boolean isAvg);
+	public ArrayList<PlayerVO> filterNormal(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league,int numS,int numE,boolean isAvg);
 	//返回筛选球员高阶数据列表
-	public ArrayList<PlayerVO> filterHigh(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league,ArrayList<String> age,int numS,int numE,boolean isAvg);
+	public ArrayList<PlayerVO> filterHigh(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league,int numS,int numE,boolean isAvg);
 
 	//以下默认返回平均数据
 	public ArrayList<HotPlayersVO> DailyKing(int num,String sortBy);//当日热门球员	

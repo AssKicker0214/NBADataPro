@@ -91,6 +91,10 @@ public class PlayerDataHandel implements PlayerDataService {
         return playVOs;
     }
 
+    public String getToday() {
+        return null;
+    }
+
     private class ComparePlayVO implements Comparator<PlayerVO> {
         @Override
         public int compare(PlayerVO o1, PlayerVO o2) {
@@ -370,13 +374,32 @@ public class PlayerDataHandel implements PlayerDataService {
     }
 
     @Override
-    public ArrayList<PlayerVO> filterNormal(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, ArrayList<String> age, int numS, int numE, boolean isAvg) {
-        return null;
+    public ArrayList<PlayerVO> filterNormal(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, int numS, int numE, boolean isAvg) {
+        ArrayList<String> attributes;
+        if (isAvg){
+            attributes = getAvgNormalInfo();
+        }else {
+            attributes = getNormalInfo();
+        }
+        return filter(attributes,sortBy,position,league,numS,numE);
     }
 
     @Override
-    public ArrayList<PlayerVO> filterHigh(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, ArrayList<String> age, int numS, int numE, boolean isAvg) {
-        return null;
+    public ArrayList<PlayerVO> filterHigh(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, int numS, int numE, boolean isAvg) {
+        return filter(getHighInfo(),sortBy,position,league,numS,numE);
+    }
+
+    private ArrayList<PlayerVO> filter(ArrayList<String> attributes,ArrayList<sortParam> sortBy,ArrayList<String> position,ArrayList<String> league, int numS,int numE){
+        ArrayList<PlayerVO> playerVOs = new PlayerDataManager().getPlayerVOs(attributes,PlayerDataManager.DEFAULT);
+        ArrayList<PlayerVO> res = new ArrayList<>();
+        for (int i = 0; i < playerVOs.size(); i++){
+            if (isInPosition(position,playerVOs.get(i)) && isInLeague(league,playerVOs.get(i)) && isInAge(numS,numE,playerVOs.get(i))){
+                res.add(playerVOs.get(i));
+            }
+        }
+
+        res.sort(new ComparePlayVO(sortBy));
+        return res;
     }
 
     private boolean isInPosition(ArrayList<String> position, PlayerVO playerVO) {
@@ -436,6 +459,8 @@ public class PlayerDataHandel implements PlayerDataService {
 
     @Override
     public ArrayList<HotPlayersVO> DailyKing(int num, String sortBy) {
+        String date = getToday();
+        playerScoreSaver.getPlayerData(date);
         return null;
     }
 
