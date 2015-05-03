@@ -35,26 +35,46 @@ public class TeamData_stub implements TeamDataService{
 
 	@Override
 	public ArrayList<TeamVO> findTeamNormal() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<TeamVO> vol = new ArrayList<TeamVO>();
+		TeamVO vo = new TeamVO();
+		vo.photo = "ATL";
+		vo.location = "***";
+		vo.teamName = "***";
+		vol.add(vo);
+		return vol;
 	}
 
 	@Override
 	public ArrayList<TeamVO> findTeamNormalAvg() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<TeamVO> vol = new ArrayList<TeamVO>();
+		TeamVO vo = new TeamVO();
+		vo.photo = "ATL";
+		vo.location = "***";
+		vo.teamName = "***";
+		vol.add(vo);
+		return vol;
 	}
 
 	@Override
 	public ArrayList<TeamVO> findTeamBasic() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<TeamVO> vol = new ArrayList<TeamVO>();
+		TeamVO vo = new TeamVO();
+		vo.photo = "ATL";
+		vo.location = "***";
+		vo.teamName = "***";
+		vol.add(vo);
+		return vol;
 	}
 
 	@Override
 	public ArrayList<TeamVO> findTeamHigh() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<TeamVO> vol = new ArrayList<TeamVO>();
+		TeamVO vo = new TeamVO();
+		vo.photo = "ATL";
+		vo.location = "***";
+		vo.teamName = "***";
+		vol.add(vo);
+		return vol;
 	}
 
 	@Override

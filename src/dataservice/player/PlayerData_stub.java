@@ -38,7 +38,7 @@ public class PlayerData_stub implements PlayerDataService{
 		HotPlayersVO vo2 = new HotPlayersVO();
 		vo2.name = "Aaron Brooks";
 		vo2.number = 12;
-		vo2.photo = "1";
+		vo2.photo = "Aaron Brooks";
 		vo2.position = "F";
 		vo2.teamName = "Hawks";
 		vo2.teamPhoto = "ATL";
@@ -79,7 +79,7 @@ public class PlayerData_stub implements PlayerDataService{
 		HotPlayersVO vo2 = new HotPlayersVO();
 		vo2.name = "Aaron Brooks";
 		vo2.number = 12;
-		vo2.photo = "1";
+		vo2.photo = "Aaron Brooks";
 		vo2.position = "F";
 		vo2.teamName = "Hawks";
 		vo2.teamPhoto = "ATL";
@@ -123,7 +123,7 @@ public class PlayerData_stub implements PlayerDataService{
 		HotPlayersVO vo2 = new HotPlayersVO();
 		vo2.name = "Aaron Brooks";
 		vo2.number = 12;
-		vo2.photo = "1";
+		vo2.photo = "Aaron Brooks";
 		vo2.position = "F";
 		vo2.teamName = "Hawks";
 		vo2.teamPhoto = "ATL";

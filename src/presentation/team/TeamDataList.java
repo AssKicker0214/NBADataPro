@@ -28,7 +28,10 @@ public class TeamDataList extends JPanel{
 	
 	public SelectLabel basicInfoButton;//信息
 	public SelectLabel NormalInfoButton;//普通数据
+	public SelectLabel AvgNormalInfoButton;//平均普通数据
 	public SelectLabel HighInfoButton;//高阶数据
+	
+	TeamDataService tds = new TeamData_stub();
 	
 	Color entered = new Color(30,80,140);
 	Color pressed = new Color(42,109,183);
@@ -54,6 +57,7 @@ public class TeamDataList extends JPanel{
 		selectLabelGroups.clear();
 		selectLabelGroups.add(basicInfoButton);
 		selectLabelGroups.add(NormalInfoButton);
+		selectLabelGroups.add(AvgNormalInfoButton);
 		selectLabelGroups.add(HighInfoButton);
 		for(SelectLabel sl : selectLabelGroups){
 			if(sl != s){
@@ -132,7 +136,7 @@ public class TeamDataList extends JPanel{
 	public void setNormalInfoButton(){
 		Point p1 = new Point(50,5);
 		Point p2 = new Point(40,30);
-		NormalInfoButton = new SelectLabel("基础",p1,p2,entered,pressed,exicted);
+		NormalInfoButton = new SelectLabel("总计",p1,p2,entered,pressed,exicted);
 		NormalInfoButton.setForeground(Color.WHITE);
 		NormalInfoButton.setBackground(exicted);
 		NormalInfoButton.addMouseListener(new NormalInfoButtonListener());
@@ -165,7 +169,7 @@ public class TeamDataList extends JPanel{
 				TeamDataList.this.remove(NormalInfoTable);
 			if(HighInfoTable!=null)
 				TeamDataList.this.remove(HighInfoTable);
-			setNormalInfoTablePanel(); 
+			setNormalInfoTablePanel(false); 
 			
 			setVisible(true);
 			repaint();	
@@ -191,9 +195,68 @@ public class TeamDataList extends JPanel{
 
 	
 	}
-	
-	public void setHighInfoButton(){
+	public void setAvgNormalInfoButton(){
 		Point p1 = new Point(100,5);
+		Point p2 = new Point(40,30);
+		AvgNormalInfoButton = new SelectLabel("场均",p1,p2,entered,pressed,exicted);
+		AvgNormalInfoButton.setForeground(Color.WHITE);
+		AvgNormalInfoButton.setBackground(exicted);
+		AvgNormalInfoButton.addMouseListener(new AvgNormalInfoButtonListener());
+		ButtonsBGLabel.add(AvgNormalInfoButton);
+	}
+
+	
+	public class AvgNormalInfoButtonListener implements MouseListener{
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+
+			setVisible(false);
+			setButtonsBGLabel();
+			NormalInfoButton.isSelected = true;
+			NormalInfoButton.setBackground(pressed);
+			setSelectedGroups(NormalInfoButton);
+			
+			if(BasicInfoTable!=null)
+				TeamDataList.this.remove(BasicInfoTable);
+			if(NormalInfoTable!=null)
+				TeamDataList.this.remove(NormalInfoTable);
+			if(HighInfoTable!=null)
+				TeamDataList.this.remove(HighInfoTable);
+			setNormalInfoTablePanel(true); 
+			
+			setVisible(true);
+			repaint();	
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+	
+	}
+	public void setHighInfoButton(){
+		Point p1 = new Point(150,5);
 		Point p2 = new Point(40,30);
 		HighInfoButton = new SelectLabel("高阶",p1,p2,entered,pressed,exicted);
 		HighInfoButton.setForeground(Color.WHITE);
@@ -258,26 +321,19 @@ public class TeamDataList extends JPanel{
 		ButtonsBGLabel = new JLabel();
 		ButtonsBGLabel.setBackground(exicted);
 		ButtonsBGLabel.setOpaque(true);
-		ButtonsBGLabel.setBounds(1055,10,145,40);
+		ButtonsBGLabel.setBounds(1005,10,195,40);
 		setBasicInfoButton();
 		setNormalInfoButton();
+		setAvgNormalInfoButton();
 		setHighInfoButton();
 		TitleLabel.add(ButtonsBGLabel,0);
 	}
 
 	
 	public void setBasicInfoTablePanel(){
-		TeamDataService tds = new TeamData_stub();
 		ArrayList<TeamVO> vo = tds.findTeamBasic();
-		ArrayList<ArrayList<String>> datas = new ArrayList<ArrayList<String>>();	
-		ArrayList<String> temp = new ArrayList<String>();
-		for(int i=0;i<vo.size();i++){
-			temp.add("1.png");
-			temp.add("Atlanta");
-		
-		
-			datas.add(temp);
-		}
+		TeamVO2List v2l = new TeamVO2List();
+		ArrayList<ArrayList<String>> datas = v2l.basicInfo(vo);
 			
 		String[] header = {"","所在地","名称","赛区","分区","主场","建立时间"};
 		ArrayList<Integer> wid = new ArrayList<Integer>();
@@ -287,78 +343,45 @@ public class TeamDataList extends JPanel{
 		this.add(BasicInfoTable);
 	}
 		
-	public void setNormalInfoTablePanel(){
-			
-		ArrayList<ArrayList<String>> datas = new ArrayList<ArrayList<String>>();	
-		ArrayList<String> l = new ArrayList<String>();
-		l.add("1.png");
-		l.add("Aaron Brooks");
-		l.add("4");
-		l.add("4");
-		l.add("36.1");
-		l.add("48.9");
-		l.add("42.9");
-		l.add("85.7");
-		l.add("2.8");
-		l.add("5.0");
-		l.add("7.8");
-		l.add("3.3");
-		l.add("0.7");
-		l.add("0.2");
-		l.add("1.5");
-		l.add("3.3");
-		l.add("15.3");
-
-		for(int i = 0; i < 50;i++){
-			datas.add(l);
+	public void setNormalInfoTablePanel(boolean isAvg){
+		ArrayList<TeamVO> vo = new ArrayList<TeamVO>();
+		TeamVO2List v2l = new TeamVO2List();
+		ArrayList<ArrayList<String>> datas = new ArrayList<ArrayList<String>>();			
+		if(isAvg){
+			vo = tds.findTeamNormalAvg();
+			datas = v2l.avgNormalData(vo);
+		}else{
+			vo = tds.findTeamNormal();
+			datas = v2l.normalData(vo);
 		}
-				
-		String[] tbHead = {"","姓名","场数","先发","分钟","％","三分％","罚球％","进攻",
-					"防守","场均篮板","场均助攻","场均抢断","场均盖帽","失误","犯规","场均得分"};
-			
-		ArrayList<Integer> wid = new ArrayList<Integer>();
-		wid.add(50);wid.add(150);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);
-		wid.add(50);wid.add(60);wid.add(60);wid.add(60);wid.add(60);wid.add(60);wid.add(70);wid.add(70);
-			
-		NormalInfoTable = new TablePane(datas,tbHead,wid,0,60,1280,320,50,true,true);
-		this.add(NormalInfoTable);
-	}
-	public void setHighInfoTablePanel(){
 		
-		ArrayList<ArrayList<String>> datas = new ArrayList<ArrayList<String>>();	
-		ArrayList<String> l = new ArrayList<String>();
-		l.add("1.png");
-		l.add("Aaron Brooks");
-		l.add("4");
-		l.add("4");
-		l.add("36.1");
-		l.add("48.9");
-		l.add("42.9");
-		l.add("85.7");
-		l.add("2.8");
-		l.add("5.0");
-		l.add("7.8");
-		l.add("3.3");
-		l.add("0.7");
-		l.add("0.2");
-		l.add("1.5");
-		l.add("3.3");
-		l.add("15.3");
-
-		for(int i = 0; i < 50;i++){
-			datas.add(l);
-		}
 				
-		String[] tbHead = {"","姓名","场数","先发","分钟","％","三分％","罚球％","进攻",
-					"防守","场均篮板","场均助攻","场均抢断","场均盖帽","失误","犯规","场均得分"};
+		String[] tbHead = {"","名称","助攻","盖帽","篮板","抢断","防守篮板","进攻篮板","%","三分％","罚球％","失误",
+					"犯规","比赛场数","得分"};
 			
 		ArrayList<Integer> wid = new ArrayList<Integer>();
-		wid.add(50);wid.add(150);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);
-		wid.add(50);wid.add(60);wid.add(60);wid.add(60);wid.add(60);wid.add(60);wid.add(70);wid.add(70);
+		wid.add(50);wid.add(150);wid.add(60);wid.add(60);wid.add(60);wid.add(60);wid.add(60);wid.add(60);wid.add(60);
+		wid.add(60);wid.add(60);wid.add(60);wid.add(60);wid.add(60);wid.add(60);
 			
 		NormalInfoTable = new TablePane(datas,tbHead,wid,0,60,1280,320,50,true,true);
 		this.add(NormalInfoTable);
 	}
+	
+	public void setHighInfoTablePanel(){
+				ArrayList<TeamVO> vo = tds.findTeamBasic();
+		TeamVO2List v2l = new TeamVO2List();
+		ArrayList<ArrayList<String>> datas = v2l.basicInfo(vo);
+				String[] tbHead = {"","姓名","助攻效率","抢断效率","防守效率","进攻效率","防守篮板率","进攻篮板率","进攻回合",
+					"抢断效率","胜率"};
+			
+		ArrayList<Integer> wid = new ArrayList<Integer>();
+		wid.add(50);wid.add(150);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);
+		wid.add(100);wid.add(100);
+			
+		NormalInfoTable = new TablePane(datas,tbHead,wid,0,60,1280,320,50,true,true);
+		this.add(NormalInfoTable);
+	}
+	
 
 	public static void main(String[] args){
 		JFrame jf = new JFrame();

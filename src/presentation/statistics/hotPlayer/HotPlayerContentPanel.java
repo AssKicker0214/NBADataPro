@@ -57,7 +57,7 @@ public class HotPlayerContentPanel  extends JPanel{
 		FirstPlayer.setBounds(0,0,1280,200);
 		FirstPlayer.setBackground(Color.WHITE);
 		//添加数据王图片
-		PhotoLabel firstPlayerPhotoLabel = new PhotoLabel(new ImageIcon(vo.get(0).photo+".png").getImage());
+		PhotoLabel firstPlayerPhotoLabel = new PhotoLabel(new ImageIcon("actionPNG/"+vo.get(0).photo+".png").getImage());
 		firstPlayerPhotoLabel.setBounds(10,15,240,200);
 		firstPlayerPhotoLabel.setBackground(Color.WHITE);
 		firstPlayerPhotoLabel.setOpaque(true);
@@ -180,7 +180,7 @@ public class HotPlayerContentPanel  extends JPanel{
 		top5.setBounds(220,230,1030,270);
 		top5.setBackground(Color.WHITE);
 		for(int i=1;i<5;i++)
-			top5.add(player(vo.get(i).photo+".png",vo.get(i).name,vo.get(i).number+" "+vo.get(i).position+"/"+vo.get(i).teamName,vo.get(i).value+"",vo.get(i).upgradeRate+"%","teamsPNG/"+vo.get(i).teamPhoto+".png"));
+			top5.add(player("portrait/"+vo.get(i).photo+".png",vo.get(i).name,vo.get(i).number+" "+vo.get(i).position+"/"+vo.get(i).teamName,vo.get(i).value+"",vo.get(i).upgradeRate+"%","teamsPNG/"+vo.get(i).teamPhoto+".png"));
 		
 		this.add(top5);
 		
