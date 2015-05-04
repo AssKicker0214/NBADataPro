@@ -12,6 +12,8 @@ import javax.swing.JPanel;
 import dataservice.team.TeamDataService;
 import dataservice.team.TeamData_stub;
 import presentation.common.SelectLabel;
+import presentation.player.vs.VSContentPanel;
+import presentation.team.vs.TeamVSTopPanel;
 import vo.teamvo.TeamVO;
 //过往查询
 public class TeamMiddlePanel  extends JPanel{
@@ -27,11 +29,13 @@ public class TeamMiddlePanel  extends JPanel{
 	SelectLabel CompareTeamsLabel;//球队对比
 	
 	JPanel teamDetailTopPanel;
+	JPanel teamVSTopPanel;
 	
 	TeamMemberPanel teamMemberPanel;
 	TeamRecent5MatchPanel teamRecent5MatchPanel;
 	TeamSchedulePanel teamSchedulePanel;
 	TeamDataPanel teamDataPanel;
+	VSContentPanel vsContentPanel;
 	
 	TeamVO vo;
 	
@@ -54,11 +58,6 @@ public class TeamMiddlePanel  extends JPanel{
 		DataLabel.setBackground(Color.GRAY);
 	}
 	
-	public void setTopPanel (){
-		teamDetailTopPanel = new TeamDetailTopPanel(vo);
-		this.add(teamDetailTopPanel);
-	}
-	
 	public void setSelectedGroups(SelectLabel s){
 		selectLabelGroups.clear();
 		selectLabelGroups.add(DataLabel);
@@ -72,36 +71,6 @@ public class TeamMiddlePanel  extends JPanel{
 				sl.isSelected = false;
 			}
 		}
-	}
-	
-	public void setContrastLabel(){
-		Point location = new Point(0,200);
-		Point size = new Point(255,50);
-		DataLabel = new SelectLabel("资料",location,size);
-
-		DataLabel.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				setSelectedGroups(DataLabel);
-				setVisible(false);
-				if(teamDataPanel != null){
-					remove(teamDataPanel);
-				}
-				if(teamMemberPanel != null){
-					remove(teamMemberPanel);
-				}
-				if(teamRecent5MatchPanel != null){
-					remove(teamRecent5MatchPanel);
-				}
-				if(teamSchedulePanel != null){
-					remove(teamSchedulePanel);
-				}
-				setTeamDataPanel();
-				setVisible(true);
-				repaint();				
-			}
-		});
-		this.add(DataLabel);
 	}
 	
 	public void setTeamMemberPanel(){
@@ -127,7 +96,73 @@ public class TeamMiddlePanel  extends JPanel{
 		this.add(teamDataPanel,0);
 		repaint();
 	}
+	
+	public void setTeamVSPanel(){
+		ArrayList<String> itemsNeedAdd = new ArrayList<String>();
+		ArrayList<Double> avg1 = new ArrayList<Double>();
+		ArrayList<Double> avg2 = new ArrayList<Double>();
+		
+		itemsNeedAdd.add("场均得分"); avg1.add(5.9); avg2.add(10.043);
+		itemsNeedAdd.add("场均助攻"); avg1.add(1.0); avg2.add(2.159);
+		itemsNeedAdd.add("场均篮板"); avg1.add(4.4); avg2.add(4.469);
+		itemsNeedAdd.add("三分％"); 	avg1.add(30.0); avg2.add(34.5);
+		itemsNeedAdd.add("罚球％");	avg1.add(78.4); avg2.add(74.3);
 
+		vsContentPanel = new VSContentPanel(itemsNeedAdd,avg1,avg2);
+		this.add(vsContentPanel);
+		repaint();
+	}
+
+	public void setVSTopPanel(){
+		teamVSTopPanel = new TeamVSTopPanel();
+		this.add(teamVSTopPanel);
+		repaint();
+	}
+	
+	public void setTopPanel (){
+		teamDetailTopPanel = new TeamDetailTopPanel(vo);
+		this.add(teamDetailTopPanel);
+	}
+	
+	public void setContrastLabel(){
+		Point location = new Point(0,200);
+		Point size = new Point(255,50);
+		DataLabel = new SelectLabel("资料",location,size);
+
+		DataLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				setSelectedGroups(DataLabel);
+				setVisible(false);
+				if(teamDataPanel != null){
+					remove(teamDataPanel);
+				}
+				if(teamMemberPanel != null){
+					remove(teamMemberPanel);
+				}
+				if(teamRecent5MatchPanel != null){
+					remove(teamRecent5MatchPanel);
+				}
+				if(teamSchedulePanel != null){
+					remove(teamSchedulePanel);
+				}
+				if(vsContentPanel != null){
+					remove(vsContentPanel);
+				}
+				if(teamDetailTopPanel != null){
+					remove(teamDetailTopPanel);
+				}
+				if(teamVSTopPanel != null){
+					remove(teamVSTopPanel);
+				}
+				setTopPanel();
+				setTeamDataPanel();
+				setVisible(true);
+				repaint();				
+			}
+		});
+		this.add(DataLabel);
+	}
 	
 	public void setMemberLabel(){
 		Point location = new Point(256,200);
@@ -151,6 +186,16 @@ public class TeamMiddlePanel  extends JPanel{
 				if(teamSchedulePanel != null){
 					remove(teamSchedulePanel);
 				}
+				if(vsContentPanel != null){
+					remove(vsContentPanel);
+				}
+				if(teamDetailTopPanel != null){
+					remove(teamDetailTopPanel);
+				}
+				if(teamVSTopPanel != null){
+					remove(teamVSTopPanel);
+				}
+				setTopPanel();
 				setTeamMemberPanel();
 				setVisible(true);
 				repaint();			
@@ -182,6 +227,16 @@ public class TeamMiddlePanel  extends JPanel{
 				if(teamSchedulePanel != null){
 					remove(teamSchedulePanel);
 				}
+				if(vsContentPanel != null){
+					remove(vsContentPanel);
+				}
+				if(teamDetailTopPanel != null){
+					remove(teamDetailTopPanel);
+				}
+				if(teamVSTopPanel != null){
+					remove(teamVSTopPanel);
+				}
+				setTopPanel();
 				setTeamRecent5MatchPanel();
 				setVisible(true);
 				repaint();				
@@ -213,6 +268,16 @@ public class TeamMiddlePanel  extends JPanel{
 				if(teamSchedulePanel != null){
 					remove(teamSchedulePanel);
 				}
+				if(vsContentPanel != null){
+					remove(vsContentPanel);
+				}
+				if(teamDetailTopPanel != null){
+					remove(teamDetailTopPanel);
+				}
+				if(teamVSTopPanel != null){
+					remove(teamVSTopPanel);
+				}
+				setTopPanel();
 				setTeamSchedulePanel();
 				setVisible(true);
 				repaint();		
@@ -223,20 +288,6 @@ public class TeamMiddlePanel  extends JPanel{
 		this.add(PastLabel);
 	}
 	
-	
-//	 setTeamDataPanel()
-//setTeamMemberPanel()
-//	 setTeamSchedulePanel()
-//	setTeamRecent5MatchPanel()
-	
-//	TeamMemberPanel teamMemberPanel;
-//	TeamRecent5MatchPanel teamRecent5MatchPanel;
-//	TeamSchedulePanel teamSchedulePanel;
-//	TeamDataPanel teamDataPanel;
-
-
-
-
 	public void setCompareTeamsLabel(){
 		
 		Point location = new Point(1024,200);
@@ -260,7 +311,16 @@ public class TeamMiddlePanel  extends JPanel{
 				if(teamSchedulePanel != null){
 					remove(teamSchedulePanel);
 				}
-//				setTeamSchedulePanel();
+				if(vsContentPanel != null){
+					remove(vsContentPanel);
+				}
+				if(teamDetailTopPanel != null){
+					remove(teamDetailTopPanel);
+				}
+				if(teamVSTopPanel != null){
+					remove(teamVSTopPanel);
+				}
+				setVSTopPanel();
 				setVisible(true);
 				repaint();		
 			}
