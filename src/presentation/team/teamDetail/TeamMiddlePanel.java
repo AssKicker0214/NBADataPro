@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import presentation.common.SelectLabel;
-
+//过往查询
 public class TeamMiddlePanel  extends JPanel{
 
 	/**
