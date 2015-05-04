@@ -66,9 +66,10 @@ public class PlayerMiddlePanel extends JPanel{
 		setContrastLabel();
 		setLatestMatchLabel();
 		setPastLabel();
+		setComparePalyersLabel();
+		
 		setContrastPanel();
 		setSeasonPanel();
-		setComparePalyersLabel();
 		ContrastLabel.setBackground(Color.GRAY);
 	}
 	

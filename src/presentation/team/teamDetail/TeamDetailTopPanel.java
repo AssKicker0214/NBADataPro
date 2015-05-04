@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import presentation.common.PhotoLabel;
+import vo.teamvo.TeamVO;
 
 public class TeamDetailTopPanel  extends JPanel{
 
@@ -26,8 +27,10 @@ public class TeamDetailTopPanel  extends JPanel{
 	JLabel WinRate;
 	JPanel TeamBasicInfoPanel;
 	JPanel TeamAvgFieldPanel;
+	TeamVO vo;
 	
-	public TeamDetailTopPanel(){
+	public TeamDetailTopPanel(TeamVO v){
+		vo = v;
 		this.setLayout(null);
 		this.setBounds(0, 0, 1280,200);
 		this.setBackground(Color.white);
@@ -55,7 +58,7 @@ public class TeamDetailTopPanel  extends JPanel{
 	 * 在toplabel里添加球员图片；
 	 */
 	public void setTeamPhotoLabel (){
-		JLabel teamPhotoLabel = new PhotoLabel(new ImageIcon("teamsPNG/ATL.png").getImage());
+		JLabel teamPhotoLabel = new PhotoLabel(new ImageIcon("teamsPNG/"+vo.photo+".png").getImage());
 		teamPhotoLabel.setBounds(0,15,230,185);
 		teamPhotoLabel.setBackground(Color.WHITE);
 		teamPhotoLabel.setOpaque(true);
@@ -68,7 +71,7 @@ public class TeamDetailTopPanel  extends JPanel{
 	 * 添加球队所在地和名称label
 	 */
 	public void setTeamName(){
-		TeamNameLabel = new JLabel("Atlanta"+" "+"Hawks");
+		TeamNameLabel = new JLabel(vo.location+" "+vo.teamName);
 		TeamNameLabel.setFont(new Font("Dialog",1,50));
 		TeamNameLabel.setForeground(Color.GRAY);
 		TeamNameLabel.setBounds(260,40,440,60);
@@ -77,7 +80,7 @@ public class TeamDetailTopPanel  extends JPanel{
 	}
 	
 	public void setWinRate(){
-		WinRate = new JLabel("胜率:"+" "+"0.75");
+		WinRate = new JLabel("胜率: "+vo.winRate);
 		WinRate.setFont(new Font("微软雅黑",1,40));
 		WinRate.setForeground(Color.DARK_GRAY);
 		WinRate.setBounds(710,30,570,60);
@@ -90,22 +93,22 @@ public class TeamDetailTopPanel  extends JPanel{
 		TeamBasicInfoPanel.setBounds(260,100,200,90);
 		TeamBasicInfoPanel.setBackground(Color.WHITE);
 				
-		JLabel leagueLabel = new JLabel("League:     "+"east");
+		JLabel leagueLabel = new JLabel("League:     "+vo.league);
 		leagueLabel.setFont(new Font("Dialog",1,10));
 		leagueLabel.setForeground(Color.DARK_GRAY);
 		TeamBasicInfoPanel.add(leagueLabel);
 
-		JLabel divisionLabel = new JLabel("Division:     " + "Southeast");
+		JLabel divisionLabel = new JLabel("Division:     " + vo.division);
 		divisionLabel.setFont(new Font("Dialog",1,10));
 		divisionLabel.setForeground(Color.DARK_GRAY);
 		TeamBasicInfoPanel.add(divisionLabel);
 		
-		JLabel homeCourtLabel = new JLabel("Home court:	" + "Philips Arena");
+		JLabel homeCourtLabel = new JLabel("Home court:	" + vo.homeCourt);
 		homeCourtLabel.setFont(new Font("Dialog",1,10));
 		homeCourtLabel.setForeground(Color.DARK_GRAY);
 		TeamBasicInfoPanel.add(homeCourtLabel);
 		
-		JLabel foundTimeLabel = new JLabel("Found time:    " + "1949");
+		JLabel foundTimeLabel = new JLabel("Found time:    " + vo.foundTime);
 		foundTimeLabel.setFont(new Font("Dialog",1,10));
 		foundTimeLabel.setForeground(Color.DARK_GRAY);
 		TeamBasicInfoPanel.add(foundTimeLabel);
@@ -135,17 +138,17 @@ public class TeamDetailTopPanel  extends JPanel{
 		AvgFieldAssistLabel.setForeground(Color.GRAY);
 		TeamAvgFieldPanel.add(AvgFieldAssistLabel);
 		
-		JLabel AvgFieldScore = new JLabel("3.1");
+		JLabel AvgFieldScore = new JLabel(vo.avgPoint+"");
 		AvgFieldScore.setFont(new Font("Dialog",1,25));
 		AvgFieldScore.setForeground(Color.GRAY);
 		TeamAvgFieldPanel.add(AvgFieldScore);
 		
-		JLabel AvgFieldREB = new JLabel("0.9");
+		JLabel AvgFieldREB = new JLabel(vo.avgRebound+"");
 		AvgFieldREB.setFont(new Font("Dialog",1,25));
 		AvgFieldREB.setForeground(Color.GRAY);
 		TeamAvgFieldPanel.add(AvgFieldREB);
 		
-		JLabel AvgFieldAssist = new JLabel("0.5");
+		JLabel AvgFieldAssist = new JLabel(vo.avgAssist+"");
 		AvgFieldAssist.setFont(new Font("Dialog",1,25));
 		AvgFieldAssist.setForeground(Color.GRAY);
 		TeamAvgFieldPanel.add(AvgFieldAssist);
@@ -160,7 +163,7 @@ public class TeamDetailTopPanel  extends JPanel{
 		jf.setLayout(null);
 		jf.setSize(1280,700);
 		jf.setLocationRelativeTo(null);
-		jf.add(new TeamDetailTopPanel());
+	//	jf.add(new TeamDetailTopPanel());
 		jf.setVisible(true);
 	}
 }

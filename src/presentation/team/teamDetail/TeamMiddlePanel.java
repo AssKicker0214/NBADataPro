@@ -9,7 +9,10 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import dataservice.team.TeamDataService;
+import dataservice.team.TeamData_stub;
 import presentation.common.SelectLabel;
+import vo.teamvo.TeamVO;
 //过往查询
 public class TeamMiddlePanel  extends JPanel{
 
@@ -30,9 +33,11 @@ public class TeamMiddlePanel  extends JPanel{
 	TeamSchedulePanel teamSchedulePanel;
 	TeamDataPanel teamDataPanel;
 	
+	TeamVO vo;
+	
 	ArrayList<SelectLabel> selectLabelGroups = new ArrayList<SelectLabel>();
 
-	public TeamMiddlePanel(){
+	public TeamMiddlePanel(String name){
 		this.setLayout(null);
 		this.setBounds(0, 35, 1280,670);
 		this.setBackground(Color.WHITE);
@@ -42,10 +47,15 @@ public class TeamMiddlePanel  extends JPanel{
 		setLatestMatchLabel();
 		setPastLabel();
 		setCompareTeamsLabel();
+		
+		TeamDataService tds =  new TeamData_stub();
+		vo = tds.findTeamInfo(name);
+		setTeamDataPanel();
+		DataLabel.setBackground(Color.GRAY);
 	}
 	
 	public void setTopPanel (){
-		teamDetailTopPanel = new TeamDetailTopPanel();
+		teamDetailTopPanel = new TeamDetailTopPanel(vo);
 		this.add(teamDetailTopPanel);
 	}
 	
@@ -95,7 +105,7 @@ public class TeamMiddlePanel  extends JPanel{
 	}
 	
 	public void setTeamMemberPanel(){
-		teamMemberPanel = new TeamMemberPanel();
+		teamMemberPanel = new TeamMemberPanel(vo.id);
 		this.add(teamMemberPanel,0);
 		repaint();
 	}
@@ -113,7 +123,7 @@ public class TeamMiddlePanel  extends JPanel{
 	}
 	
 	public void setTeamDataPanel(){
-		teamDataPanel = new TeamDataPanel();
+		teamDataPanel = new TeamDataPanel(vo);
 		this.add(teamDataPanel,0);
 		repaint();
 	}
@@ -265,7 +275,7 @@ public class TeamMiddlePanel  extends JPanel{
 		jf.setLayout(null);
 		jf.setSize(1280,700);
 		jf.setLocationRelativeTo(null);
-		jf.add(new TeamMiddlePanel());
+//		jf.add(new TeamMiddlePanel());
 		jf.setVisible(true);
 	}
 	

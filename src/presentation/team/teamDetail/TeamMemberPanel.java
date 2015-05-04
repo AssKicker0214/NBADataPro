@@ -11,8 +11,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import dataservice.team.TeamDataService;
+import dataservice.team.TeamData_stub;
 import presentation.common.SelectLabel;
+import presentation.player.PlayerVO2List;
 import presentation.table.TablePane;
+import vo.playervo.PlayerVO;
 
 public class TeamMemberPanel extends JPanel{
 
@@ -34,9 +38,14 @@ public class TeamMemberPanel extends JPanel{
 	TablePane membersBasicInfoTable;
 	TablePane membersDataTable;
 	
+	ArrayList<PlayerVO> vo;
+	
 	ArrayList<SelectLabel> selectLabelGroups = new ArrayList<SelectLabel>();
 	
-	public TeamMemberPanel(){
+	public TeamMemberPanel(int id){
+		
+		TeamDataService tds = new TeamData_stub();
+		vo = tds.teamMemberList(id);
 		this.setLayout(null);
 		this.setBounds(0,260,1280,380);
 		this.setBackground(Color.WHITE);
@@ -196,20 +205,8 @@ public class TeamMemberPanel extends JPanel{
 
 	public void setBasicInfoTablePanel(){
 			
-		ArrayList<ArrayList<String>> datas = new ArrayList<ArrayList<String>>();	
-		ArrayList<String> l = new ArrayList<String>();
-		l.add("1.png");
-		l.add("Aaron Brooks");
-		l.add("前锋");
-		l.add("5");
-		l.add("2米03");
-		l.add("96.2公斤");
-		l.add("5");
-		l.add("5");
-		l.add("Missouri");
-
-		datas.add(l);
-			
+		PlayerVO2List p2l = new PlayerVO2List();
+		ArrayList<ArrayList<String>> datas = p2l.teamMember(vo);	
 		String[] tbHead = {"","姓名","位置","号码","年龄","球龄","身高","体重","毕业学校"};
 		
 		ArrayList<Integer> wid = new ArrayList<Integer>();
@@ -221,36 +218,15 @@ public class TeamMemberPanel extends JPanel{
 		
 	public void setDataTablePanel(){
 			
-		ArrayList<ArrayList<String>> datas = new ArrayList<ArrayList<String>>();	
-		ArrayList<String> l = new ArrayList<String>();
-		l.add("1.png");
-		l.add("Aaron Brooks");
-		l.add("4");
-		l.add("4");
-		l.add("36.1");
-		l.add("48.9");
-		l.add("42.9");
-		l.add("85.7");
-		l.add("2.8");
-		l.add("5.0");
-		l.add("7.8");
-		l.add("3.3");
-		l.add("0.7");
-		l.add("0.2");
-		l.add("1.5");
-		l.add("3.3");
-		l.add("15.3");
-
-		for(int i = 0; i < 500;i++){
-			datas.add(l);
-		}
+		PlayerVO2List p2l = new PlayerVO2List();
+		ArrayList<ArrayList<String>> datas = p2l.avgNormalData(vo);
 				
-		String[] tbHead = {"","姓名","场数","先发","分钟","％","三分％","罚球％","进攻",
-					"防守","场均篮板","场均助攻","场均抢断","场均盖帽","失误","犯规","场均得分"};
+		String[] tbHead = {"","姓名","首发","效率","上场次数","分钟","％","三分％","罚球％","进攻",
+				"防守","篮板","助攻","抢断","盖帽","失误","犯规","得分"};
 			
 		ArrayList<Integer> wid = new ArrayList<Integer>();
 		wid.add(50);wid.add(150);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);
-		wid.add(50);wid.add(60);wid.add(60);wid.add(60);wid.add(60);wid.add(60);wid.add(70);wid.add(70);
+		wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);
 			
 		membersDataTable = new TablePane(datas,tbHead,wid,0,60,1280,320,50,true,false);
 		this.add(membersDataTable);
@@ -261,7 +237,7 @@ public class TeamMemberPanel extends JPanel{
 		jf.setLayout(null);
 		jf.setSize(1280,700);
 		jf.setLocationRelativeTo(null);
-		jf.add(new TeamMemberPanel());
+	//	jf.add(new TeamMemberPanel());
 		jf.setVisible(true);
 	}
 }

@@ -27,6 +27,27 @@ public class PlayerVO2List {
 		return datas;
 	}
 	
+	public ArrayList<ArrayList<String>> teamMember(ArrayList<PlayerVO> vo){
+		ArrayList<ArrayList<String>> datas = new ArrayList<ArrayList<String>>();	
+		
+		for(int i=0;i<vo.size();i++){
+			ArrayList<String> temp = new ArrayList<String>();
+
+			temp.add("portrait/"+vo.get(i).photo+".png");
+			temp.add(vo.get(i).name);
+			temp.add(vo.get(i).position);
+			temp.add(vo.get(i).number+"");
+			temp.add(vo.get(i).age+"");
+			temp.add(vo.get(i).exp+"");
+			temp.add(vo.get(i).hight);
+			temp.add(vo.get(i).weigth);
+			temp.add(vo.get(i).school);
+			
+			datas.add(temp);
+		}
+		return datas;
+	}
+	
 	public ArrayList<ArrayList<String>> normalData(ArrayList<PlayerVO> vo){
 		ArrayList<ArrayList<String>> datas = new ArrayList<ArrayList<String>>();	
 		
