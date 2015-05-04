@@ -1,7 +1,10 @@
 package presentation.player.playerDetail;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -11,6 +14,7 @@ import javax.swing.JPanel;
 import dataservice.match.MatchDataService;
 import dataservice.match.MatchData_stub;
 import presentation.common.DateLabel;
+import presentation.common.MyCheckBoxLabel;
 import presentation.match.MatchVO2List;
 import presentation.table.TablePane;
 import vo.matchvo.MatchContentPlayerVO;
@@ -25,13 +29,15 @@ public class PlayerMiddle_PastPanel extends JPanel{
 	JLabel CheckPastPanel;
 	
 	JLabel tabelLabel;
+	JLabel commit;
+	
+	
 	
 	public PlayerMiddle_PastPanel(String playerName){
 		this.setLayout(null);
 		this.setBounds(0, 255,1280,420);
 		setPastTitleLabel();
-		setBeginDate();
-		setEndDate();
+		setDate();
 		this.setBackground(Color.WHITE);
 		setTabel(playerName);
 	}
@@ -47,17 +53,54 @@ public class PlayerMiddle_PastPanel extends JPanel{
 		this.add(CheckPastPanel);
 	}
 	
-	public void setBeginDate(){
-		DateLabel calendar = new DateLabel();
-		calendar.setBounds(1000,-25,100,100);
-		CheckPastPanel.add(calendar);
-	}
+	public void setDate(){
+		DateLabel calendarStart = new DateLabel();
+		calendarStart.setBounds(900,-25,100,100);
+		CheckPastPanel.add(calendarStart);
 	
-	public void setEndDate(){
-		DateLabel calendar = new DateLabel();
-		calendar.setBounds(1150,-25,100,100);
-		CheckPastPanel.add(calendar);
-//		System.out.println(calendar.getSelectedDate());
+		DateLabel calendarEnd = new DateLabel();
+		calendarEnd.setBounds(1000,-25,100,100);
+		CheckPastPanel.add(calendarEnd);
+		
+		commit = new JLabel("commit");
+		commit.setForeground(Color.WHITE);
+		commit.setFont(new Font("Dialog",0,15));
+		commit.setBounds(1110,0,1280,50);
+		commit.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				commit.setFont(new Font("Dialog",1,15));
+				System.out.println(calendarStart.getSelectedDate().toString());
+				System.out.println(calendarEnd.getSelectedDate().toString());
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				commit.setCursor(new Cursor(Cursor.HAND_CURSOR));	
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		CheckPastPanel.add(commit);
+
+		
 	}
 
 	
