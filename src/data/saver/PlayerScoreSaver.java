@@ -1,5 +1,7 @@
 package data.saver;
 
+import vo.matchvo.MatchContentPlayerVO;
+
 import java.io.PrintStream;
 import java.util.ArrayList;
 
@@ -330,6 +332,7 @@ public class PlayerScoreSaver {
             }
         }
 
+
         /**
          * 插入一条记录
          *
@@ -415,6 +418,15 @@ public class PlayerScoreSaver {
         }
     }
 
+    public ArrayList<Integer> getL5Mid(int pid){
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        for (int i = 0; i < pidL5Mid.getLength(); i++){
+            if (pidL5Mid.pid[i] == pid){
+                arrayList.add(pidL5Mid.mid[i]);
+            }
+        }
+        return arrayList;
+    }
     private PidL5Mid pidL5Mid;
     private boolean pidL5MidFlag = false;
 
@@ -1569,13 +1581,13 @@ public class PlayerScoreSaver {
             return p_matchNum;
         }
 
-        public PlayerData(String date){
+        public PlayerData(String date) {
             this.date = date;
 
             ArrayList<Integer> arrayList = new ArrayList<>();
-            for (int i = 0; i<=currentPoint;i++){
+            for (int i = 0; i <= currentPoint; i++) {
                 int mid = PlayerScoreSaver.this.mid[i];
-                if (date.equals(matchInfoSaver.getDate(mid))){
+                if (date.equals(matchInfoSaver.getDate(mid))) {
                     arrayList.add(i);
                 }
             }
@@ -1584,9 +1596,9 @@ public class PlayerScoreSaver {
             this.length = this.points.length;
         }
 
-        private int[] getArray(ArrayList<Integer> arrayList){
-            int[] res= new int[arrayList.size()];
-            for(int i = 0;i<res.length;i++){
+        private int[] getArray(ArrayList<Integer> arrayList) {
+            int[] res = new int[arrayList.size()];
+            for (int i = 0; i < res.length; i++) {
                 res[i] = arrayList.get(i);
             }
             return res;
@@ -1603,6 +1615,52 @@ public class PlayerScoreSaver {
         public int getNum() {
             return playerSaver.getNum();
         }
+
+    }
+
+    public ArrayList<MatchContentPlayerVO>[] getTeamPlayer(int mid) {
+        ArrayList<MatchContentPlayerVO>[] matchContentPlayerVOs = new ArrayList[2];
+        int tid1 = matchInfoSaver.getTeamf()[mid - 1];
+        int tid2 = matchInfoSaver.getTeamf()[mid - 1];
+        for (int i = 0; i < currentPoint + 1; i++) {
+            if (PlayerScoreSaver.this.mid[i] == mid) {
+                MatchContentPlayerVO matchContentPlayerVO = getMatchContentPlayerVO(mid,i);
+                if (tid1 == PlayerScoreSaver.this.tid[i]) {
+                    matchContentPlayerVOs[0].add(matchContentPlayerVO);
+                }else{
+                    matchContentPlayerVOs[1].add(matchContentPlayerVO);
+                }
+            }
+        }
+        return matchContentPlayerVOs;
+    }
+
+    private MatchContentPlayerVO getMatchContentPlayerVO(int mid,int i){
+        MatchContentPlayerVO matchContentPlayerVO = new MatchContentPlayerVO();
+        matchContentPlayerVO.date = matchInfoSaver.getDate(mid);
+        matchContentPlayerVO.vs = teamSaver.getTeamName()[PlayerScoreSaver.this.d_tid[i] - 1];
+        matchContentPlayerVO.name = playerSaver.getName()[PlayerScoreSaver.this.pid[i] - 1];
+        matchContentPlayerVO.position = PlayerScoreSaver.this.position[i - 1];
+        matchContentPlayerVO.minute = PlayerScoreSaver.this.inplacetime[i - 1];
+        matchContentPlayerVO.shot = PlayerScoreSaver.this.throwin[i - 1];
+        matchContentPlayerVO.shotA = PlayerScoreSaver.this.throwall[i - 1];
+        matchContentPlayerVO.three = PlayerScoreSaver.this.throw3in[i - 1];
+        matchContentPlayerVO.threeA = PlayerScoreSaver.this.throw3all[i - 1];
+        matchContentPlayerVO.penalty = PlayerScoreSaver.this.penaltyin[i - 1];
+        matchContentPlayerVO.penaltyA = PlayerScoreSaver.this.penaltyall[i - 1];
+        matchContentPlayerVO.offendRebound = PlayerScoreSaver.this.attackbas[i - 1];
+        matchContentPlayerVO.defendRebound = PlayerScoreSaver.this.defencebas[i - 1];
+        matchContentPlayerVO.rebound = PlayerScoreSaver.this.allbas[i - 1];
+        matchContentPlayerVO.assist = PlayerScoreSaver.this.helpatt[i - 1];
+        matchContentPlayerVO.blockShot = PlayerScoreSaver.this.block[i - 1];
+        matchContentPlayerVO.fault = PlayerScoreSaver.this.mistake[i - 1];
+        matchContentPlayerVO.foul = PlayerScoreSaver.this.foul[i - 1];
+        matchContentPlayerVO.point = PlayerScoreSaver.this.score[i - 1];
+        return matchContentPlayerVO;
+    }
+
+    public ArrayList<MatchContentPlayerVO> getMatchContentPlayerVOs(int mid,int tid){
+        return null;
     }
 
 }

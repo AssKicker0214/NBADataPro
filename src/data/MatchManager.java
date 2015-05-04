@@ -1,6 +1,10 @@
-package data.saver;
+package data;
 
-import data.TeamDataManager;
+import data.saver.MatchInfoSaver;
+import data.saver.MatchScoreSaver;
+import data.saver.PlayerScoreSaver;
+import data.saver.TeamScore;
+import vo.matchvo.MatchContentPlayerVO;
 import vo.matchvo.MatchVO;
 
 import java.util.ArrayList;
@@ -11,8 +15,9 @@ import java.util.ArrayList;
 public class MatchManager {
     private MatchInfoSaver matchInfoSaver;
     private MatchScoreSaver matchScoreSaver;
+    private PlayerScoreSaver playerScoreSaver;
 
-    private MatchVO getMatchVO(int mid){
+    public MatchVO getMatchVO(int mid){
         MatchVO matchVO = new MatchVO();
         matchVO.id = mid;
         matchVO.date = matchInfoSaver.getDate(mid);
@@ -35,8 +40,11 @@ public class MatchManager {
         int tid1 = matchInfoSaver.getTeamf()[mid];
         int tid2 = matchInfoSaver.getTeaml()[mid];
 
-//        matchVO.homeTeam = new TeamDataManager()
-        new TeamDataManager();
+        matchVO.homeTeam = new TeamDataManager().getInfo(tid1);
+        matchVO.guestTeam = new TeamDataManager().getInfo(tid2);
+        ArrayList<MatchContentPlayerVO>[] arrayLists = playerScoreSaver.getTeamPlayer(mid);
+        matchVO.homeTeamPlayer = arrayLists[0];
+        matchVO.guestTeamPlayer = arrayLists[1];
         return matchVO;
     }
 }

@@ -1,5 +1,7 @@
 package dataservice.match;
 
+import data.MatchManager;
+import data.PlayerDataManager;
 import vo.matchvo.MatchContentPlayerVO;
 import vo.matchvo.MatchVO;
 
@@ -12,8 +14,12 @@ public class MatchDataHandel implements MatchDataService {
 
     @Override
     public ArrayList<MatchContentPlayerVO> FindRecentMatches_p(int num, String playerName) {
-
-        return null;
+        ArrayList<Integer> intS = new PlayerDataManager().getFindRecentMatches_p(playerName);
+        ArrayList<MatchContentPlayerVO> res = new ArrayList<>();
+        for(int i = 0; i < intS.size();i++){
+            res.add(new MatchManager().getMatchVO(intS.get(i)));
+        }
+        return res;
     }
 
     @Override
@@ -32,7 +38,7 @@ public class MatchDataHandel implements MatchDataService {
     }
 
     @Override
-    public ArrayList<MatchVO> findByDP(String start, String end, String playerName) {
+    public ArrayList<MatchContentPlayerVO> findByDP(String start, String end, String playerName) {
         return null;
     }
 
