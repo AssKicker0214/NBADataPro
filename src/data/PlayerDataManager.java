@@ -14,13 +14,19 @@ public class PlayerDataManager {
     public static final int DEFAULT = 1;
     public static final int L5 = 2;
     public static final int BEFORE = 3;
+    public static final int DATE = 4;
     private PlayerScoreSaver playerScoreSaver;
 
     private PlayerScoreSaver.PlayerData playerDataDefault;
     private PlayerScoreSaver.PlayerData playerDataL5;
     private PlayerScoreSaver.PlayerData playerDataBefore;
+    private String date;
 
     public PlayerDataManager() {
+        update();
+    }
+    public PlayerDataManager(String date){
+        this.date = date;
         update();
     }
 
@@ -57,8 +63,10 @@ public class PlayerDataManager {
             playerData = this.playerDataDefault;
         } else if (type == L5) {
             playerData = this.playerDataL5;
-        } else {
+        } else if(type == BEFORE){
             playerData = this.playerDataBefore;
+        }else{
+            playerData = playerScoreSaver.getPlayerData(date);
         }
         return playerData;
     }

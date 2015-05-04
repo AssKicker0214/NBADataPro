@@ -303,7 +303,8 @@ public class PlayerScoreSaver {
         lastModifiedTime = System.currentTimeMillis();
     }
 
-    public void getPlayerData(String date) {
+    public PlayerData getPlayerData(String date) {
+        return new PlayerData(date);
     }
 
     private class PidL5Mid {

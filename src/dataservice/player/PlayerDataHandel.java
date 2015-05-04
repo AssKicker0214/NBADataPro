@@ -471,14 +471,38 @@ public class PlayerDataHandel implements PlayerDataService {
 
     @Override
     public ArrayList<HotPlayersVO> DailyKing(int num, String sortBy) {
-        String date = getToday();
-        playerScoreSaver.getPlayerData(date);
-        return null;
+        ArrayList<HotPlayersVO> arrayList = new PlayerDataManager().getHotPlayers(sortBy, PlayerDataManager.DATE);
+        arrayList.sort(new Comparator<HotPlayersVO>() {
+            @Override
+            public int compare(HotPlayersVO o1, HotPlayersVO o2) {
+                if (o1.upgradeRate > o2.upgradeRate) {
+                    return 1;
+                } else if (o1.upgradeRate == o2.upgradeRate) {
+                    return 0;
+                } else {
+                    return -1;
+                }
+            }
+        });
+        return arrayList;
     }
 
     @Override
     public ArrayList<HotPlayersVO> SeasonKing(int num, String sortBy) {
-        return null;
+        ArrayList<HotPlayersVO> arrayList = new PlayerDataManager().getHotPlayers(sortBy,PlayerDataManager.DEFAULT);
+        arrayList.sort(new Comparator<HotPlayersVO>() {
+            @Override
+            public int compare(HotPlayersVO o1, HotPlayersVO o2) {
+                if (o1.value > o2.value){
+                    return 1;
+                }else if (o1.value == o2.value){
+                    return 0;
+                }else {
+                    return -1;
+                }
+            }
+        });
+        return arrayList;
     }
 
     @Override
