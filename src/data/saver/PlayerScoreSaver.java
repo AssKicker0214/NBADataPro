@@ -1,6 +1,7 @@
 package data.saver;
 
 import java.io.PrintStream;
+import java.util.ArrayList;
 
 /**
  * Created by chenghao on 15/4/21.
@@ -806,6 +807,7 @@ public class PlayerScoreSaver {
     //--------------------------------------------------------------------------------------//
     public class PlayerData {
 
+        private String date;
         private long lastModifiedTime;
 
 
@@ -1559,6 +1561,29 @@ public class PlayerScoreSaver {
 
         public int[] getNumOfGame() {
             return p_matchNum;
+        }
+
+        public PlayerData(String date){
+            this.date = date;
+
+            ArrayList<Integer> arrayList = new ArrayList<>();
+            for (int i = 0; i<=currentPoint;i++){
+                int mid = PlayerScoreSaver.this.mid[i];
+                if (date.equals(matchInfoSaver.getDate(mid))){
+                    arrayList.add(i);
+                }
+            }
+
+            this.points = getArray(arrayList);
+            this.length = this.points.length;
+        }
+
+        private int[] getArray(ArrayList<Integer> arrayList){
+            int[] res= new int[arrayList.size()];
+            for(int i = 0;i<res.length;i++){
+                res[i] = arrayList.get(i);
+            }
+            return res;
         }
     }
 
