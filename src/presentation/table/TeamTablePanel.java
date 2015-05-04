@@ -2,9 +2,7 @@ package presentation.table;
 
 import java.util.ArrayList;
 
-import presentation.team.TeamVO2List;
-import dataservice.team.TeamDataService;
-import dataservice.team.TeamData_stub;
+import presentation.common.ListType;
 
 public class TeamTablePanel extends TablePane{
 
@@ -21,10 +19,15 @@ public class TeamTablePanel extends TablePane{
 	}
 	
 	public void SortContent(String sortBy,boolean isDesc){
-		TeamDataService tds = new TeamData_stub();
-		TeamVO2List t2l = new TeamVO2List();
+		SortParamHandler sp = new SortParamHandler();
+		ArrayList<ArrayList<String>> datas = new ArrayList<ArrayList<String>>();
 		remove(content);
-		ArrayList<ArrayList<String>> datas = t2l.normalData(tds.sortTeamNormal(30, sortBy, isDesc));
+		if(type == ListType.normal)
+			datas = sp.TeamNormalHandler(sortBy, isDesc);
+		else if(type == ListType.avg)
+			datas = sp.TeamNormalAvgHandler(sortBy, isDesc);
+		else if(type == ListType.high)
+			datas = sp.TeamHighHandler(sortBy, isDesc);
 		getRows(datas);
 	}
 

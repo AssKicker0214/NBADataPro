@@ -13,7 +13,7 @@ public class TeamData_stub implements TeamDataService{
 		ArrayList<HotTeamsVO>  result = new ArrayList<HotTeamsVO>();
 		HotTeamsVO vo = new HotTeamsVO();
 		vo.name = "Hawks";
-		vo.league = "E";
+		vo.league = 'E';
 		vo.photo = "ATL";
 		vo.location = "Atlanta";
 		vo.value = 39;

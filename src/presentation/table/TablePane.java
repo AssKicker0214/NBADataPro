@@ -122,7 +122,6 @@ public class TablePane extends JPanel{
 
 					@Override
 					public void mousePressed(MouseEvent e) {
-						// TODO Auto-generated method stub
 						isSelected = true;
 						clicked += 1;
 						boolean isDesc = true;

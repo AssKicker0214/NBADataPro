@@ -2,8 +2,7 @@ package presentation.table;
 
 import java.util.ArrayList;
 
-import dataservice.player.PlayerDataService;
-import dataservice.player.PlayerData_stub;
+import presentation.common.ListType;
 
 public class playerTablePanel extends TablePane{
 
@@ -20,8 +19,16 @@ public class playerTablePanel extends TablePane{
 	}
 	
 	public void SortContent(String sortBy,boolean isDesc){
-		PlayerDataService pds = new PlayerData_stub();
-		//pds.sortPlayerNormal(new sortParam(sortBy,isDesc));
+		SortParamHandler sp = new SortParamHandler();
+		ArrayList<ArrayList<String>> datas = new ArrayList<ArrayList<String>>();
+		remove(content);
+		if(type == ListType.normal)
+			datas = sp.PlayerNormalHandler(sortBy, isDesc);
+		else if(type == ListType.avg)
+			datas = sp.PlayerNormalAvgHandler(sortBy, isDesc);
+		else if(type == ListType.high)
+			datas = sp.PlayerHighHandler(sortBy, isDesc);
+		getRows(datas);
 	}
 
 }

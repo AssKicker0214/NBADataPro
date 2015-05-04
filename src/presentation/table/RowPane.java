@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -62,9 +64,13 @@ public class RowPane extends JPanel {
 	public void addData(String data,int width){		
 		JLabel block = new JLabel(data,JLabel.CENTER);
 		block.setPreferredSize(new Dimension(width, TablePane.height));
-	//	block.setOpaque(true);
-	//	block.setBackground(new Color(211, 211, 211));
+		block.addMouseListener(new MouseAdapter(){
+			@Override
+			public void mousePressed(MouseEvent e) {
+				
+			}
 		
+		});
 		this.add(block);
 	}
 	
