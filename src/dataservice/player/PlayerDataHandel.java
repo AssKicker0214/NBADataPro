@@ -48,20 +48,22 @@ public class PlayerDataHandel implements PlayerDataService {
     }
 
     @Override
-    public PlayerVO findPlayerData(int playerId, boolean isAvg) {
+    public PlayerVO findPlayerData(int playerId) {
         PlayerDataManager playerDataManager = new PlayerDataManager();
         PlayerVO playerVO = new PlayerVO();
         playerVO.id = playerId;
-        if (isAvg) {
-            playerDataManager.setPlayerVO(getAvgNormalInfo(), playerVO, PlayerDataManager.DEFAULT);
-        } else {
-            playerDataManager.setPlayerVO(getNormalInfo(), playerVO, PlayerDataManager.DEFAULT);
-        }
+        playerDataManager.setPlayerVO(getAvgNormalInfo(), playerVO, PlayerDataManager.DEFAULT);
         return playerVO;
     }
 
     @Override
-    public ArrayList<PlayerVO> findPlayerData(String msg) {
+    public PlayerVO findPlayerData(String name) {
+        int playerId = new PlayerDataManager().getPlayerId(name);
+        return findPlayerData(playerId);
+    }
+
+    @Override
+    public ArrayList<PlayerVO> findPlayers(String msg) {
         ArrayList<PlayerVO> arrayList = new ArrayList<>();
         ArrayList<PlayerVO> playerVOs = findPlayer();
         for (PlayerVO playerVO : playerVOs) {
@@ -70,12 +72,31 @@ public class PlayerDataHandel implements PlayerDataService {
             }
         }
 
-        return null;
+        return arrayList;
+    }
+
+    @Override
+    public ArrayList<PlayerVO> sortPlayerInfo(ArrayList<sortParam> sortBy) {
+        ArrayList<PlayerVO> playVOs = new PlayerDataManager().getPlayerVOs(getInformation(), PlayerDataManager.DEFAULT);
+        return playVOs;
+    }
+
+    @Override
+    public ArrayList<PlayerVO> sortPlayerNormal(ArrayList<sortParam> sortBy) {
+        ArrayList<PlayerVO> playVOs = new PlayerDataManager().getPlayerVOs(getNormalInfo(), PlayerDataManager.DEFAULT);
+        return playVOs;
+    }
+
+    @Override
+    public ArrayList<PlayerVO> sortPlayerNormalAvg(ArrayList<sortParam> sortBy) {
+        ArrayList<PlayerVO> playVOs = new PlayerDataManager().getPlayerVOs(getAvgNormalInfo(), PlayerDataManager.DEFAULT);
+        return playVOs;
     }
 
     @Override
     public ArrayList<PlayerVO> findPlayer() {
         ArrayList<PlayerVO> arrayList = new PlayerDataManager().getPlayerVOs(getAllInformation(), PlayerDataManager.DEFAULT);
+
         return arrayList;
     }
 
@@ -371,6 +392,26 @@ public class PlayerDataHandel implements PlayerDataService {
         ArrayList<PlayerVO> playerVOs = new PlayerDataManager().getPlayerVOs(getHighInfo(), PlayerDataManager.DEFAULT);
         playerVOs.sort(new ComparePlayVO(sortBy));
         return playerVOs;
+    }
+
+    @Override
+    public ArrayList<PlayerVO> filterInfo(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, int numS, int numE) {
+        return null;
+    }
+
+    @Override
+    public ArrayList<PlayerVO> filterNormal(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, int numS, int numE) {
+        return null;
+    }
+
+    @Override
+    public ArrayList<PlayerVO> filterNormalAvg(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, int numS, int numE) {
+        return null;
+    }
+
+    @Override
+    public ArrayList<PlayerVO> filterHigh(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, int numS, int numE) {
+        return null;
     }
 
     @Override

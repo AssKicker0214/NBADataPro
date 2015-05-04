@@ -216,4 +216,10 @@ public class PlayerDataManager {
                 return;
         }
     }
+
+    public int getPlayerId(String name) {
+        return 0;
+    }
+
+
 }
