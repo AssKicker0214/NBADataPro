@@ -29,6 +29,13 @@ public class TeamDataHandel implements TeamDataService {
     }
 
     @Override
+    public TeamVO findTeamInfo(String teamName) {
+        TeamDataManager teamDataManager = new TeamDataManager();
+        int teamId = teamDataManager.getTeamId(teamName);
+        return findTeamInfo(teamId);
+    }
+
+    @Override
     public ArrayList<TeamVO> findTeamNormal() {
         ArrayList<TeamVO> teamVOs = new TeamDataManager().getTeamVOs(getNormalInfo(), TeamDataManager.DEFAULT);
         return teamVOs;

@@ -412,4 +412,8 @@ public class TeamDataManager {
         hotTeamsVO.photo = teamDataDefault.getPhoto()[tid - 1];
         return hotTeamsVO;
     }
+
+    public int getTeamId(String teamName) {
+        return teamDataDefault.getTeamId(teamName);
+    }
 }

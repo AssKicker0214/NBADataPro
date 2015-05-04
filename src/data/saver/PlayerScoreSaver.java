@@ -827,6 +827,10 @@ public class PlayerScoreSaver {
         public int[] getFoundTime() {
             return teamSaver.getFoundTime();
         }
+
+        public int getTeamId(String teamName) {
+            return teamSaver.getTeamId(teamName);
+        }
     }
 
     //--------------------------------------------------------------------------------------//
