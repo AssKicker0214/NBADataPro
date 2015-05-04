@@ -848,6 +848,7 @@ public class PlayerScoreSaver {
         private int[] p_matchNum;
         private int[] p_startSession;
 
+
         private void setPlayerDataLevel2() {
             p_inplacetime = new int[playerSaver.getNum()];
             p_throwin = new int[playerSaver.getNum()];
@@ -1095,6 +1096,7 @@ public class PlayerScoreSaver {
         private char[] p_league;
         private int[] p_number;
         private int[] p_age;
+        private String[] p_teamPhoto;
 
         private void setPlayerDataLevel3() {
 
@@ -1130,6 +1132,7 @@ public class PlayerScoreSaver {
             p_league = new char[playerSaver.getNum()];
             p_number = new int[playerSaver.getNum()];
             p_age = new int[playerSaver.getNum()];
+            p_teamName = new String[playerSaver.getNum()];
             for (int i = 0; i < playerSaver.getNum(); i++) {
 
                 pLegB[i] = p_throwallTeamB[i] + 0.4 * p_penaltyallTeamB[i] - 1.07 * (p_attackbasTeamB[i] / ((p_attackbasTeamB[i] + p_defencebasTeam[i]) * (double) (p_throwallTeamB[i] - p_throwinTeamB[i]))) + 1.07 * p_mistakeTeamB[i];
@@ -1239,12 +1242,14 @@ public class PlayerScoreSaver {
                     p_team[i] = teamSaver.getAbridge()[p_tid_mid[i][0] - 1];
                     p_teamName[i] = teamSaver.getTeamName()[p_tid_mid[i][0] - 1];
                     p_league[i] = teamSaver.getLeague()[p_tid_mid[i][0] - 1];
+                    p_teamPhoto[i] = teamSaver.getPhoto()[p_tid_mid[i][0] - 1];
 
                 } else {
                     p_division[i] = null;
                     p_team[i] = null;
                     p_teamName[i] = null;
                     p_league[i] = '\0';
+                    p_teamPhoto[i] = null;
                 }
 
                 p_number[i] = playerSaver.getNumber()[p_tid_mid[i][0] - 1];
@@ -1584,6 +1589,18 @@ public class PlayerScoreSaver {
                 res[i] = arrayList.get(i);
             }
             return res;
+        }
+
+        public String[] getTeamPhoto() {
+            return p_teamPhoto;
+        }
+
+        public int getPlayerId(String name) {
+            return playerSaver.getPlayerId(name);
+        }
+
+        public int getNum() {
+            return playerSaver.getNum();
         }
     }
 

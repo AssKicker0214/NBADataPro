@@ -219,11 +219,163 @@ public class PlayerDataManager {
     }
 
     public int getPlayerId(String name) {
-        return 0;
+        return playerDataDefault.getPlayerId(name);
+    }
+
+    private HotPlayersVO getHotPlayer(String sortBy,PlayerScoreSaver.PlayerData playerData,int id){
+        HotPlayersVO playersVO = new HotPlayersVO();
+        playersVO.id = id;
+        setHotPlayerInfo(playersVO,playerData);
+        setHotPlayerValue(sortBy,playersVO,playerData);
+        return playersVO;
+    }
+
+    private HotPlayersVO getUpgrade(String sortBy,PlayerScoreSaver.PlayerData playerData,int id){
+        HotPlayersVO playersVO = new HotPlayersVO();
+        playersVO.id = id;
+        setHotPlayerInfo(playersVO,playerData);
+        setUpgrade(sortBy,playersVO);
+        setHotPlayerValue(sortBy,playersVO,playerData);
+        return playersVO;
+    }
+
+    public ArrayList<HotPlayersVO> getHotPlayers(String sortBy,int type){
+        PlayerScoreSaver.PlayerData playerData = getPlayerData(type);
+        ArrayList<HotPlayersVO> playersVOs = new ArrayList<>();
+        for (int i = 0; i< playerData.getNum();i++){
+            playersVOs.add(getHotPlayer(sortBy,playerData,i++));
+        }
+        return playersVOs;
+    }
+
+    public ArrayList<HotPlayersVO> getUpgrade(String sortBy){
+        ArrayList<HotPlayersVO> playersVOs = new ArrayList<>();
+        for (int i = 0; i< playerDataDefault.getNum();i++){
+            playersVOs.add(getHotPlayer(sortBy,playerDataDefault,i++));
+        }
+        return playersVOs;
+    }
+
+    private void setHotPlayerInfo(HotPlayersVO hotPlayersVO,PlayerScoreSaver.PlayerData playerData){
+        hotPlayersVO.name = playerData.getName()[hotPlayersVO.id - 1];
+        hotPlayersVO.teamName = playerData.getTeam()[hotPlayersVO.id - 1];
+        hotPlayersVO.photo = playerData.getPhoto()[hotPlayersVO.id - 1];
+        hotPlayersVO.teamPhoto = playerData.getTeamPhoto()[hotPlayersVO.id - 1];
+        hotPlayersVO.position = playerData.getPosition()[hotPlayersVO.id - 1];
+        hotPlayersVO.number  = playerData.getNumber()[hotPlayersVO.id - 1];
     }
 
     private void setHotPlayerValue(String sortBy,HotPlayersVO hotPlayersVO,PlayerScoreSaver.PlayerData playerData){
-
+        switch (sortBy){
+            case "assist":
+                hotPlayersVO.value = playerData.getAssist()[hotPlayersVO.id - 1];
+                return;
+            case "blockShot":
+                hotPlayersVO.value = playerData.getBlockShot()[hotPlayersVO.id - 1];
+                return;
+            case "defend":
+                hotPlayersVO.value = playerData.getDefend()[hotPlayersVO.id - 1];
+                return;
+            case "efficiency":
+                hotPlayersVO.value = playerData.getEfficiency()[hotPlayersVO.id - 1];
+                return;
+            case "fault":
+                hotPlayersVO.value = playerData.getFault()[hotPlayersVO.id - 1];
+                return;
+            case "minute":
+                hotPlayersVO.value = playerData.getMinute()[hotPlayersVO.id - 1];
+                return;
+            case "numOfGame":
+                hotPlayersVO.value = playerData.getNumOfGame()[hotPlayersVO.id - 1];
+                return;
+            case "offend":
+                hotPlayersVO.value = playerData.getOffend()[hotPlayersVO.id - 1];
+                return;
+            case "penalty":
+                hotPlayersVO.value = playerData.getPenalty()[hotPlayersVO.id - 1];
+                return;
+            case "point":
+                hotPlayersVO.value = playerData.getPoint()[hotPlayersVO.id - 1];
+                return;
+            case "rebound":
+                hotPlayersVO.value = playerData.getRebound()[hotPlayersVO.id - 1];
+                return;
+            case "shot":
+                hotPlayersVO.value = playerData.getShot()[hotPlayersVO.id - 1];
+                return;
+            case "start":
+                hotPlayersVO.value = playerData.getStart()[hotPlayersVO.id - 1];
+                return;
+            case "steal":
+                hotPlayersVO.value = playerData.getSteal()[hotPlayersVO.id - 1];
+                return;
+            case "three":
+                hotPlayersVO.value = playerData.getThree()[hotPlayersVO.id - 1];
+                return;
+            case "avgAssist":
+                hotPlayersVO.value = playerData.getAvgAssist()[hotPlayersVO.id - 1];
+                return;
+            case "avgBlockShot":
+                hotPlayersVO.value = playerData.getAvgBlockShot()[hotPlayersVO.id - 1];
+                return;
+            case "avgDefend":
+                hotPlayersVO.value = playerData.getAvgDefend()[hotPlayersVO.id - 1];
+                return;
+            case "avgFault":
+                hotPlayersVO.value = playerData.getAvgFault()[hotPlayersVO.id - 1];
+                return;
+            case "avgFoul":
+                hotPlayersVO.value = playerData.getAvgFoul()[hotPlayersVO.id - 1];
+                return;
+            case "avgMinute":
+                hotPlayersVO.value = playerData.getAvgMinute()[hotPlayersVO.id - 1];
+                return;
+            case "avgOffend":
+                hotPlayersVO.value = playerData.getAvgOffend()[hotPlayersVO.id - 1];
+                return;
+            case "avgPoint":
+                hotPlayersVO.value = playerData.getAvgPoint()[hotPlayersVO.id - 1];
+                return;
+            case "avgRebound":
+                hotPlayersVO.value = playerData.getAvgRebound()[hotPlayersVO.id - 1];
+                return;
+            case "avgSteal":
+                hotPlayersVO.value = playerData.getAvgSteal()[hotPlayersVO.id - 1];
+                return;
+            case "assistEfficient":
+                hotPlayersVO.value = playerData.getAssistEfficient()[hotPlayersVO.id - 1];
+                return;
+            case "blockShotEfficient":
+                hotPlayersVO.value = playerData.getBlockShotEfficient()[hotPlayersVO.id - 1];
+                return;
+            case "defendReboundEfficient":
+                hotPlayersVO.value = playerData.getDefendReboundEfficient()[hotPlayersVO.id - 1];
+                return;
+            case "faultEfficient":
+                hotPlayersVO.value = playerData.getFaultEfficient()[hotPlayersVO.id - 1];
+                return;
+            case "frequency":
+                hotPlayersVO.value = playerData.getFrequency()[hotPlayersVO.id - 1];
+                return;
+            case "gmSc":
+                hotPlayersVO.value = playerData.getGmSc()[hotPlayersVO.id - 1];
+                return;
+            case "offendReboundEfficient":
+                hotPlayersVO.value = playerData.getOffendReboundEfficient()[hotPlayersVO.id - 1];
+                return;
+            case "realShot":
+                hotPlayersVO.value = playerData.getRealShot()[hotPlayersVO.id - 1];
+                return;
+            case "reboundEfficient":
+                hotPlayersVO.value = playerData.getReboundEfficient()[hotPlayersVO.id - 1];
+                return;
+            case "shotEfficient":
+                hotPlayersVO.value = playerData.getShotEfficient()[hotPlayersVO.id - 1];
+                return;
+            case "stealEfficient":
+                hotPlayersVO.value = playerData.getStealEfficient()[hotPlayersVO.id - 1];
+                return;
+        }
     }
 
     private void setUpgrade(String sortBy,HotPlayersVO hotPlayersVO){

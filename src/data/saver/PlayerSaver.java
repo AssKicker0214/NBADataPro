@@ -196,4 +196,13 @@ public class PlayerSaver {
     public int[] getAge() {
         return exp;
     }
+
+    public int getPlayerId(String name) {
+        for (int i = 0; i<= currentPoint; i++){
+            if (this.name[i].equals(name)){
+                return i+1;
+            }
+        }
+        return 0;
+    }
 }
