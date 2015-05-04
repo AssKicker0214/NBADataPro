@@ -53,7 +53,7 @@ public class MatchAnalyseTopPanel extends JPanel{
 	private void setsetLocalTeamPhotoLabel(){
 		localTeamPhotoLabel = new PhotoLabel(new ImageIcon("teamsPNG/ATL.png").getImage());
 //		localTeamPhotoLabel.setHorizontalAlignment(JLabel.RIGHT);
-		localTeamPhotoLabel.setBounds(350,20,200,150);
+		localTeamPhotoLabel.setBounds(350,0,200,150);
 		localTeamPhotoLabel.setBackground(Color.WHITE);
 		localTeamPhotoLabel.setOpaque(true);
 		localTeamPhotoLabel.setVisible(true);
@@ -63,7 +63,7 @@ public class MatchAnalyseTopPanel extends JPanel{
 	public void setAnotherTeamPhotoLabel (){
 		anotherTeamPhotoLabel = new PhotoLabel(new ImageIcon("teamsPNG/ATL.png").getImage());
 		anotherTeamPhotoLabel.setHorizontalAlignment(JLabel.RIGHT);
-		anotherTeamPhotoLabel.setBounds(730,20,180,150);
+		anotherTeamPhotoLabel.setBounds(730,0,180,150);
 		anotherTeamPhotoLabel.setBackground(Color.white);
 		anotherTeamPhotoLabel.setOpaque(true);
 		anotherTeamPhotoLabel.setVisible(true);
@@ -76,14 +76,14 @@ public class MatchAnalyseTopPanel extends JPanel{
 		VSLabel.setForeground(Color.DARK_GRAY);
 		VSLabel.setBackground(Color.WHITE);
 		VSLabel.setOpaque(true);
-		VSLabel.setBounds(550,25,130,150);
+		VSLabel.setBounds(550,15,130,130);
 		this.add(VSLabel);
 
 	}
 	
 	public void setLocalInfoGroupsLabel(){
 		localInfoGroupsLabel = new JLabel();
-		localInfoGroupsLabel.setBounds(0,85,350,55);
+		localInfoGroupsLabel.setBounds(0,85,350,67);
 		localInfoGroupsLabel.setOpaque(true);
 		localInfoGroupsLabel.setBackground(Color.BLACK);
 
@@ -104,7 +104,7 @@ public class MatchAnalyseTopPanel extends JPanel{
 	
 	public void setAnotherInfoGroupsLabel(){
 		anotherInfoGroupsLabel = new JLabel();
-		anotherInfoGroupsLabel.setBounds(910,85,370,55);
+		anotherInfoGroupsLabel.setBounds(910,85,370,67);
 		anotherInfoGroupsLabel.setOpaque(true);
 		anotherInfoGroupsLabel.setBackground(Color.BLACK);
 		
@@ -171,7 +171,7 @@ public class MatchAnalyseTopPanel extends JPanel{
 	//整个记分板
 	public void setScoreLabel(){
 		scoreLabel = new JLabel();
-		scoreLabel.setBounds(350,175,560,62);
+		scoreLabel.setBounds(350,150,560,62);
 		scoreLabel.setOpaque(true);
 		scoreLabel.setBackground(Color.LIGHT_GRAY);
 		
