@@ -230,7 +230,7 @@ public class PlayerData_stub implements PlayerDataService{
 	}
 
 	@Override
-	public PlayerVO avgLeague(ArrayList<String> attributes) {
+	public PlayerVO avgLeague() {
 		PlayerVO vo = new PlayerVO();
 		vo.avgPoint = 5;
 		return vo;

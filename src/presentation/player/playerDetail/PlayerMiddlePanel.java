@@ -74,9 +74,7 @@ public class PlayerMiddlePanel extends JPanel{
 	
 	public void setAttri(String name){
 		PlayerDataService pds = new PlayerData_stub();
-		ArrayList<String> attributes = new ArrayList<String>();
-		attributes.add("avgPoint");attributes.add("avgRebound");attributes.add("avgAssist");attributes.add("three");attributes.add("penalty");
-		PlayerVO voL = pds.avgLeague(attributes); 
+		PlayerVO voL = pds.avgLeague(); 
 		PlayerVO voP = pds.findPlayerData(name); 
 		vo = voP;
 		setTopPanel(voP);

@@ -8,7 +8,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import dataservice.match.MatchDataService;
+import dataservice.match.MatchData_stub;
 import presentation.table.TablePane;
+import vo.matchvo.MatchContentPlayerVO;
 
 public class PlayerMiddle_Recent5Match extends JPanel{
 
@@ -25,12 +28,12 @@ public class PlayerMiddle_Recent5Match extends JPanel{
 	public PlayerMiddle_Recent5Match(String playerName){
 		this.setLayout(null);
 		this.setBounds(0, 255,1280,400);
-		setRecent5MactchTitleLabel(playerName);
+		setRecent5MactchTitleLabel();
 		this.setBackground(Color.WHITE);
-		setTabel();
+		setTabel(playerName);
 	}
 	
-	public void setRecent5MactchTitleLabel(String playerName){
+	public void setRecent5MactchTitleLabel(){
 		Recent5MatchLabel = new JLabel("  最近5场比赛",JLabel.LEADING);
 		Recent5MatchLabel.setFont(new Font("Dialog",1,20));
 		Recent5MatchLabel.setForeground(Color.WHITE);
@@ -41,26 +44,49 @@ public class PlayerMiddle_Recent5Match extends JPanel{
 		this.add(Recent5MatchLabel);
 	}
 
-	public void setTabel(){
+	public void setTabel(String playerName){
+		MatchDataService mds = new MatchData_stub();
+		ArrayList<MatchContentPlayerVO> vo = mds.FindRecentMatches_p(5, playerName);
 		String[] columns = {"日期","对手","分钟","％","命中","出手","三分％","罚球％",
-				"进攻","防守","篮板","助攻","抢断","盖帽","失误","犯规","得分"};
+				"进攻篮板","防守篮板","篮板","助攻","盖帽","失误","犯规","得分"};
 				
-		ArrayList<String> l = new ArrayList<String>();
-		for(int i = 0; i < 17;i++){
-			l.add("20.0");
-		}
-		ArrayList<ArrayList<String>> a = new ArrayList<ArrayList<String>>();
-		for(int i = 0; i < 5 ;i++){
-			a.add(l);
-		}
+		
+		ArrayList<ArrayList<String>> datas = vo2list(vo);
 		
 		ArrayList<Integer> w = new ArrayList<Integer>();
-		for(int i = 0; i < 17 ; i++){
-			w.add(85);
+		w.add(200);w.add(200);
+		for(int i = 0; i < 14 ; i++){
+			w.add(60);
 		}
 
-		TablePane t = new TablePane(a,columns,w,0,50,1280,400,60,true,false);
+		TablePane t = new TablePane(datas,columns,w,0,50,1280,400,60,true,false);
 		this.add(t);
+	}
+	
+	public ArrayList<ArrayList<String>> vo2list(ArrayList<MatchContentPlayerVO> vo){
+		ArrayList<ArrayList<String>> datas = new ArrayList<ArrayList<String>>();
+		for(int i = 0; i < vo.size() ;i++){
+			ArrayList<String> temp = new ArrayList<String>();
+			temp.add(vo.get(i).date);
+			temp.add(vo.get(i).vs);
+			temp.add(vo.get(i).minute+"");
+			temp.add((double)vo.get(i).shot/(double)vo.get(i).shotA+"");
+			temp.add(vo.get(i).shot+"");
+			temp.add(vo.get(i).shotA+"");
+			temp.add(vo.get(i).three+"/"+vo.get(i).threeA);
+			temp.add(vo.get(i).penalty+"/"+vo.get(i).penaltyA);
+			temp.add(vo.get(i).offendRebound+"");
+			temp.add(vo.get(i).offendRebound+"");
+			temp.add(vo.get(i).rebound+"");
+			temp.add(vo.get(i).assist+"");
+			temp.add(vo.get(i).blockShot+"");
+			temp.add(vo.get(i).fault+"");
+			temp.add(vo.get(i).foul+"");
+			temp.add(vo.get(i).point+"");
+			
+			datas.add(temp);
+		}
+		return datas;
 	}
 	
 	public static void main(String[] args){
