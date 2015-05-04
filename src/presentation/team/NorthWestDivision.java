@@ -15,5 +15,5 @@ public class NorthWestDivision extends SingleDivisionLabel{
 		this.add(new SingleTeamLabel("teamsPNG/POR.png","波特兰","开拓者",w));
 		this.add(new SingleTeamLabel("teamsPNG/UTA.png","犹他","爵士",g));		
 	}
-
+	
 }

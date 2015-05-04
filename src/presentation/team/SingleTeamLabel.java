@@ -5,6 +5,8 @@ package presentation.team;
  */
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.MouseListener;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -37,6 +39,9 @@ public class SingleTeamLabel extends JLabel{
 		setTeamPicLabel(path);
 	}
 	
+	public void addXXListener(MouseListener mouseListener){
+		this.addMouseListener(mouseListener);
+	}
 	
 	public void setTeamPicLabel(String path){
 		TeamPicLabel = new PhotoLabel(new ImageIcon(path).getImage());
@@ -60,7 +65,6 @@ public class SingleTeamLabel extends JLabel{
 		TeamLocationLabel.setForeground(Color.GRAY);
 		TeamLocationLabel.setBounds(90,10,150,30);
 		this.add(TeamLocationLabel);
-
 	}
 	
 	

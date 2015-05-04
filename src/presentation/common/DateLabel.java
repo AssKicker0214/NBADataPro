@@ -354,7 +354,7 @@ public class DateLabel extends JLabel{
                     day==now.get(Calendar.DAY_OF_MONTH)){
                 //如果日期和当前日期一样,则用红框
                 Graphics2D gd=(Graphics2D)g;
-                gd.setColor(Color.RED);
+                gd.setColor(new Color(27,79,137));
                 Polygon p=new Polygon();
                 p.addPoint(0,0);
                 p.addPoint(getWidth()-1,0);

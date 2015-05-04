@@ -46,7 +46,7 @@ public class PlayerDataList  extends JPanel{
 	
 	public PlayerDataList(){
 		this.setLayout(null);
-		this.setBounds(0,160,1280,540);
+		this.setBounds(0,155,1280,540);
 		this.setBackground(Color.WHITE);
 		setTitle();
 		setButtonsBGLabel();

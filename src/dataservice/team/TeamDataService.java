@@ -22,6 +22,7 @@ public interface TeamDataService {
 	 * @Return 返回TeamVO中有均总之分的属性值的avg属性，和不区分场均和总计的全部属性
 	 */
 	public TeamVO findTeamInfo(int teamId);// 
+	public TeamVO findTeamInfo(String teamName);
 
 	
 	/**

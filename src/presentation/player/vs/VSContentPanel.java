@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import presentation.player.SingleVSBarLabel;
 
 
-public class PlayerVSContentPanel extends JPanel{
+public class VSContentPanel extends JPanel{
 
 	/**
 	 * 
@@ -25,7 +25,7 @@ public class PlayerVSContentPanel extends JPanel{
 	static Color blue = new Color(14,105,176);
 	static Color grey = Color.GRAY;
 	
-	public PlayerVSContentPanel(ArrayList<String> itemsNeedAdd,ArrayList<Double> avg1,
+	public VSContentPanel(ArrayList<String> itemsNeedAdd,ArrayList<Double> avg1,
 			ArrayList<Double> avg2){
 		this.avg1 = avg1;
 		this.avg2 = avg2;
@@ -74,7 +74,7 @@ public class PlayerVSContentPanel extends JPanel{
 		itemsNeedAdd.add("罚球％");	avg1.add(78.4); avg2.add(74.3);
 //		itemsNeedAdd.add("分钟");
 	
-		jf.add(new PlayerVSContentPanel(itemsNeedAdd,avg1,avg2));
+		jf.add(new VSContentPanel(itemsNeedAdd,avg1,avg2));
 		jf.setVisible(true);
 	}
 
