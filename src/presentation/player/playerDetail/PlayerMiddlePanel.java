@@ -49,7 +49,7 @@ public class PlayerMiddlePanel extends JPanel{
 	PlayersVSTopPanel vsTopPanel;
 	JPanel playerDetailTopPanel;
 	
-	String playerName;
+	PlayerVO vo;
 	
 	ArrayList<Double> player = new ArrayList<Double>();
 	ArrayList<Double> leagueAvg = new ArrayList<Double>();
@@ -59,34 +59,37 @@ public class PlayerMiddlePanel extends JPanel{
 	
 	
 	public PlayerMiddlePanel(String name){
-		this.playerName = name;
 		this.setLayout(null);
 		this.setBounds(0, 35, 1280,670);
 		this.setBackground(Color.WHITE);
-		setTopPanel();
-		setAttri();
+		setAttri(name);
 		setContrastLabel();
 		setLatestMatchLabel();
 		setPastLabel();
+		setContrastPanel();
+		setSeasonPanel();
 		setComparePalyersLabel();
+		ContrastLabel.setBackground(Color.GRAY);
 	}
 	
-	public void setAttri(){
+	public void setAttri(String name){
 		PlayerDataService pds = new PlayerData_stub();
 		ArrayList<String> attributes = new ArrayList<String>();
 		attributes.add("avgPoint");attributes.add("avgRebound");attributes.add("avgAssist");attributes.add("three");attributes.add("penalty");
 		PlayerVO voL = pds.avgLeague(attributes); 
-		PlayerVO voP = pds.findPlayerData(playerName); 
+		PlayerVO voP = pds.findPlayerData(name); 
+		vo = voP;
+		setTopPanel(voP);
 		player.add(voP.avgPoint);player.add(voP.avgRebound);player.add(voP.avgAssist);
 		player.add(voP.three);player.add(voP.penalty);
 		leagueAvg.add(voL.avgPoint);leagueAvg.add(voL.avgRebound);leagueAvg.add(voL.avgAssist);
 		leagueAvg.add(voL.three);leagueAvg.add(voL.penalty);
 		//"年度","球队","场数","先发","分钟","％","三分％","罚球％",
 		//"进攻","防守","场均篮板","场均助攻","场均抢断","场均盖帽","失误","犯规","场均得分"
-		avg.add(voP.team);avg.add(voP.numOfGame+"");avg.add(voP.start+"");avg.add(voP.avgMinute+"");avg.add(voP.shot+"");avg.add(voP.three+"");
+		avg.add("2012-2013");avg.add(voP.team);avg.add(voP.numOfGame+"");avg.add(voP.start+"");avg.add(voP.avgMinute+"");avg.add(voP.shot+"");avg.add(voP.three+"");
 		avg.add(voP.penalty+"");avg.add(voP.avgOffend+"");avg.add(voP.avgDefend+"");avg.add(voP.avgRebound+"");avg.add(voP.avgAssist+"");avg.add(voP.avgSteal+"");
 		avg.add(voP.avgBlockShot+"");avg.add(voP.avgFault+"");avg.add(voP.avgFoul+"");avg.add(voP.avgPoint+"");
-		total.add(voP.team);total.add(voP.numOfGame+"");total.add(voP.start+"");total.add(voP.minute+"");total.add(voP.shot+"");total.add(voP.three+"");
+		total.add("2012-2013");total.add(voP.team);total.add(voP.numOfGame+"");total.add(voP.start+"");total.add(voP.minute+"");total.add(voP.shot+"");total.add(voP.three+"");
 		total.add(voP.penalty+"");total.add(voP.offend+"");total.add(voP.defend+"");total.add(voP.rebound+"");total.add(voP.assist+"");total.add(voP.steal+"");
 		total.add(voP.blockShot+"");total.add(voP.fault+"");total.add(voP.foul+"");total.add(voP.point+"");
 
@@ -107,8 +110,8 @@ public class PlayerMiddlePanel extends JPanel{
 	}
 	
 	
-	public void setTopPanel (){
-		playerDetailTopPanel = new PlayerDetailTopPanel();
+	public void setTopPanel (PlayerVO vo){
+		playerDetailTopPanel = new PlayerDetailTopPanel(vo);
 		this.add(playerDetailTopPanel);
 	}
 	
@@ -138,9 +141,9 @@ public class PlayerMiddlePanel extends JPanel{
 				}
 				if(playerDetailTopPanel != null){
 					remove(playerDetailTopPanel);
-					setTopPanel();
+					setTopPanel(vo);
 				}else{
-					setTopPanel();
+					setTopPanel(vo);
 				}
 				
 				setContrastPanel();
@@ -180,9 +183,9 @@ public class PlayerMiddlePanel extends JPanel{
 				}
 				if(playerDetailTopPanel != null){
 					remove(playerDetailTopPanel);
-					setTopPanel();
+					setTopPanel(vo);
 				}else{
-					setTopPanel();
+					setTopPanel(vo);
 				}
 				setRecent5MatchPanel();
 				setVisible(true);
@@ -220,9 +223,9 @@ public class PlayerMiddlePanel extends JPanel{
 				}
 				if(playerDetailTopPanel != null){
 					remove(playerDetailTopPanel);
-					setTopPanel();
+					setTopPanel(vo);
 				}else{
-					setTopPanel();
+					setTopPanel(vo);
 				}
 				setPastPanel();
 				setVisible(true);
@@ -293,13 +296,13 @@ public class PlayerMiddlePanel extends JPanel{
 	}
 	
 	public void setRecent5MatchPanel(){
-		recent5MatchPanel = new PlayerMiddle_Recent5Match(playerName);
+		recent5MatchPanel = new PlayerMiddle_Recent5Match(vo.name);
 		this.add(recent5MatchPanel,0);
 		repaint();
 	}
 
 	public void setPastPanel(){
-		pastPanel = new PlayerMiddle_PastPanel(playerName);
+		pastPanel = new PlayerMiddle_PastPanel(vo.name);
 		this.add(pastPanel,0);
 		repaint();
 	}
@@ -351,7 +354,7 @@ public class PlayerMiddlePanel extends JPanel{
 		}
 
 		
-//		jf.add(new PlayerMiddlePanel(player,leagueAvg,avg,total));
+		jf.add(new PlayerMiddlePanel("Aaron Gray"));
 		jf.setVisible(true);
 	}
 	
