@@ -16,6 +16,7 @@ import dataservice.player.PlayerData_stub;
 import dataservice.player.sortParam;
 import presentation.common.SelectLabel;
 import presentation.table.TablePane;
+import presentation.table.playerTablePanel;
 import vo.playervo.PlayerVO;
 
 public class PlayerDataList  extends JPanel{

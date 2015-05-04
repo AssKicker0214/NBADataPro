@@ -498,4 +498,35 @@ public class PlayerDataManager {
                 return;
         }
     }
+
+    public ArrayList<Integer> getFindRecentMatches_p(String playerName) {
+        int pid = playerDataDefault.getPlayerId(playerName);
+//        int[][] p_tid_mid = playerDataL5.get
+        return playerScoreSaver.getL5MidPoint(pid);
+    }
+
+    public ArrayList<Integer> getFindMatches_p(String start, String end, String playerName) {
+        int pid = playerDataDefault.getPlayerId(playerName);
+
+        return playerScoreSaver.getMidPoint(start,end,pid);
+    }
+
+    public ArrayList<PlayerVO> getTeamPlayerVOs(ArrayList<String> attributes,int teamID) {
+        ArrayList<Integer> arrayList = getPlayerId(teamID);
+        ArrayList<PlayerVO> res = new ArrayList<>();
+        for (int i = 0; i < arrayList.size();i++){
+            res.add(getPlayerVO(attributes,DEFAULT,arrayList.get(i)));
+        }
+        return res;
+    }
+
+    private ArrayList<Integer> getPlayerId(int teamID) {
+        ArrayList<Integer> res = new ArrayList<>();
+       int[] tids = playerDataDefault.getTid();
+        for (int i = 0;i<tids.length;i++){
+            if (teamID == tids[i])
+                res.add(i + 1);
+        }
+        return res;
+    }
 }

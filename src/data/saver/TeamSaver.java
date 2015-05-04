@@ -142,4 +142,12 @@ public class TeamSaver {
     }
 
 
+    public int getTeamId(String teamName) {
+        for (int i = 0; i < currentPoint + 1;i++){
+            if (this.fullname[i].equals(teamName))
+                return i + 1;
+        }
+        return 0;
+    }
+
 }

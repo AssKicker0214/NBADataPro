@@ -103,6 +103,10 @@ public class PlayerDataHandel implements PlayerDataService {
         return null;
     }
 
+    public ArrayList<PlayerVO> getTeamPlayerVOs(int teamID) {
+        return new PlayerDataManager().getPlayerVOs(getAllInformation(),teamID);
+    }
+
     private class ComparePlayVO implements Comparator<PlayerVO> {
         @Override
         public int compare(PlayerVO o1, PlayerVO o2) {
@@ -524,7 +528,8 @@ public class PlayerDataHandel implements PlayerDataService {
     }
 
     @Override
-    public PlayerVO avgLeague(ArrayList<String> attributes) {
+    public PlayerVO avgLeague() {
         return null;
     }
+
 }

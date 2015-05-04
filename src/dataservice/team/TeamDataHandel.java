@@ -1,7 +1,9 @@
 package dataservice.team;
 
+import data.PlayerDataManager;
 import data.TeamDataManager;
 import data.saver.PlayerScoreSaver;
+import dataservice.player.PlayerDataHandel;
 import vo.playervo.PlayerVO;
 import vo.teamvo.HotTeamsVO;
 import vo.teamvo.TeamVO;
@@ -24,6 +26,13 @@ public class TeamDataHandel implements TeamDataService {
     public TeamVO findTeamInfo(int teamId) {
         TeamVO teamVO = new TeamDataManager().getTeamVO(getAllInformation(), TeamDataManager.DEFAULT, teamId);
         return teamVO;
+    }
+
+    @Override
+    public TeamVO findTeamInfo(String teamName) {
+        TeamDataManager teamDataManager = new TeamDataManager();
+        int teamId = teamDataManager.getTeamId(teamName);
+        return findTeamInfo(teamId);
     }
 
     @Override
@@ -267,7 +276,7 @@ public class TeamDataHandel implements TeamDataService {
 
     @Override
     public ArrayList<PlayerVO> teamMemberList(int teamID) {
-        return null;
+        return new PlayerDataHandel().getTeamPlayerVOs( teamID);
     }
 
 

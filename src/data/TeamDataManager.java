@@ -2,6 +2,8 @@ package data;
 
 import data.saver.PlayerScoreSaver;
 import data.saver.TeamSaver;
+import vo.playervo.HotPlayersVO;
+import vo.teamvo.HotTeamsVO;
 import vo.teamvo.TeamVO;
 
 import java.util.ArrayList;
@@ -399,5 +401,19 @@ public class TeamDataManager {
 
     public int getNum() {
         return TeamSaver.getTeamSaver().getNum();
+    }
+
+    public HotTeamsVO getInfo(int tid) {
+        HotTeamsVO hotTeamsVO = new HotTeamsVO();
+        hotTeamsVO.name = teamDataDefault.getTeamName()[tid - 1];
+        hotTeamsVO.id = tid;
+        hotTeamsVO.league = teamDataDefault.getLeague()[tid - 1];
+        hotTeamsVO.location = teamDataDefault.getLocation()[tid - 1];
+        hotTeamsVO.photo = teamDataDefault.getPhoto()[tid - 1];
+        return hotTeamsVO;
+    }
+
+    public int getTeamId(String teamName) {
+        return teamDataDefault.getTeamId(teamName);
     }
 }

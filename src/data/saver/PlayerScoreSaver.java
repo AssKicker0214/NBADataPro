@@ -1,5 +1,7 @@
 package data.saver;
 
+import vo.matchvo.MatchContentPlayerVO;
+
 import java.io.PrintStream;
 import java.util.ArrayList;
 
@@ -307,6 +309,16 @@ public class PlayerScoreSaver {
         return new PlayerData(date);
     }
 
+    public ArrayList<Integer> getMidPoint(String start, String end, int pid) {
+        ArrayList<Integer> res = new ArrayList<>();
+        for (int i = 0; i <= currentPoint; i++) {
+            if (pid == this.pid[i] && matchInfoSaver.isInDate(mid[i], start, end)) {
+                res.add(i);
+            }
+        }
+        return res;
+    }
+
     private class PidL5Mid {
 
         private long lastModifiedTime;
@@ -329,6 +341,7 @@ public class PlayerScoreSaver {
                 insert(i);
             }
         }
+
 
         /**
          * 插入一条记录
@@ -413,6 +426,17 @@ public class PlayerScoreSaver {
                 printStream.println(pid[i] + " " + mid[i]);
             }
         }
+    }
+
+    public ArrayList<Integer> getL5MidPoint(int pid) {
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        PidL5Mid pidL5Mid = getPidL5Mid();
+        for (int i = 0; i < pidL5Mid.getLength(); i++) {
+            if (pidL5Mid.pid[i] == pid) {
+                arrayList.add(pidL5Mid.getPointInL5Mid()[i]);
+            }
+        }
+        return arrayList;
     }
 
     private PidL5Mid pidL5Mid;
@@ -802,6 +826,10 @@ public class PlayerScoreSaver {
 
         public int[] getFoundTime() {
             return teamSaver.getFoundTime();
+        }
+
+        public int getTeamId(String teamName) {
+            return teamSaver.getTeamId(teamName);
         }
     }
 
@@ -1569,13 +1597,13 @@ public class PlayerScoreSaver {
             return p_matchNum;
         }
 
-        public PlayerData(String date){
+        public PlayerData(String date) {
             this.date = date;
 
             ArrayList<Integer> arrayList = new ArrayList<>();
-            for (int i = 0; i<=currentPoint;i++){
+            for (int i = 0; i <= currentPoint; i++) {
                 int mid = PlayerScoreSaver.this.mid[i];
-                if (date.equals(matchInfoSaver.getDate(mid))){
+                if (date.equals(matchInfoSaver.getDate(mid))) {
                     arrayList.add(i);
                 }
             }
@@ -1584,9 +1612,9 @@ public class PlayerScoreSaver {
             this.length = this.points.length;
         }
 
-        private int[] getArray(ArrayList<Integer> arrayList){
-            int[] res= new int[arrayList.size()];
-            for(int i = 0;i<res.length;i++){
+        private int[] getArray(ArrayList<Integer> arrayList) {
+            int[] res = new int[arrayList.size()];
+            for (int i = 0; i < res.length; i++) {
                 res[i] = arrayList.get(i);
             }
             return res;
@@ -1603,6 +1631,56 @@ public class PlayerScoreSaver {
         public int getNum() {
             return playerSaver.getNum();
         }
+
+        public int[] getTid() {
+            int[] tids = new int[playerSaver.getNum()];
+            for (int i = 0; i < tids.length; i++) {
+                tids[i] = p_tid_mid[i][0];
+            }
+            return tids;
+        }
+    }
+
+    public ArrayList<MatchContentPlayerVO>[] getTeamPlayer(int mid) {
+        ArrayList<MatchContentPlayerVO>[] matchContentPlayerVOs = new ArrayList[2];
+        int tid1 = matchInfoSaver.getTeamf()[mid - 1];
+        int tid2 = matchInfoSaver.getTeamf()[mid - 1];
+        for (int i = 0; i < currentPoint + 1; i++) {
+            if (PlayerScoreSaver.this.mid[i] == mid) {
+                MatchContentPlayerVO matchContentPlayerVO = getMatchContentPlayerVO(i);
+                if (tid1 == PlayerScoreSaver.this.tid[i]) {
+                    matchContentPlayerVOs[0].add(matchContentPlayerVO);
+                } else {
+                    matchContentPlayerVOs[1].add(matchContentPlayerVO);
+                }
+            }
+        }
+        return matchContentPlayerVOs;
+    }
+
+    public MatchContentPlayerVO getMatchContentPlayerVO(int i) {
+        int mid = PlayerScoreSaver.this.mid[i];
+        MatchContentPlayerVO matchContentPlayerVO = new MatchContentPlayerVO();
+        matchContentPlayerVO.date = matchInfoSaver.getDate(mid);
+        matchContentPlayerVO.vs = teamSaver.getTeamName()[PlayerScoreSaver.this.d_tid[i] - 1];
+        matchContentPlayerVO.name = playerSaver.getName()[PlayerScoreSaver.this.pid[i] - 1];
+        matchContentPlayerVO.position = PlayerScoreSaver.this.position[i - 1];
+        matchContentPlayerVO.minute = PlayerScoreSaver.this.inplacetime[i - 1];
+        matchContentPlayerVO.shot = PlayerScoreSaver.this.throwin[i - 1];
+        matchContentPlayerVO.shotA = PlayerScoreSaver.this.throwall[i - 1];
+        matchContentPlayerVO.three = PlayerScoreSaver.this.throw3in[i - 1];
+        matchContentPlayerVO.threeA = PlayerScoreSaver.this.throw3all[i - 1];
+        matchContentPlayerVO.penalty = PlayerScoreSaver.this.penaltyin[i - 1];
+        matchContentPlayerVO.penaltyA = PlayerScoreSaver.this.penaltyall[i - 1];
+        matchContentPlayerVO.offendRebound = PlayerScoreSaver.this.attackbas[i - 1];
+        matchContentPlayerVO.defendRebound = PlayerScoreSaver.this.defencebas[i - 1];
+        matchContentPlayerVO.rebound = PlayerScoreSaver.this.allbas[i - 1];
+        matchContentPlayerVO.assist = PlayerScoreSaver.this.helpatt[i - 1];
+        matchContentPlayerVO.blockShot = PlayerScoreSaver.this.block[i - 1];
+        matchContentPlayerVO.fault = PlayerScoreSaver.this.mistake[i - 1];
+        matchContentPlayerVO.foul = PlayerScoreSaver.this.foul[i - 1];
+        matchContentPlayerVO.point = PlayerScoreSaver.this.score[i - 1];
+        return matchContentPlayerVO;
     }
 
 }

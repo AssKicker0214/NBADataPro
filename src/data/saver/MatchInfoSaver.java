@@ -1,5 +1,7 @@
 package data.saver;
 
+import java.util.ArrayList;
+
 /**
  * Created by chenghao on 15/4/21.
  */
@@ -105,6 +107,59 @@ public class MatchInfoSaver {
 
     public int getNum() {
         return currentPoint + 1;
+    }
+
+    public int[] getHomePoint() {
+        return this.allscoref;
+    }
+
+    public int[] getGuestPoint() {
+        return this.allscorel;
+    }
+
+    public int[] getTeamf() {
+        return teamf;
+    }
+
+    public int[] getTeaml() {
+        return teaml;
+    }
+
+    public ArrayList<Integer> getFindRecentMatches_t(int tid) {
+        ArrayList<Integer> res  = new ArrayList<>();
+        TidL5Mid tidL5Mid = getTidL5Mid();
+        int[] points = tidL5Mid.getPointInL5Mid();
+        for (int i = 0;i<tidL5Mid.getLength();i++){
+            int j = points[i];
+            if ((teamf[j] == tid || teaml[j] == tid)){
+                res.add(j + 1);
+            }
+        }
+        return res;
+    }
+
+    public ArrayList<Integer> getMids(String start, String end) {
+        ArrayList<Integer> res = new ArrayList<>();
+        for (int i = 0; i <= currentPoint; i++){
+            if (matchtime[i].compareTo(start) >= 0 && matchtime[i].compareTo(end)<=0){
+                res.add(i + 1);
+            }
+        }
+        return res;
+    }
+
+    public  boolean isInDate(int i, String start, String end) {
+        return matchtime[i - 1].compareTo(start) >= 0 && matchtime[i - 1].compareTo(end) <= 0;
+    }
+
+    public ArrayList<Integer> getFindMatches_t(String start, String end, int tid) {
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        for (int i = 0; i<=currentPoint;i++){
+            if ((teamf[i] == tid || teaml[i] == tid) && matchtime[i].compareTo(start) >= 0 && matchtime[i].compareTo(end)<=0){
+                arrayList.add(i + 1);
+            }
+        }
+        return arrayList;
     }
 
     private class TidL5Mid {
