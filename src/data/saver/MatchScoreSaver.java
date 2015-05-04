@@ -1,5 +1,7 @@
 package data.saver;
 
+import java.util.ArrayList;
+
 /**
  * Created by chenghao on 15/4/26.
  */
@@ -74,5 +76,32 @@ public class MatchScoreSaver {
         for (int i = 0; i < currentPoint; i++){
             System.out.println(mid[i]+" "+ mindex[i]+" "+scoref[i]+" "+scorel[i]);
         }
+    }
+
+    public ArrayList<TeamScore> getTeamScores(int mid) {
+        ArrayList<TeamScore> arrayList = new ArrayList<>();
+        for (int i = 0; i< currentPoint + 1; i++){
+            if (mid == this.mid[i]){
+            TeamScore teamScore = new TeamScore();
+            teamScore.score1 = this.scoref[i];
+            teamScore.score2 = this.scorel[i];
+                arrayList.add(this.mindex[i] - 1, teamScore);}
+        }
+        return arrayList;
+    }
+
+    public ArrayList<TeamScore>[] getAllTeamScores(){
+        ArrayList<TeamScore>[] res = new ArrayList[MatchInfoSaver.getMatchInfoSaver().getNum()];
+        for (int i = 0; i< currentPoint + 1; i++){
+            int mid = this.mid[currentPoint];
+            if (res[mid - 1] == null){
+                res[mid - 1] = new ArrayList<>();
+            }
+            TeamScore teamScore = new TeamScore();
+            teamScore.score1 = this.scoref[i];
+            teamScore.score2 = this.scorel[i];
+            res[mid - 1].add(this.mindex[i] - 1,teamScore);
+        }
+        return res;
     }
 }
