@@ -134,6 +134,9 @@ public class PlayerMiddlePanel extends JPanel{
 				if(vsContentPanel != null){
 					remove(vsContentPanel);
 				}
+				if(seasonDataPanel != null){
+					remove(seasonDataPanel);
+				}
 				if(vsTopPanel != null){
 					remove(vsTopPanel);
 				}
@@ -176,6 +179,9 @@ public class PlayerMiddlePanel extends JPanel{
 				if(vsContentPanel != null){
 					remove(vsContentPanel);
 				}
+				if(seasonDataPanel != null){
+					remove(seasonDataPanel);
+				}
 				if(vsTopPanel != null){
 					remove(vsTopPanel);
 				}
@@ -216,6 +222,9 @@ public class PlayerMiddlePanel extends JPanel{
 				if(vsContentPanel != null){
 					remove(vsContentPanel);
 				}
+				if(seasonDataPanel != null){
+					remove(seasonDataPanel);
+				}
 				if(vsTopPanel != null){
 					remove(vsTopPanel);
 				}
@@ -245,9 +254,6 @@ public class PlayerMiddlePanel extends JPanel{
 			public void mousePressed(MouseEvent e) {
 				setSelectedGroups(ComparePalyersLabel);
 				setVisible(false);
-//				if(pastPanel != null){
-//					remove(pastPanel);
-//				}
 				if(contrastPanel != null){
 					remove(contrastPanel);
 				}
@@ -259,6 +265,9 @@ public class PlayerMiddlePanel extends JPanel{
 				}
 				if(vsContentPanel != null){
 					remove(vsContentPanel);
+				}
+				if(seasonDataPanel != null){
+					remove(seasonDataPanel);
 				}
 				if(playerDetailTopPanel != null){
 					remove(playerDetailTopPanel);

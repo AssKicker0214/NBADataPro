@@ -25,7 +25,7 @@ public class TeamSchedulePanel extends JPanel{
 	
 	public TeamSchedulePanel(){
 		this.setLayout(null);
-		this.setBounds(0,300,1280,450);
+		this.setBounds(0,260,1280,450);
 		this.setBackground(Color.WHITE);
 		setTitle();
 		setScheduleTablePanel();

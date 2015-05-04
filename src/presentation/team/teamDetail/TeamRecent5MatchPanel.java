@@ -23,7 +23,7 @@ public class TeamRecent5MatchPanel extends JPanel{
 	
 	public TeamRecent5MatchPanel(){
 		this.setLayout(null);
-		this.setBounds(0, 255,1280,400);
+		this.setBounds(0, 265,1280,400);
 		setRecent5MactchTitleLabel();
 		this.setBackground(Color.WHITE);
 		setTabel();
