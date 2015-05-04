@@ -21,7 +21,7 @@ public class MatchVO {
 	public int guestPoint_4;	//客场球队第四节得分
 	
 	public HotTeamsVO homeTeam; 	//主场球队,需要HotTeamsVO中除value以外的值
-	public HotTeamsVO GuestTeam; 	//客场球队,需要HotTeamsVO中除value以外的值
+	public HotTeamsVO guestTeam; 	//客场球队,需要HotTeamsVO中除value以外的值
 	
 	public ArrayList<MatchContentPlayerVO> homeTeamPlayer;	//主场球队上场球员
 	public ArrayList<MatchContentPlayerVO> guestTeamPlayer;	//客场球队上场球员

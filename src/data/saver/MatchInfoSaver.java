@@ -109,6 +109,22 @@ public class MatchInfoSaver {
         return currentPoint + 1;
     }
 
+    public int[] getHomePoint() {
+        return this.allscoref;
+    }
+
+    public int[] getGuestPoint() {
+        return this.allscorel;
+    }
+
+    public int[] getTeamf() {
+        return teamf;
+    }
+
+    public int[] getTeaml() {
+        return teaml;
+    }
+
     private class TidL5Mid {
         private long lastModifiedTime;
         private int length;
