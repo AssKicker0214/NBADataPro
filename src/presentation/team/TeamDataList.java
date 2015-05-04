@@ -372,12 +372,11 @@ public class TeamDataList extends JPanel{
 				ArrayList<TeamVO> vo = tds.findTeamBasic();
 		TeamVO2List v2l = new TeamVO2List();
 		ArrayList<ArrayList<String>> datas = v2l.highData(vo);
-				String[] tbHead = {"","姓名","助攻效率","抢断效率","防守效率","进攻效率","防守篮板率","进攻篮板率","进攻回合",
-					"抢断效率","胜率"};
+				String[] tbHead = {"","姓名","助攻效率","抢断效率","防守效率","进攻效率","防守篮板率","进攻篮板率","进攻回合","胜率"};
 			
 		ArrayList<Integer> wid = new ArrayList<Integer>();
 		wid.add(50);wid.add(150);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);
-		wid.add(100);wid.add(100);
+		wid.add(100);
 			
 		NormalInfoTable = new TeamTablePanel(datas,tbHead,wid,0,60,1280,320,50,true,true);
 		this.add(NormalInfoTable);
