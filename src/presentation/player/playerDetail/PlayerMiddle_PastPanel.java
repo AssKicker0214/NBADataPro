@@ -14,7 +14,6 @@ import javax.swing.JPanel;
 import dataservice.match.MatchDataService;
 import dataservice.match.MatchData_stub;
 import presentation.common.DateLabel;
-import presentation.common.MyCheckBoxLabel;
 import presentation.match.MatchVO2List;
 import presentation.table.TablePane;
 import vo.matchvo.MatchContentPlayerVO;
@@ -71,7 +70,6 @@ public class PlayerMiddle_PastPanel extends JPanel{
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
 			}
 			
 			@Override
@@ -84,7 +82,6 @@ public class PlayerMiddle_PastPanel extends JPanel{
 			@Override
 			public void mouseExited(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
 			}
 			
 			@Override
@@ -95,12 +92,9 @@ public class PlayerMiddle_PastPanel extends JPanel{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
 			}
 		});
 		CheckPastPanel.add(commit);
-
-		
 	}
 
 	

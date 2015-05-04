@@ -1,13 +1,17 @@
 package presentation.team.teamDetail;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import presentation.common.DateLabel;
 import presentation.table.TablePane;
 
 public class TeamSchedulePanel extends JPanel{
@@ -20,6 +24,8 @@ public class TeamSchedulePanel extends JPanel{
 	JLabel TitleLabel;
 	
 	TablePane scheduleInfoTable;
+	
+	JLabel commit;
 
 	Color entered = new Color(30,80,140);
 	
@@ -28,6 +34,7 @@ public class TeamSchedulePanel extends JPanel{
 		this.setBounds(0,260,1280,450);
 		this.setBackground(Color.WHITE);
 		setTitle();
+		setDate();
 		setScheduleTablePanel();
 	}
 	
@@ -40,6 +47,54 @@ public class TeamSchedulePanel extends JPanel{
 		TitleLabel.setBounds(0,0,1280,60);
 		this.add(TitleLabel);
 		this.updateUI();
+	}
+	
+	public void setDate(){
+		DateLabel calendarStart = new DateLabel();
+		calendarStart.setBounds(900,-25,100,100);
+		TitleLabel.add(calendarStart);
+	
+		DateLabel calendarEnd = new DateLabel();
+		calendarEnd.setBounds(1000,-25,100,100);
+		TitleLabel.add(calendarEnd);
+		
+		commit = new JLabel("commit");
+		commit.setForeground(Color.WHITE);
+		commit.setFont(new Font("Dialog",0,15));
+		commit.setBounds(1110,0,1280,50);
+		commit.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				commit.setFont(new Font("Dialog",1,15));
+				System.out.println(calendarStart.getSelectedDate().toString());
+				System.out.println(calendarEnd.getSelectedDate().toString());
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				commit.setCursor(new Cursor(Cursor.HAND_CURSOR));	
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		TitleLabel.add(commit);
 	}
 	
 	public void setScheduleTablePanel(){
@@ -68,7 +123,6 @@ public class TeamSchedulePanel extends JPanel{
 		scheduleInfoTable = new TablePane(datas,tbHead,wid,0,60,1280,300,30,true,false);
 		this.add(scheduleInfoTable);
 	}
-
 
 	public static void main(String[] args){
 		JFrame jf = new JFrame();

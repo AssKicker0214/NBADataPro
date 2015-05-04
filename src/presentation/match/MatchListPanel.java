@@ -1,6 +1,18 @@
 package presentation.match;
 
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Font;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import presentation.common.DateLabel;
+import presentation.table.TablePane;
 
 public class MatchListPanel extends JPanel{
 
@@ -9,5 +21,106 @@ public class MatchListPanel extends JPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	JLabel matchTitleLabel;
+	
+	JLabel tabelLabel;
+	
+	JLabel commit;
+	
+	public MatchListPanel(){
+		this.setLayout(null);
+		this.setBounds(0,155,1280,540);
+		setMatchTitleLabel();
+		setDate();
+		this.setBackground(Color.WHITE);
+		setTabel();
+	}
+	
+	public void setMatchTitleLabel(){
+		matchTitleLabel = new JLabel("  赛程",JLabel.LEADING);
+		matchTitleLabel.setFont(new Font("Dialog",1,20));
+		matchTitleLabel.setForeground(Color.WHITE);
+		matchTitleLabel.setBackground(new Color(33,82,138));
+		matchTitleLabel.setOpaque(true);
+		matchTitleLabel.setBounds(0,0,1280,70);
+		this.add(matchTitleLabel);
+	}
+	
+	public void setDate(){
+		DateLabel calendarStart = new DateLabel();
+		calendarStart.setBounds(900,0,100,70);
+		matchTitleLabel.add(calendarStart);
+	
+		DateLabel calendarEnd = new DateLabel();
+		calendarEnd.setBounds(1000,0,100,70);
+		matchTitleLabel.add(calendarEnd);
+		
+		commit = new JLabel("commit");
+		commit.setForeground(Color.WHITE);
+		commit.setFont(new Font("Dialog",0,18));
+		commit.setBounds(1110,10,100,50);
+		commit.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				commit.setFont(new Font("Dialog",1,15));
+				System.out.println(calendarStart.getSelectedDate().toString());
+				System.out.println(calendarEnd.getSelectedDate().toString());
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				commit.setCursor(new Cursor(Cursor.HAND_CURSOR));	
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+			}
+		});
+		matchTitleLabel.add(commit);
+	}
+	
+	public void setTabel(){
+		String[] columns = {"日期","对阵球队","总比分","第一节比分","第二节比分","第三节比分","第四节比分","比赛链接"};
+		
+		ArrayList<String> l = new ArrayList<String>();
+		for(int i = 0; i < 8;i++){
+			l.add("20.0");
+		}
+		ArrayList<ArrayList<String>> a = new ArrayList<ArrayList<String>>();
+		for(int i = 0; i < 500 ;i++){
+			a.add(l);
+		}
+		
+		ArrayList<Integer> w = new ArrayList<Integer>();
+		for(int i = 0; i < 8 ; i++){
+			w.add(160);
+		}
+
+		TablePane t = new TablePane(a,columns,w,0,70,1280,420,30,true,false);
+		this.add(t);
+	}
+	
+	public static void main(String[] args){
+		JFrame jf = new JFrame();
+		jf.setLayout(null);
+		jf.setSize(1280,700);
+		jf.setLocationRelativeTo(null);
+		
+		jf.add(new MatchListPanel());
+		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		jf.setVisible(true);
+	}
 
 }
