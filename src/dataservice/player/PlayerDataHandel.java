@@ -475,11 +475,11 @@ public class PlayerDataHandel implements PlayerDataService {
         arrayList.sort(new Comparator<HotPlayersVO>() {
             @Override
             public int compare(HotPlayersVO o1, HotPlayersVO o2) {
-                if (o1.upgradeRate > o2.upgradeRate) {
+                if (o1.value > o2.value){
                     return 1;
-                } else if (o1.upgradeRate == o2.upgradeRate) {
+                }else if (o1.value == o2.value){
                     return 0;
-                } else {
+                }else {
                     return -1;
                 }
             }
@@ -507,7 +507,20 @@ public class PlayerDataHandel implements PlayerDataService {
 
     @Override
     public ArrayList<HotPlayersVO> hotPlayer(int num, String sortBy) {
-        return null;
+        ArrayList<HotPlayersVO> arrayList = new PlayerDataManager().getUpgrade(sortBy);
+        arrayList.sort(new Comparator<HotPlayersVO>() {
+            @Override
+            public int compare(HotPlayersVO o1, HotPlayersVO o2) {
+                if (o1.upgradeRate > o2.upgradeRate) {
+                    return 1;
+                } else if (o1.upgradeRate == o2.upgradeRate) {
+                    return 0;
+                } else {
+                    return -1;
+                }
+            }
+        });
+        return arrayList;
     }
 
     @Override
