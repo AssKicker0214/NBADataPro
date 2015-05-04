@@ -30,6 +30,7 @@ public class TeamListPanel extends JPanel{
 		head1.setBackground(new Color(30,80,140));
 		head1.setBounds(0,0,564,50);
 		this.add(head1);
+
 		JLabel head2 = new JLabel(" 西部联盟");
 		head2.setFont(new Font("Dialog",1,30));
 		head2.setOpaque(true);
@@ -38,6 +39,7 @@ public class TeamListPanel extends JPanel{
 		head2.setBounds(565,0,564,50);		
 		this.add(head2);
 	}
+	
 	private void setDivisionHead(){
 		JLabel Divide1 = new JLabel(" 东南分区");
 		Divide1.setFont(new Font("Dialog",1,15));
@@ -45,38 +47,43 @@ public class TeamListPanel extends JPanel{
 		Divide1.setBackground(Color.LIGHT_GRAY);
 		Divide1.setBounds(0,50,188,30);
 		this.add(Divide1);
+		
 		JLabel Divide2 = new JLabel(" 中央分区");
 		Divide2.setFont(new Font("Dialog",1,15));
 		Divide2.setOpaque(true);
 		Divide2.setBackground(Color.LIGHT_GRAY);
 		Divide2.setBounds(188,50,188,30);
 		this.add(Divide2);
+		
 		JLabel Divide3 = new JLabel(" 大西洋分区");
 		Divide3.setFont(new Font("Dialog",1,15));
 		Divide3.setOpaque(true);
 		Divide3.setBackground(Color.LIGHT_GRAY);
 		Divide3.setBounds(376,50,188,30);
 		this.add(Divide3);
+		
 		JLabel Divide4 = new JLabel(" 太平洋分区");
 		Divide4.setFont(new Font("Dialog",1,15));
 		Divide4.setOpaque(true);
 		Divide4.setBackground(Color.LIGHT_GRAY);
 		Divide4.setBounds(565,50,188,30);
 		this.add(Divide4);
+		
 		JLabel Divide5 = new JLabel(" 西北分区");
 		Divide5.setFont(new Font("Dialog",1,15));
 		Divide5.setOpaque(true);
 		Divide5.setBackground(Color.LIGHT_GRAY);
 		Divide5.setBounds(753,50,188,30);
 		this.add(Divide5);
+		
 		JLabel Divide6 = new JLabel(" 西南分区");
 		Divide6.setFont(new Font("Dialog",1,15));
 		Divide6.setOpaque(true);
 		Divide6.setBackground(Color.LIGHT_GRAY);
 		Divide6.setBounds(941,50,188,30);
 		this.add(Divide6);
-		
 	}
+	
 	private void setTeams(){
 		JPanel TeamPanel = new JPanel();
 		TeamPanel.setLayout(new GridLayout(1,6,1,0));

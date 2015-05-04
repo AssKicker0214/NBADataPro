@@ -13,9 +13,11 @@ import javax.swing.JPanel;
 
 import presentation.floatui.FloatPane;
 import presentation.floatui.IMainFrameSize;
+import presentation.player.PlayerDataList;
 import presentation.statistics.hotPlayer.HotPlayerPanel;
 import presentation.statistics.playerKing.PlayerKingPanel;
 import presentation.statistics.teamKing.TeamKingPanel;
+import presentation.team.TeamListPanel;
 
 public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 
@@ -28,6 +30,8 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 	JPanel playerKing;
 	JPanel teamKing;
 	JPanel hotPlayer;
+	JPanel teamList;
+	JPanel playerList;
 	ArrayList<JPanel> mainParts = new ArrayList<JPanel>();
 	
 	public  Mainframe(){ 
@@ -131,9 +135,19 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 		this.add(hotPlayer);
 		hotPlayer.setVisible(false);
 		
+		teamList = new TeamListPanel();
+		this.add(teamList);
+		teamList.setVisible(false);
+		
+		playerList = new PlayerDataList();
+		this.add(playerList,0);
+		playerList.setVisible(false);
+		
 		mainParts.add(playerKing);
 		mainParts.add(teamKing);
 		mainParts.add(hotPlayer);
+		mainParts.add(teamList);
+		mainParts.add(playerList);
 	}
 	
 	private void changeMainPart(JPanel target){
@@ -165,6 +179,9 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 			case "热点球员": changeMainPart(playerKing); System.out.println(s);break;
 			case "热点球队": changeMainPart(teamKing); System.out.println(s);break;
 			case "进步球员": changeMainPart(hotPlayer);System.out.println(s);break;
+			case "球队": changeMainPart(teamList);System.out.println(s);break;
+			case "球员": changeMainPart(playerList);System.out.println(s);break;
+
 			default: break;
 		}
 	}

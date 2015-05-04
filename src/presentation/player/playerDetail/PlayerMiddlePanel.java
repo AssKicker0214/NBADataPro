@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import dataservice.player.PlayerDataService;
 import dataservice.player.PlayerData_stub;
 import presentation.common.SelectLabel;
-import presentation.player.vs.PlayerVSContentPanel;
+import presentation.player.vs.VSContentPanel;
 import presentation.player.vs.PlayersVSTopPanel;
 import vo.playervo.PlayerVO;
 
@@ -44,7 +44,7 @@ public class PlayerMiddlePanel extends JPanel{
 	PlayerMiddle_SeasonDataPanel seasonDataPanel;
 	PlayerMiddle_Recent5Match recent5MatchPanel;
 	PlayerMiddle_PastPanel pastPanel;
-	PlayerVSContentPanel vsContentPanel;
+	VSContentPanel vsContentPanel;
 	
 	PlayersVSTopPanel vsTopPanel;
 	JPanel playerDetailTopPanel;
@@ -327,7 +327,7 @@ public class PlayerMiddlePanel extends JPanel{
 		itemsNeedAdd.add("三分％"); 	avg1.add(30.0); avg2.add(34.5);
 		itemsNeedAdd.add("罚球％");	avg1.add(78.4); avg2.add(74.3);
 		//
-		vsContentPanel = new PlayerVSContentPanel(itemsNeedAdd,avg1,avg2);
+		vsContentPanel = new VSContentPanel(itemsNeedAdd,avg1,avg2);
 		this.add(vsContentPanel,0);
 		repaint();
 	}
