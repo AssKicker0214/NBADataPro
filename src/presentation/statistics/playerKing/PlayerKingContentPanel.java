@@ -45,7 +45,7 @@ public class PlayerKingContentPanel extends JPanel{
 		FirstPlayer.setBounds(0,0,520,345);
 		FirstPlayer.setBackground(Color.WHITE);
 		//添加数据王图片
-		PhotoLabel firstPlayerPhotoLabel = new PhotoLabel(new ImageIcon(vo.get(0).photo+".png").getImage());
+		PhotoLabel firstPlayerPhotoLabel = new PhotoLabel(new ImageIcon("actionPNG/"+vo.get(0).photo+".png").getImage());
 		firstPlayerPhotoLabel.setBounds(0,15,195,340);
 		firstPlayerPhotoLabel.setBackground(Color.WHITE);
 		firstPlayerPhotoLabel.setOpaque(true);
@@ -129,7 +129,7 @@ public class PlayerKingContentPanel extends JPanel{
 		top5.setBounds(630,0,510,372);
 		top5.setBackground(Color.WHITE);
 		for(int i=1;i<5;i++)
-			top5.add(player(vo.get(i).photo+".png",vo.get(i).name,vo.get(i).number+" "+vo.get(i).position+"/"+vo.get(i).teamName,vo.get(i).value+"","teamsPNG/"+vo.get(i).teamPhoto+".png"));
+			top5.add(player("portrait/"+vo.get(i).photo+".png",vo.get(i).name,vo.get(i).number+" "+vo.get(i).position+"/"+vo.get(i).teamName,vo.get(i).value+"","teamsPNG/"+vo.get(i).teamPhoto+".png"));
 	
 		this.add(top5);
 		

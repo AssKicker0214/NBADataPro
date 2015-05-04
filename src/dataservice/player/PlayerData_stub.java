@@ -7,52 +7,8 @@ import vo.playervo.PlayerVO;
 
 public class PlayerData_stub implements PlayerDataService{
 
-	@Override
-	public PlayerVO findPlayerData(int playerId, boolean isAvg) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
-	@Override
-	public ArrayList<PlayerVO> findPlayerData(String msg) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<PlayerVO> findPlayer() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<PlayerVO> sortPlayerNormal(ArrayList<sortParam> sortBy,
-			boolean isAvg) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<PlayerVO> sortPlayerHigh(ArrayList<sortParam> sortBy) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<PlayerVO> filterNormal(ArrayList<sortParam> sortBy,
-			ArrayList<String> position, ArrayList<String> league,
-			ArrayList<String> age, int num, boolean isAvg) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<PlayerVO> filterHigh(ArrayList<sortParam> sortBy,
-			ArrayList<String> position, ArrayList<String> league,
-			ArrayList<String> age, int num, boolean isAvg) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public ArrayList<HotPlayersVO> DailyKing(int num, String sortBy) {
@@ -63,15 +19,26 @@ public class PlayerData_stub implements PlayerDataService{
 		vo.photo = "Aaron Brooks";
 		vo.position = "F";
 		vo.teamName = "Hawks";
-		vo.teamPhoto = "ATL";
+		vo.teamPhoto = "BKN";
 		vo.value = 39;
+		HotPlayersVO vo3 = new HotPlayersVO();
+		vo3.name = "Aaron Brooks";
+		vo3.number = 12;
+		vo3.photo = "Aaron Brooks";
+		vo3.position = "F";
+		vo3.teamName = "Hawks";
+		vo3.teamPhoto = "ATL";
+		vo3.value = 39;
 		
-		result.add(vo);
+		if(sortBy.equals("avgPoint"))
+			result.add(vo);
+		else
+			result.add(vo3);
 		
 		HotPlayersVO vo2 = new HotPlayersVO();
 		vo2.name = "Aaron Brooks";
 		vo2.number = 12;
-		vo2.photo = "1";
+		vo2.photo = "Aaron Brooks";
 		vo2.position = "F";
 		vo2.teamName = "Hawks";
 		vo2.teamPhoto = "ATL";
@@ -95,13 +62,24 @@ public class PlayerData_stub implements PlayerDataService{
 		vo.teamName = "Hawks";
 		vo.teamPhoto = "ATL";
 		vo.value = 39;
+		HotPlayersVO vo3 = new HotPlayersVO();
+		vo3.name = "Aaron Brooks";
+		vo3.number = 12;
+		vo3.photo = "Aaron Brooks";
+		vo3.position = "F";
+		vo3.teamName = "Hawks";
+		vo3.teamPhoto = "BKN";
+		vo3.value = 39;
 		
-		result.add(vo);
+		if(sortBy.equals("avgPoint"))
+			result.add(vo);
+		else
+			result.add(vo3);
 		
 		HotPlayersVO vo2 = new HotPlayersVO();
 		vo2.name = "Aaron Brooks";
 		vo2.number = 12;
-		vo2.photo = "1";
+		vo2.photo = "Aaron Brooks";
 		vo2.position = "F";
 		vo2.teamName = "Hawks";
 		vo2.teamPhoto = "ATL";
@@ -127,16 +105,29 @@ public class PlayerData_stub implements PlayerDataService{
 		vo.upgradeRate = 39.98;
 		vo.value = 39;
 		
-		result.add(vo);
+		HotPlayersVO vo3 = new HotPlayersVO();
+		vo3.name = "Aaron Brooks";
+		vo3.number = 12;
+		vo3.photo = "Aaron Brooks";
+		vo3.position = "F";
+		vo3.teamName = "Hawks";
+		vo.upgradeRate = 39.98;
+		vo3.teamPhoto = "BKN";
+		vo3.value = 39;
+		
+		if(sortBy.equals("avgPoint"))
+			result.add(vo);
+		else
+			result.add(vo3);
 		
 		HotPlayersVO vo2 = new HotPlayersVO();
 		vo2.name = "Aaron Brooks";
 		vo2.number = 12;
-		vo2.photo = "1";
+		vo2.photo = "Aaron Brooks";
 		vo2.position = "F";
 		vo2.teamName = "Hawks";
 		vo2.teamPhoto = "ATL";
-		vo.upgradeRate = 39.98;
+		vo2.upgradeRate = 39.98;
 
 		vo2.value = 39;
 		result.add(vo2);
@@ -148,9 +139,106 @@ public class PlayerData_stub implements PlayerDataService{
 	}
 
 	@Override
+	public PlayerVO findPlayerData(int playerId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public PlayerVO findPlayerData(String msg) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<PlayerVO> sortPlayerInfo(ArrayList<sortParam> sortBy) {
+		ArrayList<PlayerVO> vol = new ArrayList<PlayerVO>();
+		PlayerVO vo1 = new PlayerVO();
+		vo1.photo = "Aaron Brooks";
+		vo1.name = "Aaron Brooks";
+		vol.add(vo1);
+		PlayerVO vo2 = new PlayerVO();
+		vo2.photo = "Aaron Gray";
+		vo2.name = "Aaron Gray";
+		vol.add(vo2);
+		return vol;
+	}
+
+	@Override
+	public ArrayList<PlayerVO> sortPlayerNormal(ArrayList<sortParam> sortBy) {
+		ArrayList<PlayerVO> vol = new ArrayList<PlayerVO>();
+		PlayerVO vo = new PlayerVO();
+		vo.photo = "Aaron Grey";
+		vo.name = "Aaron Grey";
+		vol.add(vo);
+		return vol;
+	}
+
+	@Override
+	public ArrayList<PlayerVO> sortPlayerNormalAvg(ArrayList<sortParam> sortBy) {
+		ArrayList<PlayerVO> vol = new ArrayList<PlayerVO>();
+		PlayerVO vo = new PlayerVO();
+		vo.photo = "Aaron Brooks";
+		vo.name = "Aaron Brooks";
+		vol.add(vo);
+		return vol;
+	}
+
+	@Override
+	public ArrayList<PlayerVO> sortPlayerHigh(ArrayList<sortParam> sortBy) {
+		ArrayList<PlayerVO> vol = new ArrayList<PlayerVO>();
+		PlayerVO vo = new PlayerVO();
+		vo.photo = "Aaron Brooks";
+		vo.name = "Aaron Brooks";
+		vol.add(vo);
+		return vol;
+	}
+
+	@Override
+	public ArrayList<PlayerVO> filterInfo(ArrayList<sortParam> sortBy,
+			ArrayList<String> position, ArrayList<String> league, int numS,
+			int numE) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<PlayerVO> filterNormal(ArrayList<sortParam> sortBy,
+			ArrayList<String> position, ArrayList<String> league, int numS,
+			int numE) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<PlayerVO> filterNormalAvg(ArrayList<sortParam> sortBy,
+			ArrayList<String> position, ArrayList<String> league, int numS,
+			int numE) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<PlayerVO> filterHigh(ArrayList<sortParam> sortBy,
+			ArrayList<String> position, ArrayList<String> league, int numS,
+			int numE) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public PlayerVO avgLeague(ArrayList<String> attributes) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
+	@Override
+	public ArrayList<PlayerVO> findPlayers(String msg) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 
 }

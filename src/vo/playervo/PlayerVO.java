@@ -12,6 +12,9 @@ public class PlayerVO {
 	public String position;		//球员位置信息
 	public char league;			//球员所属联盟
 	public int number;			//球员号码
+	public String hight;		//身高
+	public String weigth;		//体重
+	public String school;		//毕业学校
 
 	//normal info
 	public int 	age;				//球员年龄
@@ -24,7 +27,7 @@ public class PlayerVO {
 	public int 	minute;			//上场时间数（单位：分钟）
 	public int 	numOfGame;			//上场次数
 	public int 	offend;			//进攻数
-	public double 	penalty;		//投篮命中率
+	public double 	penalty;		//罚球命中率
 	public int 	point;			//得分
 	public int 	rebound;		//篮板数
 	public double 	shot;			//投篮命中率

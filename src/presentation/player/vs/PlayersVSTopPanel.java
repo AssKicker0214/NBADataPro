@@ -33,7 +33,7 @@ public class PlayersVSTopPanel extends JPanel{
 
 	public PlayersVSTopPanel(){
 		this.setLayout(null);
-		this.setBounds(0, 0, 1280,265);
+		this.setBounds(0, 0, 1280,197);
 		this.setBackground(Color.WHITE);
 		setLocalPlayerPhotoLabel();
 		setAnotherPlayerPhotoLabel();
@@ -48,7 +48,7 @@ public class PlayersVSTopPanel extends JPanel{
 	public void setLocalPlayerPhotoLabel (){
 		localPlayerPhotoLabel = new PhotoLabel(new ImageIcon("1.png").getImage());
 		localPlayerPhotoLabel.setHorizontalAlignment(JLabel.RIGHT);
-		localPlayerPhotoLabel.setBounds(300,20,230,180);
+		localPlayerPhotoLabel.setBounds(300,-5,230,150);
 		localPlayerPhotoLabel.setBackground(Color.WHITE);
 		localPlayerPhotoLabel.setOpaque(true);
 		localPlayerPhotoLabel.setVisible(true);
@@ -58,7 +58,7 @@ public class PlayersVSTopPanel extends JPanel{
 	public void setLocalTeamPhotoLabel (){
 		localTeamPhotoLabel = new PhotoLabel(new ImageIcon("teamsPNG/ATL.png").getImage());
 		localTeamPhotoLabel.setHorizontalAlignment(JLabel.RIGHT);
-		localTeamPhotoLabel.setBounds(140,20,250,150);
+		localTeamPhotoLabel.setBounds(140,-10,250,150);
 		localTeamPhotoLabel.setBackground(Color.WHITE);
 		localTeamPhotoLabel.setOpaque(true);
 		localTeamPhotoLabel.setVisible(true);
@@ -77,7 +77,7 @@ public class PlayersVSTopPanel extends JPanel{
 	public void setAnotherTeamPhotoLabel (){
 		anotherTeamPhotoLabel = new PhotoLabel(new ImageIcon("teamsPNG/ATL.png").getImage());
 		anotherTeamPhotoLabel.setHorizontalAlignment(JLabel.RIGHT);
-		anotherTeamPhotoLabel.setBounds(955,20,250,150);
+		anotherTeamPhotoLabel.setBounds(955,-10,250,150);
 		anotherTeamPhotoLabel.setBackground(Color.WHITE);
 		anotherTeamPhotoLabel.setOpaque(true);
 		anotherTeamPhotoLabel.setVisible(true);
@@ -87,7 +87,7 @@ public class PlayersVSTopPanel extends JPanel{
 	public void setAnotherPlayerPhotoLabel (){
 		anotherPlayerPhotoLabel = new PhotoLabel(new ImageIcon("1.png").getImage());
 		anotherPlayerPhotoLabel.setHorizontalAlignment(JLabel.RIGHT);
-		anotherPlayerPhotoLabel.setBounds(730,20,230,180);
+		anotherPlayerPhotoLabel.setBounds(730,-5,230,150);
 		anotherPlayerPhotoLabel.setBackground(Color.WHITE);
 		anotherPlayerPhotoLabel.setOpaque(true);
 		anotherPlayerPhotoLabel.setVisible(true);
@@ -96,7 +96,7 @@ public class PlayersVSTopPanel extends JPanel{
 	
 	public void setLocalInfoGroupsLabel(){
 		localInfoGroupsLabel = new JLabel();
-		localInfoGroupsLabel.setBounds(0,205,535,60);
+		localInfoGroupsLabel.setBounds(0,145,535,55);
 		localInfoGroupsLabel.setOpaque(true);
 		localInfoGroupsLabel.setBackground(light);
 
@@ -117,7 +117,7 @@ public class PlayersVSTopPanel extends JPanel{
 		JLabel playerPos = new JLabel("前锋"+" / "+"纽约",JLabel.CENTER);
 		playerPos.setFont(new Font("Dialog",1,15));
 		playerPos.setForeground(Color.WHITE);
-		playerPos.setBounds(390,40,180,15);
+		playerPos.setBounds(390,35,180,15);
 		localInfoGroupsLabel.add(playerPos);
 
 		this.add(localInfoGroupsLabel);
@@ -125,7 +125,7 @@ public class PlayersVSTopPanel extends JPanel{
 	
 	public void setAnotherInfoGroupsLabel(){
 		anotherInfoGroupsLabel = new JLabel();
-		anotherInfoGroupsLabel.setBounds(715,205,565,60);
+		anotherInfoGroupsLabel.setBounds(715,145,565,55);
 		anotherInfoGroupsLabel.setOpaque(true);
 		anotherInfoGroupsLabel.setBackground(light);
 		
@@ -146,7 +146,7 @@ public class PlayersVSTopPanel extends JPanel{
 		JLabel anotherPos = new JLabel("前锋"+" / "+"纽约");
 		anotherPos.setFont(new Font("Dialog",1,15));
 		anotherPos.setForeground(Color.WHITE);
-		anotherPos.setBounds(15,40,180,15);
+		anotherPos.setBounds(15,35,180,15);
 		anotherInfoGroupsLabel.add(anotherPos);
 
 		this.add(anotherInfoGroupsLabel);
@@ -158,7 +158,7 @@ public class PlayersVSTopPanel extends JPanel{
 		VSDownLabel.setForeground(Color.WHITE);
 		VSDownLabel.setBackground(lightest);
 		VSDownLabel.setOpaque(true);
-		VSDownLabel.setBounds(535,205,180,60);
+		VSDownLabel.setBounds(535,145,180,55);
 		this.add(VSDownLabel);
 
 	}

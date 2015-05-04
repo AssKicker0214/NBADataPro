@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.RenderingHints;
 import java.awt.geom.Line2D;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -35,13 +36,13 @@ public class PlayerMiddle_ContrastLeaguePanel extends JPanel {
 	
 	Color blue = new Color(56,167,230);
 	
-	public PlayerMiddle_ContrastLeaguePanel(){
+	public PlayerMiddle_ContrastLeaguePanel(ArrayList<Double> player,ArrayList<Double> leagueAvg){
 		this.setLayout(null);
 		this.setBounds(0, 250, 1280,180);
 		this.setBackground(Color.WHITE);
 		BarsGroupLabel = new JLabel();
 		setBottomTitle();
-		setBarsLabel();
+		setBarsLabel(player,leagueAvg);
 	}
 	
 	/*
@@ -119,7 +120,7 @@ public class PlayerMiddle_ContrastLeaguePanel extends JPanel {
 
 	}
 	
-	public void setBarsLabel(){
+	public void setBarsLabel(ArrayList<Double> player,ArrayList<Double> leagueAvg){
 		JLabel LeagueContrastTextLabel = new JLabel("联盟对比",JLabel.CENTER);
 		LeagueContrastTextLabel.setFont(new Font("Dialog",1,20));
 		LeagueContrastTextLabel.setForeground(Color.GRAY);
@@ -132,11 +133,11 @@ public class PlayerMiddle_ContrastLeaguePanel extends JPanel {
 		BarsGroupLabel.setOpaque(true);
 		BarsGroupLabel.setVisible(true);
 
-		JLabel FS_BarLabel = new SingleBarLabel(20.1,50.9,blue,100,100);
-		JLabel REB_BarLabel = new SingleBarLabel(20.1,60.9,blue,100,100);
-		JLabel Assist_BarLabel = new SingleBarLabel(20.1,80.9,blue,100,100);
-		JLabel FTP_BarLabel = new SingleBarLabel(20.1,30.9,blue,100,100);
-		JLabel TPTP_BarLabel = new SingleBarLabel(20.1,30.9,blue,100,100);
+		JLabel FS_BarLabel = new SingleBarLabel(player.get(0),leagueAvg.get(0),blue,100,100);
+		JLabel REB_BarLabel = new SingleBarLabel(player.get(1),leagueAvg.get(1),blue,100,100);
+		JLabel Assist_BarLabel = new SingleBarLabel(player.get(2),leagueAvg.get(2),blue,100,100);
+		JLabel FTP_BarLabel = new SingleBarLabel(player.get(3),leagueAvg.get(3),blue,100,100);
+		JLabel TPTP_BarLabel = new SingleBarLabel(player.get(4),leagueAvg.get(4),blue,100,100);
 
 		BarsGroupLabel.removeAll();
 		BarsGroupLabel.add(FS_BarLabel);
@@ -153,7 +154,14 @@ public class PlayerMiddle_ContrastLeaguePanel extends JPanel {
 		jf.setLayout(null);
 		jf.setSize(1280,700);
 		jf.setLocationRelativeTo(null);
-		jf.add(new PlayerMiddle_ContrastLeaguePanel());
+		ArrayList<Double> player = new ArrayList<Double>();
+		ArrayList<Double> leagueAvg = new ArrayList<Double>();
+		player.add(20.5);leagueAvg.add(30.7);
+		player.add(20.5);leagueAvg.add(30.7);
+		player.add(20.5);leagueAvg.add(30.7);
+		player.add(20.5);leagueAvg.add(30.7);
+		player.add(20.5);leagueAvg.add(30.7);
+		jf.add(new PlayerMiddle_ContrastLeaguePanel(player,leagueAvg));
 		jf.setVisible(true);
 	}
 	
