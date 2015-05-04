@@ -28,6 +28,9 @@ public class TeamTablePanel extends TablePane{
 			datas = sp.TeamNormalAvgHandler(sortBy, isDesc);
 		else if(type == ListType.high)
 			datas = sp.TeamHighHandler(sortBy, isDesc);
+		
+		if(datas.size()==0)
+			return;
 		getRows(datas);
 	}
 

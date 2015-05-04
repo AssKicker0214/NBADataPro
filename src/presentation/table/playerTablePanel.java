@@ -28,6 +28,9 @@ public class playerTablePanel extends TablePane{
 			datas = sp.PlayerNormalAvgHandler(sortBy, isDesc);
 		else if(type == ListType.high)
 			datas = sp.PlayerHighHandler(sortBy, isDesc);
+		
+		if(datas.size()==0)
+			return;
 		getRows(datas);
 	}
 
