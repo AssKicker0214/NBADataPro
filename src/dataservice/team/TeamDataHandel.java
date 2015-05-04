@@ -1,7 +1,9 @@
 package dataservice.team;
 
+import data.PlayerDataManager;
 import data.TeamDataManager;
 import data.saver.PlayerScoreSaver;
+import dataservice.player.PlayerDataHandel;
 import vo.playervo.PlayerVO;
 import vo.teamvo.HotTeamsVO;
 import vo.teamvo.TeamVO;
@@ -267,7 +269,7 @@ public class TeamDataHandel implements TeamDataService {
 
     @Override
     public ArrayList<PlayerVO> teamMemberList(int teamID) {
-        return null;
+        return new PlayerDataHandel().getTeamPlayerVOs( teamID);
     }
 
 
