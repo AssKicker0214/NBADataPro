@@ -163,8 +163,8 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 		// TODO Auto-generated method stub
 		switch(s){
 			case "热点球员": changeMainPart(playerKing); System.out.println(s);break;
-			case "热点球队": changeMainPart(teamKing);break;
-			case "进步球员": changeMainPart(hotPlayer);break;
+			case "热点球队": changeMainPart(teamKing); System.out.println(s);break;
+			case "进步球员": changeMainPart(hotPlayer);System.out.println(s);break;
 			default: break;
 		}
 	}
