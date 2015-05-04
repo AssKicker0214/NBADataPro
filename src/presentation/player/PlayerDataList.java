@@ -140,6 +140,7 @@ public class PlayerDataList  extends JPanel{
 		NormalInfoButton = new SelectLabel("基础",p1,p2,entered,pressed,exicted);
 		NormalInfoButton.setForeground(Color.WHITE);
 		NormalInfoButton.setBackground(exicted);
+		NormalInfoButton.setOpaque(true);
 		NormalInfoButton.addMouseListener(new NormalInfoButtonListener());
 		ButtonsBGLabel.add(NormalInfoButton);
 	}
@@ -202,6 +203,7 @@ public class PlayerDataList  extends JPanel{
 		AvgNormalInfoButton = new SelectLabel("场均",p1,p2,entered,pressed,exicted);
 		AvgNormalInfoButton.setForeground(Color.WHITE);
 		AvgNormalInfoButton.setBackground(exicted);
+		AvgNormalInfoButton.setOpaque(true);
 		AvgNormalInfoButton.addMouseListener(new AvgNormalInfoButtonListener());
 		ButtonsBGLabel.add(AvgNormalInfoButton);
 	}
@@ -220,9 +222,9 @@ public class PlayerDataList  extends JPanel{
 
 			setVisible(false);
 			setButtonsBGLabel();
-			NormalInfoButton.isSelected = true;
-			NormalInfoButton.setBackground(pressed);
-			setSelectedGroups(NormalInfoButton);
+			AvgNormalInfoButton.isSelected = true;
+			AvgNormalInfoButton.setBackground(pressed);
+			setSelectedGroups(AvgNormalInfoButton);
 			
 			if(BasicInfoTable!=null)
 				PlayerDataList.this.remove(BasicInfoTable);
@@ -262,6 +264,7 @@ public class PlayerDataList  extends JPanel{
 		HighInfoButton = new SelectLabel("高阶",p1,p2,entered,pressed,exicted);
 		HighInfoButton.setForeground(Color.WHITE);
 		HighInfoButton.setBackground(exicted);
+		HighInfoButton.setOpaque(true);
 		HighInfoButton.addMouseListener(new HighInfoButtonListener());
 		ButtonsBGLabel.add(HighInfoButton);
 	}

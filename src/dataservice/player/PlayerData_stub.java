@@ -145,9 +145,12 @@ public class PlayerData_stub implements PlayerDataService{
 	}
 
 	@Override
-	public PlayerVO findPlayerData(String msg) {
-		// TODO Auto-generated method stub
-		return null;
+	public PlayerVO findPlayerData(String name) {
+		PlayerVO vo = new PlayerVO();
+		vo.photo = "Aaron Gray";
+		vo.name = "Aaron Gray";
+		vo.team = "Hawks";
+		return vo;
 	}
 
 	@Override
@@ -228,8 +231,9 @@ public class PlayerData_stub implements PlayerDataService{
 
 	@Override
 	public PlayerVO avgLeague(ArrayList<String> attributes) {
-		// TODO Auto-generated method stub
-		return null;
+		PlayerVO vo = new PlayerVO();
+		vo.avgPoint = 5;
+		return vo;
 	}
 
 	
