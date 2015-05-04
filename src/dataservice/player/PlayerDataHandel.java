@@ -93,23 +93,10 @@ public class PlayerDataHandel implements PlayerDataService {
         return playVOs;
     }
 
-    @Override
-    public ArrayList<PlayerVO> findPlayer() {
+    private ArrayList<PlayerVO> findPlayer() {
         ArrayList<PlayerVO> arrayList = new PlayerDataManager().getPlayerVOs(getAllInformation(), PlayerDataManager.DEFAULT);
 
         return arrayList;
-    }
-
-    @Override
-    public ArrayList<PlayerVO> sortPlayerNormal(ArrayList<sortParam> sortBy, boolean isAvg) {
-        ArrayList<PlayerVO> playVOs;
-        if (isAvg) {
-            playVOs = new PlayerDataManager().getPlayerVOs(getAvgNormalInfo(), PlayerDataManager.DEFAULT);
-        } else {
-            playVOs = new PlayerDataManager().getPlayerVOs(getNormalInfo(), PlayerDataManager.DEFAULT);
-        }
-        playVOs.sort(new ComparePlayVO(sortBy));
-        return playVOs;
     }
 
     public String getToday() {
@@ -396,37 +383,21 @@ public class PlayerDataHandel implements PlayerDataService {
 
     @Override
     public ArrayList<PlayerVO> filterInfo(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, int numS, int numE) {
-        return null;
+        return filter(getInformation(),sortBy,position,league,numS,numE);
     }
 
     @Override
     public ArrayList<PlayerVO> filterNormal(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, int numS, int numE) {
-        return null;
+        return filter(getNormalInfo(),sortBy,position,league,numS,numE);
     }
 
     @Override
     public ArrayList<PlayerVO> filterNormalAvg(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, int numS, int numE) {
-        return null;
+        return filter(getAvgNormalInfo(),sortBy,position,league,numS,numE);
     }
 
     @Override
     public ArrayList<PlayerVO> filterHigh(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, int numS, int numE) {
-        return null;
-    }
-
-    @Override
-    public ArrayList<PlayerVO> filterNormal(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, int numS, int numE, boolean isAvg) {
-        ArrayList<String> attributes;
-        if (isAvg){
-            attributes = getAvgNormalInfo();
-        }else {
-            attributes = getNormalInfo();
-        }
-        return filter(attributes,sortBy,position,league,numS,numE);
-    }
-
-    @Override
-    public ArrayList<PlayerVO> filterHigh(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, int numS, int numE, boolean isAvg) {
         return filter(getHighInfo(),sortBy,position,league,numS,numE);
     }
 
