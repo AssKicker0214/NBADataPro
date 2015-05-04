@@ -8,8 +8,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import dataservice.match.MatchDataService;
+import dataservice.match.MatchData_stub;
 import presentation.common.DateLabel;
+import presentation.match.MatchVO2List;
 import presentation.table.TablePane;
+import vo.matchvo.MatchContentPlayerVO;
 
 public class PlayerMiddle_PastPanel extends JPanel{
 
@@ -58,24 +62,21 @@ public class PlayerMiddle_PastPanel extends JPanel{
 
 	
 	public void setTabel(String playerName){
+		MatchDataService mds = new MatchData_stub();
+		ArrayList<MatchContentPlayerVO> vo = mds.FindRecentMatches_p(5, playerName);
 		String[] columns = {"日期","对手","分钟","％","命中","出手","三分％","罚球％",
-				"进攻","防守","篮板","助攻","抢断","盖帽","失误","犯规","得分"};
+				"进攻篮板","防守篮板","篮板","助攻","盖帽","失误","犯规","得分"};
 				
-		ArrayList<String> l = new ArrayList<String>();
-		for(int i = 0; i < 17;i++){
-			l.add("20.0");
-		}
-		ArrayList<ArrayList<String>> a = new ArrayList<ArrayList<String>>();
-		for(int i = 0; i < 25 ;i++){
-			a.add(l);
-		}
+		MatchVO2List m2l = new MatchVO2List();
+		ArrayList<ArrayList<String>> datas = m2l.playerDeitail(vo);
 		
 		ArrayList<Integer> w = new ArrayList<Integer>();
-		for(int i = 0; i < 17 ; i++){
-			w.add(85);
+		w.add(200);w.add(200);
+		for(int i = 0; i < 14 ; i++){
+			w.add(60);
 		}
 
-		TablePane t = new TablePane(a,columns,w,0,50,1280,340,30,true,false);
+		TablePane t = new TablePane(datas,columns,w,0,50,1280,400,60,true,false);
 		this.add(t);
 	}
 	

@@ -40,10 +40,17 @@ public class MatchData_stub implements MatchDataService{
 	}
 
 	@Override
-	public ArrayList<MatchVO> findByDP(String start, String end,
+	public ArrayList<MatchContentPlayerVO> findByDP(String start, String end,
 			String playerName) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<MatchContentPlayerVO> result = new ArrayList<MatchContentPlayerVO>();
+		MatchContentPlayerVO vo1 = new MatchContentPlayerVO();
+		vo1.date = "2014-1-1";
+		result.add(vo1);
+		MatchContentPlayerVO vo2 = new MatchContentPlayerVO();
+		vo2.date = "2015-1-1";
+		result.add(vo2);
+		
+		return result;
 	}
 
 	@Override
