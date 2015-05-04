@@ -2,6 +2,7 @@ package data;
 
 import data.saver.PlayerSaver;
 import data.saver.PlayerScoreSaver;
+import vo.playervo.HotPlayersVO;
 import vo.playervo.PlayerVO;
 
 import java.util.ArrayList;
@@ -221,5 +222,120 @@ public class PlayerDataManager {
         return 0;
     }
 
+    private void setHotPlayerValue(String sortBy,HotPlayersVO hotPlayersVO,PlayerScoreSaver.PlayerData playerData){
 
+    }
+
+    private void setUpgrade(String sortBy,HotPlayersVO hotPlayersVO){
+        switch (sortBy){
+            case "assist":
+                hotPlayersVO.upgradeRate = (playerDataBefore.getAssist()[hotPlayersVO.id - 1]) <= 0?-1:((double)playerDataL5.getAssist()[hotPlayersVO.id - 1] -playerDataBefore.getAssist()[hotPlayersVO.id - 1])/(playerDataBefore.getAssist()[hotPlayersVO.id - 1]);
+                return;
+            case "blockShot":
+                hotPlayersVO.upgradeRate = (playerDataBefore.getBlockShot()[hotPlayersVO.id - 1]) <= 0?-1:((double)playerDataL5.getBlockShot()[hotPlayersVO.id - 1] -playerDataBefore.getBlockShot()[hotPlayersVO.id - 1])/(playerDataBefore.getBlockShot()[hotPlayersVO.id - 1]);
+                return;
+            case "defend":
+                hotPlayersVO.upgradeRate = (playerDataBefore.getDefend()[hotPlayersVO.id - 1]) <= 0?-1:((double)playerDataL5.getDefend()[hotPlayersVO.id - 1] -playerDataBefore.getDefend()[hotPlayersVO.id - 1])/(playerDataBefore.getDefend()[hotPlayersVO.id - 1]);
+                return;
+            case "efficiency":
+                hotPlayersVO.upgradeRate = (playerDataBefore.getEfficiency()[hotPlayersVO.id - 1]) <= 0?-1:((double)playerDataL5.getEfficiency()[hotPlayersVO.id - 1] -playerDataBefore.getEfficiency()[hotPlayersVO.id - 1])/(playerDataBefore.getEfficiency()[hotPlayersVO.id - 1]);
+                return;
+            case "fault":
+                hotPlayersVO.upgradeRate = (playerDataBefore.getFault()[hotPlayersVO.id - 1]) <= 0?-1:((double)playerDataL5.getFault()[hotPlayersVO.id - 1] -playerDataBefore.getFault()[hotPlayersVO.id - 1])/(playerDataBefore.getFault()[hotPlayersVO.id - 1]);
+                return;
+            case "minute":
+                hotPlayersVO.upgradeRate = (playerDataBefore.getMinute()[hotPlayersVO.id - 1]) <= 0?-1:((double)playerDataL5.getMinute()[hotPlayersVO.id - 1] -playerDataBefore.getMinute()[hotPlayersVO.id - 1])/(playerDataBefore.getMinute()[hotPlayersVO.id - 1]);
+                return;
+            case "numOfGame":
+                hotPlayersVO.upgradeRate = (playerDataBefore.getNumOfGame()[hotPlayersVO.id - 1]) <= 0?-1:((double)playerDataL5.getNumOfGame()[hotPlayersVO.id - 1] -playerDataBefore.getNumOfGame()[hotPlayersVO.id - 1])/(playerDataBefore.getNumOfGame()[hotPlayersVO.id - 1]);
+                return;
+            case "offend":
+                hotPlayersVO.upgradeRate = (playerDataBefore.getOffend()[hotPlayersVO.id - 1]) <= 0?-1:((double)playerDataL5.getOffend()[hotPlayersVO.id - 1] -playerDataBefore.getOffend()[hotPlayersVO.id - 1])/(playerDataBefore.getOffend()[hotPlayersVO.id - 1]);
+                return;
+            case "penalty":
+                hotPlayersVO.upgradeRate = (playerDataBefore.getPenalty()[hotPlayersVO.id - 1]) <= 0?-1:((double)playerDataL5.getPenalty()[hotPlayersVO.id - 1] -playerDataBefore.getPenalty()[hotPlayersVO.id - 1])/(playerDataBefore.getPenalty()[hotPlayersVO.id - 1]);
+                return;
+            case "point":
+                hotPlayersVO.upgradeRate = (playerDataBefore.getPoint()[hotPlayersVO.id - 1]) <= 0?-1:((double)playerDataL5.getPoint()[hotPlayersVO.id - 1] -playerDataBefore.getPoint()[hotPlayersVO.id - 1])/(playerDataBefore.getPoint()[hotPlayersVO.id - 1]);
+                return;
+            case "rebound":
+                hotPlayersVO.upgradeRate = (playerDataBefore.getRebound()[hotPlayersVO.id - 1]) <= 0?-1:((double)playerDataL5.getRebound()[hotPlayersVO.id - 1] -playerDataBefore.getRebound()[hotPlayersVO.id - 1])/(playerDataBefore.getRebound()[hotPlayersVO.id - 1]);
+                return;
+            case "shot":
+                hotPlayersVO.upgradeRate = (playerDataBefore.getShot()[hotPlayersVO.id - 1]) <= 0?-1:((double)playerDataL5.getShot()[hotPlayersVO.id - 1] -playerDataBefore.getShot()[hotPlayersVO.id - 1])/(playerDataBefore.getShot()[hotPlayersVO.id - 1]);
+                return;
+            case "start":
+                hotPlayersVO.upgradeRate = (playerDataBefore.getStart()[hotPlayersVO.id - 1]) <= 0?-1:((double)playerDataL5.getStart()[hotPlayersVO.id - 1] -playerDataBefore.getStart()[hotPlayersVO.id - 1])/(playerDataBefore.getStart()[hotPlayersVO.id - 1]);
+                return;
+            case "steal":
+                hotPlayersVO.upgradeRate = (playerDataBefore.getSteal()[hotPlayersVO.id - 1]) <= 0?-1:((double)playerDataL5.getSteal()[hotPlayersVO.id - 1] -playerDataBefore.getSteal()[hotPlayersVO.id - 1])/(playerDataBefore.getSteal()[hotPlayersVO.id - 1]);
+                return;
+            case "three":
+                hotPlayersVO.upgradeRate = (playerDataBefore.getThree()[hotPlayersVO.id - 1]) <= 0?-1:((double)playerDataL5.getThree()[hotPlayersVO.id - 1] -playerDataBefore.getThree()[hotPlayersVO.id - 1])/(playerDataBefore.getThree()[hotPlayersVO.id - 1]);
+                return;
+            case "avgAssist":
+                hotPlayersVO.upgradeRate = (playerDataBefore.getAvgAssist()[hotPlayersVO.id - 1]) <= 0?-1:((double)playerDataL5.getAvgAssist()[hotPlayersVO.id - 1] -playerDataBefore.getAvgAssist()[hotPlayersVO.id - 1])/(playerDataBefore.getAvgAssist()[hotPlayersVO.id - 1]);
+                return;
+            case "avgBlockShot":
+                hotPlayersVO.upgradeRate = (playerDataBefore.getAvgBlockShot()[hotPlayersVO.id - 1]) <= 0?-1:((double)playerDataL5.getAvgBlockShot()[hotPlayersVO.id - 1] -playerDataBefore.getAvgBlockShot()[hotPlayersVO.id - 1])/(playerDataBefore.getAvgBlockShot()[hotPlayersVO.id - 1]);
+                return;
+            case "avgDefend":
+                hotPlayersVO.upgradeRate = (playerDataBefore.getAvgDefend()[hotPlayersVO.id - 1]) <= 0?-1:((double)playerDataL5.getAvgDefend()[hotPlayersVO.id - 1] -playerDataBefore.getAvgDefend()[hotPlayersVO.id - 1])/(playerDataBefore.getAvgDefend()[hotPlayersVO.id - 1]);
+                return;
+            case "avgFault":
+                hotPlayersVO.upgradeRate = (playerDataBefore.getAvgFault()[hotPlayersVO.id - 1]) <= 0?-1:((double)playerDataL5.getAvgFault()[hotPlayersVO.id - 1] -playerDataBefore.getAvgFault()[hotPlayersVO.id - 1])/(playerDataBefore.getAvgFault()[hotPlayersVO.id - 1]);
+                return;
+            case "avgFoul":
+                hotPlayersVO.upgradeRate = (playerDataBefore.getAvgFoul()[hotPlayersVO.id - 1]) <= 0?-1:((double)playerDataL5.getAvgFoul()[hotPlayersVO.id - 1] -playerDataBefore.getAvgFoul()[hotPlayersVO.id - 1])/(playerDataBefore.getAvgFoul()[hotPlayersVO.id - 1]);
+                return;
+            case "avgMinute":
+                hotPlayersVO.upgradeRate = (playerDataBefore.getAvgMinute()[hotPlayersVO.id - 1]) <= 0?-1:((double)playerDataL5.getAvgMinute()[hotPlayersVO.id - 1] -playerDataBefore.getAvgMinute()[hotPlayersVO.id - 1])/(playerDataBefore.getAvgMinute()[hotPlayersVO.id - 1]);
+                return;
+            case "avgOffend":
+                hotPlayersVO.upgradeRate = (playerDataBefore.getAvgOffend()[hotPlayersVO.id - 1]) <= 0?-1:((double)playerDataL5.getAvgOffend()[hotPlayersVO.id - 1] -playerDataBefore.getAvgOffend()[hotPlayersVO.id - 1])/(playerDataBefore.getAvgOffend()[hotPlayersVO.id - 1]);
+                return;
+            case "avgPoint":
+                hotPlayersVO.upgradeRate = (playerDataBefore.getAvgPoint()[hotPlayersVO.id - 1]) <= 0?-1:((double)playerDataL5.getAvgPoint()[hotPlayersVO.id - 1] -playerDataBefore.getAvgPoint()[hotPlayersVO.id - 1])/(playerDataBefore.getAvgPoint()[hotPlayersVO.id - 1]);
+                return;
+            case "avgRebound":
+                hotPlayersVO.upgradeRate = (playerDataBefore.getAvgRebound()[hotPlayersVO.id - 1]) <= 0?-1:((double)playerDataL5.getAvgRebound()[hotPlayersVO.id - 1] -playerDataBefore.getAvgRebound()[hotPlayersVO.id - 1])/(playerDataBefore.getAvgRebound()[hotPlayersVO.id - 1]);
+                return;
+            case "avgSteal":
+                hotPlayersVO.upgradeRate = (playerDataBefore.getAvgSteal()[hotPlayersVO.id - 1]) <= 0?-1:((double)playerDataL5.getAvgSteal()[hotPlayersVO.id - 1] -playerDataBefore.getAvgSteal()[hotPlayersVO.id - 1])/(playerDataBefore.getAvgSteal()[hotPlayersVO.id - 1]);
+                return;
+            case "assistEfficient":
+                hotPlayersVO.upgradeRate = (playerDataBefore.getAssistEfficient()[hotPlayersVO.id - 1]) <= 0?-1:((double)playerDataL5.getAssistEfficient()[hotPlayersVO.id - 1] -playerDataBefore.getAssistEfficient()[hotPlayersVO.id - 1])/(playerDataBefore.getAssistEfficient()[hotPlayersVO.id - 1]);
+                return;
+            case "blockShotEfficient":
+                hotPlayersVO.upgradeRate = (playerDataBefore.getAvgBlockShot()[hotPlayersVO.id - 1]) <= 0?-1:((double)playerDataL5.getAvgBlockShot()[hotPlayersVO.id - 1] -playerDataBefore.getAvgBlockShot()[hotPlayersVO.id - 1])/(playerDataBefore.getAvgBlockShot()[hotPlayersVO.id - 1]);
+                return;
+            case "defendReboundEfficient":
+                hotPlayersVO.upgradeRate = (playerDataBefore.getDefendReboundEfficient()[hotPlayersVO.id - 1]) <= 0?-1:((double)playerDataL5.getDefendReboundEfficient()[hotPlayersVO.id - 1] -playerDataBefore.getDefendReboundEfficient()[hotPlayersVO.id - 1])/(playerDataBefore.getDefendReboundEfficient()[hotPlayersVO.id - 1]);
+                return;
+            case "faultEfficient":
+                hotPlayersVO.upgradeRate = (playerDataBefore.getFaultEfficient()[hotPlayersVO.id - 1]) <= 0?-1:((double)playerDataL5.getFaultEfficient()[hotPlayersVO.id - 1] -playerDataBefore.getFaultEfficient()[hotPlayersVO.id - 1])/(playerDataBefore.getFaultEfficient()[hotPlayersVO.id - 1]);
+                return;
+            case "frequency":
+                hotPlayersVO.upgradeRate = (playerDataBefore.getFrequency()[hotPlayersVO.id - 1]) <= 0?-1:((double)playerDataL5.getFrequency()[hotPlayersVO.id - 1] -playerDataBefore.getFrequency()[hotPlayersVO.id - 1])/(playerDataBefore.getFrequency()[hotPlayersVO.id - 1]);
+                return;
+            case "gmSc":
+                hotPlayersVO.upgradeRate = (playerDataBefore.getGmSc()[hotPlayersVO.id - 1]) <= 0?-1:((double)playerDataL5.getGmSc()[hotPlayersVO.id - 1] -playerDataBefore.getGmSc()[hotPlayersVO.id - 1])/(playerDataBefore.getGmSc()[hotPlayersVO.id - 1]);
+                return;
+            case "offendReboundEfficient":
+                hotPlayersVO.upgradeRate = (playerDataBefore.getOffendReboundEfficient()[hotPlayersVO.id - 1]) <= 0?-1:((double)playerDataL5.getOffendReboundEfficient()[hotPlayersVO.id - 1] -playerDataBefore.getOffendReboundEfficient()[hotPlayersVO.id - 1])/(playerDataBefore.getOffendReboundEfficient()[hotPlayersVO.id - 1]);
+                return;
+            case "realShot":
+                hotPlayersVO.upgradeRate = (playerDataBefore.getRealShot()[hotPlayersVO.id - 1]) <= 0?-1:((double)playerDataL5.getRealShot()[hotPlayersVO.id - 1] -playerDataBefore.getRealShot()[hotPlayersVO.id - 1])/(playerDataBefore.getRealShot()[hotPlayersVO.id - 1]);
+                return;
+            case "reboundEfficient":
+                hotPlayersVO.upgradeRate = (playerDataBefore.getReboundEfficient()[hotPlayersVO.id - 1]) <= 0?-1:((double)playerDataL5.getReboundEfficient()[hotPlayersVO.id - 1] -playerDataBefore.getReboundEfficient()[hotPlayersVO.id - 1])/(playerDataBefore.getReboundEfficient()[hotPlayersVO.id - 1]);
+                return;
+            case "shotEfficient":
+                hotPlayersVO.upgradeRate = (playerDataBefore.getShotEfficient()[hotPlayersVO.id - 1]) <= 0?-1:((double)playerDataL5.getShotEfficient()[hotPlayersVO.id - 1] -playerDataBefore.getShotEfficient()[hotPlayersVO.id - 1])/(playerDataBefore.getShotEfficient()[hotPlayersVO.id - 1]);
+                return;
+            case "stealEfficient":
+                hotPlayersVO.upgradeRate = (playerDataBefore.getStealEfficient()[hotPlayersVO.id - 1]) <= 0?-1:((double)playerDataL5.getStealEfficient()[hotPlayersVO.id - 1] -playerDataBefore.getStealEfficient()[hotPlayersVO.id - 1])/(playerDataBefore.getStealEfficient()[hotPlayersVO.id - 1]);
+                return;
+        }
+    }
 }
