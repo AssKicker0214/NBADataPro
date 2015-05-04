@@ -38,7 +38,7 @@ public class TeamMemberPanel extends JPanel{
 	
 	public TeamMemberPanel(){
 		this.setLayout(null);
-		this.setBounds(0,300,1280,380);
+		this.setBounds(0,260,1280,380);
 		this.setBackground(Color.WHITE);
 		setTitle();
 		setButtonsBGLabel();

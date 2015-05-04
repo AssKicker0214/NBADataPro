@@ -1,12 +1,9 @@
 package presentation.player.vs;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.util.ArrayList;
 
-import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -38,7 +35,7 @@ public class PlayerVSContentPanel extends JPanel{
 		fl.setVgap(0);
 		this.setLayout(fl);
 
-		this.setBounds(0, 340, 1280,360);
+		this.setBounds(30, 300, 1280,360);
 		this.setBackground(Color.WHITE);
 		this.setOpaque(true);
 		addBars();

@@ -17,13 +17,18 @@ public class TeamMiddlePanel  extends JPanel{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	SelectLabel ContrastLabel;//联盟对比
+	SelectLabel DataLabel;//球队资料
 	SelectLabel MemberLabel;//球队阵容
 	SelectLabel LatestMatchLabel;//近5场比赛
 	SelectLabel PastLabel;//过往查询
 	SelectLabel CompareTeamsLabel;//球队对比
 	
 	JPanel teamDetailTopPanel;
+	
+	TeamMemberPanel teamMemberPanel;
+	TeamRecent5MatchPanel teamRecent5MatchPanel;
+	TeamSchedulePanel teamSchedulePanel;
+	TeamDataPanel teamDataPanel;
 	
 	ArrayList<SelectLabel> selectLabelGroups = new ArrayList<SelectLabel>();
 
@@ -46,39 +51,73 @@ public class TeamMiddlePanel  extends JPanel{
 	
 	public void setSelectedGroups(SelectLabel s){
 		selectLabelGroups.clear();
-		selectLabelGroups.add(ContrastLabel);
+		selectLabelGroups.add(DataLabel);
 		selectLabelGroups.add(MemberLabel);
 		selectLabelGroups.add(LatestMatchLabel);
 		selectLabelGroups.add(PastLabel);
 		selectLabelGroups.add(CompareTeamsLabel);
 		for(SelectLabel sl : selectLabelGroups){
 			if(sl != s){
-				sl.setBackground(Color.black);;
+				sl.setBackground(Color.black);
+				sl.isSelected = false;
 			}
 		}
 	}
+	
 	public void setContrastLabel(){
 		Point location = new Point(0,200);
 		Point size = new Point(255,50);
-		ContrastLabel = new SelectLabel("资料",location,size);
+		DataLabel = new SelectLabel("资料",location,size);
 
-		ContrastLabel.addMouseListener(new MouseAdapter() {
+		DataLabel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				setSelectedGroups(ContrastLabel);
+				setSelectedGroups(DataLabel);
 				setVisible(false);
-//				set
-				
-				
-				
+				if(teamDataPanel != null){
+					remove(teamDataPanel);
+				}
+				if(teamMemberPanel != null){
+					remove(teamMemberPanel);
+				}
+				if(teamRecent5MatchPanel != null){
+					remove(teamRecent5MatchPanel);
+				}
+				if(teamSchedulePanel != null){
+					remove(teamSchedulePanel);
+				}
+				setTeamDataPanel();
+				setVisible(true);
+				repaint();				
 			}
 		});
-		this.add(ContrastLabel);
+		this.add(DataLabel);
 	}
 	
-	public void setContrastPanel(){
-		
+	public void setTeamMemberPanel(){
+		teamMemberPanel = new TeamMemberPanel();
+		this.add(teamMemberPanel,0);
+		repaint();
 	}
+
+	public void setTeamSchedulePanel(){
+		teamSchedulePanel = new TeamSchedulePanel();
+		this.add(teamSchedulePanel,0);
+		repaint();
+	}
+
+	public void setTeamRecent5MatchPanel(){
+		teamRecent5MatchPanel = new TeamRecent5MatchPanel();
+		this.add(teamRecent5MatchPanel,0);
+		repaint();
+	}
+	
+	public void setTeamDataPanel(){
+		teamDataPanel = new TeamDataPanel();
+		this.add(teamDataPanel,0);
+		repaint();
+	}
+
 	
 	public void setMemberLabel(){
 		Point location = new Point(256,200);
@@ -89,7 +128,22 @@ public class TeamMiddlePanel  extends JPanel{
 			@Override
 			public void mousePressed(MouseEvent e) {
 				setSelectedGroups(MemberLabel);
-		
+				setVisible(false);
+				if(teamDataPanel != null){
+					remove(teamDataPanel);
+				}
+				if(teamMemberPanel != null){
+					remove(teamMemberPanel);
+				}
+				if(teamRecent5MatchPanel != null){
+					remove(teamRecent5MatchPanel);
+				}
+				if(teamSchedulePanel != null){
+					remove(teamSchedulePanel);
+				}
+				setTeamMemberPanel();
+				setVisible(true);
+				repaint();			
 			}
 		});
 		this.add(MemberLabel);
@@ -105,6 +159,22 @@ public class TeamMiddlePanel  extends JPanel{
 			@Override
 			public void mousePressed(MouseEvent e) {
 				setSelectedGroups(LatestMatchLabel);
+				setVisible(false);
+				if(teamDataPanel != null){
+					remove(teamDataPanel);
+				}
+				if(teamMemberPanel != null){
+					remove(teamMemberPanel);
+				}
+				if(teamRecent5MatchPanel != null){
+					remove(teamRecent5MatchPanel);
+				}
+				if(teamSchedulePanel != null){
+					remove(teamSchedulePanel);
+				}
+				setTeamRecent5MatchPanel();
+				setVisible(true);
+				repaint();				
 			}
 		});
 
@@ -120,11 +190,42 @@ public class TeamMiddlePanel  extends JPanel{
 			@Override
 			public void mousePressed(MouseEvent e) {
 				setSelectedGroups(PastLabel);
+				setVisible(false);
+				if(teamDataPanel != null){
+					remove(teamDataPanel);
+				}
+				if(teamMemberPanel != null){
+					remove(teamMemberPanel);
+				}
+				if(teamRecent5MatchPanel != null){
+					remove(teamRecent5MatchPanel);
+				}
+				if(teamSchedulePanel != null){
+					remove(teamSchedulePanel);
+				}
+				setTeamSchedulePanel();
+				setVisible(true);
+				repaint();		
+				
 			}
 		});
 
 		this.add(PastLabel);
 	}
+	
+	
+//	 setTeamDataPanel()
+//setTeamMemberPanel()
+//	 setTeamSchedulePanel()
+//	setTeamRecent5MatchPanel()
+	
+//	TeamMemberPanel teamMemberPanel;
+//	TeamRecent5MatchPanel teamRecent5MatchPanel;
+//	TeamSchedulePanel teamSchedulePanel;
+//	TeamDataPanel teamDataPanel;
+
+
+
 
 	public void setCompareTeamsLabel(){
 		
@@ -136,14 +237,28 @@ public class TeamMiddlePanel  extends JPanel{
 			@Override
 			public void mousePressed(MouseEvent e) {
 				setSelectedGroups(CompareTeamsLabel);
+				setVisible(false);
+				if(teamDataPanel != null){
+					remove(teamDataPanel);
+				}
+				if(teamMemberPanel != null){
+					remove(teamMemberPanel);
+				}
+				if(teamRecent5MatchPanel != null){
+					remove(teamRecent5MatchPanel);
+				}
+				if(teamSchedulePanel != null){
+					remove(teamSchedulePanel);
+				}
+//				setTeamSchedulePanel();
+				setVisible(true);
+				repaint();		
 			}
 			
 		});
 		this.add(CompareTeamsLabel);
 	}
 
-
-	
 
 	public static void main(String[] args){
 		JFrame jf = new JFrame();

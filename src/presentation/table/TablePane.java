@@ -209,7 +209,7 @@ public class TablePane extends JPanel{
 		w.add(200);
 		w.add(300);
 		w.add(400);
-		TablePane t = new TablePane(a,b,w,0,0,1200,200,40,true,false);
+		TablePane t = new TablePane(a,b,w,0,0,1200,200,40,true,true);
 		f.getContentPane().add(t);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setVisible(true);

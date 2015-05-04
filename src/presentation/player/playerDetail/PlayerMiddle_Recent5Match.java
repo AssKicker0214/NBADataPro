@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 
 import dataservice.match.MatchDataService;
 import dataservice.match.MatchData_stub;
+import presentation.match.MatchVO2List;
 import presentation.table.TablePane;
 import vo.matchvo.MatchContentPlayerVO;
 
@@ -50,8 +51,8 @@ public class PlayerMiddle_Recent5Match extends JPanel{
 		String[] columns = {"日期","对手","分钟","％","命中","出手","三分％","罚球％",
 				"进攻篮板","防守篮板","篮板","助攻","盖帽","失误","犯规","得分"};
 				
-		
-		ArrayList<ArrayList<String>> datas = vo2list(vo);
+		MatchVO2List m2l = new MatchVO2List();
+		ArrayList<ArrayList<String>> datas = m2l.playerDeitail(vo);
 		
 		ArrayList<Integer> w = new ArrayList<Integer>();
 		w.add(200);w.add(200);
@@ -63,31 +64,7 @@ public class PlayerMiddle_Recent5Match extends JPanel{
 		this.add(t);
 	}
 	
-	public ArrayList<ArrayList<String>> vo2list(ArrayList<MatchContentPlayerVO> vo){
-		ArrayList<ArrayList<String>> datas = new ArrayList<ArrayList<String>>();
-		for(int i = 0; i < vo.size() ;i++){
-			ArrayList<String> temp = new ArrayList<String>();
-			temp.add(vo.get(i).date);
-			temp.add(vo.get(i).vs);
-			temp.add(vo.get(i).minute+"");
-			temp.add((double)vo.get(i).shot/(double)vo.get(i).shotA+"");
-			temp.add(vo.get(i).shot+"");
-			temp.add(vo.get(i).shotA+"");
-			temp.add(vo.get(i).three+"/"+vo.get(i).threeA);
-			temp.add(vo.get(i).penalty+"/"+vo.get(i).penaltyA);
-			temp.add(vo.get(i).offendRebound+"");
-			temp.add(vo.get(i).offendRebound+"");
-			temp.add(vo.get(i).rebound+"");
-			temp.add(vo.get(i).assist+"");
-			temp.add(vo.get(i).blockShot+"");
-			temp.add(vo.get(i).fault+"");
-			temp.add(vo.get(i).foul+"");
-			temp.add(vo.get(i).point+"");
-			
-			datas.add(temp);
-		}
-		return datas;
-	}
+	
 	
 	public static void main(String[] args){
 		JFrame jf = new JFrame();
