@@ -14,7 +14,6 @@ import javax.swing.JPanel;
 
 import presentation.common.PhotoLabel;
 import presentation.common.SelectLabel;
-import presentation.player.PlayerDataList;
 import presentation.table.TablePane;
 
 public class MatchDataAnalysePanel extends JPanel{
@@ -133,7 +132,7 @@ public class MatchDataAnalysePanel extends JPanel{
 			if(teamLabel!=null){
 				MatchDataAnalysePanel.this.remove(teamLabel);
 			}
-			setTeamLabel();
+//			setTeamLabel();
 			setVisible(true);
 			repaint();	
 		}
