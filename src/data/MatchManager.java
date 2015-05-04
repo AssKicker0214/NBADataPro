@@ -1,9 +1,8 @@
 package data;
 
-import data.saver.MatchInfoSaver;
-import data.saver.MatchScoreSaver;
-import data.saver.PlayerScoreSaver;
-import data.saver.TeamScore;
+import data.input.Match;
+import data.input.Team;
+import data.saver.*;
 import vo.matchvo.MatchContentPlayerVO;
 import vo.matchvo.MatchVO;
 
@@ -16,6 +15,7 @@ public class MatchManager {
     private MatchInfoSaver matchInfoSaver;
     private MatchScoreSaver matchScoreSaver;
     private PlayerScoreSaver playerScoreSaver;
+    private TeamSaver teamSaver;
 
     public MatchVO getMatchVO(int mid){
         MatchVO matchVO = new MatchVO();
@@ -46,5 +46,46 @@ public class MatchManager {
         matchVO.homeTeamPlayer = arrayLists[0];
         matchVO.guestTeamPlayer = arrayLists[1];
         return matchVO;
+    }
+
+    public MatchContentPlayerVO getMatchContentPlayerVO(int i) {
+        return playerScoreSaver.getMatchContentPlayerVO(i);
+    }
+
+    public ArrayList<Integer> getFindRecentMatches_t(String teamName) {
+        int tid = teamSaver.getTeamId(teamName);
+        return matchInfoSaver.getFindRecentMatches_t(tid);
+    }
+
+    public ArrayList<MatchVO> findByDate(String start, String end) {
+        ArrayList<Integer> arrayList = matchInfoSaver.getMids(start,end);
+        ArrayList<MatchVO> matchVOs = new ArrayList<>();
+        for (int i = 0; i < arrayList.size();i++){
+            matchVOs.add(getMatchVO(i + 1));
+        }
+        return matchVOs;
+    }
+
+    public ArrayList<MatchContentPlayerVO> findByDP(String start, String end, String playerName) {
+        ArrayList<Integer> intS = new PlayerDataManager().getFindMatches_p(start, end, playerName);
+        ArrayList<MatchContentPlayerVO> res = new ArrayList<>();
+        for (int i = 0; i < intS.size();i++){
+            res.add(getMatchContentPlayerVO(i));
+        }
+        return res;
+    }
+
+    public ArrayList<MatchVO> findByDT(String start, String end, String teamName) {
+        ArrayList<Integer> intS = getFindMatches_t(start, end, teamName);
+        ArrayList<MatchVO> res = new ArrayList<>();
+        for (int i = 0; i < intS.size();i++){
+            res.add(getMatchVO(intS.get(i)));
+        }
+        return res;
+    }
+
+    private ArrayList<Integer> getFindMatches_t(String start, String end, String teamName) {
+        int tid = teamSaver.getTeamId(teamName);
+        return matchInfoSaver.getFindMatches_t(start,end,tid);
     }
 }

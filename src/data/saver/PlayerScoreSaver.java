@@ -309,6 +309,16 @@ public class PlayerScoreSaver {
         return new PlayerData(date);
     }
 
+    public ArrayList<Integer> getMidPoint(String start, String end, int pid) {
+        ArrayList<Integer> res = new ArrayList<>();
+        for (int i = 0; i <= currentPoint;i++){
+            if (pid == this.pid[i] && matchInfoSaver.isInDate(mid[i],start,end)){
+                res.add(i);
+            }
+        }
+        return res;
+    }
+
     private class PidL5Mid {
 
         private long lastModifiedTime;
@@ -418,11 +428,12 @@ public class PlayerScoreSaver {
         }
     }
 
-    public ArrayList<Integer> getL5Mid(int pid){
+    public ArrayList<Integer> getL5MidPoint(int pid){
         ArrayList<Integer> arrayList = new ArrayList<>();
+        PidL5Mid pidL5Mid = getPidL5Mid();
         for (int i = 0; i < pidL5Mid.getLength(); i++){
             if (pidL5Mid.pid[i] == pid){
-                arrayList.add(pidL5Mid.mid[i]);
+                arrayList.add(pidL5Mid.getPointInL5Mid()[i]);
             }
         }
         return arrayList;
@@ -1624,7 +1635,7 @@ public class PlayerScoreSaver {
         int tid2 = matchInfoSaver.getTeamf()[mid - 1];
         for (int i = 0; i < currentPoint + 1; i++) {
             if (PlayerScoreSaver.this.mid[i] == mid) {
-                MatchContentPlayerVO matchContentPlayerVO = getMatchContentPlayerVO(mid,i);
+                MatchContentPlayerVO matchContentPlayerVO = getMatchContentPlayerVO(i);
                 if (tid1 == PlayerScoreSaver.this.tid[i]) {
                     matchContentPlayerVOs[0].add(matchContentPlayerVO);
                 }else{
@@ -1635,7 +1646,8 @@ public class PlayerScoreSaver {
         return matchContentPlayerVOs;
     }
 
-    private MatchContentPlayerVO getMatchContentPlayerVO(int mid,int i){
+    public MatchContentPlayerVO getMatchContentPlayerVO(int i){
+        int mid = PlayerScoreSaver.this.mid[i];
         MatchContentPlayerVO matchContentPlayerVO = new MatchContentPlayerVO();
         matchContentPlayerVO.date = matchInfoSaver.getDate(mid);
         matchContentPlayerVO.vs = teamSaver.getTeamName()[PlayerScoreSaver.this.d_tid[i] - 1];
@@ -1657,10 +1669,6 @@ public class PlayerScoreSaver {
         matchContentPlayerVO.foul = PlayerScoreSaver.this.foul[i - 1];
         matchContentPlayerVO.point = PlayerScoreSaver.this.score[i - 1];
         return matchContentPlayerVO;
-    }
-
-    public ArrayList<MatchContentPlayerVO> getMatchContentPlayerVOs(int mid,int tid){
-        return null;
     }
 
 }

@@ -502,6 +502,12 @@ public class PlayerDataManager {
     public ArrayList<Integer> getFindRecentMatches_p(String playerName) {
         int pid = playerDataDefault.getPlayerId(playerName);
 //        int[][] p_tid_mid = playerDataL5.get
-        return null;
+        return playerScoreSaver.getL5MidPoint(pid);
+    }
+
+    public ArrayList<Integer> getFindMatches_p(String start, String end, String playerName) {
+        int pid = playerDataDefault.getPlayerId(playerName);
+
+        return playerScoreSaver.getMidPoint(start,end,pid);
     }
 }
