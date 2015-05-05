@@ -5,14 +5,19 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import dataservice.match.MatchDataService;
+import dataservice.match.MatchData_stub;
 import presentation.common.DateLabel;
 import presentation.table.TablePane;
+import vo.matchvo.MatchVO;
 
 public class MatchListPanel extends JPanel{
 
@@ -33,7 +38,9 @@ public class MatchListPanel extends JPanel{
 		setMatchTitleLabel();
 		setDate();
 		this.setBackground(Color.WHITE);
-		setTabel();
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
+		String date = df.format(new Date());
+		setTabel(date,date);
 	}
 	
 	public void setMatchTitleLabel(){
@@ -91,24 +98,23 @@ public class MatchListPanel extends JPanel{
 		matchTitleLabel.add(commit);
 	}
 	
-	public void setTabel(){
-		String[] columns = {"日期","对阵球队","总比分","第一节比分","第二节比分","第三节比分","第四节比分","比赛链接"};
+	public void setTabel(String start,String end){
 		
-		ArrayList<String> l = new ArrayList<String>();
-		for(int i = 0; i < 8;i++){
-			l.add("20.0");
-		}
-		ArrayList<ArrayList<String>> a = new ArrayList<ArrayList<String>>();
-		for(int i = 0; i < 500 ;i++){
-			a.add(l);
-		}
+		MatchDataService mds = new MatchData_stub();
+		ArrayList<MatchVO> vo = mds.findByDate(start, end);
 		
-		ArrayList<Integer> w = new ArrayList<Integer>();
-		for(int i = 0; i < 8 ; i++){
-			w.add(160);
+		String[] columns = {"日期","","对阵球队","总比分","第一节比分","第二节比分","第三节比分","第四节比分"};
+		
+		MatchVO2List m2l = new MatchVO2List();
+		ArrayList<ArrayList<String>> datas = m2l.matchList(vo);
+		
+		ArrayList<Integer> wid = new ArrayList<Integer>();
+		wid.add(180);wid.add(0);
+		for(int i = 0; i < 6;i++){
+			wid.add(180);
 		}
-
-		TablePane t = new TablePane(a,columns,w,0,70,1280,420,30,true,false);
+		wid.add(0);
+		TablePane t = new TablePane(datas,columns,wid,0,70,1280,420,30,true,false);
 		this.add(t);
 	}
 	
