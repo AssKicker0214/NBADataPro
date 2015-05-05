@@ -51,7 +51,7 @@ public class PlayersVSTopPanel extends JPanel{
 	
 	public String msg;
 	JPanel main;
-	PlayerVO initVO;
+	PlayerVO anotherVO;
 	PlayerVO localVO;
 
 	public PlayersVSTopPanel(JPanel middle,PlayerVO localvo){
@@ -62,7 +62,7 @@ public class PlayersVSTopPanel extends JPanel{
 		
 		setLocalInfoGroupsLabel(localvo);
 		setAttri();
-		setAnotherInfoGroupsLabel(initVO);
+		setAnotherInfoGroupsLabel(anotherVO);
 
 		setLocalPlayerPhotoLabel();
 		setAnotherPlayerPhotoLabel();
@@ -73,13 +73,14 @@ public class PlayersVSTopPanel extends JPanel{
 		setSearchLabel();
 		searchLabel.setVisible(false);
 		this.main = middle;
+		this.setVisible(true);
 	}
 	
 	public void setAttri(){
-		initVO.number = 0;
-		initVO.name = "NBA联盟平均数";
-		initVO.photo = "nba";
-		initVO.teamName = "transparent";
+		anotherVO.number = 0;
+		anotherVO.name = "NBA联盟平均数";
+		anotherVO.photo = "nba";
+		anotherVO.teamName = "transparent";
 	}
 	
 	public void setLocalPlayerPhotoLabel (){
@@ -111,7 +112,7 @@ public class PlayersVSTopPanel extends JPanel{
 	}
 	
 	public void setAnotherTeamPhotoLabel (){
-		anotherTeamPhotoLabel = new PhotoLabel(new ImageIcon("teamsPNG/" + initVO.teamName + ".png").getImage());
+		anotherTeamPhotoLabel = new PhotoLabel(new ImageIcon("teamsPNG/" + anotherVO.teamName + ".png").getImage());
 		anotherTeamPhotoLabel.setHorizontalAlignment(JLabel.RIGHT);
 		anotherTeamPhotoLabel.setBounds(955,-10,250,120);
 		anotherTeamPhotoLabel.setBackground(Color.WHITE);
@@ -121,7 +122,7 @@ public class PlayersVSTopPanel extends JPanel{
 	}
 
 	public void setAnotherPlayerPhotoLabel (){
-		anotherPlayerPhotoLabel = new PhotoLabel(new ImageIcon("portrait/" + initVO.photo + ".png").getImage());
+		anotherPlayerPhotoLabel = new PhotoLabel(new ImageIcon("portrait/" + anotherVO.photo + ".png").getImage());
 		anotherPlayerPhotoLabel.setHorizontalAlignment(JLabel.RIGHT);
 		anotherPlayerPhotoLabel.setBounds(730,-5,230,150);
 		anotherPlayerPhotoLabel.setBackground(Color.WHITE);
@@ -277,7 +278,7 @@ public class PlayersVSTopPanel extends JPanel{
 				public void mousePressed(MouseEvent e) {
 					PlayersVSTopPanel.this.setVisible(false);
 					PlayerDataService pds = new PlayerData_stub();
-					initVO = pds.avgLeague(); 
+					anotherVO = pds.findPlayerData(name.getText()); 
 					if(anotherPlayerPhotoLabel != null){
 						remove(anotherPlayerPhotoLabel);
 					}
@@ -287,12 +288,11 @@ public class PlayersVSTopPanel extends JPanel{
 					if(anotherInfoGroupsLabel != null){
 						remove(anotherInfoGroupsLabel);
 					}
-					setAnotherInfoGroupsLabel(initVO);
+					setAnotherInfoGroupsLabel(anotherVO);
 					setAnotherPlayerPhotoLabel();
 					setAnotherTeamPhotoLabel();
 					PlayersVSTopPanel.this.setVisible(true);
 					PlayersVSTopPanel.this.repaint();
-
 				}
 				
 				@Override
