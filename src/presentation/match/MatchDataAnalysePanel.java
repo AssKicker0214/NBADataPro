@@ -132,7 +132,8 @@ public class MatchDataAnalysePanel extends JPanel{
 			if(teamLabel!=null){
 				MatchDataAnalysePanel.this.remove(teamLabel);
 			}
-//			setTeamLabel();
+			setTeamLabel("亚特兰大 老鹰","teamsPNG/ATL.png");
+			setInfoTablePanel();
 			setVisible(true);
 			repaint();	
 		}
@@ -178,8 +179,22 @@ public class MatchDataAnalysePanel extends JPanel{
 
 		@Override
 		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
+			setVisible(false);
+			setButtonsBGLabel();
+			secPageButton.isSelected = true;
+			secPageButton.setBackground(pressed);
+			setSelectedGroups(secPageButton);
+			if(InfoTable!=null){
+				MatchDataAnalysePanel.this.remove(InfoTable);
+			}
+			setInfoTablePanel(); 
+			if(teamLabel!=null){
+				MatchDataAnalysePanel.this.remove(teamLabel);
+			}
+			setTeamLabel("波士顿 凯尔特人","teamsPNG/BOS.png");
+			setInfoTablePanel();
+			setVisible(true);
+			repaint();				
 		}
 
 		@Override
@@ -225,7 +240,7 @@ public class MatchDataAnalysePanel extends JPanel{
 			l.add("20.0");
 		}
 		ArrayList<ArrayList<String>> datas = new ArrayList<ArrayList<String>>();
-		for(int i = 0;i<20;i++){
+		for(int i = 0;i<30;i++){
 			datas.add(l);
 		}
 			
@@ -239,7 +254,7 @@ public class MatchDataAnalysePanel extends JPanel{
 		wid.add(60);wid.add(60);wid.add(60);wid.add(60);
 		wid.add(60);wid.add(60);wid.add(60);
 		
-		InfoTable = new TablePane(datas,header,wid,0,100,1280,355,30,true,false);
+		InfoTable = new TablePane(datas,header,wid,0,100,1280,340,30,true,false);
 		this.add(InfoTable);
 	}
 

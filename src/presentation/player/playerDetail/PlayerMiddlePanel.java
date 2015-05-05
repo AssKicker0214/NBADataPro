@@ -1,17 +1,20 @@
 package presentation.player.playerDetail;
 
 import java.awt.Color;
+import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import dataservice.player.PlayerDataService;
 import dataservice.player.PlayerData_stub;
+import presentation.common.PhotoLabel;
 import presentation.common.SelectLabel;
 import presentation.player.vs.VSContentPanel;
 import presentation.player.vs.PlayersVSTopPanel;
@@ -61,7 +64,7 @@ public class PlayerMiddlePanel extends JPanel{
 	ArrayList<String> avg = new ArrayList<String>();
 	ArrayList<String> total = new ArrayList<String>();
 	ArrayList<SelectLabel> selectLabelGroups = new ArrayList<SelectLabel>();
-	ArrayList<String> itemsNeedAdd = new ArrayList<String>();
+	
 	
 	public PlayerMiddlePanel(String name){
 		this.setLayout(null);
@@ -96,12 +99,7 @@ public class PlayerMiddlePanel extends JPanel{
 		total.add("2012-2013");total.add(voP.team);total.add(voP.numOfGame+"");total.add(voP.start+"");total.add(voP.minute+"");total.add(voP.shot+"");total.add(voP.three+"");
 		total.add(voP.penalty+"");total.add(voP.offend+"");total.add(voP.defend+"");total.add(voP.rebound+"");total.add(voP.assist+"");total.add(voP.steal+"");
 		total.add(voP.blockShot+"");total.add(voP.fault+"");total.add(voP.foul+"");total.add(voP.point+"");
-		
-		itemsNeedAdd.add("场均得分"); 
-		itemsNeedAdd.add("场均助攻"); 
-		itemsNeedAdd.add("场均篮板"); 
-		itemsNeedAdd.add("三分％"); 			
-		itemsNeedAdd.add("罚球％");	
+
 	}
 	
 	public void setSelectedGroups(SelectLabel s){
@@ -284,9 +282,9 @@ public class PlayerMiddlePanel extends JPanel{
 				}
 				if(vsTopPanel != null){
 					remove(vsTopPanel);
-					setVSTopPanel(PlayerMiddlePanel.this,vo); 
+					setVSTopPanel(PlayerMiddlePanel.this); 
 				}else{
-					setVSTopPanel(PlayerMiddlePanel.this,vo); 
+					setVSTopPanel(PlayerMiddlePanel.this); 
 				}
 				setVSPanel();
 				setVisible(true);
@@ -322,18 +320,65 @@ public class PlayerMiddlePanel extends JPanel{
 	}
 	
 	public void setVSPanel(){
-		vsContentPanel = new VSContentPanel(itemsNeedAdd,player,leagueAvg);
+		//
+		ArrayList<String> itemsNeedAdd = new ArrayList<String>();
+		ArrayList<Double> avg1 = new ArrayList<Double>();
+		ArrayList<Double> avg2 = new ArrayList<Double>();
+		
+		itemsNeedAdd.add("场均得分"); avg1.add(5.9); avg2.add(10.043);
+		itemsNeedAdd.add("场均助攻"); avg1.add(1.0); avg2.add(2.159);
+		itemsNeedAdd.add("场均篮板"); avg1.add(4.4); avg2.add(4.469);
+		itemsNeedAdd.add("三分％"); 	avg1.add(30.0); avg2.add(34.5);
+		itemsNeedAdd.add("罚球％");	avg1.add(78.4); avg2.add(74.3);
+		//
+		vsContentPanel = new VSContentPanel(itemsNeedAdd,avg1,avg2);
 		this.add(vsContentPanel);
 		repaint();
 	}
 	
 	
-	public void setVSTopPanel(JPanel middle,PlayerVO localvo){
-		vsTopPanel = new PlayersVSTopPanel(middle,localvo);
+	public void setVSTopPanel(JPanel middle){
+		vsTopPanel = new PlayersVSTopPanel(middle);
 		this.add(vsTopPanel);
 		repaint();
 	}
-	
+
+//		ArrayList<PlayerVO> list = new ArrayList<PlayerVO>();
+//		PlayerDataService pds = new PlayerData_stub();
+//		list = pds.findPlayers(message);
+//		setChooseList(list);
+
+	public void setChooseList(ArrayList<PlayerVO> list){
+		chooseList = new JLabel();
+		chooseList.setBounds(1000, 145, 280, 45*list.size());
+		chooseList.setLayout(new GridLayout(list.size(),1,0,0));
+		chooseList.setBackground(Color.BLACK);
+		chooseList.setOpaque(true);
+		for(int i = 0; i < list.size(); i++){
+			JLabel item = new JLabel();
+			item.setSize(280, 50);
+			
+			JLabel name = new JLabel(list.get(i).name,JLabel.LEADING);
+			name.setBounds(100,0,100,50);
+			name.setForeground(darkest);
+			name.setBackground(Color.white);
+			name.setOpaque(true);
+			item.add(name);
+			
+			JLabel photo = new PhotoLabel(new ImageIcon("portrait/" + list.get(i).photo + ".png").getImage());
+			photo.setBounds(10,0,80,50);
+			photo.setBackground(Color.WHITE);
+			photo.setOpaque(true);
+			photo.setVisible(true);
+			item.add(photo);
+
+			chooseList.add(item);
+		}
+		chooseList.setVisible(true);
+		this.add(chooseList,0);
+	}
+
+
 	public static void main(String[] args){
 		JFrame jf = new JFrame();
 		jf.setLayout(null);
