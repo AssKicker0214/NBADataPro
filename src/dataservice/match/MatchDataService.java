@@ -6,7 +6,7 @@ import vo.matchvo.MatchContentPlayerVO;
 import vo.matchvo.MatchVO;
 
 public interface MatchDataService {
-	public ArrayList<MatchContentPlayerVO> FindRecentMatches_p(int num, String playerName);// 球员最近比赛信息
+	public ArrayList<MatchContentPlayerVO> FindRecentMatches_p(String playerName);// 球员最近比赛信息
 	public ArrayList<MatchContentPlayerVO> findByDP(String start, String end, String playerName);//根据日期及球员查找
 
 	

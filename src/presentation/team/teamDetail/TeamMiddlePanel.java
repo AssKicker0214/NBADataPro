@@ -80,13 +80,13 @@ public class TeamMiddlePanel  extends JPanel{
 	}
 
 	public void setTeamSchedulePanel(){
-		teamSchedulePanel = new TeamSchedulePanel();
+		teamSchedulePanel = new TeamSchedulePanel(vo.teamName);
 		this.add(teamSchedulePanel,0);
 		repaint();
 	}
 
 	public void setTeamRecent5MatchPanel(){
-		teamRecent5MatchPanel = new TeamRecent5MatchPanel();
+		teamRecent5MatchPanel = new TeamRecent5MatchPanel(vo.teamName);
 		this.add(teamRecent5MatchPanel,0);
 		repaint();
 	}

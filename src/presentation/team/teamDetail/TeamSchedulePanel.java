@@ -5,14 +5,20 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import dataservice.match.MatchDataService;
+import dataservice.match.MatchData_stub;
 import presentation.common.DateLabel;
+import presentation.match.MatchVO2List;
 import presentation.table.TablePane;
+import vo.matchvo.MatchVO;
 
 public class TeamSchedulePanel extends JPanel{
 
@@ -29,13 +35,18 @@ public class TeamSchedulePanel extends JPanel{
 
 	Color entered = new Color(30,80,140);
 	
-	public TeamSchedulePanel(){
+	String TeamName;
+	
+	public TeamSchedulePanel(String team){
+		TeamName = team;
 		this.setLayout(null);
 		this.setBounds(0,260,1280,450);
 		this.setBackground(Color.WHITE);
 		setTitle();
 		setDate();
-		setScheduleTablePanel();
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
+		String date = df.format(new Date());
+		setScheduleTablePanel(date,date);
 	}
 	
 	public void setTitle(){
@@ -73,8 +84,8 @@ public class TeamSchedulePanel extends JPanel{
 			@Override
 			public void mousePressed(MouseEvent e) {
 				commit.setFont(new Font("Dialog",1,15));
-				System.out.println(calendarStart.getSelectedDate().toString());
-				System.out.println(calendarEnd.getSelectedDate().toString());
+				setScheduleTablePanel(calendarStart.getSelectedDate().toString(),calendarEnd.getSelectedDate().toString());
+
 			}
 			
 			@Override
@@ -97,29 +108,20 @@ public class TeamSchedulePanel extends JPanel{
 		TitleLabel.add(commit);
 	}
 	
-	public void setScheduleTablePanel(){
+	public void setScheduleTablePanel(String start,String end){
+		MatchDataService mds = new MatchData_stub();
+		ArrayList<MatchVO> vo = mds.FindRecentMatches_t(TeamName);
+	
+		String[] tbHead = {"日期","对阵球队","总比分","第一节比分","第二节比分","第三节比分","第四节比分",""};
 		
-		ArrayList<ArrayList<String>> datas = new ArrayList<ArrayList<String>>();	
-		ArrayList<String> l = new ArrayList<String>();
-		l.add("5月4日");
-		l.add("CHA-LAC");
-		l.add("98-78");
-		l.add("26-37");
-		l.add("27-26");
-		l.add("28-20");
-		l.add("23-15");
-		l.add("技术统计");
-
-		for(int i = 0;i < 20;i++){
-			datas.add(l);
-		}
-		
-		String[] tbHead = {"日期","对阵球队","总比分","第一节比分","第二节比分","第三节比分","第四节比分","比赛链接"};
+		MatchVO2List m2l = new MatchVO2List();
+		ArrayList<ArrayList<String>> datas = m2l.matchList(vo);
 		
 		ArrayList<Integer> wid = new ArrayList<Integer>();
-		for(int i = 0; i < 8;i++){
-			wid.add(160);
+		for(int i = 0; i < 7;i++){
+			wid.add(180);
 		}
+		wid.add(0);
 		scheduleInfoTable = new TablePane(datas,tbHead,wid,0,60,1280,300,30,true,false);
 		this.add(scheduleInfoTable);
 	}
@@ -129,7 +131,7 @@ public class TeamSchedulePanel extends JPanel{
 		jf.setLayout(null);
 		jf.setSize(1280,700);
 		jf.setLocationRelativeTo(null);
-		jf.add(new TeamSchedulePanel());
+	//	jf.add(new TeamSchedulePanel());
 		jf.setVisible(true);
 	}
 

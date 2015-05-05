@@ -8,7 +8,7 @@ import vo.matchvo.MatchVO;
 public class MatchData_stub implements MatchDataService{
 
 	@Override
-	public ArrayList<MatchContentPlayerVO> FindRecentMatches_p(int num,
+	public ArrayList<MatchContentPlayerVO> FindRecentMatches_p(
 			String playerName) {
 		ArrayList<MatchContentPlayerVO> result = new ArrayList<MatchContentPlayerVO>();
 		MatchContentPlayerVO vo1 = new MatchContentPlayerVO();

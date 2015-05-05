@@ -8,7 +8,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import dataservice.match.MatchDataService;
+import dataservice.match.MatchData_stub;
+import presentation.match.MatchVO2List;
 import presentation.table.TablePane;
+import vo.matchvo.MatchVO;
 
 public class TeamRecent5MatchPanel extends JPanel{
 
@@ -21,12 +25,12 @@ public class TeamRecent5MatchPanel extends JPanel{
 	
 	JLabel tabelLabel;
 	
-	public TeamRecent5MatchPanel(){
+	public TeamRecent5MatchPanel(String TeamName){
 		this.setLayout(null);
 		this.setBounds(0, 265,1280,400);
 		setRecent5MactchTitleLabel();
 		this.setBackground(Color.WHITE);
-		setTabel();
+		setTabel(TeamName);
 	}
 
 	public void setRecent5MactchTitleLabel(){
@@ -40,24 +44,21 @@ public class TeamRecent5MatchPanel extends JPanel{
 		this.add(Recent5MatchLabel);
 	}
  
-	public void setTabel(){
-		String[] columns = {"日期","对阵球队","总比分","第一节比分","第二节比分","第三节比分","第四节比分","比赛链接"};
+	public void setTabel(String TeamName){
 		
-		ArrayList<String> l = new ArrayList<String>();
-		for(int i = 0; i < 8;i++){
-			l.add("20.0");
-		}
-		ArrayList<ArrayList<String>> a = new ArrayList<ArrayList<String>>();
-		for(int i = 0; i < 5 ;i++){
-			a.add(l);
-		}
+		MatchDataService mds = new MatchData_stub();
+		ArrayList<MatchVO> vo = mds.FindRecentMatches_t(TeamName);
+		String[] tbHead = {"日期","对阵球队","总比分","第一节比分","第二节比分","第三节比分","第四节比分",""};
 		
-		ArrayList<Integer> w = new ArrayList<Integer>();
-		for(int i = 0; i < 8 ; i++){
-			w.add(160);
+		MatchVO2List m2l = new MatchVO2List();
+		ArrayList<ArrayList<String>> datas = m2l.matchList(vo);
+		
+		ArrayList<Integer> wid = new ArrayList<Integer>();
+		for(int i = 0; i < 7;i++){
+			wid.add(180);
 		}
-
-		TablePane t = new TablePane(a,columns,w,0,50,1280,400,60,true,false);
+		wid.add(0);
+		TablePane t = new TablePane(datas,tbHead,wid,0,50,1280,400,60,true,false);
 		this.add(t);
 	}
 	
@@ -67,7 +68,7 @@ public class TeamRecent5MatchPanel extends JPanel{
 		jf.setSize(1280,700);
 		jf.setLocationRelativeTo(null);
 		
-		jf.add(new TeamRecent5MatchPanel());
+	//	jf.add(new TeamRecent5MatchPanel());
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jf.setVisible(true);
 	}

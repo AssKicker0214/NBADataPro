@@ -47,7 +47,7 @@ public class PlayerMiddle_Recent5Match extends JPanel{
 
 	public void setTabel(String playerName){
 		MatchDataService mds = new MatchData_stub();
-		ArrayList<MatchContentPlayerVO> vo = mds.FindRecentMatches_p(5, playerName);
+		ArrayList<MatchContentPlayerVO> vo = mds.FindRecentMatches_p(playerName);
 		String[] columns = {"日期","对手","分钟","％","命中","出手","三分％","罚球％",
 				"进攻篮板","防守篮板","篮板","助攻","盖帽","失误","犯规","得分"};
 				
