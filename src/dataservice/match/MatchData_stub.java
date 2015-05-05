@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import vo.matchvo.MatchContentPlayerVO;
 import vo.matchvo.MatchVO;
+import vo.teamvo.HotTeamsVO;
 
 public class MatchData_stub implements MatchDataService{
 
@@ -23,20 +24,44 @@ public class MatchData_stub implements MatchDataService{
 
 	@Override
 	public ArrayList<MatchVO> FindRecentMatches_t(String teamName) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<MatchVO> vol = new ArrayList<MatchVO>();
+		MatchVO vo = new MatchVO();
+		HotTeamsVO ht = new HotTeamsVO();
+		HotTeamsVO gt = new HotTeamsVO();
+		ht.name = "ATL";
+		gt.name = "BKN";
+		vo.date = "2015-5-5";
+		vo.homeTeam = ht;
+		vo.guestTeam = gt;
+		vol.add(vo);
+		
+		System.out.println(vol.get(0).homeTeam.name+vol.get(0).guestTeam.name);
+		
+		return vol;
 	}
 
 	@Override
 	public MatchVO findMatch(int matchID) {
-		// TODO Auto-generated method stub
-		return null;
+		MatchVO vo = new MatchVO();
+		vo.date = "2015-5-5";		
+		return vo;
 	}
 
 	@Override
 	public ArrayList<MatchVO> findByDate(String start, String end) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<MatchVO> vol = new ArrayList<MatchVO>();
+		MatchVO vo = new MatchVO();
+		HotTeamsVO ht = new HotTeamsVO();
+		HotTeamsVO gt = new HotTeamsVO();
+		ht.name = "ATL";
+		gt.name = "BKN";
+		vo.date = "2015-5-5";
+		vo.homeTeam = ht;
+		vo.guestTeam = gt;
+		vol.add(vo);
+		
+		
+		return vol;
 	}
 
 	@Override
@@ -55,8 +80,19 @@ public class MatchData_stub implements MatchDataService{
 
 	@Override
 	public ArrayList<MatchVO> findByDT(String start, String end, String teamName) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<MatchVO> vol = new ArrayList<MatchVO>();
+		MatchVO vo = new MatchVO();
+		HotTeamsVO ht = new HotTeamsVO();
+		HotTeamsVO gt = new HotTeamsVO();
+		ht.name = "ATL";
+		gt.name = "BKN";
+		vo.date = "2015-5-5";
+		vo.homeTeam = ht;
+		vo.guestTeam = gt;
+		vol.add(vo);
+		
+		
+		return vol;
 	}
 
 	

@@ -1,6 +1,7 @@
 package vo.matchvo;
 
 public class MatchContentPlayerVO {
+	public int matchID;			//比赛ID
 	public String date;			//比赛日期
 	public String vs;			//对手球队名称
 	public String name;			//球员名称

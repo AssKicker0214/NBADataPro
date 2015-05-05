@@ -45,6 +45,9 @@ public class TeamMiddlePanel  extends JPanel{
 		this.setLayout(null);
 		this.setBounds(0, 35, 1280,670);
 		this.setBackground(Color.WHITE);
+		
+		TeamDataService tds =  new TeamData_stub();
+		vo = tds.findTeamInfo(name);
 		setTopPanel();
 		setContrastLabel();
 		setMemberLabel();
@@ -52,8 +55,6 @@ public class TeamMiddlePanel  extends JPanel{
 		setPastLabel();
 		setCompareTeamsLabel();
 		
-		TeamDataService tds =  new TeamData_stub();
-		vo = tds.findTeamInfo(name);
 		setTeamDataPanel();
 		DataLabel.setBackground(Color.GRAY);
 	}
@@ -335,7 +336,7 @@ public class TeamMiddlePanel  extends JPanel{
 		jf.setLayout(null);
 		jf.setSize(1280,700);
 		jf.setLocationRelativeTo(null);
-//		jf.add(new TeamMiddlePanel());
+		jf.add(new TeamMiddlePanel("Hawks"));
 		jf.setVisible(true);
 	}
 	

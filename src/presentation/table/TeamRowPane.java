@@ -1,10 +1,14 @@
 package presentation.table;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JLabel;
+
+import presentation.main.Mainframe;
+import presentation.team.teamDetail.TeamMiddlePanel;
 
 public class TeamRowPane extends RowPane{
 
@@ -24,7 +28,10 @@ public class TeamRowPane extends RowPane{
 		block.addMouseListener(new MouseAdapter(){
 			@Override
 			public void mousePressed(MouseEvent e) {
-				System.out.println("team");
+				Component[] labels =  getComponents();
+				System.out.println(((JLabel) labels[2]).getText());
+				Mainframe.getFrame().restoreIni();
+				Mainframe.getFrame().setContentPane(new TeamMiddlePanel(((JLabel) labels[2]).getText()));
 			}
 		
 		});

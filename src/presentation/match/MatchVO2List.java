@@ -11,6 +11,7 @@ public class MatchVO2List {
 		for(int i = 0; i < vo.size() ;i++){
 			ArrayList<String> temp = new ArrayList<String>();
 			temp.add(vo.get(i).date);
+			temp.add(vo.get(i).matchID+"");
 			temp.add(vo.get(i).vs);
 			temp.add(vo.get(i).minute+"");
 			temp.add((double)vo.get(i).shot/(double)vo.get(i).shotA+"");
@@ -36,13 +37,16 @@ public class MatchVO2List {
 		for(int i = 0; i < vo.size() ;i++){
 			ArrayList<String> temp = new ArrayList<String>();
 			temp.add(vo.get(i).date);
+			temp.add(vo.get(i).id+"");
 			temp.add(vo.get(i).homeTeam.name+"-"+vo.get(i).guestTeam.name);
 			temp.add(vo.get(i).homePoint+"-"+vo.get(i).guestPoint);
 			temp.add(vo.get(i).homePoint_1+"-"+vo.get(i).guestPoint_1);
 			temp.add(vo.get(i).homePoint_2+"-"+vo.get(i).guestPoint_2);
 			temp.add(vo.get(i).homePoint_3+"-"+vo.get(i).guestPoint_3);
 			temp.add(vo.get(i).homePoint_4+"-"+vo.get(i).guestPoint_4);
-			temp.add(vo.get(i).id+"");
+			
+			
+			datas.add(temp);
 		}
 		return datas;
 	}

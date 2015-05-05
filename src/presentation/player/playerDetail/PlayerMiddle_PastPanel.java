@@ -106,14 +106,14 @@ public class PlayerMiddle_PastPanel extends JPanel{
 		MatchDataService mds = new MatchData_stub();
 		
 		ArrayList<MatchContentPlayerVO> vo = mds.findByDP(start, end, PlayerName);
-		String[] columns = {"日期","对手","分钟","％","命中","出手","三分％","罚球％",
+		String[] columns = {"日期","","对手","分钟","％","命中","出手","三分％","罚球％",
 				"进攻篮板","防守篮板","篮板","助攻","盖帽","失误","犯规","得分"};
 				
 		MatchVO2List m2l = new MatchVO2List();
 		ArrayList<ArrayList<String>> datas = m2l.playerDeitail(vo);
 		
 		ArrayList<Integer> w = new ArrayList<Integer>();
-		w.add(200);w.add(200);
+		w.add(200);w.add(0);w.add(200);
 		for(int i = 0; i < 14 ; i++){
 			w.add(60);
 		}

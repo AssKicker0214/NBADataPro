@@ -48,16 +48,16 @@ public class TeamRecent5MatchPanel extends JPanel{
 		
 		MatchDataService mds = new MatchData_stub();
 		ArrayList<MatchVO> vo = mds.FindRecentMatches_t(TeamName);
-		String[] tbHead = {"日期","对阵球队","总比分","第一节比分","第二节比分","第三节比分","第四节比分",""};
-		
+		String[] tbHead = {"日期","","对阵球队","总比分","第一节比分","第二节比分","第三节比分","第四节比分"};
 		MatchVO2List m2l = new MatchVO2List();
 		ArrayList<ArrayList<String>> datas = m2l.matchList(vo);
 		
 		ArrayList<Integer> wid = new ArrayList<Integer>();
-		for(int i = 0; i < 7;i++){
+		wid.add(180);wid.add(0);
+		for(int i = 0; i < 6;i++){
 			wid.add(180);
 		}
-		wid.add(0);
+		
 		TablePane t = new TablePane(datas,tbHead,wid,0,50,1280,400,60,true,false);
 		this.add(t);
 	}

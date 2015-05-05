@@ -16,6 +16,7 @@ import dataservice.team.TeamData_stub;
 import presentation.common.SelectLabel;
 import presentation.player.PlayerVO2List;
 import presentation.table.TablePane;
+import presentation.table.playerTablePanel;
 import vo.playervo.PlayerVO;
 
 public class TeamMemberPanel extends JPanel{
@@ -212,7 +213,7 @@ public class TeamMemberPanel extends JPanel{
 		ArrayList<Integer> wid = new ArrayList<Integer>();
 		wid.add(50);wid.add(300);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);
 		
-		membersBasicInfoTable = new TablePane(datas,tbHead,wid,0,60,1280,350,50,true,false);
+		membersBasicInfoTable = new playerTablePanel(datas,tbHead,wid,0,60,1280,350,50,true,false);
 		this.add(membersBasicInfoTable);
 	}
 		
@@ -228,7 +229,7 @@ public class TeamMemberPanel extends JPanel{
 		wid.add(50);wid.add(150);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);
 		wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);
 			
-		membersDataTable = new TablePane(datas,tbHead,wid,0,60,1280,320,50,true,false);
+		membersDataTable = new playerTablePanel(datas,tbHead,wid,0,60,1280,320,50,true,false);
 		this.add(membersDataTable);
 	}
 

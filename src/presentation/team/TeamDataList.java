@@ -336,7 +336,7 @@ public class TeamDataList extends JPanel{
 		TeamVO2List v2l = new TeamVO2List();
 		ArrayList<ArrayList<String>> datas = v2l.basicInfo(vo);
 			
-		String[] header = {"","所在地","名称","赛区","分区","主场","建立时间"};
+		String[] header = {"","名称","所在地","赛区","分区","主场","建立时间"};
 		ArrayList<Integer> wid = new ArrayList<Integer>();
 		wid.add(50);wid.add(200);wid.add(200);wid.add(100);wid.add(200);wid.add(400);wid.add(100);
 		
@@ -372,7 +372,7 @@ public class TeamDataList extends JPanel{
 				ArrayList<TeamVO> vo = tds.findTeamBasic();
 		TeamVO2List v2l = new TeamVO2List();
 		ArrayList<ArrayList<String>> datas = v2l.highData(vo);
-				String[] tbHead = {"","姓名","助攻效率","抢断效率","防守效率","进攻效率","防守篮板率","进攻篮板率","进攻回合","胜率"};
+				String[] tbHead = {"","名称","助攻效率","抢断效率","防守效率","进攻效率","防守篮板率","进攻篮板率","进攻回合","胜率"};
 			
 		ArrayList<Integer> wid = new ArrayList<Integer>();
 		wid.add(50);wid.add(150);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);
