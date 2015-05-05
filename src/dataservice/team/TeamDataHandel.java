@@ -15,8 +15,6 @@ import java.util.ArrayList;
  */
 public class TeamDataHandel implements TeamDataService {
 
-
-
     @Override
     public ArrayList<HotTeamsVO> hotTeams(int num, String sortBy) {
         return null;

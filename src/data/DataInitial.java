@@ -12,6 +12,7 @@ public class DataInitial {
     private String teamPath;
     private String playerPath;
     private String matchPath;
+    private DataUpdate dataUpdate;
 
     public void init(){
         Team team = new Team(teamPath);
@@ -20,7 +21,11 @@ public class DataInitial {
         player.init();
         Match match = new Match(matchPath);
         match.init();
+        dataUpdate = new DataUpdate(matchPath);
+        dataUpdate.start();
+    }
 
-        new DataUpdate(matchPath).start();
+    public void end(){
+        dataUpdate.end();
     }
 }
