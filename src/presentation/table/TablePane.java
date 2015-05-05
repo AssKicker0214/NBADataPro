@@ -60,8 +60,7 @@ public class TablePane extends JPanel{
 
 			protected ArrayList<RowPane> doInBackground() throws Exception {
 				ArrayList<RowPane> rows = new ArrayList<RowPane>();
-//				ArrayList<Integer> widths = decideWidth(dataTypes);
-//				
+				
 				if(firstV.equals(""))
 					for(int i=0;i<rowInfos.size();i++){
 						RowPane row = new RowPane(i+1,hasIndex);		
@@ -164,7 +163,7 @@ public class TablePane extends JPanel{
 		}
 	}
 	
-	protected void setContent(ArrayList<RowPane> rows){
+	protected void setContent(ArrayList<? extends RowPane> rows){
 
 		content = new JScrollPane();
 		content.getVerticalScrollBar().setUnitIncrement(40);

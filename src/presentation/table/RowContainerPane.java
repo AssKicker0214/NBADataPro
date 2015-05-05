@@ -13,13 +13,11 @@ public class RowContainerPane extends JPanel{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	ArrayList<RowPane> rowPanes;
+	ArrayList<? extends RowPane> rowPanes;
 
-	public RowContainerPane(ArrayList<RowPane> rows){
-	//	this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+	public RowContainerPane(ArrayList<? extends RowPane> rows){
 		FlowLayout fl = (FlowLayout) this.getLayout();
 		fl.setVgap(0);
-//		this.setBounds(0,0,TablePane.width,Math.max(TablePane.height*(rows.size()+1),TablePane.sumHeight));
 		this.setPreferredSize(new Dimension(TablePane.width, Math.max(TablePane.height*(rows.size()+1),TablePane.sumHeight)));
 
 		this.setBackground(new Color(245,245,245));
@@ -27,7 +25,7 @@ public class RowContainerPane extends JPanel{
 	}
 	
 	
-	public void setRows(ArrayList<RowPane> rows){
+	public void setRows(ArrayList<? extends RowPane> rows){
 		rowPanes = rows;
 		this.removeAll();
 		for(int i=0;i<rows.size();i++){

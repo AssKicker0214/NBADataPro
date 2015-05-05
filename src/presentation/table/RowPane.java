@@ -67,7 +67,7 @@ public class RowPane extends JPanel {
 		block.addMouseListener(new MouseAdapter(){
 			@Override
 			public void mousePressed(MouseEvent e) {
-				
+				System.out.println("match");
 			}
 		
 		});
