@@ -5,6 +5,7 @@ package presentation.team;
  */
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
@@ -25,23 +26,28 @@ public class SingleTeamLabel extends JLabel{
 	
 	JLabel TeamPicLabel;
 	JLabel ItemsJLabel;
+	String teamName;
+	
+	SingleDivisionLabel singleDivision;
 	
 	
-	public SingleTeamLabel(String path,String location,String TeamName, Color color){
+	public SingleTeamLabel(String path,String location,String teamName, Color color){
 		this.setLayout(null);
 		this.setBounds(0, 80, 188,78);
 		this.setOpaque(true);
 		this.setBackground(color);
 		this.setVisible(true);
 //		setItemLabel();
-		setTeamNameLabel(TeamName);
+		setTeamNameLabel(teamName);
 		setTeamLocationLabel(location);
 		setTeamPicLabel(path);
+		
+		this.addMouseListener(new SingleTeamAction());
+		
+		this.teamName = teamName;
 	}
 	
-	public void addXXListener(MouseListener mouseListener){
-		this.addMouseListener(mouseListener);
-	}
+	
 	
 	public void setTeamPicLabel(String path){
 		TeamPicLabel = new PhotoLabel(new ImageIcon(path).getImage());
@@ -67,6 +73,10 @@ public class SingleTeamLabel extends JLabel{
 		this.add(TeamLocationLabel);
 	}
 	
+	public void setSingleDivision(SingleDivisionLabel singleDivision){
+		this.singleDivision = singleDivision;
+	}
+	
 	
 	public static void main(String[] args){
 		JFrame jf = new JFrame();
@@ -75,5 +85,39 @@ public class SingleTeamLabel extends JLabel{
 		jf.setLocationRelativeTo(null);
 		jf.getContentPane().add(new SingleTeamLabel("teamsPNG/ATL.png","亚特兰大","老鹰",Color.WHITE));
 		jf.setVisible(true);
+	}
+	
+	class SingleTeamAction implements MouseListener{
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			singleDivision.teamChose(SingleTeamLabel.this.teamName);
+			System.out.println("singleTeamLabel: "+ SingleTeamLabel.this.teamName);
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
 	}
 }

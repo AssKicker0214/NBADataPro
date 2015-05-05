@@ -1,17 +1,20 @@
 package presentation.player.playerDetail;
 
 import java.awt.Color;
+import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import dataservice.player.PlayerDataService;
 import dataservice.player.PlayerData_stub;
+import presentation.common.PhotoLabel;
 import presentation.common.SelectLabel;
 import presentation.player.vs.VSContentPanel;
 import presentation.player.vs.PlayersVSTopPanel;
@@ -39,6 +42,11 @@ public class PlayerMiddlePanel extends JPanel{
 	JLabel PlayerTextLabel;
 	JLabel GreyLabel;
 	JLabel LeagueAvgTextLabel;
+	
+	JLabel chooseList;
+	String message;
+	
+	Color darkest = new Color(29,72,121);
 	
 	PlayerMiddle_ContrastLeaguePanel contrastPanel;
 	PlayerMiddle_SeasonDataPanel seasonDataPanel;
@@ -250,7 +258,6 @@ public class PlayerMiddlePanel extends JPanel{
 		Point size = new Point(320,50);
 		ComparePalyersLabel = new SelectLabel("球员对比",location,size);
 		ComparePalyersLabel.addMouseListener(new MouseAdapter() {
-			
 			@Override
 			public void mousePressed(MouseEvent e) {
 				setSelectedGroups(ComparePalyersLabel);
@@ -275,12 +282,9 @@ public class PlayerMiddlePanel extends JPanel{
 				}
 				if(vsTopPanel != null){
 					remove(vsTopPanel);
-				}
-				if(vsTopPanel != null){
-					remove(vsTopPanel);
-					setVSTopPanel(); 
+					setVSTopPanel(PlayerMiddlePanel.this); 
 				}else{
-					setVSTopPanel(); 
+					setVSTopPanel(PlayerMiddlePanel.this); 
 				}
 				setVSPanel();
 				setVisible(true);
@@ -293,25 +297,25 @@ public class PlayerMiddlePanel extends JPanel{
 
 	public void setContrastPanel(){
 		contrastPanel = new PlayerMiddle_ContrastLeaguePanel(player,leagueAvg);
-		this.add(contrastPanel,0);
+		this.add(contrastPanel);
 		repaint();
 	}
 	
 	public void setSeasonPanel(){
 		seasonDataPanel = new PlayerMiddle_SeasonDataPanel(avg, total);
-		this.add(seasonDataPanel,0);
+		this.add(seasonDataPanel);
 		repaint();
 	}
 	
 	public void setRecent5MatchPanel(){
 		recent5MatchPanel = new PlayerMiddle_Recent5Match(vo.name);
-		this.add(recent5MatchPanel,0);
+		this.add(recent5MatchPanel);
 		repaint();
 	}
 
 	public void setPastPanel(){
 		pastPanel = new PlayerMiddle_PastPanel(vo.name);
-		this.add(pastPanel,0);
+		this.add(pastPanel);
 		repaint();
 	}
 	
@@ -328,14 +332,50 @@ public class PlayerMiddlePanel extends JPanel{
 		itemsNeedAdd.add("罚球％");	avg1.add(78.4); avg2.add(74.3);
 		//
 		vsContentPanel = new VSContentPanel(itemsNeedAdd,avg1,avg2);
-		this.add(vsContentPanel,0);
+		this.add(vsContentPanel);
 		repaint();
 	}
 	
-	public void setVSTopPanel(){
-		vsTopPanel = new PlayersVSTopPanel();
-		this.add(vsTopPanel,0);
+	
+	public void setVSTopPanel(JPanel middle){
+		vsTopPanel = new PlayersVSTopPanel(middle);
+		this.add(vsTopPanel);
 		repaint();
+	}
+
+//		ArrayList<PlayerVO> list = new ArrayList<PlayerVO>();
+//		PlayerDataService pds = new PlayerData_stub();
+//		list = pds.findPlayers(message);
+//		setChooseList(list);
+
+	public void setChooseList(ArrayList<PlayerVO> list){
+		chooseList = new JLabel();
+		chooseList.setBounds(1000, 145, 280, 45*list.size());
+		chooseList.setLayout(new GridLayout(list.size(),1,0,0));
+		chooseList.setBackground(Color.BLACK);
+		chooseList.setOpaque(true);
+		for(int i = 0; i < list.size(); i++){
+			JLabel item = new JLabel();
+			item.setSize(280, 50);
+			
+			JLabel name = new JLabel(list.get(i).name,JLabel.LEADING);
+			name.setBounds(100,0,100,50);
+			name.setForeground(darkest);
+			name.setBackground(Color.white);
+			name.setOpaque(true);
+			item.add(name);
+			
+			JLabel photo = new PhotoLabel(new ImageIcon("portrait/" + list.get(i).photo + ".png").getImage());
+			photo.setBounds(10,0,80,50);
+			photo.setBackground(Color.WHITE);
+			photo.setOpaque(true);
+			photo.setVisible(true);
+			item.add(photo);
+
+			chooseList.add(item);
+		}
+		chooseList.setVisible(true);
+		this.add(chooseList,0);
 	}
 
 

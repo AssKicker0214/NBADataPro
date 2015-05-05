@@ -27,6 +27,8 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 	 */
 	private static final long serialVersionUID = 1L;
 	JLayeredPane layer;
+	JPanel contentPane;
+	JPanel bufferedPane;
 	
 	JPanel playerKing;
 	JPanel teamKing;
@@ -38,6 +40,8 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 	
 	public  Mainframe(){ 
 		layer = this.getLayeredPane();
+		contentPane = (JPanel) this.getContentPane();
+		bufferedPane = new JPanel();
 	
 		setLayout(null);
 		setUndecorated(true);
@@ -78,10 +82,7 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 			}
 		});
 	}
-	//设置最上层,用来承载弹出的子选项
-	private void setFrontLayer(){
-		
-	}
+	
 	
 	public void setImageLabel(){
 		JLabel imageLabel = new JLabel();
@@ -138,6 +139,7 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 		hotPlayer.setVisible(false);
 		
 		teamList = new TeamListPanel();
+		((TeamListPanel) teamList).setMainFrame(this);
 		this.add(teamList);
 		teamList.setVisible(false);
 		
@@ -178,6 +180,16 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 		Mainframe mf = new Mainframe();
 	}
 
+	public void returnIni(){
+		//contentPane = bufferedPane;
+		for(int i=0;i<mainParts.size();i++){
+			mainParts.get(i).setVisible(false);
+		}
+	}
+	
+	public void restoreIni(){
+		bufferedPane = contentPane;
+	}
 
 	@Override
 	public void update(String s) {
@@ -191,6 +203,10 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 			case "比赛": changeMainPart(matchList);System.out.println(s);break;
 			default: break;
 		}
+	}
+	
+	public void teamChose(String teamName){
+		System.out.println("team has been chosen: "+teamName);
 	}
 
 
