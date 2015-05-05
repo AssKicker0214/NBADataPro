@@ -15,7 +15,6 @@ import javax.swing.JPanel;
 import presentation.common.PhotoLabel;
 import presentation.common.SelectLabel;
 import presentation.table.TablePane;
-import vo.matchvo.MatchVO;
 
 public class MatchDataAnalysePanel extends JPanel{
 
@@ -38,12 +37,10 @@ public class MatchDataAnalysePanel extends JPanel{
 	TablePane InfoTable;
 
 	ArrayList<SelectLabel> selectLabelGroups = new ArrayList<SelectLabel>();
-	MatchVO vo;
+
 	public MatchDataAnalysePanel(){
-	//	MatchDataService mds = new MatchData_stub();
-	//	vo = mds.findMatch(matchID);
 		this.setLayout(null);
-		this.setBounds(0,0,1280,540);
+		this.setBounds(0,215,1280,540);
 		this.setBackground(Color.WHITE);
 		setTitle();
 		setButtonsBGLabel();
@@ -72,7 +69,7 @@ public class MatchDataAnalysePanel extends JPanel{
 		TitleLabel.setForeground(Color.WHITE);
 		TitleLabel.setBackground(entered);
 		TitleLabel.setOpaque(true);
-		TitleLabel.setBounds(0,212,1280,40);
+		TitleLabel.setBounds(0,0,1280,40);
 		this.add(TitleLabel);
 		this.updateUI();
 	}
@@ -80,11 +77,11 @@ public class MatchDataAnalysePanel extends JPanel{
 	public void setTeamLabel(String teamName,String photo){
 		teamLabel = new JLabel();
 		teamLabel.setLayout(null);
-		teamLabel.setBounds(0,252,1280,60);
+		teamLabel.setBounds(0,40,1280,60);
 		teamLabel.setBackground(Color.WHITE);
 
 		JLabel TeamPhotoLabel = new PhotoLabel(new ImageIcon(photo).getImage());
-		TeamPhotoLabel.setBounds(20,252,100,60);
+		TeamPhotoLabel.setBounds(20,0,100,60);
 		TeamPhotoLabel.setBackground(Color.WHITE);
 		TeamPhotoLabel.setOpaque(true);
 		TeamPhotoLabel.setVisible(true);
@@ -92,7 +89,7 @@ public class MatchDataAnalysePanel extends JPanel{
 		
 		JLabel TeamNameLabel = new JLabel(teamName,JLabel.CENTER);
 		TeamNameLabel.setFont(new Font("Dialog",1,20));
-		TeamNameLabel.setBounds(100,22,200,60);
+		TeamNameLabel.setBounds(100,0,200,60);
 		TeamNameLabel.setForeground(Color.DARK_GRAY);
 		TeamNameLabel.setBackground(Color.WHITE);
 		TeamNameLabel.setOpaque(true);
@@ -209,7 +206,7 @@ public class MatchDataAnalysePanel extends JPanel{
 		ButtonsBGLabel = new JLabel();
 		ButtonsBGLabel.setBackground(exicted);
 		ButtonsBGLabel.setOpaque(true);
-		ButtonsBGLabel.setBounds(1105,217,95,30);
+		ButtonsBGLabel.setBounds(1105,5,95,30);
 		setFstPageButton();
 		setSecPageButton();
 		TitleLabel.add(ButtonsBGLabel,0);
@@ -242,7 +239,7 @@ public class MatchDataAnalysePanel extends JPanel{
 		wid.add(60);wid.add(60);wid.add(60);wid.add(60);
 		wid.add(60);wid.add(60);wid.add(60);
 		
-		InfoTable = new TablePane(datas,header,wid,0,312,1280,355,30,true,false);
+		InfoTable = new TablePane(datas,header,wid,0,100,1280,355,30,true,false);
 		this.add(InfoTable);
 	}
 

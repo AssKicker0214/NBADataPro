@@ -27,6 +27,8 @@ public class MatchAnalyseTopPanel extends JPanel{
 	JLabel partialScoreLabelGroups;//小比分群
 	JLabel scoreLabel;//小比分群
 	
+	MatchDataAnalysePanel matchDataAnalysePanel;
+	
 	public MatchAnalyseTopPanel(){
 		this.setLayout(null);
 		this.setBounds(0, 0, 1280,700);
@@ -38,6 +40,7 @@ public class MatchAnalyseTopPanel extends JPanel{
 		setLocalInfoGroupsLabel();
 		setAnotherInfoGroupsLabel();
 		setScoreLabel();
+		setMatchDataAnalysePanel();
 	}
 	
 	public void setDataLabel(){
@@ -191,6 +194,11 @@ public class MatchAnalyseTopPanel extends JPanel{
 		setPartialScoreGroupsLabel();
 	}
 
+	public void setMatchDataAnalysePanel(){
+		matchDataAnalysePanel = new MatchDataAnalysePanel();
+		this.add(matchDataAnalysePanel);
+		repaint();
+	}
 
 
 	public static void main(String[] args){

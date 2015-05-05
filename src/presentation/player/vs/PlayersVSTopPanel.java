@@ -290,6 +290,8 @@ public class PlayersVSTopPanel extends JPanel{
 					setAnotherInfoGroupsLabel(initVO);
 					setAnotherPlayerPhotoLabel();
 					setAnotherTeamPhotoLabel();
+					PlayersVSTopPanel.this.setVisible(true);
+					PlayersVSTopPanel.this.repaint();
 
 				}
 				
