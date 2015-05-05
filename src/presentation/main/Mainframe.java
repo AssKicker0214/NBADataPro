@@ -28,9 +28,12 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static Mainframe frame;
 	JLayeredPane layer;
 	JPanel contentPane;
 	JPanel bufferedPane;
+	
+	boolean contentPaneChange = false;
 	
 	JPanel playerKing;
 	JPanel teamKing;
@@ -40,7 +43,21 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 	JPanel matchList;
 	ArrayList<JPanel> mainParts = new ArrayList<JPanel>();
 	
-	public  Mainframe(){ 
+	private  Mainframe(){ 
+		setFrame();
+	}
+	
+	public static Mainframe getFrame(){
+		if(frame == null){
+			frame = new Mainframe();
+		}else{
+			
+		}
+
+		return frame;
+	}
+	
+	private void setFrame(){
 		layer = this.getLayeredPane();
 		contentPane = (JPanel) this.getContentPane();
 		bufferedPane = new JPanel();
@@ -61,7 +78,6 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-	
 	
 	private void setTitleLabel(){
 		JLabel titleLabel = new JLabel();
@@ -179,11 +195,15 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 	}
 	
 	public static  void main(String[] args){
-		Mainframe mf = new Mainframe();
+		Mainframe.getFrame();
 	}
 
 	public void returnIni(){
-		//contentPane = bufferedPane;
+		if(contentPaneChange){
+			contentPaneChange = false;
+			this.setContentPane(bufferedPane);
+			contentPane.repaint();
+		}
 		for(int i=0;i<mainParts.size();i++){
 			mainParts.get(i).setVisible(false);
 		}
@@ -208,11 +228,13 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 	}
 	
 	public void teamChose(String teamName){
-		contentPane.setVisible(false);
+		contentPaneChange = true;
 		restoreIni();
-		contentPane.add(new PlayerMiddlePanel("Aaron Gray"),0);
-//		this.repaint();
-		contentPane.setVisible(true);
+		this.setContentPane(new PlayerMiddlePanel("Aaron Gray"));
+//		contentPane = new PlayerMiddlePanel("Aaron Gray");
+//		contentPane.setVisible(false);
+//		contentPane.add(new PlayerMiddlePanel("Aaron Gray"),0);
+//		contentPane.setVisible(true);
 		System.out.println("team has been chosen: "+teamName);
 	}
 
