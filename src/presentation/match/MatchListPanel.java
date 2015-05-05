@@ -32,17 +32,36 @@ public class MatchListPanel extends JPanel{
 	
 	JLabel commit;
 	
+	TablePane table;
+	
 	public MatchListPanel(){
 		this.setLayout(null);
 		this.setBounds(0,155,1280,540);
 		setMatchTitleLabel();
 		setDate();
 		this.setBackground(Color.WHITE);
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
-		String date = df.format(new Date());
-		setTabel(date,date);
+		update();
 	}
-	
+	public void update(){
+		if(table!=null)
+			remove(table);
+		MatchDataService mds = new MatchData_stub();
+		ArrayList<MatchVO> vo = mds.findByDate("", "");//显示最近20场比赛
+		
+		String[] columns = {"日期","","对阵球队","总比分","第一节比分","第二节比分","第三节比分","第四节比分"};
+		
+		MatchVO2List m2l = new MatchVO2List();
+		ArrayList<ArrayList<String>> datas = m2l.matchList(vo);
+		
+		ArrayList<Integer> wid = new ArrayList<Integer>();
+		wid.add(180);wid.add(0);
+		for(int i = 0; i < 6;i++){
+			wid.add(180);
+		}
+		wid.add(0);
+		table = new TablePane(datas,columns,wid,0,70,1280,420,30,true,false);
+		this.add(table);
+	}
 	public void setMatchTitleLabel(){
 		matchTitleLabel = new JLabel("  赛程",JLabel.LEADING);
 		matchTitleLabel.setFont(new Font("Dialog",1,20));
@@ -100,6 +119,8 @@ public class MatchListPanel extends JPanel{
 	
 	public void setTabel(String start,String end){
 		
+		this.remove(table);
+		
 		MatchDataService mds = new MatchData_stub();
 		ArrayList<MatchVO> vo = mds.findByDate(start, end);
 		
@@ -114,8 +135,8 @@ public class MatchListPanel extends JPanel{
 			wid.add(180);
 		}
 		wid.add(0);
-		TablePane t = new TablePane(datas,columns,wid,0,70,1280,420,30,true,false);
-		this.add(t);
+		table = new TablePane(datas,columns,wid,0,70,1280,420,30,true,false);
+		this.add(table);
 	}
 	
 	public static void main(String[] args){

@@ -6,6 +6,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.RenderingHints;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.geom.Line2D;
 
 import javax.swing.ImageIcon;
@@ -14,6 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import presentation.common.PhotoLabel;
+import presentation.main.Mainframe;
+import presentation.team.teamDetail.TeamMiddlePanel;
 import vo.playervo.PlayerVO;
 
 
@@ -79,6 +83,14 @@ public class PlayerDetailTopPanel extends JPanel{
 		teamPicLabel.setBackground(Color.WHITE);
 		teamPicLabel.setOpaque(true);
 		teamPicLabel.setVisible(true);
+		teamPicLabel.addMouseListener(new MouseAdapter(){
+			@Override
+			public void mousePressed(MouseEvent e) {
+				Mainframe.getFrame().restoreIni();
+				Mainframe.getFrame().setContentPane(new TeamMiddlePanel(vo.team));
+			}
+		
+		});
 		this.add(teamPicLabel);
 	}
 	

@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.geom.Line2D;
 import java.util.ArrayList;
 
@@ -16,6 +18,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import presentation.common.PhotoLabel;
+import presentation.main.Mainframe;
+import presentation.player.playerDetail.PlayerMiddlePanel;
 import vo.playervo.HotPlayersVO;
 
 
@@ -62,7 +66,17 @@ public class HotPlayerContentPanel  extends JPanel{
 		firstPlayerPhotoLabel.setBackground(Color.WHITE);
 		firstPlayerPhotoLabel.setOpaque(true);
 		firstPlayerPhotoLabel.setVisible(true);
+		
+		firstPlayerPhotoLabel.addMouseListener(new MouseAdapter(){
+			@Override
+			public void mousePressed(MouseEvent e) {
+				Mainframe.getFrame().restoreIni();
+				Mainframe.getFrame().setContentPane(new PlayerMiddlePanel(vo.get(0).name));
+			}
+		
+		});
 		FirstPlayer.add(firstPlayerPhotoLabel);
+
 		//添加球员排名
 		JLabel place = new JLabel("1");
 		place.setFont(new Font("Vrinda",1,120));
@@ -199,6 +213,14 @@ public class HotPlayerContentPanel  extends JPanel{
 				PlayerPhotoLabel.setBackground(Color.WHITE);
 				PlayerPhotoLabel.setOpaque(true);
 				PlayerPhotoLabel.setVisible(true);
+				PlayerPhotoLabel.addMouseListener(new MouseAdapter(){
+					@Override
+					public void mousePressed(MouseEvent e) {
+						Mainframe.getFrame().restoreIni();
+						Mainframe.getFrame().setContentPane(new PlayerMiddlePanel(n));
+					}
+				
+				});
 				playerP.add(PlayerPhotoLabel);
 				//添加球员名称
 				JLabel name = new JLabel(n);

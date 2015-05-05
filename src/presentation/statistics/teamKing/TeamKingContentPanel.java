@@ -3,6 +3,8 @@ package presentation.statistics.teamKing;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
@@ -12,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import presentation.common.PhotoLabel;
+import presentation.main.Mainframe;
+import presentation.team.teamDetail.TeamMiddlePanel;
 import vo.teamvo.HotTeamsVO;
 
 
@@ -48,6 +52,15 @@ public class TeamKingContentPanel  extends JPanel{
 		firstPlayerPhotoLabel.setBackground(Color.WHITE);
 		firstPlayerPhotoLabel.setOpaque(true);
 		firstPlayerPhotoLabel.setVisible(true);
+		
+		firstPlayerPhotoLabel.addMouseListener(new MouseAdapter(){
+			@Override
+			public void mousePressed(MouseEvent e) {
+				Mainframe.getFrame().restoreIni();
+				Mainframe.getFrame().setContentPane(new TeamMiddlePanel(vo.get(0).name));
+			}
+		
+		});
 		FirstTeam.add(firstPlayerPhotoLabel);
 		//添加球队排名
 		JLabel place = new JLabel("1");
@@ -142,6 +155,14 @@ public class TeamKingContentPanel  extends JPanel{
 				teamPhotoLabel.setBackground(Color.WHITE);
 				teamPhotoLabel.setOpaque(true);
 				teamPhotoLabel.setVisible(true);
+				teamPhotoLabel.addMouseListener(new MouseAdapter(){
+					@Override
+					public void mousePressed(MouseEvent e) {
+						Mainframe.getFrame().restoreIni();
+						Mainframe.getFrame().setContentPane(new TeamMiddlePanel(name));
+					}
+				
+				});
 				playerP.add(teamPhotoLabel);
 				//添加球队名称
 				JLabel teamName = new JLabel(name);

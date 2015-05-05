@@ -3,6 +3,8 @@ package presentation.statistics.playerKing;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
@@ -12,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import presentation.common.PhotoLabel;
+import presentation.main.Mainframe;
+import presentation.player.playerDetail.PlayerMiddlePanel;
 import vo.playervo.HotPlayersVO;
 
 public class PlayerKingContentPanel extends JPanel{
@@ -50,6 +54,14 @@ public class PlayerKingContentPanel extends JPanel{
 		firstPlayerPhotoLabel.setBackground(Color.WHITE);
 		firstPlayerPhotoLabel.setOpaque(true);
 		firstPlayerPhotoLabel.setVisible(true);
+		firstPlayerPhotoLabel.addMouseListener(new MouseAdapter(){
+			@Override
+			public void mousePressed(MouseEvent e) {
+				Mainframe.getFrame().restoreIni();
+				Mainframe.getFrame().setContentPane(new PlayerMiddlePanel(vo.get(0).name));
+			}
+		
+		});
 		FirstPlayer.add(firstPlayerPhotoLabel);
 		//添加球员排名
 		JLabel place = new JLabel("1");
@@ -58,7 +70,7 @@ public class PlayerKingContentPanel extends JPanel{
 		place.setBounds(180,50,115,120);
 		FirstPlayer.add(place);
 		//添加球员名称
-		JLabel firstName = new JLabel(name[1]);
+		JLabel firstName = new JLabel(name[0]);
 		firstName.setFont(new Font("Vrinda",1,20));
 		firstName.setForeground(Color.DARK_GRAY);
 		firstName.setBounds(270,70,100,20);
@@ -148,6 +160,14 @@ public class PlayerKingContentPanel extends JPanel{
 				PlayerPhotoLabel.setBackground(Color.WHITE);
 				PlayerPhotoLabel.setOpaque(true);
 				PlayerPhotoLabel.setVisible(true);
+				PlayerPhotoLabel.addMouseListener(new MouseAdapter(){
+					@Override
+					public void mousePressed(MouseEvent e) {
+						Mainframe.getFrame().restoreIni();
+						Mainframe.getFrame().setContentPane(new PlayerMiddlePanel(n));
+					}
+				
+				});
 				playerP.add(PlayerPhotoLabel);
 				//添加球员名称
 				JLabel name = new JLabel(n);

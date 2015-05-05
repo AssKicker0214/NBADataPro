@@ -3,6 +3,8 @@ package presentation.match;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -12,6 +14,8 @@ import javax.swing.JPanel;
 import dataservice.match.MatchDataService;
 import dataservice.match.MatchData_stub;
 import presentation.common.PhotoLabel;
+import presentation.main.Mainframe;
+import presentation.team.teamDetail.TeamMiddlePanel;
 import vo.matchvo.MatchVO;
 
 public class MatchAnalyseTopPanel extends JPanel{
@@ -67,6 +71,14 @@ public class MatchAnalyseTopPanel extends JPanel{
 		localTeamPhotoLabel.setBackground(Color.WHITE);
 		localTeamPhotoLabel.setOpaque(true);
 		localTeamPhotoLabel.setVisible(true);
+		localTeamPhotoLabel.addMouseListener(new MouseAdapter(){
+			@Override
+			public void mousePressed(MouseEvent e) {
+				Mainframe.getFrame().restoreIni();
+				Mainframe.getFrame().setContentPane(new TeamMiddlePanel(vo.homeTeam.name));
+			}
+		
+		});
 		this.add(localTeamPhotoLabel);
 	}
 	
@@ -77,6 +89,14 @@ public class MatchAnalyseTopPanel extends JPanel{
 		anotherTeamPhotoLabel.setBackground(Color.white);
 		anotherTeamPhotoLabel.setOpaque(true);
 		anotherTeamPhotoLabel.setVisible(true);
+		anotherTeamPhotoLabel.addMouseListener(new MouseAdapter(){
+			@Override
+			public void mousePressed(MouseEvent e) {
+				Mainframe.getFrame().restoreIni();
+				Mainframe.getFrame().setContentPane(new TeamMiddlePanel(vo.guestTeam.name));
+			}
+		
+		});
 		this.add(anotherTeamPhotoLabel);
 	}
 	
