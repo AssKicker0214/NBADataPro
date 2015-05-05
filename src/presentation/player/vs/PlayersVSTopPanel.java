@@ -2,13 +2,23 @@ package presentation.player.vs;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
+import dataservice.player.PlayerDataService;
+import dataservice.player.PlayerData_stub;
 import presentation.common.PhotoLabel;
+import vo.playervo.PlayerVO;
 
 
 public class PlayersVSTopPanel extends JPanel{
@@ -27,13 +37,21 @@ public class PlayersVSTopPanel extends JPanel{
 	JLabel localInfoGroupsLabel;
 	JLabel anotherInfoGroupsLabel;
 	
+	JLabel chooseList;
+	
 	JLabel searchLabel;
+	JLabel settingLabel;
+	
+	JTextField searchText;
 	
 	Color lightest = new Color(46,110,180);
 	Color light = new Color(33,82,138);
 	Color darkest = new Color(29,72,121);
+	
+	public String msg;
+	JPanel main;
 
-	public PlayersVSTopPanel(){
+	public PlayersVSTopPanel(JPanel middle){
 		this.setLayout(null);
 		this.setBounds(0, 0, 1280,197);
 		this.setBackground(Color.WHITE);
@@ -45,6 +63,15 @@ public class PlayersVSTopPanel extends JPanel{
 		setVSDownLabel();
 		setLocalInfoGroupsLabel();
 		setAnotherInfoGroupsLabel();
+		setSearchLabel();
+		searchLabel.setVisible(false);
+		this.main = middle;
+		
+		
+//		ArrayList<PlayerVO> list = new ArrayList<PlayerVO>();
+//		PlayerDataService pds = new PlayerData_stub();
+//		list = pds.findPlayers(searchText.getText());
+//		setChooseList(list);
 	}
 	
 	public void setLocalPlayerPhotoLabel (){
@@ -65,16 +92,6 @@ public class PlayersVSTopPanel extends JPanel{
 		localTeamPhotoLabel.setOpaque(true);
 		localTeamPhotoLabel.setVisible(true);
 		this.add(localTeamPhotoLabel);
-	}
-
-	public void setSearchLabel(){
-		searchLabel = new JLabel("球员对比",JLabel.CENTER);
-		searchLabel.setFont(new Font("Dialog",1,30));
-		searchLabel.setForeground(Color.GRAY);
-		searchLabel.setBounds(535,35,180,60);
-		
-		this.add(searchLabel);
-
 	}
 
 	public void setVSUpLabel(){
@@ -145,7 +162,7 @@ public class PlayersVSTopPanel extends JPanel{
 		anotherNum.setForeground(Color.WHITE);
 		anotherNum.setBackground(darkest);
 		anotherNum.setOpaque(true);
-		anotherNum.setBounds(465,0,100,60);
+		anotherNum.setBounds(415,0,100,60);
 		anotherInfoGroupsLabel.add(anotherNum);
 		
 		JLabel anotherName = new JLabel("Jordan-Adams");
@@ -159,8 +176,116 @@ public class PlayersVSTopPanel extends JPanel{
 		anotherPos.setForeground(Color.WHITE);
 		anotherPos.setBounds(15,32,180,15);
 		anotherInfoGroupsLabel.add(anotherPos);
-
+		settingLabel();
 		this.add(anotherInfoGroupsLabel);
+	}
+	
+	public void settingLabel(){
+		settingLabel = new PhotoLabel(new ImageIcon("setting.png").getImage());
+//		settingLabel.setHorizontalAlignment(JLabel.RIGHT);
+		settingLabel.setBounds(525,13,25,25);
+		settingLabel.setBackground(light);
+		settingLabel.setOpaque(true);
+		settingLabel.setVisible(true);
+		settingLabel.addMouseListener(new MouseListener() {
+			int select = 0;
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				select += 1;
+				if(select%2 == 1){
+					searchLabel.setVisible(true);
+				}else{
+					searchLabel.setVisible(false);
+				}
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		anotherInfoGroupsLabel.add(settingLabel);
+	}
+
+	public void setSearchLabel(){
+		searchLabel = new JLabel();
+		searchLabel.setBounds(1000,100,280,45);
+		searchLabel.setBackground(Color.LIGHT_GRAY);
+		searchLabel.setOpaque(true);
+
+		searchText = new JTextField();
+		searchText.setBounds(5, 5, 270, 35);
+		searchText.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				main.setVisible(false);
+				System.out.println(searchText.getText());
+				msg = searchText.getText();
+//				System.out.println("AAAAAAAAAAA" + msg);
+				ArrayList<PlayerVO> list = new ArrayList<PlayerVO>();
+				PlayerDataService pds = new PlayerData_stub();
+				list = pds.findPlayers(msg);
+				setChooseList(list);
+				main.add(chooseList,0);
+				main.setVisible(true);
+			}
+		});
+		searchLabel.add(searchText);
+		this.add(searchLabel,0);
+		
+	}
+	
+	public void setChooseList(ArrayList<PlayerVO> list){
+		chooseList = new JLabel();
+		chooseList.setBounds(1000, 145, 280, 50*list.size());
+		chooseList.setLayout(new GridLayout(list.size(),1,0,0));
+		chooseList.setBackground(Color.BLACK);
+		chooseList.setOpaque(true);
+		for(int i = 0; i < list.size(); i++){
+			JLabel item = new JLabel();
+			item.setSize(280, 50);
+			
+			JLabel name = new JLabel(list.get(i).name,JLabel.LEADING);
+			name.setBounds(100,0,100,50);
+			name.setForeground(darkest);
+			name.setBackground(Color.white);
+			name.setOpaque(true);
+			item.add(name);
+			
+			JLabel photo = new PhotoLabel(new ImageIcon("portrait/" + list.get(i).photo + ".png").getImage());
+			photo.setBounds(10,0,80,50);
+			photo.setBackground(Color.WHITE);
+			photo.setOpaque(true);
+			photo.setVisible(true);
+			item.add(photo);
+
+			chooseList.add(item);
+		}
+		chooseList.setVisible(true);
+//		this.add(chooseList,0);
+//		main.add(chooseList,0);
+
 	}
 	
 	public void setVSDownLabel(){
@@ -179,7 +304,7 @@ public class PlayersVSTopPanel extends JPanel{
 		jf.setLayout(null);
 		jf.setSize(1280,700);
 		jf.setLocationRelativeTo(null);
-		jf.add(new PlayersVSTopPanel());
+//		jf.add(new PlayersVSTopPanel());
 		jf.setVisible(true);
 	}
 }

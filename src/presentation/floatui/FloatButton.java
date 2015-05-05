@@ -111,6 +111,7 @@ public class FloatButton extends JLabel implements MouseMotionListener, MouseLis
 
 	public void mouseClicked(MouseEvent e) {
 //		mainPane.changeMainPane();
+		mainPane.returnIni();
 	}
 
 	public void mousePressed(MouseEvent e) {

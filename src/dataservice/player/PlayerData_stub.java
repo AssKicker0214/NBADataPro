@@ -239,8 +239,14 @@ public class PlayerData_stub implements PlayerDataService{
 	
 	@Override
 	public ArrayList<PlayerVO> findPlayers(String msg) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<PlayerVO>  result = new ArrayList<PlayerVO>();
+		PlayerVO vo = new PlayerVO();
+		vo.name = "Aaron Brooks";
+		vo.photo = "Aaron Brooks";
+		for(int i = 0;i < 10;i++){
+			result.add(vo);
+		}
+		return result;
 	}
 
 	
