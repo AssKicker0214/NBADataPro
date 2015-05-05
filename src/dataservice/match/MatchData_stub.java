@@ -22,7 +22,7 @@ public class MatchData_stub implements MatchDataService{
 	}
 
 	@Override
-	public ArrayList<MatchVO> FindRecentMatches_t(int num, String teamName) {
+	public ArrayList<MatchVO> FindRecentMatches_t(String teamName) {
 		// TODO Auto-generated method stub
 		return null;
 	}

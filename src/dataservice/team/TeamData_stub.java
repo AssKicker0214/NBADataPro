@@ -13,7 +13,7 @@ public class TeamData_stub implements TeamDataService{
 		ArrayList<HotTeamsVO>  result = new ArrayList<HotTeamsVO>();
 		HotTeamsVO vo = new HotTeamsVO();
 		vo.name = "Hawks";
-		vo.league = "E";
+		vo.league = 'E';
 		vo.photo = "ATL";
 		vo.location = "Atlanta";
 		vo.value = 39;
@@ -79,8 +79,13 @@ public class TeamData_stub implements TeamDataService{
 
 	@Override
 	public ArrayList<TeamVO> sortTeamNormal(int num, String sortBy, boolean desc) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<TeamVO> vol = new ArrayList<TeamVO>();
+		TeamVO vo = new TeamVO();
+		vo.photo = "BKN";
+		vo.location = "***";
+		vo.teamName = "***";
+		vol.add(vo);
+		return vol;
 	}
 
 	@Override
@@ -104,6 +109,12 @@ public class TeamData_stub implements TeamDataService{
 
 	@Override
 	public ArrayList<PlayerVO> teamMemberList(int teamID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public TeamVO findTeamInfo(String teamName) {
 		// TODO Auto-generated method stub
 		return null;
 	}

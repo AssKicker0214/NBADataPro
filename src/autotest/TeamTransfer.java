@@ -15,7 +15,7 @@ public class TeamTransfer {
 		for(int i=0;i<vo.size();i++){
 			TeamHotInfo temp = new TeamHotInfo();
 			temp.setField(field);
-			temp.setLeague(vo.get(i).league);
+			temp.setLeague(vo.get(i).league+"");
 			temp.setTeamName(vo.get(i).name);
 			temp.setValue(vo.get(i).value);
 			

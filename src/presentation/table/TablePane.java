@@ -10,6 +10,8 @@ import java.util.concurrent.ExecutionException;
 
 import javax.swing.*;
 
+import presentation.common.ListType;
+
 public class TablePane extends JPanel{
 	/**
 	 * 
@@ -20,31 +22,39 @@ public class TablePane extends JPanel{
 	public  static int column;
 	public  static int sumHeight;
 	
-	private JPanel header;
-	private JScrollPane content;
-	private RowContainerPane rowContainer;
+	protected JPanel header;
+	protected JScrollPane content;
+	protected RowContainerPane rowContainer;
 	
-	ArrayList<JLabel> headsList = new ArrayList<JLabel>();
+	protected ListType type;
+	protected ArrayList<Integer> wid;
+	protected String firstV;
+	protected boolean hasIndex;
 	
-	public TablePane(ArrayList<ArrayList<String>> datas,String[] columns,ArrayList<Integer> wid,
-			int x,int y,int w,int sh,int h ,boolean hasIndex,boolean whetherRank){
+	protected ArrayList<JLabel> headsList = new ArrayList<JLabel>();
+	
+	public TablePane(ArrayList<ArrayList<String>> datas,String[] columns,ArrayList<Integer> wi,
+			int x,int y,int w,int sh,int h ,boolean hasI,boolean whetherRank){
 		height = h;
 		width = w;
 		sumHeight = sh;
 		column = columns.length; 
+		wid = wi;
+		firstV = columns[0];
+		hasIndex = hasI;
 		this.setBackground(Color.WHITE);
 		this.setBounds(x,y,w,sh);
 		this.setLayout(null);
 		
 		
 		setHeader(columns,wid,hasIndex,whetherRank);
-		getRows(datas,wid,columns[0],hasIndex);
+		getRows(datas);
 		
 		this.repaint();
 	}
 	
 	
-	private void getRows(final ArrayList<ArrayList<String>> rowInfos, final ArrayList<Integer> width,final String firstVal,final boolean hasIndex){
+	protected void getRows(final ArrayList<ArrayList<String>> rowInfos){
 		
 		SwingWorker<ArrayList<RowPane>, Void> worker = new SwingWorker<ArrayList<RowPane>, Void>() {
 
@@ -52,16 +62,16 @@ public class TablePane extends JPanel{
 				ArrayList<RowPane> rows = new ArrayList<RowPane>();
 //				ArrayList<Integer> widths = decideWidth(dataTypes);
 //				
-				if(firstVal.equals(""))
+				if(firstV.equals(""))
 					for(int i=0;i<rowInfos.size();i++){
 						RowPane row = new RowPane(i+1,hasIndex);		
-						row.addDatas_pic(rowInfos.get(i),width);
+						row.addDatas_pic(rowInfos.get(i),wid);
 						rows.add(row);
 					}
 				else
 					for(int i=0;i<rowInfos.size();i++){
 						RowPane row = new RowPane(i+1,hasIndex);		
-						row.addDatas(rowInfos.get(i),width);
+						row.addDatas(rowInfos.get(i),wid);
 						rows.add(row);
 					}
 				return rows;
@@ -84,7 +94,7 @@ public class TablePane extends JPanel{
 		
 	}
 	
-	private void setHeader(String[] columns, ArrayList<Integer> wid, boolean hasIndex,boolean whetherRank){
+	protected void setHeader(String[] columns, ArrayList<Integer> wid, boolean hasIndex,boolean whetherRank){
 		header = new JPanel();
 		header.setBackground(Color.LIGHT_GRAY);
 		FlowLayout flowLayout = (FlowLayout) header.getLayout();
@@ -112,18 +122,16 @@ public class TablePane extends JPanel{
 
 					@Override
 					public void mousePressed(MouseEvent e) {
-						// TODO Auto-generated method stub
 						isSelected = true;
 						clicked += 1;
-						if(clicked%2 == 1){
-							getItemsAndDescend(l1.getText());
-							System.out.println(l1.getText() + " 是倒序");
-						}else{
-							System.out.println("现在是正序");
+						boolean isDesc = true;
+						if(clicked%2 == 0){
+							isDesc = false;
 						}
 						l1.setOpaque(true);
 						l1.setBackground(Color.GRAY);
 						setSelectedGroups(l1);
+						SortContent(l1.getText(),isDesc);
 					}
 				
 					@Override
@@ -135,8 +143,7 @@ public class TablePane extends JPanel{
 							l.setBackground(Color.GRAY);
 						}
 					
-					}
-				
+					}				
 					@Override
 					public void mouseEntered(MouseEvent e) {
 						JLabel jl = (JLabel) e.getSource();
@@ -149,7 +156,7 @@ public class TablePane extends JPanel{
 		}
 	}
 		
-	public void setSelectedGroups(JLabel s){
+	protected void setSelectedGroups(JLabel s){
 		for(JLabel sl : headsList){
 			if(sl != s){
 				sl.setBackground(Color.LIGHT_GRAY);
@@ -157,7 +164,7 @@ public class TablePane extends JPanel{
 		}
 	}
 	
-	private void setContent(ArrayList<RowPane> rows){
+	protected void setContent(ArrayList<RowPane> rows){
 
 		content = new JScrollPane();
 		content.getVerticalScrollBar().setUnitIncrement(40);
@@ -168,14 +175,7 @@ public class TablePane extends JPanel{
 		content.setViewportView(rowContainer);
 	}
 	
-	/*获得需要倒序排列的项*/
-	public String getItemsAndDescend(String itemNeedDescend){
-		return itemNeedDescend;
-	}
-	
-	public void setChangeData(){
-		
-	}
+	public void SortContent(String sortBy,boolean isDesc){}
 	
 	
 	public static void main(String args[]){

@@ -4,16 +4,16 @@ import java.util.ArrayList;
 
 import presentation.common.ListType;
 
-public class playerTablePanel extends TablePane{
+public class TeamTablePanel extends TablePane{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public playerTablePanel(ArrayList<ArrayList<String>> datas,
-			String[] columns, ArrayList<Integer> wid, int x, int y, int w,
-			int sh, int h, boolean hasIndex, boolean whetherRank) {
+	public TeamTablePanel(ArrayList<ArrayList<String>> datas, String[] columns,
+			ArrayList<Integer> wid, int x, int y, int w, int sh, int h,
+			boolean hasIndex, boolean whetherRank) {
 		super(datas, columns, wid, x, y, w, sh, h, hasIndex, whetherRank);
 		// TODO Auto-generated constructor stub
 	}
@@ -23,11 +23,11 @@ public class playerTablePanel extends TablePane{
 		ArrayList<ArrayList<String>> datas = new ArrayList<ArrayList<String>>();
 		remove(content);
 		if(type == ListType.normal)
-			datas = sp.PlayerNormalHandler(sortBy, isDesc);
+			datas = sp.TeamNormalHandler(sortBy, isDesc);
 		else if(type == ListType.avg)
-			datas = sp.PlayerNormalAvgHandler(sortBy, isDesc);
+			datas = sp.TeamNormalAvgHandler(sortBy, isDesc);
 		else if(type == ListType.high)
-			datas = sp.PlayerHighHandler(sortBy, isDesc);
+			datas = sp.TeamHighHandler(sortBy, isDesc);
 		
 		if(datas.size()==0)
 			return;

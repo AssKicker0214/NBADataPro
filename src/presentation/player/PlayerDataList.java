@@ -16,6 +16,7 @@ import dataservice.player.PlayerData_stub;
 import dataservice.player.sortParam;
 import presentation.common.SelectLabel;
 import presentation.table.TablePane;
+import presentation.table.playerTablePanel;
 import vo.playervo.PlayerVO;
 
 public class PlayerDataList  extends JPanel{
@@ -345,7 +346,7 @@ public class PlayerDataList  extends JPanel{
 		ArrayList<Integer> wid = new ArrayList<Integer>();
 		wid.add(50);wid.add(150);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(200);
 		
-		BasicInfoTable = new TablePane(datas,header,wid,0,60,1280,350,50,true,false);
+		BasicInfoTable = new TablePane(datas,header,wid,0,60,1280,400,50,true,false);
 		this.add(BasicInfoTable);
 	}
 		
@@ -372,7 +373,7 @@ public class PlayerDataList  extends JPanel{
 		wid.add(50);wid.add(150);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);
 		wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);
 			
-		NormalInfoTable = new TablePane(datas,tbHead,wid,0,60,1280,320,50,true,true);
+		NormalInfoTable = new TablePane(datas,tbHead,wid,0,60,1280,400,50,true,true);
 		this.add(NormalInfoTable);
 	}
 	public void setHighInfoTablePanel(){
@@ -391,7 +392,7 @@ public class PlayerDataList  extends JPanel{
 		wid.add(50);wid.add(150);wid.add(50);wid.add(50);wid.add(50);wid.add(100);wid.add(100);wid.add(50);wid.add(50);wid.add(50);
 		wid.add(100);wid.add(50);wid.add(70);
 			
-		NormalInfoTable = new TablePane(datas,tbHead,wid,0,60,1280,320,50,true,true);
+		NormalInfoTable = new TablePane(datas,tbHead,wid,0,60,1280,400,50,true,true);
 		this.add(NormalInfoTable);
 	}
 

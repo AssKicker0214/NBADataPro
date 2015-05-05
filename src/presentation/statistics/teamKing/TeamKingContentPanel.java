@@ -122,7 +122,7 @@ public class TeamKingContentPanel  extends JPanel{
 		top5.setBounds(610,0,530,372);
 		top5.setBackground(Color.WHITE);
 		for(int i=1;i<5;i++)
-			top5.add(team("teamsPNG/"+vo.get(i).photo+".png",vo.get(i).location+"-"+vo.get(i).name,vo.get(i).league,vo.get(i).value+""));
+			top5.add(team("teamsPNG/"+vo.get(i).photo+".png",vo.get(i).location+"-"+vo.get(i).name,vo.get(i).league+"",vo.get(i).value+""));
 	
 		
 		this.add(top5);

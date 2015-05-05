@@ -5,7 +5,9 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,7 +16,6 @@ import javax.swing.JPanel;
 import dataservice.match.MatchDataService;
 import dataservice.match.MatchData_stub;
 import presentation.common.DateLabel;
-import presentation.common.MyCheckBoxLabel;
 import presentation.match.MatchVO2List;
 import presentation.table.TablePane;
 import vo.matchvo.MatchContentPlayerVO;
@@ -31,15 +32,18 @@ public class PlayerMiddle_PastPanel extends JPanel{
 	JLabel tabelLabel;
 	JLabel commit;
 	
+	String PlayerName;
 	
-	
-	public PlayerMiddle_PastPanel(String playerName){
+	public PlayerMiddle_PastPanel(String player){
+		PlayerName = player;
 		this.setLayout(null);
 		this.setBounds(0, 255,1280,420);
 		setPastTitleLabel();
 		setDate();
 		this.setBackground(Color.WHITE);
-		setTabel(playerName);
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
+		String date = df.format(new Date());
+		setTabel(date,date);
 	}
 	
 	public void setPastTitleLabel(){
@@ -71,20 +75,17 @@ public class PlayerMiddle_PastPanel extends JPanel{
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
 			}
 			
 			@Override
 			public void mousePressed(MouseEvent e) {
 				commit.setFont(new Font("Dialog",1,15));
-				System.out.println(calendarStart.getSelectedDate().toString());
-				System.out.println(calendarEnd.getSelectedDate().toString());
+				setTabel(calendarStart.getSelectedDate().toString(),calendarEnd.getSelectedDate().toString());
 			}
 			
 			@Override
 			public void mouseExited(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
 			}
 			
 			@Override
@@ -95,18 +96,16 @@ public class PlayerMiddle_PastPanel extends JPanel{
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
 			}
 		});
 		CheckPastPanel.add(commit);
-
-		
 	}
 
 	
-	public void setTabel(String playerName){
+	public void setTabel(String start,String end){
 		MatchDataService mds = new MatchData_stub();
-		ArrayList<MatchContentPlayerVO> vo = mds.FindRecentMatches_p(5, playerName);
+		
+		ArrayList<MatchContentPlayerVO> vo = mds.findByDP(start, end, PlayerName);
 		String[] columns = {"日期","对手","分钟","％","命中","出手","三分％","罚球％",
 				"进攻篮板","防守篮板","篮板","助攻","盖帽","失误","犯规","得分"};
 				

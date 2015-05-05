@@ -20,21 +20,21 @@ public class PlayerVO {
 
 	//normal info
 	public int 	age;				//球员年龄
-	public int 	assist;			//助攻数
-	public int 	blockShot;		//盖帽数
-	public int 	defend;			//防守数
+	public int 	assist;				//助攻数
+	public int 	blockShot;			//盖帽数
+	public int 	defend;				//防守数
 	public double 	efficiency;		//效率
-	public int 	fault;			//失误数
-	public int 	foul;			//犯规数
-	public int 	minute;			//上场时间数（单位：分钟）
+	public int 	fault;				//失误数
+	public int 	foul;				//犯规数
+	public int 	minute;				//上场时间数（单位：分钟）
 	public int 	numOfGame;			//上场次数
-	public int 	offend;			//进攻数
+	public int 	offend;				//进攻数
 	public double 	penalty;		//罚球命中率
-	public int 	point;			//得分
-	public int 	rebound;		//篮板数
+	public int 	point;				//得分
+	public int 	rebound;			//篮板数
 	public double 	shot;			//投篮命中率
 	public int 		start;			//首发次数
-	public int 	steal;			//抢断数
+	public int 	steal;				//抢断数
 	public double 	three;			//三分命中率
 	
 	//avg normal info

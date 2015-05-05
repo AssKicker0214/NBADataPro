@@ -57,7 +57,8 @@ public class MatchDataAnalysePanel extends JPanel{
 		selectLabelGroups.add(secPageButton);
 		for(SelectLabel sl : selectLabelGroups){
 			if(sl != s){
-				sl.setBackground(exicted);;
+				sl.setBackground(exicted);
+				sl.isSelected = false;
 			}
 		}
 	}
@@ -119,7 +120,6 @@ public class MatchDataAnalysePanel extends JPanel{
 
 		@Override
 		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
 			setVisible(false);
 			setButtonsBGLabel();
 			fstPageButton.isSelected = true;

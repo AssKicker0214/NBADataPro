@@ -15,6 +15,7 @@ import dataservice.team.TeamDataService;
 import dataservice.team.TeamData_stub;
 import presentation.common.SelectLabel;
 import presentation.table.TablePane;
+import presentation.table.TeamTablePanel;
 import vo.teamvo.TeamVO;
 
 public class TeamDataList extends JPanel{
@@ -339,7 +340,7 @@ public class TeamDataList extends JPanel{
 		ArrayList<Integer> wid = new ArrayList<Integer>();
 		wid.add(50);wid.add(200);wid.add(200);wid.add(100);wid.add(200);wid.add(400);wid.add(100);
 		
-		BasicInfoTable = new TablePane(datas,header,wid,0,60,1280,350,50,true,false);
+		BasicInfoTable = new TeamTablePanel(datas,header,wid,0,60,1280,350,50,true,false);
 		this.add(BasicInfoTable);
 	}
 		
@@ -363,7 +364,7 @@ public class TeamDataList extends JPanel{
 		wid.add(50);wid.add(150);wid.add(60);wid.add(60);wid.add(60);wid.add(60);wid.add(60);wid.add(60);wid.add(60);
 		wid.add(60);wid.add(60);wid.add(60);wid.add(60);wid.add(60);wid.add(60);
 			
-		NormalInfoTable = new TablePane(datas,tbHead,wid,0,60,1280,320,50,true,true);
+		NormalInfoTable = new TeamTablePanel(datas,tbHead,wid,0,60,1280,320,50,true,true);
 		this.add(NormalInfoTable);
 	}
 	
@@ -371,14 +372,13 @@ public class TeamDataList extends JPanel{
 				ArrayList<TeamVO> vo = tds.findTeamBasic();
 		TeamVO2List v2l = new TeamVO2List();
 		ArrayList<ArrayList<String>> datas = v2l.highData(vo);
-				String[] tbHead = {"","姓名","助攻效率","抢断效率","防守效率","进攻效率","防守篮板率","进攻篮板率","进攻回合",
-					"抢断效率","胜率"};
+				String[] tbHead = {"","姓名","助攻效率","抢断效率","防守效率","进攻效率","防守篮板率","进攻篮板率","进攻回合","胜率"};
 			
 		ArrayList<Integer> wid = new ArrayList<Integer>();
 		wid.add(50);wid.add(150);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);
-		wid.add(100);wid.add(100);
+		wid.add(100);
 			
-		NormalInfoTable = new TablePane(datas,tbHead,wid,0,60,1280,320,50,true,true);
+		NormalInfoTable = new TeamTablePanel(datas,tbHead,wid,0,60,1280,320,50,true,true);
 		this.add(NormalInfoTable);
 	}
 	
