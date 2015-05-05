@@ -1,20 +1,17 @@
 package presentation.player.playerDetail;
 
 import java.awt.Color;
-import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import dataservice.player.PlayerDataService;
 import dataservice.player.PlayerData_stub;
-import presentation.common.PhotoLabel;
 import presentation.common.SelectLabel;
 import presentation.player.vs.VSContentPanel;
 import presentation.player.vs.PlayersVSTopPanel;
@@ -286,7 +283,7 @@ public class PlayerMiddlePanel extends JPanel{
 				}else{
 					setVSTopPanel(PlayerMiddlePanel.this); 
 				}
-				setVSPanel();
+				setVSPanel();//这边是第一次点 做默认？？。。
 				setVisible(true);
 				repaint();
 			}
@@ -337,48 +334,12 @@ public class PlayerMiddlePanel extends JPanel{
 	}
 	
 	
-	public void setVSTopPanel(JPanel middle){
-		vsTopPanel = new PlayersVSTopPanel(middle);
+	public void setVSTopPanel(PlayerMiddlePanel middle){
+		vsTopPanel = new PlayersVSTopPanel(middle,vo);
 		this.add(vsTopPanel);
 		repaint();
 	}
-
-//		ArrayList<PlayerVO> list = new ArrayList<PlayerVO>();
-//		PlayerDataService pds = new PlayerData_stub();
-//		list = pds.findPlayers(message);
-//		setChooseList(list);
-
-	public void setChooseList(ArrayList<PlayerVO> list){
-		chooseList = new JLabel();
-		chooseList.setBounds(1000, 145, 280, 45*list.size());
-		chooseList.setLayout(new GridLayout(list.size(),1,0,0));
-		chooseList.setBackground(Color.BLACK);
-		chooseList.setOpaque(true);
-		for(int i = 0; i < list.size(); i++){
-			JLabel item = new JLabel();
-			item.setSize(280, 50);
-			
-			JLabel name = new JLabel(list.get(i).name,JLabel.LEADING);
-			name.setBounds(100,0,100,50);
-			name.setForeground(darkest);
-			name.setBackground(Color.white);
-			name.setOpaque(true);
-			item.add(name);
-			
-			JLabel photo = new PhotoLabel(new ImageIcon("portrait/" + list.get(i).photo + ".png").getImage());
-			photo.setBounds(10,0,80,50);
-			photo.setBackground(Color.WHITE);
-			photo.setOpaque(true);
-			photo.setVisible(true);
-			item.add(photo);
-
-			chooseList.add(item);
-		}
-		chooseList.setVisible(true);
-		this.add(chooseList,0);
-	}
-
-
+	
 	public static void main(String[] args){
 		JFrame jf = new JFrame();
 		jf.setLayout(null);
