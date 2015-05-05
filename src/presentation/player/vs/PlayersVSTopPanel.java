@@ -51,32 +51,39 @@ public class PlayersVSTopPanel extends JPanel{
 	
 	public String msg;
 	JPanel main;
+	PlayerVO initVO;
+	PlayerVO localVO;
 
-	public PlayersVSTopPanel(JPanel middle){
+	public PlayersVSTopPanel(JPanel middle,PlayerVO localvo){
+		this.localVO = localvo;
 		this.setLayout(null);
 		this.setBounds(0, 0, 1280,197);
 		this.setBackground(Color.WHITE);
+		
+		setLocalInfoGroupsLabel(localvo);
+		setAttri();
+		setAnotherInfoGroupsLabel(initVO);
+
 		setLocalPlayerPhotoLabel();
 		setAnotherPlayerPhotoLabel();
 		setLocalTeamPhotoLabel();
 		setAnotherTeamPhotoLabel();
 		setVSUpLabel();
 		setVSDownLabel();
-		setLocalInfoGroupsLabel();
-		setAnotherInfoGroupsLabel();
 		setSearchLabel();
 		searchLabel.setVisible(false);
 		this.main = middle;
-		
-		
-//		ArrayList<PlayerVO> list = new ArrayList<PlayerVO>();
-//		PlayerDataService pds = new PlayerData_stub();
-//		list = pds.findPlayers(searchText.getText());
-//		setChooseList(list);
+	}
+	
+	public void setAttri(){
+		initVO.number = 0;
+		initVO.name = "NBA联盟平均数";
+		initVO.photo = "nba";
+		initVO.teamName = "transparent";
 	}
 	
 	public void setLocalPlayerPhotoLabel (){
-		localPlayerPhotoLabel = new PhotoLabel(new ImageIcon("1.png").getImage());
+		localPlayerPhotoLabel = new PhotoLabel(new ImageIcon("teamsPNG/" + localVO.photo + ".png").getImage());
 		localPlayerPhotoLabel.setHorizontalAlignment(JLabel.RIGHT);
 		localPlayerPhotoLabel.setBounds(300,-5,230,150);
 		localPlayerPhotoLabel.setBackground(Color.WHITE);
@@ -86,7 +93,7 @@ public class PlayersVSTopPanel extends JPanel{
 	}
 	
 	public void setLocalTeamPhotoLabel (){
-		localTeamPhotoLabel = new PhotoLabel(new ImageIcon("teamsPNG/ATL.png").getImage());
+		localTeamPhotoLabel = new PhotoLabel(new ImageIcon("portrait/" + localVO.teamName + ".png").getImage());
 		localTeamPhotoLabel.setHorizontalAlignment(JLabel.RIGHT);
 		localTeamPhotoLabel.setBounds(140,-10,250,120);
 		localTeamPhotoLabel.setBackground(Color.WHITE);
@@ -104,7 +111,7 @@ public class PlayersVSTopPanel extends JPanel{
 	}
 	
 	public void setAnotherTeamPhotoLabel (){
-		anotherTeamPhotoLabel = new PhotoLabel(new ImageIcon("teamsPNG/ATL.png").getImage());
+		anotherTeamPhotoLabel = new PhotoLabel(new ImageIcon("teamsPNG/" + initVO.teamName + ".png").getImage());
 		anotherTeamPhotoLabel.setHorizontalAlignment(JLabel.RIGHT);
 		anotherTeamPhotoLabel.setBounds(955,-10,250,120);
 		anotherTeamPhotoLabel.setBackground(Color.WHITE);
@@ -114,7 +121,7 @@ public class PlayersVSTopPanel extends JPanel{
 	}
 
 	public void setAnotherPlayerPhotoLabel (){
-		anotherPlayerPhotoLabel = new PhotoLabel(new ImageIcon("1.png").getImage());
+		anotherPlayerPhotoLabel = new PhotoLabel(new ImageIcon("portrait/" + initVO.photo + ".png").getImage());
 		anotherPlayerPhotoLabel.setHorizontalAlignment(JLabel.RIGHT);
 		anotherPlayerPhotoLabel.setBounds(730,-5,230,150);
 		anotherPlayerPhotoLabel.setBackground(Color.WHITE);
@@ -123,13 +130,13 @@ public class PlayersVSTopPanel extends JPanel{
 		this.add(anotherPlayerPhotoLabel);
 	}
 		
-	public void setLocalInfoGroupsLabel(){
+	public void setLocalInfoGroupsLabel(PlayerVO playerVO){
 		localInfoGroupsLabel = new JLabel();
 		localInfoGroupsLabel.setBounds(0,145,535,55);
 		localInfoGroupsLabel.setOpaque(true);
 		localInfoGroupsLabel.setBackground(light);
 
-		JLabel playerNum = new JLabel("4",JLabel.CENTER);
+		JLabel playerNum = new JLabel(playerVO.number + "",JLabel.CENTER);
 		playerNum.setFont(new Font("Dialog",1,30));
 		playerNum.setForeground(Color.WHITE);
 		playerNum.setBackground(darkest);
@@ -137,13 +144,13 @@ public class PlayersVSTopPanel extends JPanel{
 		playerNum.setBounds(0,0,100,60);
 		localInfoGroupsLabel.add(playerNum);
 
-		JLabel playerName = new JLabel("Jordan-Adams",JLabel.CENTER);
+		JLabel playerName = new JLabel(playerVO.name,JLabel.CENTER);
 		playerName.setFont(new Font("Dialog",1,18));
 		playerName.setForeground(Color.WHITE);
 		playerName.setBounds(355,5,180,30);
 		localInfoGroupsLabel.add(playerName);
 		
-		JLabel playerPos = new JLabel("前锋"+" / "+"纽约",JLabel.CENTER);
+		JLabel playerPos = new JLabel(playerVO.position,JLabel.CENTER);
 		playerPos.setFont(new Font("Dialog",1,13));
 		playerPos.setForeground(Color.WHITE);
 		playerPos.setBounds(390,32,180,15);
@@ -152,13 +159,13 @@ public class PlayersVSTopPanel extends JPanel{
 		this.add(localInfoGroupsLabel);
 	}
 	
-	public void setAnotherInfoGroupsLabel(){
+	public void setAnotherInfoGroupsLabel(PlayerVO playerVO){
 		anotherInfoGroupsLabel = new JLabel();
 		anotherInfoGroupsLabel.setBounds(715,145,565,55);
 		anotherInfoGroupsLabel.setOpaque(true);
 		anotherInfoGroupsLabel.setBackground(light);
 		
-		JLabel anotherNum = new JLabel("4",JLabel.CENTER);
+		JLabel anotherNum = new JLabel(playerVO.number + "",JLabel.CENTER);
 		anotherNum.setFont(new Font("Dialog",1,30));
 		anotherNum.setForeground(Color.WHITE);
 		anotherNum.setBackground(darkest);
@@ -166,13 +173,13 @@ public class PlayersVSTopPanel extends JPanel{
 		anotherNum.setBounds(415,0,100,60);
 		anotherInfoGroupsLabel.add(anotherNum);
 		
-		JLabel anotherName = new JLabel("Jordan-Adams");
+		JLabel anotherName = new JLabel(playerVO.name);
 		anotherName.setFont(new Font("Dialog",1,18));
 		anotherName.setForeground(Color.WHITE);
 		anotherName.setBounds(15,5,180,30);
 		anotherInfoGroupsLabel.add(anotherName);
 		
-		JLabel anotherPos = new JLabel("前锋"+" / "+"纽约");
+		JLabel anotherPos = new JLabel(playerVO.position);
 		anotherPos.setFont(new Font("Dialog",1,13));
 		anotherPos.setForeground(Color.WHITE);
 		anotherPos.setBounds(15,32,180,15);
@@ -268,8 +275,22 @@ public class PlayersVSTopPanel extends JPanel{
 				
 				@Override
 				public void mousePressed(MouseEvent e) {
-					// TODO Auto-generated method stub
-					
+					PlayersVSTopPanel.this.setVisible(false);
+					PlayerDataService pds = new PlayerData_stub();
+					initVO = pds.avgLeague(); 
+					if(anotherPlayerPhotoLabel != null){
+						remove(anotherPlayerPhotoLabel);
+					}
+					if(anotherTeamPhotoLabel != null){
+						remove(anotherTeamPhotoLabel);
+					}
+					if(anotherInfoGroupsLabel != null){
+						remove(anotherInfoGroupsLabel);
+					}
+					setAnotherInfoGroupsLabel(initVO);
+					setAnotherPlayerPhotoLabel();
+					setAnotherTeamPhotoLabel();
+
 				}
 				
 				@Override

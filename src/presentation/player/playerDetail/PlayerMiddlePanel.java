@@ -279,9 +279,9 @@ public class PlayerMiddlePanel extends JPanel{
 				}
 				if(vsTopPanel != null){
 					remove(vsTopPanel);
-					setVSTopPanel(PlayerMiddlePanel.this); 
+					setVSTopPanel(PlayerMiddlePanel.this,vo); 
 				}else{
-					setVSTopPanel(PlayerMiddlePanel.this); 
+					setVSTopPanel(PlayerMiddlePanel.this,vo); 
 				}
 				setVSPanel();
 				setVisible(true);
@@ -334,8 +334,8 @@ public class PlayerMiddlePanel extends JPanel{
 	}
 	
 	
-	public void setVSTopPanel(JPanel middle){
-		vsTopPanel = new PlayersVSTopPanel(middle);
+	public void setVSTopPanel(JPanel middle,PlayerVO localvo){
+		vsTopPanel = new PlayersVSTopPanel(middle,localvo);
 		this.add(vsTopPanel);
 		repaint();
 	}

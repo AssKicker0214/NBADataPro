@@ -228,11 +228,16 @@ public class PlayerData_stub implements PlayerDataService{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	//联盟平均数据 返回值包括 场均得分，场均篮板，场均助攻，罚球命中率，三分命中率
 	@Override
 	public PlayerVO avgLeague() {
 		PlayerVO vo = new PlayerVO();
 		vo.avgPoint = 5;
+		vo.avgRebound = 10;
+		vo.avgAssist = 4;
+		vo.penalty = 100.0;
+		vo.three = 90.0;
 		return vo;
 	}
 
