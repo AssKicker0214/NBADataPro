@@ -15,10 +15,12 @@ import presentation.floatui.FloatPane;
 import presentation.floatui.IMainFrameSize;
 import presentation.match.MatchListPanel;
 import presentation.player.PlayerDataList;
+import presentation.player.playerDetail.PlayerMiddlePanel;
 import presentation.statistics.hotPlayer.HotPlayerPanel;
 import presentation.statistics.playerKing.PlayerKingPanel;
 import presentation.statistics.teamKing.TeamKingPanel;
 import presentation.team.TeamListPanel;
+import presentation.team.teamDetail.TeamMiddlePanel;
 
 public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 
@@ -206,6 +208,11 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 	}
 	
 	public void teamChose(String teamName){
+		contentPane.setVisible(false);
+		restoreIni();
+		contentPane.add(new PlayerMiddlePanel("Aaron Gray"),0);
+//		this.repaint();
+		contentPane.setVisible(true);
 		System.out.println("team has been chosen: "+teamName);
 	}
 

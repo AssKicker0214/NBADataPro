@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -187,14 +188,9 @@ public class PlayersVSTopPanel extends JPanel{
 		settingLabel.setBackground(light);
 		settingLabel.setOpaque(true);
 		settingLabel.setVisible(true);
-		settingLabel.addMouseListener(new MouseListener() {
+		settingLabel.addMouseListener(new MouseAdapter()
+		{	
 			int select = 0;
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
 			@Override
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
@@ -205,36 +201,18 @@ public class PlayersVSTopPanel extends JPanel{
 					searchLabel.setVisible(false);
 				}
 			}
-			
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
 		});
 		anotherInfoGroupsLabel.add(settingLabel);
 	}
 
 	public void setSearchLabel(){
 		searchLabel = new JLabel();
-		searchLabel.setBounds(1000,100,280,45);
+		searchLabel.setBounds(950,100,330,45);
 		searchLabel.setBackground(Color.LIGHT_GRAY);
 		searchLabel.setOpaque(true);
 
 		searchText = new JTextField();
-		searchText.setBounds(5, 5, 270, 35);
+		searchText.setBounds(5, 5, 340, 35);
 		searchText.addActionListener(new ActionListener() {
 			
 			@Override
@@ -258,9 +236,9 @@ public class PlayersVSTopPanel extends JPanel{
 	
 	public void setChooseList(ArrayList<PlayerVO> list){
 		chooseList = new JLabel();
-		chooseList.setBounds(1000, 145, 280, 50*list.size());
+		chooseList.setBounds(950, 145, 330, 50*list.size());
 		chooseList.setLayout(new GridLayout(list.size(),1,0,0));
-		chooseList.setBackground(Color.BLACK);
+		chooseList.setBackground(Color.LIGHT_GRAY);
 		chooseList.setOpaque(true);
 		for(int i = 0; i < list.size(); i++){
 			JLabel item = new JLabel();
@@ -279,7 +257,40 @@ public class PlayersVSTopPanel extends JPanel{
 			photo.setOpaque(true);
 			photo.setVisible(true);
 			item.add(photo);
-
+			
+			name.addMouseListener(new MouseListener() {
+				
+				@Override
+				public void mouseReleased(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mousePressed(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseExited(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseEntered(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+			
 			chooseList.add(item);
 		}
 		chooseList.setVisible(true);
