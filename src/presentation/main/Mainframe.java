@@ -2,7 +2,9 @@ package presentation.main;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
@@ -80,25 +82,27 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 	}
 	
 	private void setTitleLabel(){
-		JLabel titleLabel = new JLabel();
-		titleLabel.setBounds(0, 0, 1280,30);
-		titleLabel.setBackground(Color.black);
-		titleLabel.setOpaque(true);
+//		JLabel titleLabel = new JLabel();
+//		titleLabel.setBounds(0, 0, 1280,30);
+//		titleLabel.setBackground(Color.black);
+//		titleLabel.setOpaque(true);
+//		this.add(titleLabel);
+//		titleLabel.addMouseMotionListener(new  MouseMotionListener() {
+//			
+//			@Override
+//			public void mouseMoved(MouseEvent arg0) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//			
+//			@Override
+//			public void mouseDragged(MouseEvent arg0) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//		});
+		TitleLabel titleLabel = new TitleLabel();
 		this.add(titleLabel);
-		titleLabel.addMouseMotionListener(new  MouseMotionListener() {
-			
-			@Override
-			public void mouseMoved(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseDragged(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
 	}
 	
 	
@@ -246,4 +250,119 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 		return this.getSize();
 	}
 
+	class TitleLabel extends JLabel{
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public TitleLabel(){
+			initialise();
+		}
+		
+		private void initialise(){
+			this.setBounds(0, 0, 1280,30);
+			this.setBackground(Color.black);
+			this.setOpaque(true);
+			this.addMouseMotionListener(new  MouseMotionListener() {
+				
+				@Override
+				public void mouseMoved(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseDragged(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+			
+			setClose();
+			setMin();
+		}
+		
+		private void setClose(){
+			JLabel closeLabel = new JLabel("X");
+//			closeLabel.setOpaque(true);
+			closeLabel.setBounds(1240, 0, 35, 30);
+			closeLabel.setFont(new Font("微软雅黑", Font.BOLD, 16));
+			closeLabel.setForeground(Color.white);
+			closeLabel.addMouseListener(new MouseListener() {
+				
+				@Override
+				public void mouseReleased(MouseEvent arg0) {
+					Mainframe.getFrame().dispose();;
+				}
+				
+				@Override
+				public void mousePressed(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseExited(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseEntered(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseClicked(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+			this.add(closeLabel);
+		}
+		
+		private void setMin(){
+			JLabel minLabel = new JLabel("-");
+			minLabel.setBounds(1200, 0, 35, 30);
+//			minLabel.setOpaque(true);
+			minLabel.setFont(new Font("微软雅黑", Font.BOLD, 16));
+			minLabel.setForeground(Color.white);
+			minLabel.addMouseListener(new MouseListener() {
+				
+				@Override
+				public void mouseReleased(MouseEvent arg0) {
+					Mainframe.getFrame().setExtendedState(JFrame.ICONIFIED);
+				}
+				
+				@Override
+				public void mousePressed(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseExited(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseEntered(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseClicked(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+			this.add(minLabel);
+			
+		}
+	}
 }
