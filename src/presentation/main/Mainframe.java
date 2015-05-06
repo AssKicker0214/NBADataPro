@@ -48,6 +48,8 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 	JPanel matchList;
 	ArrayList<JPanel> mainParts = new ArrayList<JPanel>();
 	
+	GuideContainer guideContainer;
+	
 	private  Mainframe(){ 
 		setFrame();
 	}
@@ -114,7 +116,7 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 		contentPane = new JPanel();
 		contentPane.setLayout(null);
 		contentPane.setVisible(false);
-		contentPane.setBackground(Color.cyan);
+//		contentPane.setBackground(Color.cyan);
 		contentPane.setBounds(0, 30, 1280, 670);
 		this.add(contentPane);
 	}
@@ -138,7 +140,7 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 	}
 	
 	private void setGuideGroup(){
-		GuideContainer guideContainer = new GuideContainer();
+		guideContainer = new GuideContainer();
 		GuideLabel playerGuide = new GuideLabel("球员");
 		playerGuide.setMainFrame(this);
 		
@@ -235,6 +237,7 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 			contentPane = bufferedPane;
 			this.add(contentPane);
 			this.repaint();
+			guideContainer.setAllUnselected();
 			contentPane.setVisible(true);
 		}
 		
