@@ -23,6 +23,7 @@ import presentation.player.PlayerDataList;
 import presentation.statistics.hotPlayer.HotPlayerPanel;
 import presentation.statistics.playerKing.PlayerKingPanel;
 import presentation.statistics.teamKing.TeamKingPanel;
+import presentation.team.TeamDataList;
 import presentation.team.TeamListPanel;
 import presentation.team.teamDetail.TeamMiddlePanel;
 
@@ -34,6 +35,7 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 	private static final long serialVersionUID = 1L;
 	private static Mainframe frame;
 	JLayeredPane layer;
+
 	JPanel contentPane;
 	JPanel bufferedPane;
 	JPanel jumpPane;
@@ -46,6 +48,8 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 	JPanel teamList;
 	JPanel playerList;
 	JPanel matchList;
+	JPanel teamDataList;
+	
 	ArrayList<JPanel> mainParts = new ArrayList<JPanel>();
 	
 	GuideContainer guideContainer;
@@ -146,21 +150,24 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 		
 		GuideLabel teamGuide = new GuideLabel("球队");
 		teamGuide.setMainFrame(this);
-
+		
+			SuboptionLayer teamSuboptionLayer = new TeamSuboptionLayer();
+			layer.add(teamSuboptionLayer);
+			layer.setLayer(teamSuboptionLayer, 600);
+			teamSuboptionLayer.setMainFrame(this);
+			teamGuide.linkSuboption(teamSuboptionLayer);
+		
 		GuideLabel gameGuide = new GuideLabel("比赛");
 		gameGuide.setMainFrame(this);
 
 		GuideLabel staticGuide = new GuideLabel("统计");
 		staticGuide.setMainFrame(this);
 
-
 			SuboptionLayer staticSuboptionLayer = new StaticSuboptionLayer();
-			
 			layer.add(staticSuboptionLayer);
 			layer.setLayer(staticSuboptionLayer, 500);
 			staticSuboptionLayer.setMainFrame(this);
-			
-		staticGuide.linkSuboption(staticSuboptionLayer);
+			staticGuide.linkSuboption(staticSuboptionLayer);
 			
 		guideContainer.addGuide(playerGuide);
 		guideContainer.addGuide(teamGuide);
@@ -197,12 +204,18 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 		contentPane.add(matchList,0);
 		matchList.setVisible(false);
 		
+		teamDataList = new TeamDataList();
+		this.add(teamDataList,0);
+		matchList.setVisible(false);
+		
 		mainParts.add(playerKing);
 		mainParts.add(teamKing);
 		mainParts.add(hotPlayer);
 		mainParts.add(teamList);
 		mainParts.add(playerList);
 		mainParts.add(matchList);
+		mainParts.add(teamDataList);
+
 	}
 	
 	private void changeMainPart(JPanel target){
@@ -259,6 +272,7 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 			case "球队": changeMainPart(teamList);System.out.println(s);restoreIni();break;
 			case "球员": changeMainPart(playerList);System.out.println(s);restoreIni();break;
 			case "比赛": changeMainPart(matchList);System.out.println(s);restoreIni();break;
+
 			default: break;
 		}
 	}

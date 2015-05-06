@@ -14,7 +14,7 @@ public interface TeamDataService {
 	 * @Param num:返回的球队的个数  sortBy：排序依据 参数范围: avgPoint;avgRebound;avgSteal;avgAssist;avgBlockShot;shot;three;penalty
 	 * @Return HotTeamsVO中的全部属性
 	 */
-	public ArrayList<HotTeamsVO> hotTeams(int num,String sortBy);//热点球队
+	public ArrayList<HotTeamsVO> hotTeams(int num, String sortBy);//热点球队
 	
 	/**
 	 * 返回确切的某一个球队的基本信息
@@ -58,18 +58,18 @@ public interface TeamDataService {
 	 * @Param desc: true表示降序排列
 	 * @Return 返回TeamVO中的normal info以及teamName，photo
 	 */
-	public ArrayList<TeamVO> sortTeamNormal(int num,String sortBy, boolean desc);
+	public ArrayList<TeamVO> sortTeamNormal(int num, String sortBy, boolean desc);
 	/**
 	 * 参数同上
 	 * @Return 返回TeamVO中的avg normal info,
 	 * 		及以numOfGame,penalty,shot,three(即normal info 中不分均总的数据), 及teamName,photo,
 	 */
-	public ArrayList<TeamVO> sortTeamNormalAvg(int num,String sortBy, boolean desc);
+	public ArrayList<TeamVO> sortTeamNormalAvg(int num, String sortBy, boolean desc);
 	/**
 	 * 参数同上
 	 *  @Return 返回TeamVO中的high info及以及teamName，photo
 	 */
-	public ArrayList<TeamVO> sortTeamHigh(int num,String sortBy, boolean desc);
+	public ArrayList<TeamVO> sortTeamHigh(int num, String sortBy, boolean desc);
 	
 
 

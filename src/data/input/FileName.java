@@ -10,7 +10,7 @@ public class FileName {
     private static FileName fileName;
 
     private FileName(){
-
+        arrayList = new ArrayList<>();
     }
 
     public static FileName getFileName(){
