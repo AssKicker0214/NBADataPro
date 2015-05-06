@@ -88,6 +88,11 @@ public class PlayerDataManager {
 
     private void setAttribute(String s, PlayerVO playerVO, PlayerScoreSaver.PlayerData playerData) {
         switch (s){
+//            public String hight;		//身高
+//            public String weigth;		//体重
+//            public String school;		//毕业学校
+//            public String birth;		//生日
+//            public int exp;				//球龄
             case "photo":
                 playerVO.photo = playerData.getPhoto()[playerVO.id - 1];
                 return;
@@ -98,7 +103,7 @@ public class PlayerDataManager {
                 playerVO.name = playerData.getName()[playerVO.id - 1];
                 return;
             case "team":
-                playerVO.name = playerData.getTeam()[playerVO.id - 1];
+                playerVO.team = playerData.getTeam()[playerVO.id - 1];
                 return;
             case "teamName":
                 playerVO.teamName = playerData.getTeamName()[playerVO.id - 1];
@@ -114,6 +119,15 @@ public class PlayerDataManager {
                 return;
             case "age":
                 playerVO.age = playerData.getAge()[playerVO.id - 1];
+                return;
+            case "school":
+                playerVO.school = playerData.getSchool()[playerVO.id - 1];
+                return;
+            case "birth":
+                playerVO.birth = playerData.getBirth()[playerVO.id - 1];
+                return;
+            case "exp":
+                playerVO.exp = playerData.getExp()[playerVO.id - 1];
                 return;
             case "assist":
                 playerVO.assist = playerData.getAssist()[playerVO.id - 1];

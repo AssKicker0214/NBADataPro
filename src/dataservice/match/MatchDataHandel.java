@@ -23,7 +23,7 @@ public class MatchDataHandel implements MatchDataService {
     }
 
     @Override
-    public ArrayList<MatchVO> FindRecentMatches_t(int num, String teamName) {
+    public ArrayList<MatchVO> FindRecentMatches_t( String teamName) {
         ArrayList<Integer> intS = new MatchManager().getFindRecentMatches_t(teamName);
         ArrayList<MatchVO> res = new ArrayList<>();
         for(int i = 0; i < intS.size();i++){

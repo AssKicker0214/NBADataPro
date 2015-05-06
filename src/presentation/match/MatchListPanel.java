@@ -5,15 +5,14 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import dataservice.match.MatchDataService;
+import dataservice.match.MatchDataHandel;
 import dataservice.match.MatchData_stub;
 import presentation.common.DateLabel;
 import presentation.table.TablePane;
@@ -46,7 +45,7 @@ public class MatchListPanel extends JPanel{
 		if(table!=null)
 			remove(table);
 		MatchDataService mds = new MatchData_stub();
-		ArrayList<MatchVO> vo = mds.findByDate("", "");//显示最近20场比赛
+		ArrayList<MatchVO> vo = mds.findRecent20();//显示最近20场比赛
 		
 		String[] columns = {"日期","","对阵球队","总比分","第一节比分","第二节比分","第三节比分","第四节比分"};
 		

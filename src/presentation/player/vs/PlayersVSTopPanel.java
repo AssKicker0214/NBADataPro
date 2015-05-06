@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import dataservice.player.PlayerDataService;
-import dataservice.player.PlayerData_stub;
+import dataservice.player.PlayerDataHandel;
 import presentation.common.PhotoLabel;
 import presentation.player.playerDetail.PlayerMiddlePanel;
 import vo.playervo.PlayerVO;
@@ -80,7 +80,7 @@ public class PlayersVSTopPanel extends JPanel{
 		this.main = middle;
 		
 //		ArrayList<PlayerVO> list = new ArrayList<PlayerVO>();
-//		PlayerDataService pds = new PlayerData_stub();
+//		PlayerDataService pds = new PlayerDataHandel();
 //		list = pds.findPlayers(searchText.getText());
 //		setChooseList(list);
 	}
@@ -241,7 +241,7 @@ public class PlayersVSTopPanel extends JPanel{
 				msg = searchText.getText();
 //				System.out.println("AAAAAAAAAAA" + msg);
 				ArrayList<PlayerVO> list = new ArrayList<PlayerVO>();
-				PlayerDataService pds = new PlayerData_stub();
+				PlayerDataService pds = new PlayerDataHandel();
 				list = pds.findPlayers(msg);
 				setChooseList(list);
 				main.add(chooseList,0);
@@ -290,7 +290,7 @@ public class PlayersVSTopPanel extends JPanel{
 				@Override
 				public void mousePressed(MouseEvent e) {
 					PlayersVSTopPanel.this.setVisible(false);
-					PlayerDataService pds = new PlayerData_stub();
+					PlayerDataService pds = new PlayerDataHandel();
 					anotherVO = pds.findPlayerData(name.getText()); 
 										
 					if(anotherPlayerPhotoLabel != null){

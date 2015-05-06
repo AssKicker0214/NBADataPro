@@ -27,7 +27,7 @@ public class TeamDataManager {
 
     public void update() {
         playerScoreSaver = PlayerScoreSaver.getPlayerScoreSaver();
-        teamDataDefault = playerScoreSaver.getTeamDataBefore();
+        teamDataDefault = playerScoreSaver.getTeamDataDefault();
         teamDataL5 = playerScoreSaver.getTeamDataL5();
         teamDataBefore = playerScoreSaver.getTeamDataBefore();
     }
@@ -113,6 +113,9 @@ public class TeamDataManager {
             case "defendRebound":
                 teamVO.defendRebound = teamData.getDefendRebound()[teamVO.id - 1];
                 return;
+            case "foul":
+                teamVO.foul = teamData.getFoul()[teamVO.id - 1];
+                return;
             case "fault":
                 teamVO.fault = teamData.getFault()[teamVO.id - 1];
                 return;
@@ -191,7 +194,7 @@ public class TeamDataManager {
                 teamVO.stealEfficient = teamData.getStealEfficient()[teamVO.id - 1];
                 return;
             case "winRate":
-                teamVO.stealEfficient = teamData.getWinRate()[teamVO.id - 1];
+                teamVO.winRate = teamData.getWinRate()[teamVO.id - 1];
                 return;
         }
     }

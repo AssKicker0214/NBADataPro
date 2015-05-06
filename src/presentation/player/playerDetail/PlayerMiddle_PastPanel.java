@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import dataservice.match.MatchDataService;
-import dataservice.match.MatchData_stub;
+import dataservice.match.MatchDataHandel;
 import presentation.common.DateLabel;
 import presentation.match.MatchVO2List;
 import presentation.table.TablePane;
@@ -103,7 +103,7 @@ public class PlayerMiddle_PastPanel extends JPanel{
 
 	
 	public void setTabel(String start,String end){
-		MatchDataService mds = new MatchData_stub();
+		MatchDataService mds = new MatchDataHandel();
 		
 		ArrayList<MatchContentPlayerVO> vo = mds.findByDP(start, end, PlayerName);
 		String[] columns = {"日期","","对手","分钟","％","命中","出手","三分％","罚球％",

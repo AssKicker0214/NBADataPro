@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import dataservice.match.MatchDataService;
-import dataservice.match.MatchData_stub;
+import dataservice.match.MatchDataHandel;
 import presentation.match.MatchVO2List;
 import presentation.table.TablePane;
 import vo.matchvo.MatchVO;
@@ -46,7 +46,7 @@ public class TeamRecent5MatchPanel extends JPanel{
  
 	public void setTabel(String TeamName){
 		
-		MatchDataService mds = new MatchData_stub();
+		MatchDataService mds = new MatchDataHandel();
 		ArrayList<MatchVO> vo = mds.FindRecentMatches_t(TeamName);
 		String[] tbHead = {"日期","","对阵球队","总比分","第一节比分","第二节比分","第三节比分","第四节比分"};
 		MatchVO2List m2l = new MatchVO2List();

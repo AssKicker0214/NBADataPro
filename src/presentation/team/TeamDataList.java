@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import dataservice.team.TeamDataService;
-import dataservice.team.TeamData_stub;
+import dataservice.team.TeamDataHandel;
 import presentation.common.SelectLabel;
 import presentation.table.TablePane;
 import presentation.table.TeamTablePanel;
@@ -32,7 +32,7 @@ public class TeamDataList extends JPanel{
 	public SelectLabel AvgNormalInfoButton;//平均普通数据
 	public SelectLabel HighInfoButton;//高阶数据
 	
-	TeamDataService tds = new TeamData_stub();
+	TeamDataService tds = new TeamDataHandel();
 	
 	Color entered = new Color(30,80,140);
 	Color pressed = new Color(42,109,183);

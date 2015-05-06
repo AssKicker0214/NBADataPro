@@ -12,39 +12,142 @@ import java.util.Comparator;
  * Created by chenghao on 15/4/30.
  */
 public class PlayerDataHandel implements PlayerDataService {
-    private PlayerScoreSaver playerScoreSaver;
-    private PlayerScoreSaver.PlayerData playerDataDefault;
-    private PlayerScoreSaver.PlayerData playerDataL5;
-    private PlayerScoreSaver.PlayerData playerDataBefore;
-
     private static ArrayList<String> highInfo;
 
     public static ArrayList<String> getHighInfo() {
-        return null;
+        if (highInfo == null) {
+            highInfo = new ArrayList<>();
+            highInfo.add("name");
+            highInfo.add("assistEfficient");
+            highInfo.add("blockShotEfficient");
+            highInfo.add("defendReboundEfficient");
+            highInfo.add("faultEfficient");
+            highInfo.add("frequency");
+            highInfo.add("gmSc");
+            highInfo.add("offendReboundEfficient");
+            highInfo.add("realShot");
+            highInfo.add("reboundEfficient");
+            highInfo.add("shotEfficient");
+            highInfo.add("stealEfficient");
+        }
+        return highInfo;
     }
 
-    private static ArrayList<String> allInformation;
+    private static ArrayList<String> allInfo;
 
-    public static ArrayList<String> getAllInformation() {
-        return null;
+    public static ArrayList<String> getAllInfo() {
+        if (allInfo == null) {
+            allInfo = new ArrayList<>();
+            allInfo.add("photo");
+            allInfo.add("division");
+            allInfo.add("minute");
+            allInfo.add("name");
+            allInfo.add("team");
+            allInfo.add("teamName");
+            allInfo.add("position");
+            allInfo.add("league");
+            allInfo.add("number");
+            allInfo.add("school");
+            allInfo.add("birth");
+            allInfo.add("exp");
+            allInfo.add("age");
+            allInfo.add("avgAssist");
+            allInfo.add("avgBlockShot");
+            allInfo.add("avgDefend");
+            allInfo.add("efficiency");
+            allInfo.add("avgFault");
+            allInfo.add("avgFoul");
+            allInfo.add("avgMinute");
+            allInfo.add("numOfGame");
+            allInfo.add("avgOffend");
+            allInfo.add("shot");
+            allInfo.add("penalty");
+            allInfo.add("avgPoint");
+            allInfo.add("avgRebound");
+            allInfo.add("start");
+            allInfo.add("avgSteal");
+            allInfo.add("three");
+            allInfo.add("assistEfficient");
+            allInfo.add("blockShotEfficient");
+            allInfo.add("defendReboundEfficient");
+            allInfo.add("faultEfficient");
+            allInfo.add("frequency");
+            allInfo.add("gmSc");
+            allInfo.add("offendReboundEfficient");
+            allInfo.add("realShot");
+            allInfo.add("reboundEfficient");
+            allInfo.add("shotEfficient");
+            allInfo.add("stealEfficient");
+        }
+        return allInfo;
     }
 
     private static ArrayList<String> avgNormalInfo;
 
     public static ArrayList<String> getAvgNormalInfo() {
-        return null;
+        if (avgNormalInfo == null){
+            avgNormalInfo.add("age");
+            avgNormalInfo.add("avgAssist");
+            avgNormalInfo.add("avgBlockShot");
+            avgNormalInfo.add("avgDefend");
+            avgNormalInfo.add("efficiency");
+            avgNormalInfo.add("avgFault");
+            avgNormalInfo.add("avgFoul");
+            avgNormalInfo.add("avgMinute");
+            avgNormalInfo.add("numOfGame");
+            avgNormalInfo.add("avgOffend");
+            avgNormalInfo.add("penalty");
+            avgNormalInfo.add("avgPoint");
+            avgNormalInfo.add("avgRebound");
+            avgNormalInfo.add("start");
+            avgNormalInfo.add("avgSteal");
+            avgNormalInfo.add("three");
+        }
+        return avgNormalInfo;
     }
 
     private static ArrayList<String> normalInfo;
 
     public static ArrayList<String> getNormalInfo() {
-        return null;
+        if (normalInfo == null) {
+            normalInfo.add("name");
+            normalInfo.add("assist");
+            normalInfo.add("blockShot");
+            normalInfo.add("defend");
+            normalInfo.add("efficiency");
+            normalInfo.add("fault");
+            normalInfo.add("foul");
+            normalInfo.add("minute");
+            normalInfo.add("numOfGame");
+            normalInfo.add("offend");
+            normalInfo.add("penalty");
+            normalInfo.add("point");
+            normalInfo.add("rebound");
+            normalInfo.add("start");
+            normalInfo.add("steal");
+            normalInfo.add("three");
+        }
+        return normalInfo;
     }
 
     private static ArrayList<String> information;
 
     public static ArrayList<String> getInformation() {
-        return null;
+        if (information == null) {
+            information = new ArrayList<>();
+            information.add("photo");
+            information.add("division");
+            information.add("name");
+            information.add("team");
+            information.add("teamName");
+            information.add("position");
+            information.add("league");
+            information.add("number");
+            information.add("school");
+            information.add("birth");
+            information.add("exp");
+        }
+        return information;
     }
 
     @Override
@@ -52,7 +155,7 @@ public class PlayerDataHandel implements PlayerDataService {
         PlayerDataManager playerDataManager = new PlayerDataManager();
         PlayerVO playerVO = new PlayerVO();
         playerVO.id = playerId;
-        playerDataManager.setPlayerVO(getAvgNormalInfo(), playerVO, PlayerDataManager.DEFAULT);
+        playerDataManager.setPlayerVO(getAllInfo(), playerVO, PlayerDataManager.DEFAULT);
         return playerVO;
     }
 
@@ -94,7 +197,7 @@ public class PlayerDataHandel implements PlayerDataService {
     }
 
     private ArrayList<PlayerVO> findPlayer() {
-        ArrayList<PlayerVO> arrayList = new PlayerDataManager().getPlayerVOs(getAllInformation(), PlayerDataManager.DEFAULT);
+        ArrayList<PlayerVO> arrayList = new PlayerDataManager().getPlayerVOs(getAllInfo(), PlayerDataManager.DEFAULT);
 
         return arrayList;
     }
@@ -104,7 +207,7 @@ public class PlayerDataHandel implements PlayerDataService {
     }
 
     public ArrayList<PlayerVO> getTeamPlayerVOs(int teamID) {
-        return new PlayerDataManager().getPlayerVOs(getAllInformation(),teamID);
+        return new PlayerDataManager().getPlayerVOs(getAllInfo(), teamID);
     }
 
     private class ComparePlayVO implements Comparator<PlayerVO> {
@@ -387,29 +490,29 @@ public class PlayerDataHandel implements PlayerDataService {
 
     @Override
     public ArrayList<PlayerVO> filterInfo(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, int numS, int numE) {
-        return filter(getInformation(),sortBy,position,league,numS,numE);
+        return filter(getInformation(), sortBy, position, league, numS, numE);
     }
 
     @Override
     public ArrayList<PlayerVO> filterNormal(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, int numS, int numE) {
-        return filter(getNormalInfo(),sortBy,position,league,numS,numE);
+        return filter(getNormalInfo(), sortBy, position, league, numS, numE);
     }
 
     @Override
     public ArrayList<PlayerVO> filterNormalAvg(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, int numS, int numE) {
-        return filter(getAvgNormalInfo(),sortBy,position,league,numS,numE);
+        return filter(getAvgNormalInfo(), sortBy, position, league, numS, numE);
     }
 
     @Override
     public ArrayList<PlayerVO> filterHigh(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, int numS, int numE) {
-        return filter(getHighInfo(),sortBy,position,league,numS,numE);
+        return filter(getHighInfo(), sortBy, position, league, numS, numE);
     }
 
-    private ArrayList<PlayerVO> filter(ArrayList<String> attributes,ArrayList<sortParam> sortBy,ArrayList<String> position,ArrayList<String> league, int numS,int numE){
-        ArrayList<PlayerVO> playerVOs = new PlayerDataManager().getPlayerVOs(attributes,PlayerDataManager.DEFAULT);
+    private ArrayList<PlayerVO> filter(ArrayList<String> attributes, ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, int numS, int numE) {
+        ArrayList<PlayerVO> playerVOs = new PlayerDataManager().getPlayerVOs(attributes, PlayerDataManager.DEFAULT);
         ArrayList<PlayerVO> res = new ArrayList<>();
-        for (int i = 0; i < playerVOs.size(); i++){
-            if (isInPosition(position,playerVOs.get(i)) && isInLeague(league,playerVOs.get(i)) && isInAge(numS,numE,playerVOs.get(i))){
+        for (int i = 0; i < playerVOs.size(); i++) {
+            if (isInPosition(position, playerVOs.get(i)) && isInLeague(league, playerVOs.get(i)) && isInAge(numS, numE, playerVOs.get(i))) {
                 res.add(playerVOs.get(i));
             }
         }
@@ -479,11 +582,11 @@ public class PlayerDataHandel implements PlayerDataService {
         arrayList.sort(new Comparator<HotPlayersVO>() {
             @Override
             public int compare(HotPlayersVO o1, HotPlayersVO o2) {
-                if (o1.value > o2.value){
+                if (o1.value > o2.value) {
                     return 1;
-                }else if (o1.value == o2.value){
+                } else if (o1.value == o2.value) {
                     return 0;
-                }else {
+                } else {
                     return -1;
                 }
             }
@@ -493,15 +596,15 @@ public class PlayerDataHandel implements PlayerDataService {
 
     @Override
     public ArrayList<HotPlayersVO> SeasonKing(int num, String sortBy) {
-        ArrayList<HotPlayersVO> arrayList = new PlayerDataManager().getHotPlayers(sortBy,PlayerDataManager.DEFAULT);
+        ArrayList<HotPlayersVO> arrayList = new PlayerDataManager().getHotPlayers(sortBy, PlayerDataManager.DEFAULT);
         arrayList.sort(new Comparator<HotPlayersVO>() {
             @Override
             public int compare(HotPlayersVO o1, HotPlayersVO o2) {
-                if (o1.value > o2.value){
+                if (o1.value > o2.value) {
                     return 1;
-                }else if (o1.value == o2.value){
+                } else if (o1.value == o2.value) {
                     return 0;
-                }else {
+                } else {
                     return -1;
                 }
             }

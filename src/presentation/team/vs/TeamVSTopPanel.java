@@ -17,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import dataservice.team.TeamDataHandel;
 import dataservice.team.TeamDataService;
 import dataservice.team.TeamData_stub;
 import presentation.common.PhotoLabel;
@@ -229,7 +230,7 @@ public class TeamVSTopPanel extends JPanel{
 				@Override
 				public void mousePressed(MouseEvent e) {
 					TeamVSTopPanel.this.setVisible(false);
-					TeamDataService tds = new TeamData_stub();
+					TeamDataService tds = new TeamDataHandel();
 					anotherVO = tds.findTeamInfo(name.getText()); 
 										
 					if(anotherTeamPhotoLabel != null){

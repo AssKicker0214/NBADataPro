@@ -194,7 +194,7 @@ public class PlayerSaver {
     }
 
     public int[] getAge() {
-        return exp;
+        return age;
     }
 
     public int getPlayerId(String name) {
@@ -204,5 +204,17 @@ public class PlayerSaver {
             }
         }
         return 0;
+    }
+
+    public String[] getSchool() {
+        return school;
+    }
+
+    public String[] getBirth() {
+        return birth;
+    }
+
+    public int[] getExp() {
+        return exp;
     }
 }

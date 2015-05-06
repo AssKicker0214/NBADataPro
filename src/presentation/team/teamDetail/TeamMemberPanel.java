@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import dataservice.team.TeamDataService;
-import dataservice.team.TeamData_stub;
+import dataservice.team.TeamDataHandel;
 import presentation.common.SelectLabel;
 import presentation.player.PlayerVO2List;
 import presentation.table.TablePane;
@@ -45,7 +45,7 @@ public class TeamMemberPanel extends JPanel{
 	
 	public TeamMemberPanel(int id){
 		
-		TeamDataService tds = new TeamData_stub();
+		TeamDataService tds = new TeamDataHandel();
 		vo = tds.teamMemberList(id);
 		this.setLayout(null);
 		this.setBounds(0,260,1280,380);

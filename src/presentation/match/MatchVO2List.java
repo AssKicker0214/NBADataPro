@@ -14,7 +14,7 @@ public class MatchVO2List {
 			temp.add(vo.get(i).date);
 			temp.add(vo.get(i).matchID+"");
 			temp.add(vo.get(i).vs);
-			temp.add(vo.get(i).minute+"");
+			temp.add(vo.get(i).minute/60+"");
 			temp.add((double)vo.get(i).shot/(double)vo.get(i).shotA+"");
 			temp.add(vo.get(i).shot+"");
 			temp.add(vo.get(i).shotA+"");
@@ -40,7 +40,7 @@ public class MatchVO2List {
 			temp.add(vo.get(i).date);
 			temp.add(vo.get(i).matchID+"");
 			temp.add(vo.get(i).vs);
-			temp.add(vo.get(i).minute+"");
+			temp.add(vo.get(i).minute/60+"");
 			temp.add((double)vo.get(i).shot/(double)vo.get(i).shotA+"");
 			temp.add(vo.get(i).shot+"");
 			temp.add(vo.get(i).shotA+"");

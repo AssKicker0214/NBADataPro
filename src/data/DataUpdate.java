@@ -14,7 +14,7 @@ public class DataUpdate extends Thread {
     private FileName fileName;
 
     private String path;
-
+    private boolean flag = true;
     public DataUpdate(String path) {
         this.fileName = FileName.getFileName();
         this.path = path;
@@ -22,7 +22,7 @@ public class DataUpdate extends Thread {
 
     @Override
     public void run(){
-        while (true){
+        while (flag){
             try {
                 Thread.sleep(3000);
             } catch (InterruptedException e) {
@@ -31,6 +31,10 @@ public class DataUpdate extends Thread {
 
             checker();
         }
+    }
+
+    public void end(){
+        flag = false;
     }
 
     private void checker() {
