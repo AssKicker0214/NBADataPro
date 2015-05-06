@@ -2,6 +2,7 @@ package data;
 
 import data.saver.PlayerSaver;
 import data.saver.PlayerScoreSaver;
+import data.saver.Tools;
 import vo.playervo.HotPlayersVO;
 import vo.playervo.PlayerVO;
 
@@ -145,7 +146,7 @@ public class PlayerDataManager {
                 playerVO.defend = playerData.getDefend()[playerVO.id - 1];
                 return;
             case "efficiency":
-                playerVO.efficiency = playerData.getEfficiency()[playerVO.id - 1];
+                playerVO.efficiency = Tools.change(playerData.getEfficiency()[playerVO.id - 1]);
                 return;
             case "fault":
                 playerVO.fault = playerData.getFault()[playerVO.id - 1];
@@ -160,7 +161,7 @@ public class PlayerDataManager {
                 playerVO.offend = playerData.getOffend()[playerVO.id - 1];
                 return;
             case "penalty":
-                playerVO.penalty = playerData.getPenalty()[playerVO.id - 1];
+                playerVO.penalty = Tools.change(playerData.getPenalty()[playerVO.id - 1]);
                 return;
             case "point":
                 playerVO.point = playerData.getPoint()[playerVO.id - 1];
@@ -169,7 +170,7 @@ public class PlayerDataManager {
                 playerVO.rebound = playerData.getRebound()[playerVO.id - 1];
                 return;
             case "shot":
-                playerVO.shot = playerData.getShot()[playerVO.id - 1];
+                playerVO.shot = Tools.change(playerData.getShot()[playerVO.id - 1]);
                 return;
             case "start":
                 playerVO.start = playerData.getStart()[playerVO.id - 1];
@@ -178,70 +179,70 @@ public class PlayerDataManager {
                 playerVO.steal = playerData.getSteal()[playerVO.id - 1];
                 return;
             case "three":
-                playerVO.three = playerData.getThree()[playerVO.id - 1];
+                playerVO.three = Tools.change(playerData.getThree()[playerVO.id - 1]);
                 return;
             case "avgAssist":
-                playerVO.avgAssist = playerData.getAvgAssist()[playerVO.id - 1];
+                playerVO.avgAssist = Tools.change(playerData.getAvgAssist()[playerVO.id - 1]);
                 return;
             case "avgBlockShot":
-                playerVO.avgBlockShot = playerData.getAvgBlockShot()[playerVO.id - 1];
+                playerVO.avgBlockShot = Tools.change(playerData.getAvgBlockShot()[playerVO.id - 1]);
                 return;
             case "avgDefend":
                 playerVO.avgDefend = playerData.getAvgDefend()[playerVO.id - 1];
                 return;
             case "avgFault":
-                playerVO.avgFault = playerData.getAvgFault()[playerVO.id - 1];
+                playerVO.avgFault = Tools.change(playerData.getAvgFault()[playerVO.id - 1]);
                 return;
             case "avgFoul":
-                playerVO.avgFoul = playerData.getAvgFoul()[playerVO.id - 1];
+                playerVO.avgFoul = Tools.change(playerData.getAvgFoul()[playerVO.id - 1]);
                 return;
             case "avgMinute":
-                playerVO.avgMinute = playerData.getAvgMinute()[playerVO.id - 1];
+                playerVO.avgMinute = Tools.change(playerData.getAvgMinute()[playerVO.id - 1]);
                 return;
             case "avgOffend":
-                playerVO.avgOffend = playerData.getAvgOffend()[playerVO.id - 1];
+                playerVO.avgOffend = Tools.change(playerData.getAvgOffend()[playerVO.id - 1]);
                 return;
             case "avgPoint":
-                playerVO.avgPoint = playerData.getAvgPoint()[playerVO.id - 1];
+                playerVO.avgPoint = Tools.change(playerData.getAvgPoint()[playerVO.id - 1]);
                 return;
             case "avgRebound":
-                playerVO.avgRebound = playerData.getAvgRebound()[playerVO.id - 1];
+                playerVO.avgRebound = Tools.change(playerData.getAvgRebound()[playerVO.id - 1]);
                 return;
             case "avgSteal":
-                playerVO.avgSteal = playerData.getAvgSteal()[playerVO.id - 1];
+                playerVO.avgSteal = Tools.change(playerData.getAvgSteal()[playerVO.id - 1]);
                 return;
             case "assistEfficient":
-                playerVO.assistEfficient = playerData.getAssistEfficient()[playerVO.id - 1];
+                playerVO.assistEfficient = Tools.change(playerData.getAssistEfficient()[playerVO.id - 1]);
                 return;
             case "blockShotEfficient":
-                playerVO.blockShotEfficient = playerData.getBlockShotEfficient()[playerVO.id - 1];
+                playerVO.blockShotEfficient = Tools.change(playerData.getBlockShotEfficient()[playerVO.id - 1]);
                 return;
             case "defendReboundEfficient":
-                playerVO.defendReboundEfficient = playerData.getDefendReboundEfficient()[playerVO.id - 1];
+                playerVO.defendReboundEfficient = Tools.change(playerData.getDefendReboundEfficient()[playerVO.id - 1]);
                 return;
             case "faultEfficient":
-                playerVO.faultEfficient = playerData.getFaultEfficient()[playerVO.id - 1];
+                playerVO.faultEfficient = Tools.change(playerData.getFaultEfficient()[playerVO.id - 1]);
                 return;
             case "frequency":
-                playerVO.frequency = playerData.getFrequency()[playerVO.id - 1];
+                playerVO.frequency = Tools.change(playerData.getFrequency()[playerVO.id - 1]);
                 return;
             case "gmSc":
-                playerVO.gmSc = playerData.getGmSc()[playerVO.id - 1];
+                playerVO.gmSc = Tools.change(playerData.getGmSc()[playerVO.id - 1]);
                 return;
             case "offendReboundEfficient":
-                playerVO.offendReboundEfficient = playerData.getOffendReboundEfficient()[playerVO.id - 1];
+                playerVO.offendReboundEfficient = Tools.change(playerData.getOffendReboundEfficient()[playerVO.id - 1]);
                 return;
             case "realShot":
-                playerVO.realShot = playerData.getRealShot()[playerVO.id - 1];
+                playerVO.realShot = Tools.change(playerData.getRealShot()[playerVO.id - 1]);
                 return;
             case "reboundEfficient":
-                playerVO.reboundEfficient = playerData.getReboundEfficient()[playerVO.id - 1];
+                playerVO.reboundEfficient = Tools.change(playerData.getReboundEfficient()[playerVO.id - 1]);
                 return;
             case "shotEfficient":
-                playerVO.shotEfficient = playerData.getShotEfficient()[playerVO.id - 1];
+                playerVO.shotEfficient = Tools.change(playerData.getShotEfficient()[playerVO.id - 1]);
                 return;
             case "stealEfficient":
-                playerVO.stealEfficient = playerData.getStealEfficient()[playerVO.id - 1];
+                playerVO.stealEfficient = Tools.change(playerData.getStealEfficient()[playerVO.id - 1]);
                 return;
         }
     }

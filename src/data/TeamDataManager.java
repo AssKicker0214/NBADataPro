@@ -2,6 +2,7 @@ package data;
 
 import data.saver.PlayerScoreSaver;
 import data.saver.TeamSaver;
+import data.saver.Tools;
 import vo.playervo.HotPlayersVO;
 import vo.teamvo.HotTeamsVO;
 import vo.teamvo.TeamVO;
@@ -126,7 +127,7 @@ public class TeamDataManager {
                 teamVO.offendRebound = teamData.getOffendRebound()[teamVO.id - 1];
                 return;
             case "penalty":
-                teamVO.penalty = teamData.getPenalty()[teamVO.id - 1];
+                teamVO.penalty = Tools.change(teamData.getPenalty()[teamVO.id - 1]);
                 return;
             case "point":
                 teamVO.point = teamData.getPoint()[teamVO.id - 1];
@@ -135,66 +136,66 @@ public class TeamDataManager {
                 teamVO.rebound = teamData.getRebound()[teamVO.id - 1];
                 return;
             case "shot":
-                teamVO.shot = teamData.getShot()[teamVO.id - 1];
+                teamVO.shot = Tools.change(teamData.getShot()[teamVO.id - 1]);
                 return;
             case "steal":
                 teamVO.steal = teamData.getSteal()[teamVO.id - 1];
                 return;
             case "three":
-                teamVO.three = teamData.getThree()[teamVO.id - 1];
+                teamVO.three = Tools.change(teamData.getThree()[teamVO.id - 1]);
                 return;
 
             case "avgAssist":
-                teamVO.avgAssist = teamData.getAvgAssist()[teamVO.id - 1];
+                teamVO.avgAssist = Tools.change(teamData.getAvgAssist()[teamVO.id - 1]);
                 return;
             case "avgBlockShot":
-                teamVO.avgBlockShot = teamData.getAvgBlockShot()[teamVO.id - 1];
+                teamVO.avgBlockShot = Tools.change(teamData.getAvgBlockShot()[teamVO.id - 1]);
                 return;
             case "avgDefendRebound":
-                teamVO.avgDefendRebound = teamData.getAvgDefendRebound()[teamVO.id - 1];
+                teamVO.avgDefendRebound = Tools.change(teamData.getAvgDefendRebound()[teamVO.id - 1]);
                 return;
             case "avgFault":
-                teamVO.avgFault = teamData.getAvgFault()[teamVO.id - 1];
+                teamVO.avgFault = Tools.change(teamData.getAvgFault()[teamVO.id - 1]);
                 return;
             case "avgFoul":
-                teamVO.avgFoul = teamData.getAvgFoul()[teamVO.id - 1];
+                teamVO.avgFoul = Tools.change(teamData.getAvgFoul()[teamVO.id - 1]);
                 return;
             case "avgOffendRebound":
-                teamVO.avgOffendRebound = teamData.getAvgOffendRebound()[teamVO.id - 1];
+                teamVO.avgOffendRebound = Tools.change(teamData.getAvgOffendRebound()[teamVO.id - 1]);
                 return;
             case "avgPoint":
-                teamVO.avgPoint = teamData.getAvgPoint()[teamVO.id - 1];
+                teamVO.avgPoint = Tools.change(teamData.getAvgPoint()[teamVO.id - 1]);
                 return;
             case "avgRebound":
-                teamVO.avgRebound = teamData.getAvgRebound()[teamVO.id - 1];
+                teamVO.avgRebound = Tools.change(teamData.getAvgRebound()[teamVO.id - 1]);
                 return;
             case "avgSteal":
-                teamVO.avgSteal = teamData.getAvgSteal()[teamVO.id - 1];
+                teamVO.avgSteal = Tools.change(teamData.getAvgSteal()[teamVO.id - 1]);
                 return;
 
             case "assistEfficient":
-                teamVO.assistEfficient = teamData.getAssistEfficient()[teamVO.id - 1];
+                teamVO.assistEfficient = Tools.change(teamData.getAssistEfficient()[teamVO.id - 1]);
                 return;
             case "defendEfficient":
-                teamVO.defendEfficient = teamData.getDefendEfficient()[teamVO.id - 1];
+                teamVO.defendEfficient = Tools.change(teamData.getDefendEfficient()[teamVO.id - 1]);
                 return;
             case "defendReboundEfficient":
-                teamVO.defendReboundEfficient = teamData.getDefendReboundEfficient()[teamVO.id - 1];
+                teamVO.defendReboundEfficient = Tools.change(teamData.getDefendReboundEfficient()[teamVO.id - 1]);
                 return;
             case "offendEfficient":
-                teamVO.offendEfficient = teamData.getOffendEfficient()[teamVO.id - 1];
+                teamVO.offendEfficient = Tools.change(teamData.getOffendEfficient()[teamVO.id - 1]);
                 return;
             case "offendReboundEfficient":
-                teamVO.offendReboundEfficient = teamData.getOffendReboundEfficient()[teamVO.id - 1];
+                teamVO.offendReboundEfficient = Tools.change(teamData.getOffendReboundEfficient()[teamVO.id - 1]);
                 return;
             case "offendRound":
-                teamVO.offendRound = teamData.getOffendRound()[teamVO.id - 1];
+                teamVO.offendRound = Tools.change(teamData.getOffendRound()[teamVO.id - 1]);
                 return;
             case "stealEfficient":
-                teamVO.stealEfficient = teamData.getStealEfficient()[teamVO.id - 1];
+                teamVO.stealEfficient = Tools.change(teamData.getStealEfficient()[teamVO.id - 1]);
                 return;
             case "winRate":
-                teamVO.winRate = teamData.getWinRate()[teamVO.id - 1];
+                teamVO.winRate = Tools.change(teamData.getWinRate()[teamVO.id - 1]);
                 return;
         }
     }
