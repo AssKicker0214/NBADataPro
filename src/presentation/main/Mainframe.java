@@ -25,7 +25,6 @@ import presentation.statistics.playerKing.PlayerKingPanel;
 import presentation.statistics.teamKing.TeamKingPanel;
 import presentation.team.TeamDataList;
 import presentation.team.TeamListPanel;
-import presentation.team.teamDetail.TeamMiddlePanel;
 
 public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 
@@ -204,9 +203,9 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 		contentPane.add(matchList,0);
 		matchList.setVisible(false);
 		
-// 		teamDataList = new TeamDataList();
-//		this.add(teamDataList,0);
-//		matchList.setVisible(false);
+ 		teamDataList = new TeamDataList();
+ 		contentPane.add(teamDataList,0);
+		matchList.setVisible(false);
 		
 		mainParts.add(playerKing);
 		mainParts.add(teamKing);
