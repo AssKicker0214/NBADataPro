@@ -20,7 +20,7 @@ public class GuideContainer extends JLabel implements IGuideContainer{
 
 
 	public GuideContainer(){
-		this.setBounds(0, 155, 145, 550);
+		this.setBounds(0, 125, 145, 550);
 		this.setLayout(null);
 		this.setBackground(entered);
 		this.setOpaque(true);
