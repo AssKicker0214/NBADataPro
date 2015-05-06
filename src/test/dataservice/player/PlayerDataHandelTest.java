@@ -2,6 +2,7 @@ package test.dataservice.player;
 
 import data.DataInitial;
 import dataservice.player.PlayerDataHandel;
+import dataservice.player.sortParam;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,7 +29,7 @@ public class PlayerDataHandelTest {
 
     @After
     public void after() throws Exception {
-        DataInitial.end();
+//        DataInitial.end();
     }
 
     /**
@@ -150,7 +151,15 @@ public class PlayerDataHandelTest {
      */
     @Test
     public void testSortPlayerInfo() throws Exception {
-//TODO: Test goes here... 
+        ArrayList<sortParam> arrayList1 = new ArrayList<>();
+        sortParam sortParam1 = new sortParam();
+        sortParam1.isDesc =false;
+        sortParam1.field = "name";
+        arrayList1.add(sortParam1);
+        ArrayList<PlayerVO> arrayList = new PlayerDataHandel().sortPlayerInfo(arrayList1);
+        for (int i = 0; i<arrayList.size();i++){
+            System.out.println(arrayList.get(i).name);
+        }
     }
 
     /**

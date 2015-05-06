@@ -96,6 +96,12 @@ public class PlayerDataManager {
             case "photo":
                 playerVO.photo = playerData.getPhoto()[playerVO.id - 1];
                 return;
+            case "weigth":
+                playerVO.weigth = playerData.getP_weigth()[playerVO.id - 1];
+                return;
+            case "hight":
+                playerVO.hight = playerData.getHight()[playerVO.id - 1];
+                return;
             case "division":
                 playerVO.division = playerData.getDivision()[playerVO.id - 1];
                 return;

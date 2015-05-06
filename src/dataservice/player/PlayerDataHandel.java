@@ -199,24 +199,26 @@ public class PlayerDataHandel implements PlayerDataService {
     @Override
     public ArrayList<PlayerVO> sortPlayerInfo(ArrayList<sortParam> sortBy) {
         ArrayList<PlayerVO> playVOs = new PlayerDataManager().getPlayerVOs(getInformation(), PlayerDataManager.DEFAULT);
+        playVOs.sort(new ComparePlayVO(sortBy));
         return playVOs;
     }
 
     @Override
     public ArrayList<PlayerVO> sortPlayerNormal(ArrayList<sortParam> sortBy) {
         ArrayList<PlayerVO> playVOs = new PlayerDataManager().getPlayerVOs(getNormalInfo(), PlayerDataManager.DEFAULT);
+        playVOs.sort(new ComparePlayVO(sortBy));
         return playVOs;
     }
 
     @Override
     public ArrayList<PlayerVO> sortPlayerNormalAvg(ArrayList<sortParam> sortBy) {
         ArrayList<PlayerVO> playVOs = new PlayerDataManager().getPlayerVOs(getAvgNormalInfo(), PlayerDataManager.DEFAULT);
+        playVOs.sort(new ComparePlayVO(sortBy));
         return playVOs;
     }
 
     private ArrayList<PlayerVO> findPlayer() {
         ArrayList<PlayerVO> arrayList = new PlayerDataManager().getPlayerVOs(getAllInfo(), PlayerDataManager.DEFAULT);
-
         return arrayList;
     }
 
@@ -271,6 +273,7 @@ public class PlayerDataHandel implements PlayerDataService {
     }
 
     private int compare(PlayerVO playerVO1, PlayerVO playerVO2, String field) {
+        System.out.println(field);
         switch (field) {
             case "name":
                 return playerVO1.name.compareTo(playerVO2.name);

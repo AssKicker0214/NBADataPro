@@ -217,4 +217,16 @@ public class PlayerSaver {
     public int[] getExp() {
         return exp;
     }
+
+    public int[] getWeight() {
+        return weight;
+    }
+
+    public int[] getHeight1() {
+        return heightfoot;
+    }
+
+    public int[] getHeight2() {
+        return heightinch;
+    }
 }
