@@ -21,4 +21,9 @@ public class MatchContentPlayerVO {
 	public int fault;			//失误数
 	public int foul;			//犯规数
 	public int point;			//个人得分
+
+    public void show() {
+        System.out.println(matchID+" "+date+" "+vs+" "+name+" "+position+" "+minute+" "+shot+" "+shotA+" "+three+" " +
+                threeA+" "+penalty+" "+penaltyA+" "+offendRebound+" "+defendRebound+" "+rebound+" "+assist+" "+blockShot+" "+fault+" "+foul+" "+point);
+    }
 }
