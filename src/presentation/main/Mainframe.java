@@ -204,9 +204,9 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 		contentPane.add(matchList,0);
 		matchList.setVisible(false);
 		
-		teamDataList = new TeamDataList();
-		this.add(teamDataList,0);
-		matchList.setVisible(false);
+// 		teamDataList = new TeamDataList();
+//		this.add(teamDataList,0);
+//		matchList.setVisible(false);
 		
 		mainParts.add(playerKing);
 		mainParts.add(teamKing);
@@ -269,10 +269,10 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 			case "热点球员": changeMainPart(playerKing); System.out.println(s);restoreIni();break;
 			case "热点球队": changeMainPart(teamKing); System.out.println(s);restoreIni();break;
 			case "进步球员": changeMainPart(hotPlayer);System.out.println(s);restoreIni();break;
-			case "球队": changeMainPart(teamList);System.out.println(s);restoreIni();break;
+			case "球队列表": changeMainPart(teamList);System.out.println(s);restoreIni();break;
 			case "球员": changeMainPart(playerList);System.out.println(s);restoreIni();break;
 			case "比赛": changeMainPart(matchList);System.out.println(s);restoreIni();break;
-
+			case "球队表格": changeMainPart(teamDataList);System.out.println(s);restoreIni();break;
 			default: break;
 		}
 	}
