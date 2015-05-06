@@ -1,9 +1,14 @@
 package test.dataservice.player; 
 
 import data.DataInitial;
+import data.input.Player;
+import dataservice.player.PlayerDataHandel;
 import org.junit.Test;
 import org.junit.Before; 
-import org.junit.After; 
+import org.junit.After;
+import vo.playervo.PlayerVO;
+
+import java.util.ArrayList;
 
 /** 
 * PlayerDataHandel Tester. 
@@ -24,65 +29,30 @@ public void after() throws Exception {
     DataInitial.end();
 } 
 
-/** 
-* 
-* Method: getHighInfo() 
-* 
-*/ 
-@Test
-public void testGetHighInfo() throws Exception { 
-//TODO: Test goes here... 
-} 
-
-/** 
-* 
-* Method: getAllInformation() 
-* 
-*/ 
-@Test
-public void testGetAllInformation() throws Exception { 
-//TODO: Test goes here... 
-} 
-
-/** 
-* 
-* Method: getAvgNormalInfo() 
-* 
-*/ 
-@Test
-public void testGetAvgNormalInfo() throws Exception { 
-//TODO: Test goes here... 
-} 
-
-/** 
-* 
-* Method: getNormalInfo() 
-* 
-*/ 
-@Test
-public void testGetNormalInfo() throws Exception { 
-//TODO: Test goes here... 
-} 
-
-/** 
-* 
-* Method: getInformation() 
-* 
-*/ 
-@Test
-public void testGetInformation() throws Exception { 
-//TODO: Test goes here... 
-} 
-
-/** 
+/**
 * 
 * Method: findPlayerData(int playerId) 
 * 
 */ 
 @Test
-public void testFindPlayerDataPlayerId() throws Exception { 
-//TODO: Test goes here... 
-} 
+public void testFindPlayerDataPlayerId() throws Exception {
+    PlayerVO playerVO = new PlayerDataHandel().findPlayerData(33);
+    System.out.println(playerVO.name);
+    System.out.println(playerVO.minute);
+    System.out.println(playerVO.start);
+    System.out.println(playerVO.numOfGame);
+    System.out.println(playerVO.shot);
+    System.out.println(playerVO.penalty);
+    System.out.println(playerVO.three);
+    System.out.println(playerVO.stealEfficient);
+    System.out.println(playerVO.faultEfficient);
+    System.out.println(playerVO.efficiency);
+    System.out.println(playerVO.gmSc);
+    System.out.println(playerVO.blockShotEfficient);
+//    System.out.println(playerVO.name);
+//    System.out.println(playerVO.name);
+//    System.out.println(playerVO.name);
+}
 
 /** 
 * 

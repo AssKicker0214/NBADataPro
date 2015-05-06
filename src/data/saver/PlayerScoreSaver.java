@@ -499,7 +499,6 @@ public class PlayerScoreSaver {
         for (int i = 0; i <= currentPoint; i++) {
             pidDefaultMid[i] = i;
             if (!pidL5Mid.isInPointInL5Mid(i)) {
-
                 pidBeforeMid[m] = i;
                 m++;
             }
@@ -878,7 +877,6 @@ public class PlayerScoreSaver {
         private String date;
         private long lastModifiedTime;
 
-
         private int[] p_inplacetime;
         private int[] p_throwin;
         private int[] p_throwall;
@@ -915,7 +913,6 @@ public class PlayerScoreSaver {
         private int[][] p_tid_mid;
         private int[] p_matchNum;
         private int[] p_startSession;
-
 
         private void setPlayerDataLevel2() {
             p_inplacetime = new int[playerSaver.getNum()];
@@ -1165,6 +1162,9 @@ public class PlayerScoreSaver {
         private int[] p_number;
         private int[] p_age;
         private String[] p_teamPhoto;
+        private String[] p_school;
+        private String[] p_birth;
+        private int[] p_exp;
 
         private void setPlayerDataLevel3() {
 
@@ -1200,8 +1200,11 @@ public class PlayerScoreSaver {
             p_league = new char[playerSaver.getNum()];
             p_number = new int[playerSaver.getNum()];
             p_age = new int[playerSaver.getNum()];
+            p_exp = new int[playerSaver.getNum()];
             p_teamName = new String[playerSaver.getNum()];
             p_teamPhoto = new String[playerSaver.getNum()];
+            p_school = new String[playerSaver.getNum()];
+            p_birth = new String[playerSaver.getNum()];
             for (int i = 0; i < playerSaver.getNum(); i++) {
 
                 pLegB[i] = p_throwallTeamB[i] + 0.4 * p_penaltyallTeamB[i] - 1.07 * (p_attackbasTeamB[i] / ((p_attackbasTeamB[i] + p_defencebasTeam[i]) * (double) (p_throwallTeamB[i] - p_throwinTeamB[i]))) + 1.07 * p_mistakeTeamB[i];
@@ -1323,6 +1326,9 @@ public class PlayerScoreSaver {
 
                 p_number[i] = playerSaver.getNumber()[i];
                 p_age[i] = playerSaver.getAge()[i];
+                p_exp[i] = playerSaver.getExp()[i];
+                p_school[i] = playerSaver.getSchool()[i];
+                p_birth[i] = playerSaver.getBirth()[i];
             }
 
         }
@@ -1678,6 +1684,18 @@ public class PlayerScoreSaver {
                 tids[i] = p_tid_mid[i][0];
             }
             return tids;
+        }
+
+        public String[] getSchool() {
+            return p_school;
+        }
+
+        public String[] getBirth() {
+            return p_birth;
+        }
+
+        public int[] getExp() {
+            return p_exp;
         }
     }
 
