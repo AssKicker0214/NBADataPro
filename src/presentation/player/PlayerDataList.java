@@ -55,6 +55,10 @@ public class PlayerDataList  extends JPanel{
 	
 	ArrayList<SelectLabel> selectLabelGroups = new ArrayList<SelectLabel>();
 	
+	ArrayList<sortParam> sortBy = new ArrayList<sortParam>();
+	ArrayList<String> position = new ArrayList<String>();
+	ArrayList<String> league = new ArrayList<String>();
+	
 	public PlayerDataList(){
 		this.setLayout(null);
 		this.setBounds(0,125,1280,540);
@@ -89,7 +93,82 @@ public class PlayerDataList  extends JPanel{
 			}
 		}
 	}
+	public void setAttri(){
+		String leagueChosen = (String) filter.leagueCombo.getSelectedItem();
+		String positionChosen = (String) filter.positionCombo.getSelectedItem();
+		String fst = (String) filter.firstCombo.getSelectedItem();
+		String sec = (String) filter.secondCombo.getSelectedItem();
+		String third = (String) filter.thirdCombo.getSelectedItem();
+		switch(leagueChosen){
+			case"全部":league.add("E"); league.add("W");break;
+			case"东部联盟":league.add("E");break;
+			case"西部联盟":league.add("W");break;
+			default:break;
+		}
+		switch(positionChosen){
+			case"全部":position.add("F"); position.add("C");position.add("G");break;
+			case"前锋":position.add("F");break;
+			case"中锋":position.add("C");break;
+			case"后卫":position.add("G");break;
+			default:break;
+		}
+		switch(fst){
+			case"场均助攻":sortBy.add(new sortParam("avgAssist",true));break;
+			case"场均盖帽":sortBy.add(new sortParam("avgBlockShot",true));break;
+			case"场均防守":sortBy.add(new sortParam("avgDefend",true));break;
+			case"场均失误":sortBy.add(new sortParam("avgFault",true));break;
+			case"场均犯规":sortBy.add(new sortParam("avgFoul",true));break;
+			case"上场时间":sortBy.add(new sortParam("avgMinute",true));break;
+			case"进攻":	 sortBy.add(new sortParam("avgOffend",true));break;
+			case"场均篮板":sortBy.add(new sortParam("avgRebound",true));break;
+			case"场均得分":sortBy.add(new sortParam("avgPoint",true));break;
+			case"场均抢断":sortBy.add(new sortParam("avgSteal",true));break;
+			case"GMSC效率值":sortBy.add(new sortParam("gmSc",true));break;
+			case"三分命中率":sortBy.add(new sortParam("three",true));break;
+			case"投篮命中率":sortBy.add(new sortParam("shot",true));break;
+			case"罚球命中率":sortBy.add(new sortParam("penalty",true));break;
+			default:break;
+		}
+			
+		switch(sec){
+			case"场均助攻":sortBy.add(new sortParam("avgAssist",true));break;
+			case"场均盖帽":sortBy.add(new sortParam("avgBlockShot",true));break;
+			case"场均防守":sortBy.add(new sortParam("avgDefend",true));break;
+			case"场均失误":sortBy.add(new sortParam("avgFault",true));break;
+			case"场均犯规":sortBy.add(new sortParam("avgFoul",true));break;
+			case"上场时间":sortBy.add(new sortParam("avgMinute",true));break;
+			case"进攻":	 sortBy.add(new sortParam("avgOffend",true));break;
+			case"场均篮板":sortBy.add(new sortParam("avgRebound",true));break;
+			case"场均得分":sortBy.add(new sortParam("avgPoint",true));break;
+			case"场均抢断":sortBy.add(new sortParam("avgSteal",true));break;
+			case"GMSC效率值":sortBy.add(new sortParam("gmSc",true));break;
+			case"三分命中率":sortBy.add(new sortParam("three",true));break;
+			case"投篮命中率":sortBy.add(new sortParam("shot",true));break;
+			case"罚球命中率":sortBy.add(new sortParam("penalty",true));break;
+			default:break;
+		}
+		
+		switch(third){
+			case"场均助攻":sortBy.add(new sortParam("avgAssist",true));break;
+			case"场均盖帽":sortBy.add(new sortParam("avgBlockShot",true));break;
+			case"场均防守":sortBy.add(new sortParam("avgDefend",true));break;
+			case"场均失误":sortBy.add(new sortParam("avgFault",true));break;
+			case"场均犯规":sortBy.add(new sortParam("avgFoul",true));break;
+			case"上场时间":sortBy.add(new sortParam("avgMinute",true));break;
+			case"进攻":	 sortBy.add(new sortParam("avgOffend",true));break;
+			case"场均篮板":sortBy.add(new sortParam("avgRebound",true));break;
+			case"场均得分":sortBy.add(new sortParam("avgPoint",true));break;
+			case"场均抢断":sortBy.add(new sortParam("avgSteal",true));break;
+			case"GMSC效率值":sortBy.add(new sortParam("gmSc",true));break;
+			case"三分命中率":sortBy.add(new sortParam("three",true));break;
+			case"投篮命中率":sortBy.add(new sortParam("shot",true));break;
+			case"罚球命中率":sortBy.add(new sortParam("penalty",true));break;
+			default:break;
+		}
+	}
 
+
+	
 	public void setTitle(){
 		titleLabel = new JLabel(" 球员列表",JLabel.LEADING);
 		titleLabel.setFont(new Font("Dialog",1,20));
@@ -105,21 +184,9 @@ public class PlayerDataList  extends JPanel{
 		this.add(filter);
 		filter.setVisible(false);
 	}
-
-	public void setBasicInfoButton(){
-		Point p1 = new Point(5,5);
-		Point p2 = new Point(40,30);
-		basicInfoButton = new SelectLabel("信息",p1,p2,entered,pressed,exicted);
-		basicInfoButton.setForeground(Color.WHITE);
-		basicInfoButton.setBackground(exicted);
-		basicInfoButton.setOpaque(true);
-		basicInfoButton.addMouseListener(new BasicInfoButtonListener());
-		buttonsBGLabel.add(basicInfoButton);
-	}
 	
 	private void setFilterButton(){
 		JLabel filterButton = new JLabel("筛选",JLabel.LEADING);
-//		filterButton.setText("筛选");
 		filterButton.setBounds(1220, 10, 80, 40);
 		filterButton.setBackground(entered);
 		filterButton.setForeground(Color.WHITE);
@@ -133,6 +200,23 @@ public class PlayerDataList  extends JPanel{
 					upMotion.upMove();
 					filterButton.setText("筛选");
 					filter.setVisible(false);
+					
+					setAttri();
+					setVisible(false);
+					setButtonsBGLabel();
+					basicInfoButton.isSelected = true;
+					basicInfoButton.setBackground(pressed);
+					setSelectedGroups(basicInfoButton);
+					if(BasicInfoTable!=null)
+						PlayerDataList.this.remove(BasicInfoTable);
+					if(NormalInfoTable!=null)
+						PlayerDataList.this.remove(NormalInfoTable);
+					if(HighInfoTable!=null)
+						PlayerDataList.this.remove(HighInfoTable);
+					setBasicInfoTablePanel(); 
+					setVisible(true);
+					repaint();	
+					
 				}else{
 					downMotion.downMove();
 					filterButton.setText("确定");
@@ -140,11 +224,9 @@ public class PlayerDataList  extends JPanel{
 				}
 				selected = !selected;
 			}
-			
+
 			@Override
 			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
 			}
 			
 			@Override
@@ -167,6 +249,17 @@ public class PlayerDataList  extends JPanel{
 		});
 		titleLabel.add(filterButton);
 	
+	}
+	
+	public void setBasicInfoButton(){
+		Point p1 = new Point(5,5);
+		Point p2 = new Point(40,30);
+		basicInfoButton = new SelectLabel("信息",p1,p2,entered,pressed,exicted);
+		basicInfoButton.setForeground(Color.WHITE);
+		basicInfoButton.setBackground(exicted);
+		basicInfoButton.setOpaque(true);
+		basicInfoButton.addMouseListener(new BasicInfoButtonListener());
+		buttonsBGLabel.add(basicInfoButton);
 	}
 	
 	class BasicInfoButtonListener implements MouseListener{
@@ -213,7 +306,6 @@ public class PlayerDataList  extends JPanel{
 		}
 	}
 
-	
 	public void setNormalInfoButton(){
 		Point p1 = new Point(50,5);
 		Point p2 = new Point(40,30);
@@ -225,7 +317,6 @@ public class PlayerDataList  extends JPanel{
 		buttonsBGLabel.add(NormalInfoButton);
 	}
 
-	
 	public class NormalInfoButtonListener implements MouseListener{
 
 		@Override
@@ -277,6 +368,7 @@ public class PlayerDataList  extends JPanel{
 
 	
 	}
+	
 	public void setAvgNormalInfoButton(){
 		Point p1 = new Point(100,5);
 		Point p2 = new Point(40,30);
@@ -287,7 +379,6 @@ public class PlayerDataList  extends JPanel{
 		AvgNormalInfoButton.addMouseListener(new AvgNormalInfoButtonListener());
 		buttonsBGLabel.add(AvgNormalInfoButton);
 	}
-
 	
 	public class AvgNormalInfoButtonListener implements MouseListener{
 
@@ -338,6 +429,7 @@ public class PlayerDataList  extends JPanel{
 
 	
 	}
+	
 	public void setHighInfoButton(){
 		Point p1 = new Point(150,5);
 		Point p2 = new Point(40,30);
@@ -348,7 +440,6 @@ public class PlayerDataList  extends JPanel{
 		HighInfoButton.addMouseListener(new HighInfoButtonListener());
 		buttonsBGLabel.add(HighInfoButton);
 	}
-
 	
 	public class HighInfoButtonListener implements MouseListener{
 
@@ -414,10 +505,7 @@ public class PlayerDataList  extends JPanel{
 	}
 
 	public void setBasicInfoTablePanel(){
-		sortParam s = new sortParam("point",true);
-		ArrayList<sortParam> sortBy = new ArrayList<sortParam>();
-		sortBy.add(s);
-		ArrayList<PlayerVO> vo = pds.sortPlayerInfo(sortBy);
+		ArrayList<PlayerVO> vo = pds.filterInfo(sortBy,position,league,-1,-1);
 		PlayerVO2List v2l = new PlayerVO2List();
 		ArrayList<ArrayList<String>> datas = v2l.basicInfo(vo);
 			
@@ -430,20 +518,16 @@ public class PlayerDataList  extends JPanel{
 	}
 		
 	public void setNormalInfoTablePanel(boolean isAvg){
-			
-		sortParam s = new sortParam("point",true);
-		ArrayList<sortParam> sortBy = new ArrayList<sortParam>();
-		sortBy.add(s);
 		ArrayList<PlayerVO> vo = new ArrayList<PlayerVO>();
 		ArrayList<ArrayList<String>> datas = new ArrayList<ArrayList<String>>();			
 		PlayerVO2List v2l = new PlayerVO2List();
 		ListType tableType = ListType.avg;
 		if(isAvg){
-			vo = pds.sortPlayerNormalAvg(sortBy);
+			vo = pds.filterNormalAvg(sortBy,position,league,-1,-1);
 			datas = v2l.avgNormalData(vo);
 		}else{
 			tableType = ListType.normal;
-			vo = pds.sortPlayerNormal(sortBy);
+			vo = pds.filterNormal(sortBy,position,league,-1,-1);
 			datas = v2l.normalData(vo);
 		}
 
@@ -458,12 +542,9 @@ public class PlayerDataList  extends JPanel{
 		NormalInfoTable.type = tableType;
 		this.add(NormalInfoTable);
 	}
+	
 	public void setHighInfoTablePanel(){
-		
-		sortParam s = new sortParam("point",true);
-		ArrayList<sortParam> sortBy = new ArrayList<sortParam>();
-		sortBy.add(s);
-		ArrayList<PlayerVO> vo = pds.sortPlayerHigh(sortBy);
+		ArrayList<PlayerVO> vo = pds.filterHigh(sortBy,position,league,-1,-1);
 		PlayerVO2List v2l = new PlayerVO2List();
 		ArrayList<ArrayList<String>> datas = v2l.highData(vo);
 				
