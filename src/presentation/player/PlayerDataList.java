@@ -12,12 +12,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import dataservice.player.PlayerDataService;
-import dataservice.player.PlayerDataHandel;
 import dataservice.player.PlayerData_stub;
 import dataservice.player.sortParam;
+import presentation.common.ListType;
 import presentation.common.PanelMotion;
 import presentation.common.PullDownMenu;
 import presentation.common.SelectLabel;
+import presentation.player.playerDetail.FilterLabel;
 import presentation.table.TablePane;
 import presentation.table.playerTablePanel;
 import vo.playervo.PlayerVO;
@@ -32,6 +33,7 @@ public class PlayerDataList  extends JPanel{
 	JLabel buttonsBGLabel;
 	
 	PullDownMenu menu;
+	FilterLabel filter;
 	
 	PanelMotion upMotion;
 	PanelMotion downMotion;
@@ -98,10 +100,10 @@ public class PlayerDataList  extends JPanel{
 		this.add(titleLabel);
 		this.updateUI();
 		
-		menu = new PullDownMenu();
-		menu.setLocation(0, 55);
-		this.add(menu);
-		menu.setVisible(false);
+		filter = new FilterLabel();
+		filter.setLocation(0, 55);
+		this.add(filter);
+		filter.setVisible(false);
 	}
 
 	public void setBasicInfoButton(){
@@ -116,9 +118,12 @@ public class PlayerDataList  extends JPanel{
 	}
 	
 	private void setFilterButton(){
-		JLabel filterButton = new JLabel();
-		filterButton.setText("筛选");
-		filterButton.setBounds(800, 10, 80, 40);
+		JLabel filterButton = new JLabel("筛选",JLabel.LEADING);
+//		filterButton.setText("筛选");
+		filterButton.setBounds(1220, 10, 80, 40);
+		filterButton.setBackground(entered);
+		filterButton.setForeground(Color.WHITE);
+		filterButton.setFont(new Font("Dialog",1,20));
 		filterButton.setOpaque(true);
 		filterButton.addMouseListener(new MouseListener() {
 			boolean selected = false;
@@ -127,11 +132,11 @@ public class PlayerDataList  extends JPanel{
 				if(selected == true){
 					upMotion.upMove();
 					filterButton.setText("筛选");
-					menu.setVisible(false);
+					filter.setVisible(false);
 				}else{
 					downMotion.downMove();
 					filterButton.setText("确定");
-					menu.setVisible(true);
+					filter.setVisible(true);
 				}
 				selected = !selected;
 			}
@@ -432,10 +437,12 @@ public class PlayerDataList  extends JPanel{
 		ArrayList<PlayerVO> vo = new ArrayList<PlayerVO>();
 		ArrayList<ArrayList<String>> datas = new ArrayList<ArrayList<String>>();			
 		PlayerVO2List v2l = new PlayerVO2List();
+		ListType tableType = ListType.avg;
 		if(isAvg){
 			vo = pds.sortPlayerNormalAvg(sortBy);
 			datas = v2l.avgNormalData(vo);
 		}else{
+			tableType = ListType.normal;
 			vo = pds.sortPlayerNormal(sortBy);
 			datas = v2l.normalData(vo);
 		}
@@ -448,6 +455,7 @@ public class PlayerDataList  extends JPanel{
 		wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);
 			
 		NormalInfoTable = new playerTablePanel(datas,tbHead,wid,0,60,1280,400,50,true,true);
+		NormalInfoTable.type = tableType;
 		this.add(NormalInfoTable);
 	}
 	public void setHighInfoTablePanel(){
@@ -466,8 +474,10 @@ public class PlayerDataList  extends JPanel{
 		wid.add(50);wid.add(150);wid.add(50);wid.add(50);wid.add(50);wid.add(100);wid.add(100);wid.add(50);wid.add(50);wid.add(50);
 		wid.add(100);wid.add(50);wid.add(70);
 			
-		NormalInfoTable = new playerTablePanel(datas,tbHead,wid,0,60,1280,400,50,true,true);
-		this.add(NormalInfoTable);
+		HighInfoTable = new playerTablePanel(datas,tbHead,wid,0,60,1280,400,50,true,true);
+		HighInfoTable.type = ListType.high;
+
+		this.add(HighInfoTable);
 	}
 
 	public static void main(String[] args){

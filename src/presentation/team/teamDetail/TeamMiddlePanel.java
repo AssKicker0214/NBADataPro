@@ -51,7 +51,6 @@ public class TeamMiddlePanel  extends JPanel{
 		this.setBackground(Color.WHITE);
 		
 		TeamDataService tds =  new TeamDataHandel();
-		System.out.println(name);
 		vo = tds.findTeamInfo(name);
 		setAttri(name);
 		setTopPanel();

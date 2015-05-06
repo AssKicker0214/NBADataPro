@@ -56,7 +56,6 @@ public class TeamKingContentPanel  extends JPanel{
 		firstPlayerPhotoLabel.addMouseListener(new MouseAdapter(){
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Mainframe.getFrame().restoreIni();
 				Mainframe.getFrame().setContentPane(new TeamMiddlePanel(vo.get(0).name));
 			}
 		
@@ -158,8 +157,7 @@ public class TeamKingContentPanel  extends JPanel{
 				teamPhotoLabel.addMouseListener(new MouseAdapter(){
 					@Override
 					public void mousePressed(MouseEvent e) {
-						Mainframe.getFrame().restoreIni();
-						Mainframe.getFrame().setContentPane(new TeamMiddlePanel(name));
+						Mainframe.getFrame().changeContent(new TeamMiddlePanel(name));
 					}
 				
 				});

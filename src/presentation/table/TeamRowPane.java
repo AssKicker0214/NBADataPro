@@ -29,9 +29,7 @@ public class TeamRowPane extends RowPane{
 			@Override
 			public void mousePressed(MouseEvent e) {
 				Component[] labels =  getComponents();
-				System.out.println(((JLabel) labels[2]).getText());
-				Mainframe.getFrame().restoreIni();
-				Mainframe.getFrame().setContentPane(new TeamMiddlePanel(((JLabel) labels[2]).getText()));
+				Mainframe.getFrame().changeContent(new TeamMiddlePanel(((JLabel) labels[2]).getText()));
 			}
 		
 		});
