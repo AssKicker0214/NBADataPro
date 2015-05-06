@@ -8,12 +8,14 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 import data.DataInitial;
+import presentation.common.PhotoLabel;
 import presentation.floatui.FloatPane;
 import presentation.floatui.IMainFrameSize;
 import presentation.match.MatchListPanel;
@@ -107,7 +109,7 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 	
 	
 	public void setImageLabel(){
-		JLabel imageLabel = new JLabel();
+		JLabel imageLabel = new PhotoLabel(new ImageIcon("title.png").getImage());
 		imageLabel.setBounds(0, 30, 1280,120);
 		imageLabel.setBackground(Color.darkGray);
 		imageLabel.setOpaque(true);
