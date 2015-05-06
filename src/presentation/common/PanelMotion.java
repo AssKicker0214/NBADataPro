@@ -34,9 +34,13 @@ public class PanelMotion {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			for(JPanel panel:panels){
+				if(panel == null){
+					break;
+				}
+				
 				int currentY = panel.getY();
 				if(currentY < y){
-					panel.setLocation(panel.getX(), currentY+3);
+					panel.setLocation(panel.getX(), currentY+5);
 				}else{
 					panel.setLocation(panel.getX(), y);
 					downTimer.stop();
@@ -53,12 +57,16 @@ public class PanelMotion {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			for(JPanel panel:panels){
+				if(panel == null){
+					break;
+				}
+				
 				int currentY = panel.getY();
-				if(currentY < y){
-					panel.setLocation(panel.getX(), currentY-3);
+				if(currentY > y){
+					panel.setLocation(panel.getX(), currentY-5);
 				}else{
 					panel.setLocation(panel.getX(), y);
-					downTimer.stop();
+					upTimer.stop();
 				}
 			}
 			
