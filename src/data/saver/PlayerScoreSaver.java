@@ -1171,6 +1171,8 @@ public class PlayerScoreSaver {
         private String[] p_school;
         private String[] p_birth;
         private int[] p_exp;
+        private String[] p_weigth;
+        private String[] p_hight;
 
         private void setPlayerDataLevel3() {
 
@@ -1211,6 +1213,8 @@ public class PlayerScoreSaver {
             p_teamPhoto = new String[playerSaver.getNum()];
             p_school = new String[playerSaver.getNum()];
             p_birth = new String[playerSaver.getNum()];
+            p_weigth = new String[playerSaver.getNum()];
+            p_hight = new String[playerSaver.getNum()];
             for (int i = 0; i < playerSaver.getNum(); i++) {
                 pLegB[i] = p_throwallTeamB[i] + 0.4 * p_penaltyallTeamB[i] - 1.07 * ((double)p_attackbasTeamB[i] / (p_attackbasTeamB[i] + p_defencebasTeam[i])) * (double) (p_throwallTeamB[i] - p_throwinTeamB[i]) + 1.07 * p_mistakeTeamB[i];
 //                legB[i] = b_throwall[i] + 0.4 * b_penaltyall[i] - 1.07 * ((double) b_attackbas[i] / (b_attackbas[i] + a_defencebas[i])) * (double) (b_throwall[i] - b_throwin[i]) + 1.07 * b_mistake[i];
@@ -1346,6 +1350,8 @@ public class PlayerScoreSaver {
                 p_exp[i] = playerSaver.getExp()[i];
                 p_school[i] = playerSaver.getSchool()[i];
                 p_birth[i] = playerSaver.getBirth()[i];
+                p_weigth[i] = playerSaver.getWeight()[i] < 0 ? null:String.valueOf(playerSaver.getWeight()[i]);
+                p_hight[i] = (playerSaver.getHeight1()[i] < 0 || playerSaver.getHeight2()[i] < 0)?null:playerSaver.getHeight1()[i] + " "+ playerSaver.getHeight2()[i];
             }
 
         }
@@ -1722,6 +1728,14 @@ public class PlayerScoreSaver {
 
         public int[] getExp() {
             return p_exp;
+        }
+
+        public String[] getP_weigth() {
+            return p_weigth;
+        }
+
+        public String[] getHight() {
+            return p_hight;
         }
     }
 
