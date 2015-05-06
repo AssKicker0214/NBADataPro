@@ -286,8 +286,10 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 		
 		private void setClose(){
 			JLabel closeLabel = new JLabel("X");
-//			closeLabel.setOpaque(true);
-			closeLabel.setBounds(1240, 0, 35, 30);
+			closeLabel.setOpaque(true);
+			closeLabel.setHorizontalAlignment(JLabel.CENTER);
+			closeLabel.setBackground(new Color(100, 30, 40));
+			closeLabel.setBounds(1240, 0, 40, 30);
 			closeLabel.setFont(new Font("微软雅黑", Font.BOLD, 16));
 			closeLabel.setForeground(Color.white);
 			closeLabel.addMouseListener(new MouseListener() {
@@ -305,13 +307,13 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 				
 				@Override
 				public void mouseExited(MouseEvent arg0) {
-					// TODO Auto-generated method stub
-					
+					closeLabel.setBackground(new Color(100, 30, 40));
 				}
 				
 				@Override
 				public void mouseEntered(MouseEvent arg0) {
-					// TODO Auto-generated method stub
+					closeLabel.setBackground(new Color(200, 60, 70));
+					
 					
 				}
 				
@@ -326,8 +328,10 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 		
 		private void setMin(){
 			JLabel minLabel = new JLabel("-");
-			minLabel.setBounds(1200, 0, 35, 30);
-//			minLabel.setOpaque(true);
+			minLabel.setBounds(1200, 0, 40, 30);
+			minLabel.setHorizontalAlignment(JLabel.CENTER);
+			minLabel.setBackground(new Color(50, 50, 80));
+			minLabel.setOpaque(true);
 			minLabel.setFont(new Font("微软雅黑", Font.BOLD, 16));
 			minLabel.setForeground(Color.white);
 			minLabel.addMouseListener(new MouseListener() {
@@ -345,19 +349,17 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 				
 				@Override
 				public void mouseExited(MouseEvent arg0) {
-					// TODO Auto-generated method stub
+					minLabel.setBackground(new Color(50, 50, 80));
 					
 				}
 				
 				@Override
 				public void mouseEntered(MouseEvent arg0) {
-					// TODO Auto-generated method stub
-					
+					minLabel.setBackground(new Color(80, 80, 160));
 				}
 				
 				@Override
 				public void mouseClicked(MouseEvent arg0) {
-					// TODO Auto-generated method stub
 					
 				}
 			});

@@ -14,6 +14,8 @@ import javax.swing.JPanel;
 import dataservice.player.PlayerDataService;
 import dataservice.player.PlayerData_stub;
 import dataservice.player.sortParam;
+import presentation.common.PanelMotion;
+import presentation.common.PullDownMenu;
 import presentation.common.SelectLabel;
 import presentation.table.TablePane;
 import presentation.table.playerTablePanel;
@@ -25,8 +27,13 @@ public class PlayerDataList  extends JPanel{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	JLabel TitleLabel;
-	JLabel ButtonsBGLabel;
+	JLabel titleLabel;
+	JLabel buttonsBGLabel;
+	
+	PullDownMenu menu;
+	
+	PanelMotion upMotion;
+	PanelMotion downMotion;
 	
 	public SelectLabel basicInfoButton;//信息
 	public SelectLabel NormalInfoButton;//普通数据
@@ -53,6 +60,18 @@ public class PlayerDataList  extends JPanel{
 		setButtonsBGLabel();
 		basicInfoButton.setBackground(pressed);
 		setBasicInfoTablePanel();
+		
+		setMotion();
+		setFilterButton();
+	}
+	
+	private void setMotion(){
+		ArrayList<JPanel> panels = new ArrayList<JPanel>();
+		panels.add(BasicInfoTable);
+		panels.add(NormalInfoTable);
+		panels.add(HighInfoTable);
+		upMotion = new PanelMotion(panels, 155);
+		downMotion = new PanelMotion(panels, 245);
 	}
 	
 	public void setSelectedGroups(SelectLabel s){
@@ -69,14 +88,18 @@ public class PlayerDataList  extends JPanel{
 	}
 
 	public void setTitle(){
-		TitleLabel = new JLabel(" 球员列表",JLabel.LEADING);
-		TitleLabel.setFont(new Font("Dialog",1,20));
-		TitleLabel.setForeground(Color.WHITE);
-		TitleLabel.setBackground(entered);
-		TitleLabel.setOpaque(true);
-		TitleLabel.setBounds(0,0,1280,60);
-		this.add(TitleLabel);
+		titleLabel = new JLabel(" 球员列表",JLabel.LEADING);
+		titleLabel.setFont(new Font("Dialog",1,20));
+		titleLabel.setForeground(Color.WHITE);
+		titleLabel.setBackground(entered);
+		titleLabel.setOpaque(true);
+		titleLabel.setBounds(0,0,1280,60);
+		this.add(titleLabel);
 		this.updateUI();
+		
+		menu = new PullDownMenu();
+		menu.setLocation(0, 155);
+		this.add(menu, -1);
 	}
 
 	public void setBasicInfoButton(){
@@ -87,7 +110,54 @@ public class PlayerDataList  extends JPanel{
 		basicInfoButton.setBackground(exicted);
 		basicInfoButton.setOpaque(true);
 		basicInfoButton.addMouseListener(new BasicInfoButtonListener());
-		ButtonsBGLabel.add(basicInfoButton);
+		buttonsBGLabel.add(basicInfoButton);
+	}
+	
+	private void setFilterButton(){
+		JLabel filterButton = new JLabel();
+		filterButton.setText("筛选");
+		filterButton.setBounds(800, 10, 80, 40);
+		filterButton.setOpaque(true);
+		filterButton.addMouseListener(new MouseListener() {
+			boolean selected = false;
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				if(selected == true){
+					upMotion.upMove();
+					filterButton.setText("筛选");
+				}else{
+					downMotion.downMove();
+					filterButton.setText("确定");
+				}
+				selected = !selected;
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		titleLabel.add(filterButton);
+	
 	}
 	
 	class BasicInfoButtonListener implements MouseListener{
@@ -143,7 +213,7 @@ public class PlayerDataList  extends JPanel{
 		NormalInfoButton.setBackground(exicted);
 		NormalInfoButton.setOpaque(true);
 		NormalInfoButton.addMouseListener(new NormalInfoButtonListener());
-		ButtonsBGLabel.add(NormalInfoButton);
+		buttonsBGLabel.add(NormalInfoButton);
 	}
 
 	
@@ -206,7 +276,7 @@ public class PlayerDataList  extends JPanel{
 		AvgNormalInfoButton.setBackground(exicted);
 		AvgNormalInfoButton.setOpaque(true);
 		AvgNormalInfoButton.addMouseListener(new AvgNormalInfoButtonListener());
-		ButtonsBGLabel.add(AvgNormalInfoButton);
+		buttonsBGLabel.add(AvgNormalInfoButton);
 	}
 
 	
@@ -267,7 +337,7 @@ public class PlayerDataList  extends JPanel{
 		HighInfoButton.setBackground(exicted);
 		HighInfoButton.setOpaque(true);
 		HighInfoButton.addMouseListener(new HighInfoButtonListener());
-		ButtonsBGLabel.add(HighInfoButton);
+		buttonsBGLabel.add(HighInfoButton);
 	}
 
 	
@@ -323,15 +393,15 @@ public class PlayerDataList  extends JPanel{
 	}
 	
 	public void setButtonsBGLabel(){
-		ButtonsBGLabel = new JLabel();
-		ButtonsBGLabel.setBackground(exicted);
-		ButtonsBGLabel.setOpaque(true);
-		ButtonsBGLabel.setBounds(1005,10,195,40);
+		buttonsBGLabel = new JLabel();
+		buttonsBGLabel.setBackground(exicted);
+		buttonsBGLabel.setOpaque(true);
+		buttonsBGLabel.setBounds(1005,10,195,40);
 		setBasicInfoButton();
 		setNormalInfoButton();
 		setAvgNormalInfoButton();
 		setHighInfoButton();
-		TitleLabel.add(ButtonsBGLabel,0);
+		titleLabel.add(buttonsBGLabel,0);
 	}
 
 	public void setBasicInfoTablePanel(){
