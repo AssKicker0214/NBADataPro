@@ -47,7 +47,7 @@ public class TeamMiddlePanel  extends JPanel{
 
 	public TeamMiddlePanel(String name){
 		this.setLayout(null);
-		this.setBounds(0, 30, 1280,675);
+		this.setBounds(0, 0, 1280,675);
 		this.setBackground(Color.WHITE);
 		
 		TeamDataService tds =  new TeamDataHandel();
@@ -209,7 +209,6 @@ public class TeamMiddlePanel  extends JPanel{
 					remove(teamVSTopPanel);
 				}
 				setTopPanel();
-				
 				setTeamMemberPanel();
 				setVisible(true);
 				repaint();			

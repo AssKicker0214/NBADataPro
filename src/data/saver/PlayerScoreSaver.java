@@ -1292,7 +1292,7 @@ public class PlayerScoreSaver {
                 }
 
                 if (p_inplacetime[i] > 0 || p_throwall[i] > 0 || p_throw3all[i] > 0 || p_mistake[i] > 0) {
-                    p_utiliation[i] = (((double) p_throwall[i] - p_throw3all[i] + 0.44 * p_penaltyall[i] + p_mistake[i]) * ((double) p_inplacetimeTeam[i] / 5) / (p_inplacetime[i])) / ((double) p_throwallTeam[i] - p_throw3allTeam[i] + 0.44 * p_penaltyallTeam[i] + p_mistakeTeam[i]);
+                    p_utiliation[i] = (((double) p_throwall[i]  + 0.44 * p_penaltyall[i] + p_mistake[i]) * ((double) p_inplacetimeTeam[i] / 5) / (p_inplacetime[i])) / ((double) p_throwallTeam[i] + 0.44 * p_penaltyallTeam[i] + p_mistakeTeam[i]);
                 } else {
                     p_utiliation[i] = -1;
                 }
@@ -1310,7 +1310,7 @@ public class PlayerScoreSaver {
                     p_GmSc[i] = -1;
                 }
                 if (p_score[i] > 0 || p_throwall[i] > 0 || p_penaltyall[i] > 0) {
-                    p_TSP[i] = p_score[i] / (2 * (p_throwall[i] + 0.44 * p_penaltyall[i]));
+                    p_TSP[i] = p_score[i] / (2 * ((double) p_throwall[i] + 0.44 * p_penaltyall[i]));
                 } else {
                     p_TSP[i] = -1;
                 }
@@ -1323,9 +1323,13 @@ public class PlayerScoreSaver {
 
 
                 if (p_tid_mid[i][0] > 0) {
+
                     p_division[i] = teamSaver.getDivision()[p_tid_mid[i][0] - 1];
                     p_team[i] = teamSaver.getAbridge()[p_tid_mid[i][0] - 1];
                     p_teamName[i] = teamSaver.getTeamName()[p_tid_mid[i][0] - 1];
+//                    if (i == 490){
+//                        System.out.println(p_tid_mid[i][0]+"--------------______------"+p_teamName[i]);
+//                    }
                     p_league[i] = teamSaver.getLeague()[p_tid_mid[i][0] - 1];
                     p_teamPhoto[i] = teamSaver.getPhoto()[p_tid_mid[i][0] - 1];
 
@@ -1356,6 +1360,15 @@ public class PlayerScoreSaver {
         private int[][] mid_penaltyall;
         private int[][] mid_allbas;
 
+        public void showPidTid(){
+            for (int i = 0; i < p_tid_mid.length;i++){
+                System.out.println(i+" "+p_tid_mid[i][0]+" "+p_tid_mid[i][1]);
+            }
+
+            for (int i = 0; i< p_teamName.length;i++){
+                System.out.println(i+" "+p_teamName[i]);
+            }
+        }
 
         private void setPlayerDataLevel1() {
             mid_inplacetime = new int[matchInfoSaver.getNum()][4];

@@ -23,7 +23,7 @@ public class TeamListPanel extends JPanel{
 	
 	public TeamListPanel(){
 		this.setLayout(null);
-		this.setBounds(150, 155,1130,545);
+		this.setBounds(150, 125,1130,545);
 		this.setBackground(Color.WHITE);
 		setHead();
 		setDivisionHead();

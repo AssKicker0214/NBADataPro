@@ -34,6 +34,11 @@ public class TeamDataHandel implements TeamDataService {
     }
 
     @Override
+    public ArrayList<TeamVO> findTeams(String msg) {
+        return null;
+    }
+
+    @Override
     public ArrayList<TeamVO> findTeamNormal() {
         ArrayList<TeamVO> teamVOs = new TeamDataManager().getTeamVOs(getNormalInfo(), TeamDataManager.DEFAULT);
         return teamVOs;

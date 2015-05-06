@@ -12,7 +12,6 @@ import java.util.ArrayList;
  */
 public class MatchDataHandel implements MatchDataService {
 
-    @Override
     public ArrayList<MatchContentPlayerVO> FindRecentMatches_p(int num, String playerName) {
         ArrayList<Integer> intS = new PlayerDataManager().getFindRecentMatches_p(playerName);
         ArrayList<MatchContentPlayerVO> res = new ArrayList<>();
@@ -39,16 +38,26 @@ public class MatchDataHandel implements MatchDataService {
 
     @Override
     public ArrayList<MatchVO> findByDate(String start, String end) {
-        return new MatchManager().findByDate(start,end);
+        return new MatchManager().findByDate(start, end);
+    }
+
+    @Override
+    public ArrayList<MatchContentPlayerVO> FindRecentMatches_p(String playerName) {
+        return null;
     }
 
     @Override
     public ArrayList<MatchContentPlayerVO> findByDP(String start, String end, String playerName) {
-        return new MatchManager().findByDP( start,  end, playerName);
+        return new MatchManager().findByDP(start, end, playerName);
     }
 
     @Override
     public ArrayList<MatchVO> findByDT(String start, String end, String teamName) {
         return new MatchManager().findByDT(start, end, teamName);
+    }
+
+    @Override
+    public ArrayList<MatchVO> findRecent20() {
+        return null;
     }
 }
