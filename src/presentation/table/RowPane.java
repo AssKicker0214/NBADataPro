@@ -26,20 +26,21 @@ public class RowPane extends JPanel {
 	
 	private JLabel photoLabel;
 	private JLabel indexLabel;
+	int height;
 	
 	/**
 	 * Create the panel.
 	 */
-	public RowPane(int index, boolean hasIndex) {
+	public RowPane(int index, boolean hasIndex,int width,int h) {
 		if((index%2)==0)
 			this.setBackground(Color.white);
 		else
 			this.setBackground(new Color(245,245,245));
-		
+		height = h;
 		FlowLayout flowLayout = (FlowLayout) getLayout();
 		flowLayout.setHgap(10);
 		flowLayout.setAlignment(FlowLayout.LEADING);
-		setPreferredSize(new Dimension(TablePane.width, TablePane.height));
+		setPreferredSize(new Dimension(width, height));
 		if(hasIndex)
 			setIndex(index);
 		
@@ -47,7 +48,7 @@ public class RowPane extends JPanel {
 	}
 	
 	public void setPhotoLabel(String photo,int w){
-		photoLabel = new PhotoLabel(new Dimension(w, TablePane.height));
+		photoLabel = new PhotoLabel(new Dimension(w, height));
 		((PhotoLabel) photoLabel).setImage(new ImageIcon(photo).getImage());
 		add(photoLabel);
 	}
@@ -57,7 +58,7 @@ public class RowPane extends JPanel {
 		indexLabel = new JLabel(index+"");
 		indexLabel.setFont(new Font(Font.DIALOG_INPUT, Font.BOLD, 15));
 		indexLabel.setHorizontalAlignment(JLabel.CENTER);
-		indexLabel.setPreferredSize(new Dimension(30,TablePane.height));
+		indexLabel.setPreferredSize(new Dimension(30,height));
 		this.add(indexLabel);
 		
 	}
@@ -66,7 +67,7 @@ public class RowPane extends JPanel {
 	
 	public void addData(String data,int width){		
 		JLabel block = new JLabel(data,JLabel.CENTER);
-		block.setPreferredSize(new Dimension(width, TablePane.height));
+		block.setPreferredSize(new Dimension(width, height));
 		block.addMouseListener(new MouseAdapter(){
 			@Override
 			public void mousePressed(MouseEvent e) {

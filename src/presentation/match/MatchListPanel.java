@@ -77,6 +77,7 @@ public class MatchListPanel extends JPanel implements Updatable{
 				commit.setFont(new Font("Dialog",1,15));
 				System.out.println(calendarStart.getSelectedDate().toString());
 				System.out.println(calendarEnd.getSelectedDate().toString());
+				setTabel(calendarStart.getSelectedDate().toString(),calendarEnd.getSelectedDate().toString());
 			}
 			
 			@Override
