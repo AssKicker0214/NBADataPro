@@ -9,11 +9,14 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import dataservice.player.PlayerDataService;
+import dataservice.player.PlayerData_stub;
 import dataservice.team.TeamDataService;
 import dataservice.team.TeamData_stub;
 import presentation.common.SelectLabel;
 import presentation.player.vs.VSContentPanel;
 import presentation.team.vs.TeamVSTopPanel;
+import vo.playervo.PlayerVO;
 import vo.teamvo.TeamVO;
 //过往查询
 public class TeamMiddlePanel  extends JPanel{
@@ -39,7 +42,10 @@ public class TeamMiddlePanel  extends JPanel{
 	
 	TeamVO vo;
 	
+	ArrayList<Double> team = new ArrayList<Double>();
+	ArrayList<Double> leagueAvg = new ArrayList<Double>();
 	ArrayList<SelectLabel> selectLabelGroups = new ArrayList<SelectLabel>();
+	ArrayList<String> itemsNeedAdd = new ArrayList<String>();
 
 	public TeamMiddlePanel(String name){
 		this.setLayout(null);
@@ -58,6 +64,33 @@ public class TeamMiddlePanel  extends JPanel{
 		setTeamDataPanel();
 		DataLabel.setBackground(Color.GRAY);
 	}
+	
+	public void setAttri(String name){
+		TeamDataService pds = new TeamData_stub();
+		PlayerVO voL = pds.avgLeague(); 
+		TeamVO voP = pds.findTeamInfo(name); 
+		vo = voP;
+		setTopPanel(voP);
+		player.add(voP.avgPoint);player.add(voP.avgRebound);player.add(voP.avgAssist);
+		player.add(voP.three);player.add(voP.penalty);
+		leagueAvg.add(voL.avgPoint);leagueAvg.add(voL.avgRebound);leagueAvg.add(voL.avgAssist);
+		leagueAvg.add(voL.three);leagueAvg.add(voL.penalty);
+		//"年度","球队","场数","先发","分钟","％","三分％","罚球％",
+		//"进攻","防守","场均篮板","场均助攻","场均抢断","场均盖帽","失误","犯规","场均得分"
+		avg.add("2012-2013");avg.add(voP.team);avg.add(voP.numOfGame+"");avg.add(voP.start+"");avg.add(voP.avgMinute+"");avg.add(voP.shot+"");avg.add(voP.three+"");
+		avg.add(voP.penalty+"");avg.add(voP.avgOffend+"");avg.add(voP.avgDefend+"");avg.add(voP.avgRebound+"");avg.add(voP.avgAssist+"");avg.add(voP.avgSteal+"");
+		avg.add(voP.avgBlockShot+"");avg.add(voP.avgFault+"");avg.add(voP.avgFoul+"");avg.add(voP.avgPoint+"");
+		total.add("2012-2013");total.add(voP.team);total.add(voP.numOfGame+"");total.add(voP.start+"");total.add(voP.minute+"");total.add(voP.shot+"");total.add(voP.three+"");
+		total.add(voP.penalty+"");total.add(voP.offend+"");total.add(voP.defend+"");total.add(voP.rebound+"");total.add(voP.assist+"");total.add(voP.steal+"");
+		total.add(voP.blockShot+"");total.add(voP.fault+"");total.add(voP.foul+"");total.add(voP.point+"");
+		itemsNeedAdd.add("场均得分");
+		itemsNeedAdd.add("场均助攻");
+		itemsNeedAdd.add("场均篮板"); 
+		itemsNeedAdd.add("三分％"); 
+		itemsNeedAdd.add("罚球％");
+
+	}
+
 	
 	public void setSelectedGroups(SelectLabel s){
 		selectLabelGroups.clear();
@@ -99,23 +132,13 @@ public class TeamMiddlePanel  extends JPanel{
 	}
 	
 	public void setTeamVSPanel(){
-		ArrayList<String> itemsNeedAdd = new ArrayList<String>();
-		ArrayList<Double> avg1 = new ArrayList<Double>();
-		ArrayList<Double> avg2 = new ArrayList<Double>();
-		
-		itemsNeedAdd.add("场均得分"); avg1.add(5.9); avg2.add(10.043);
-		itemsNeedAdd.add("场均助攻"); avg1.add(1.0); avg2.add(2.159);
-		itemsNeedAdd.add("场均篮板"); avg1.add(4.4); avg2.add(4.469);
-		itemsNeedAdd.add("三分％"); 	avg1.add(30.0); avg2.add(34.5);
-		itemsNeedAdd.add("罚球％");	avg1.add(78.4); avg2.add(74.3);
-
-		vsContentPanel = new VSContentPanel(itemsNeedAdd,avg1,avg2);
+		vsContentPanel = new VSContentPanel(itemsNeedAdd,team,leagueAvg);
 		this.add(vsContentPanel);
 		repaint();
 	}
 
-	public void setVSTopPanel(){
-		teamVSTopPanel = new TeamVSTopPanel();
+	public void setVSTopPanel(TeamMiddlePanel middle){
+		teamVSTopPanel = new TeamVSTopPanel(middle);
 		this.add(teamVSTopPanel);
 		repaint();
 	}
@@ -321,7 +344,8 @@ public class TeamMiddlePanel  extends JPanel{
 				if(teamVSTopPanel != null){
 					remove(teamVSTopPanel);
 				}
-				setVSTopPanel();
+				setVSTopPanel(TeamMiddlePanel.this);
+				setTeamVSPanel();
 				setVisible(true);
 				repaint();		
 			}
