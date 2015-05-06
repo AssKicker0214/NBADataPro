@@ -205,7 +205,7 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 		
  		teamDataList = new TeamDataList();
  		contentPane.add(teamDataList,0);
-		matchList.setVisible(false);
+ 		teamDataList.setVisible(false);
 		
 		mainParts.add(playerKing);
 		mainParts.add(teamKing);
@@ -235,8 +235,9 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 	}
 	
 	public static  void main(String[] args){
-		Mainframe.getFrame();
 		DataInitial.init();
+		Mainframe.getFrame();
+		
 	}
 
 	public void returnIni(){
