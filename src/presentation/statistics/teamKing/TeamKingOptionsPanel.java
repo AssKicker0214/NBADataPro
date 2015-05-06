@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import dataservice.team.TeamDataService;
-import dataservice.team.TeamDataHandel;
+import dataservice.team.TeamData_stub;
 import presentation.common.SelectLabel;
 
 public class TeamKingOptionsPanel extends JPanel {
@@ -67,7 +67,7 @@ public class TeamKingOptionsPanel extends JPanel {
 	}
 
 	public void setTeamKingContentPanel(String sortBy){
-		TeamDataService tds = new TeamDataHandel();
+		TeamDataService tds = new TeamData_stub();
 		teamKingContentPanel = new TeamKingContentPanel(tds.hotTeams(5, sortBy));
 		this.add(teamKingContentPanel);
 		repaint();

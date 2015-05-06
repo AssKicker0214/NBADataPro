@@ -11,14 +11,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import dataservice.Updatable;
 import dataservice.match.MatchDataService;
-import dataservice.match.MatchDataHandel;
+import dataservice.match.MatchData_stub;
 import presentation.common.DateLabel;
 import presentation.table.TablePane;
 import vo.matchvo.MatchVO;
 
-public class MatchListPanel extends JPanel implements Updatable{
+public class MatchListPanel extends JPanel{
 
 	/**
 	 * 
@@ -41,7 +40,26 @@ public class MatchListPanel extends JPanel implements Updatable{
 		this.setBackground(Color.WHITE);
 		update();
 	}
-
+	public void update(){
+		if(table!=null)
+			remove(table);
+		MatchDataService mds = new MatchData_stub();
+		ArrayList<MatchVO> vo = mds.findRecent20();//显示最近20场比赛
+		
+		String[] columns = {"日期","","对阵球队","总比分","第一节比分","第二节比分","第三节比分","第四节比分"};
+		
+		MatchVO2List m2l = new MatchVO2List();
+		ArrayList<ArrayList<String>> datas = m2l.matchList(vo);
+		
+		ArrayList<Integer> wid = new ArrayList<Integer>();
+		wid.add(180);wid.add(0);
+		for(int i = 0; i < 6;i++){
+			wid.add(180);
+		}
+		wid.add(0);
+		table = new TablePane(datas,columns,wid,0,70,1280,420,30,true,false);
+		this.add(table);
+	}
 	public void setMatchTitleLabel(){
 		matchTitleLabel = new JLabel("  赛程",JLabel.LEADING);
 		matchTitleLabel.setFont(new Font("Dialog",1,20));
@@ -101,7 +119,7 @@ public class MatchListPanel extends JPanel implements Updatable{
 		
 		this.remove(table);
 		
-		MatchDataService mds = new MatchDataHandel();
+		MatchDataService mds = new MatchData_stub();
 		ArrayList<MatchVO> vo = mds.findByDate(start, end);
 		
 		String[] columns = {"日期","","对阵球队","总比分","第一节比分","第二节比分","第三节比分","第四节比分"};
@@ -128,28 +146,6 @@ public class MatchListPanel extends JPanel implements Updatable{
 		jf.add(new MatchListPanel());
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jf.setVisible(true);
-	}
-	@Override
-	public void update() {
-		if(table!=null)
-			remove(table);
-		MatchDataService mds = new MatchDataHandel();
-		ArrayList<MatchVO> vo = mds.findRecent20();//显示最近20场比赛
-		
-		String[] columns = {"日期","","对阵球队","总比分","第一节比分","第二节比分","第三节比分","第四节比分"};
-		
-		MatchVO2List m2l = new MatchVO2List();
-		ArrayList<ArrayList<String>> datas = m2l.matchList(vo);
-		
-		ArrayList<Integer> wid = new ArrayList<Integer>();
-		wid.add(180);wid.add(0);
-		for(int i = 0; i < 6;i++){
-			wid.add(180);
-		}
-		wid.add(0);
-		table = new TablePane(datas,columns,wid,0,70,1280,420,30,true,false);
-		this.add(table);
-		
 	}
 
 }

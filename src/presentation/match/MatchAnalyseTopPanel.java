@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 
 import dataservice.match.MatchDataService;
 import dataservice.match.MatchDataHandel;
-import dataservice.match.MatchDataHandel;
+import dataservice.match.MatchData_stub;
 import presentation.common.PhotoLabel;
 import presentation.main.Mainframe;
 import presentation.team.teamDetail.TeamMiddlePanel;
@@ -42,7 +42,7 @@ public class MatchAnalyseTopPanel extends JPanel{
 		this.setLayout(null);
 		this.setBounds(0, 0, 1280,700);
 		this.setBackground(Color.WHITE);
-		MatchDataService mds = new MatchDataHandel();
+		MatchDataService mds = new MatchData_stub();
 		vo = mds.findMatch(matchID);
 		
 		setDataLabel();
