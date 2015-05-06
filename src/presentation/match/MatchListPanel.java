@@ -35,7 +35,7 @@ public class MatchListPanel extends JPanel{
 	
 	public MatchListPanel(){
 		this.setLayout(null);
-		this.setBounds(0,155,1280,540);
+		this.setBounds(0,125,1280,540);
 		setMatchTitleLabel();
 		setDate();
 		this.setBackground(Color.WHITE);

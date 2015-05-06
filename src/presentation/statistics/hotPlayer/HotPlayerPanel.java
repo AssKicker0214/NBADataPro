@@ -28,7 +28,7 @@ public class HotPlayerPanel extends JPanel{
 	
 	public HotPlayerPanel(){
 		this.setLayout(null);
-		this.setBounds(150, 155, 1280, 550);
+		this.setBounds(150, 125, 1280, 550);
 		this.setBackground(Color.WHITE);
 		this.setOpaque(true);
 		setTitle("  进步最快球员");

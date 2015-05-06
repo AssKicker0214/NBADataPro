@@ -36,6 +36,7 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 	JLayeredPane layer;
 	JPanel contentPane;
 	JPanel bufferedPane;
+	JPanel jumpPane;
 	
 	boolean contentPaneChange = false;
 	
@@ -63,13 +64,13 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 	
 	private void setFrame(){
 		layer = this.getLayeredPane();
-		contentPane = (JPanel) this.getContentPane();
 		bufferedPane = new JPanel();
 	
 		setLayout(null);
 		setUndecorated(true);
 		setSize(1280,700);
 		setLocationRelativeTo(null);
+		setContent();
 		setTitleLabel();
 		setImageLabel(); 
 		setGuideGroup();
@@ -79,6 +80,8 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 		setFloat();
 		
 		setVisible(true);
+		contentPane.setVisible(true);
+		System.out.println(contentPane.getComponentCount());
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
@@ -107,13 +110,31 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 		this.add(titleLabel);
 	}
 	
+	private void setContent(){
+		contentPane = new JPanel();
+		contentPane.setLayout(null);
+		contentPane.setVisible(false);
+		contentPane.setBackground(Color.cyan);
+		contentPane.setBounds(0, 30, 1280, 670);
+		this.add(contentPane);
+	}
+	
+	public void changeContent(JPanel panel){
+		contentPaneChange = true;
+		contentPane.setVisible(false);
+		Mainframe.getFrame().remove(contentPane);
+		contentPane = panel;
+		Mainframe.getFrame().add(contentPane);
+		contentPane.setVisible(true);
+		System.out.println(contentPane.getComponentCount());
+	}
 	
 	public void setImageLabel(){
 		JLabel imageLabel = new PhotoLabel(new ImageIcon("title.png").getImage());
-		imageLabel.setBounds(0, 30, 1280,120);
+		imageLabel.setBounds(0, 0, 1280,120);
 		imageLabel.setBackground(Color.darkGray);
 		imageLabel.setOpaque(true);
-		this.add(imageLabel);
+		contentPane.add(imageLabel);
 	}
 	
 	private void setGuideGroup(){
@@ -143,7 +164,7 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 		guideContainer.addGuide(teamGuide);
 		guideContainer.addGuide(gameGuide);
 		guideContainer.addGuide(staticGuide);
-		this.add(guideContainer);
+		contentPane.add(guideContainer);
 		
 //		this.setSuboptionLayer();
 	}
@@ -151,28 +172,28 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 	
 	private void setMainPartPanel(){
 		playerKing = new PlayerKingPanel();
-		this.add(playerKing);
+		contentPane.add(playerKing);
 		playerKing.setVisible(false);
 		
 		teamKing = new TeamKingPanel();
-		this.add(teamKing);
+		contentPane.add(teamKing);
 		teamKing.setVisible(false);
 		
 		hotPlayer = new HotPlayerPanel();
-		this.add(hotPlayer);
+		contentPane.add(hotPlayer);
 		hotPlayer.setVisible(false);
 		
 		teamList = new TeamListPanel();
 		((TeamListPanel) teamList).setMainFrame(this);
-		this.add(teamList);
+		contentPane.add(teamList);
 		teamList.setVisible(false);
 		
 		playerList = new PlayerDataList();
-		this.add(playerList,0);
+		contentPane.add(playerList,0);
 		playerList.setVisible(false);
 		
 		matchList = new MatchListPanel();
-		this.add(matchList,0);
+		contentPane.add(matchList,0);
 		matchList.setVisible(false);
 		
 		mainParts.add(playerKing);
@@ -208,7 +229,10 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 	public void returnIni(){
 		if(contentPaneChange){
 			contentPaneChange = false;
-			this.setContentPane(bufferedPane);
+			this.remove(contentPane);
+			contentPane = bufferedPane;
+			this.add(contentPane);
+			this.repaint();
 			contentPane.repaint();
 		}
 		for(int i=0;i<mainParts.size();i++){
@@ -237,7 +261,8 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 	public void teamChose(String teamName){
 		contentPaneChange = true;
 		restoreIni();
-		this.setContentPane(new TeamMiddlePanel(teamName));
+//		changeContent(panel);
+//		this.setContentPane(new TeamMiddlePanel(teamName));
 //		contentPane = new PlayerMiddlePanel("Aaron Gray");
 //		contentPane.setVisible(false);
 //		contentPane.add(new PlayerMiddlePanel("Aaron Gray"),0);
