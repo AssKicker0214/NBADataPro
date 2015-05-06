@@ -43,6 +43,7 @@ public class Match {
         BufferedReader br = null;
         try {
             String title = file.getName();
+            FileName.getFileName().add(title);
             String input = null;
             br = new BufferedReader(new InputStreamReader(
                     new FileInputStream(file)));
