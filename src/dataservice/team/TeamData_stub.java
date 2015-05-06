@@ -155,6 +155,8 @@ public class TeamData_stub implements TeamDataService{
 		vo.league = 'E';
 		vo.photo = "ATL";
 		vo.location = "Atlanta";
+		vo.avgAssist = 4.2;
+		vo.avgPoint = 12.3;
 		return vo;
 	}
 }

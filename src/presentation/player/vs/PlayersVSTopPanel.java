@@ -86,6 +86,7 @@ public class PlayersVSTopPanel extends JPanel{
 	}
 	
 	public void setAttri(){
+		
 		anotherVO.number = 0;
 		anotherVO.name = "NBA联盟平均数";
 		anotherVO.photo = "nba";
