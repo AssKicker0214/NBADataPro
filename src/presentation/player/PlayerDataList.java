@@ -13,7 +13,9 @@ import javax.swing.JPanel;
 
 import dataservice.player.PlayerDataService;
 import dataservice.player.PlayerDataHandel;
+import dataservice.player.PlayerData_stub;
 import dataservice.player.sortParam;
+import presentation.common.ListType;
 import presentation.common.SelectLabel;
 import presentation.table.TablePane;
 import presentation.table.playerTablePanel;
@@ -33,7 +35,7 @@ public class PlayerDataList  extends JPanel{
 	public SelectLabel AvgNormalInfoButton;//平均普通数据
 	public SelectLabel HighInfoButton;//高阶数据
 	
-	PlayerDataService pds = new PlayerDataHandel();
+	PlayerDataService pds = new PlayerData_stub();
 	
 	Color entered = new Color(30,80,140);
 	Color pressed = new Color(42,109,183);
@@ -358,10 +360,12 @@ public class PlayerDataList  extends JPanel{
 		ArrayList<PlayerVO> vo = new ArrayList<PlayerVO>();
 		ArrayList<ArrayList<String>> datas = new ArrayList<ArrayList<String>>();			
 		PlayerVO2List v2l = new PlayerVO2List();
+		ListType tableType = ListType.avg;
 		if(isAvg){
 			vo = pds.sortPlayerNormalAvg(sortBy);
 			datas = v2l.avgNormalData(vo);
 		}else{
+			tableType = ListType.normal;
 			vo = pds.sortPlayerNormal(sortBy);
 			datas = v2l.normalData(vo);
 		}
@@ -374,6 +378,7 @@ public class PlayerDataList  extends JPanel{
 		wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);
 			
 		NormalInfoTable = new playerTablePanel(datas,tbHead,wid,0,60,1280,400,50,true,true);
+		NormalInfoTable.type = tableType;
 		this.add(NormalInfoTable);
 	}
 	public void setHighInfoTablePanel(){
@@ -392,8 +397,10 @@ public class PlayerDataList  extends JPanel{
 		wid.add(50);wid.add(150);wid.add(50);wid.add(50);wid.add(50);wid.add(100);wid.add(100);wid.add(50);wid.add(50);wid.add(50);
 		wid.add(100);wid.add(50);wid.add(70);
 			
-		NormalInfoTable = new playerTablePanel(datas,tbHead,wid,0,60,1280,400,50,true,true);
-		this.add(NormalInfoTable);
+		HighInfoTable = new playerTablePanel(datas,tbHead,wid,0,60,1280,400,50,true,true);
+		HighInfoTable.type = ListType.high;
+
+		this.add(HighInfoTable);
 	}
 
 	public static void main(String[] args){
