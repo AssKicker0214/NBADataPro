@@ -140,8 +140,11 @@ public class PlayerData_stub implements PlayerDataService{
 
 	@Override
 	public PlayerVO findPlayerData(int playerId) {
-		// TODO Auto-generated method stub
-		return null;
+		PlayerVO vo = new PlayerVO();
+		vo.photo = "Aaron Gray";
+		vo.name = "Aaron Gray";
+		vo.team = "Hawks";
+		return vo;
 	}
 
 	@Override
@@ -150,6 +153,8 @@ public class PlayerData_stub implements PlayerDataService{
 		vo.photo = "Aaron Gray";
 		vo.name = "Aaron Gray";
 		vo.team = "Hawks";
+		vo.position = "后卫";
+		vo.avgAssist = 3.2;
 		return vo;
 	}
 
@@ -201,46 +206,93 @@ public class PlayerData_stub implements PlayerDataService{
 	public ArrayList<PlayerVO> filterInfo(ArrayList<sortParam> sortBy,
 			ArrayList<String> position, ArrayList<String> league, int numS,
 			int numE) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<PlayerVO> vol = new ArrayList<PlayerVO>();
+		PlayerVO vo1 = new PlayerVO();
+		vo1.photo = "Aaron Brooks";
+		vo1.name = "Aaron Brooks";
+		vol.add(vo1);
+		PlayerVO vo2 = new PlayerVO();
+		vo2.photo = "Aaron Gray";
+		vo2.name = "Aaron Gray";
+		vol.add(vo2);
+		return vol;
+	
 	}
 
 	@Override
 	public ArrayList<PlayerVO> filterNormal(ArrayList<sortParam> sortBy,
 			ArrayList<String> position, ArrayList<String> league, int numS,
 			int numE) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<PlayerVO> vol = new ArrayList<PlayerVO>();
+		PlayerVO vo1 = new PlayerVO();
+		vo1.photo = "Aaron Brooks";
+		vo1.name = "Aaron Brooks";
+		vol.add(vo1);
+		PlayerVO vo2 = new PlayerVO();
+		vo2.photo = "Aaron Gray";
+		vo2.name = "Aaron Gray";
+		vol.add(vo2);
+		return vol;
+	
 	}
 
 	@Override
 	public ArrayList<PlayerVO> filterNormalAvg(ArrayList<sortParam> sortBy,
 			ArrayList<String> position, ArrayList<String> league, int numS,
 			int numE) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<PlayerVO> vol = new ArrayList<PlayerVO>();
+		PlayerVO vo1 = new PlayerVO();
+		vo1.photo = "Aaron Brooks";
+		vo1.name = "Aaron Brooks";
+		vol.add(vo1);
+		PlayerVO vo2 = new PlayerVO();
+		vo2.photo = "Aaron Gray";
+		vo2.name = "Aaron Gray";
+		vol.add(vo2);
+		return vol;
 	}
+	
 
 	@Override
 	public ArrayList<PlayerVO> filterHigh(ArrayList<sortParam> sortBy,
 			ArrayList<String> position, ArrayList<String> league, int numS,
 			int numE) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<PlayerVO> vol = new ArrayList<PlayerVO>();
+		PlayerVO vo1 = new PlayerVO();
+		vo1.photo = "Aaron Brooks";
+		vo1.name = "Aaron Brooks";
+		vol.add(vo1);
+		PlayerVO vo2 = new PlayerVO();
+		vo2.photo = "Aaron Gray";
+		vo2.name = "Aaron Gray";
+		vol.add(vo2);
+		return vol;
+	
 	}
-
+	
+	//联盟平均数据 返回值包括 场均得分，场均篮板，场均助攻，罚球命中率，三分命中率
 	@Override
 	public PlayerVO avgLeague() {
 		PlayerVO vo = new PlayerVO();
 		vo.avgPoint = 5;
+		vo.avgRebound = 10;
+		vo.avgAssist = 4;
+		vo.penalty = 100.0;
+		vo.three = 90.0;
 		return vo;
 	}
 
 	
 	@Override
 	public ArrayList<PlayerVO> findPlayers(String msg) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<PlayerVO>  result = new ArrayList<PlayerVO>();
+		PlayerVO vo = new PlayerVO();
+		vo.name = "Aaron Brooks";
+		vo.photo = "Aaron Brooks";
+		for(int i = 0;i < 10;i++){
+			result.add(vo);
+		}
+		return result;
 	}
 
 	
