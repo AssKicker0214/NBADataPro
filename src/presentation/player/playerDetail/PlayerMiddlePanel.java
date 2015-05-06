@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import dataservice.player.PlayerDataService;
-import dataservice.player.PlayerData_stub;
+import dataservice.player.PlayerDataHandel;
 import presentation.common.SelectLabel;
 import presentation.player.vs.VSContentPanel;
 import presentation.player.vs.PlayersVSTopPanel;
@@ -79,7 +79,7 @@ public class PlayerMiddlePanel extends JPanel{
 	}
 	
 	public void setAttri(String name){
-		PlayerDataService pds = new PlayerData_stub();
+		PlayerDataService pds = new PlayerDataHandel();
 		PlayerVO voL = pds.avgLeague(); 
 		PlayerVO voP = pds.findPlayerData(name); 
 		vo = voP;

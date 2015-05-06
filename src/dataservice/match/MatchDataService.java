@@ -18,4 +18,5 @@ public interface MatchDataService {
 	public ArrayList<MatchVO> FindRecentMatches_t(String teamName);// 球队最近5场比赛信息
 	public ArrayList<MatchVO> findByDate(String start, String end);//根据日期查找比赛
 	public ArrayList<MatchVO> findByDT(String start, String end, String teamName);//根据日期及球队查找
+	public ArrayList<MatchVO> findRecent20();//查找最近20场比赛
 }

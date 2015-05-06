@@ -1,4 +1,4 @@
-package presentation.team.teamDetail;
+ package presentation.team.teamDetail;
 
 import java.awt.Color;
 import java.awt.Point;
@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import dataservice.team.TeamDataService;
-import dataservice.team.TeamData_stub;
+import dataservice.team.TeamDataHandel;
 import presentation.common.SelectLabel;
 import presentation.player.vs.VSContentPanel;
 import presentation.team.vs.TeamVSTopPanel;
@@ -50,7 +50,7 @@ public class TeamMiddlePanel  extends JPanel{
 		this.setBounds(0, 35, 1280,670);
 		this.setBackground(Color.WHITE);
 		
-		TeamDataService tds =  new TeamData_stub();
+		TeamDataService tds =  new TeamDataHandel();
 		vo = tds.findTeamInfo(name);
 		setAttri(name);
 		setTopPanel();
