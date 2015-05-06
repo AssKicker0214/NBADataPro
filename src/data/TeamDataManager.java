@@ -420,4 +420,119 @@ public class TeamDataManager {
     public int getTeamId(String teamName) {
         return teamDataDefault.getTeamId(teamName);
     }
+
+    public ArrayList<HotTeamsVO> getHotTeams(String sortBy) {
+        ArrayList<HotTeamsVO> arrayList = new ArrayList<>();
+        for (int i = 0; i < getNum(); i++) {
+            arrayList.add(getHotTeamVO(sortBy, i + 1));
+        }
+        return arrayList;
+    }
+
+    private HotTeamsVO getHotTeamVO(String sortBy, int tid) {
+        HotTeamsVO hotTeamsVO = new HotTeamsVO();
+        hotTeamsVO.id = tid;
+        hotTeamsVO.name = teamDataDefault.getTeamName()[tid - 1];
+        hotTeamsVO.photo = teamDataDefault.getPhoto()[tid - 1];
+        hotTeamsVO.location = teamDataDefault.getLocation()[tid - 1];
+        setAttribute(sortBy, hotTeamsVO, getTeamData(DEFAULT));
+        return hotTeamsVO;
+    }
+
+    private void setAttribute(String sortBy, HotTeamsVO hotTeamsVO, PlayerScoreSaver.TeamData teamData) {
+        switch (sortBy) {
+            case "assist":
+                hotTeamsVO.value = teamData.getAssist()[hotTeamsVO.id - 1];
+                return;
+            case "blockShot":
+                hotTeamsVO.value = teamData.getBlockShot()[hotTeamsVO.id - 1];
+                return;
+            case "defendRebound":
+                hotTeamsVO.value = teamData.getDefendRebound()[hotTeamsVO.id - 1];
+                return;
+            case "foul":
+                hotTeamsVO.value = teamData.getFoul()[hotTeamsVO.id - 1];
+                return;
+            case "fault":
+                hotTeamsVO.value = teamData.getFault()[hotTeamsVO.id - 1];
+                return;
+            case "numOfGame":
+                hotTeamsVO.value = teamData.getNumOfGame()[hotTeamsVO.id - 1];
+                return;
+            case "offendRebound":
+                hotTeamsVO.value = teamData.getOffendRebound()[hotTeamsVO.id - 1];
+                return;
+            case "penalty":
+                hotTeamsVO.value = Tools.change(teamData.getPenalty()[hotTeamsVO.id - 1]);
+                return;
+            case "point":
+                hotTeamsVO.value = teamData.getPoint()[hotTeamsVO.id - 1];
+                return;
+            case "rebound":
+                hotTeamsVO.value = teamData.getRebound()[hotTeamsVO.id - 1];
+                return;
+            case "shot":
+                hotTeamsVO.value = Tools.change(teamData.getShot()[hotTeamsVO.id - 1]);
+                return;
+            case "steal":
+                hotTeamsVO.value = teamData.getSteal()[hotTeamsVO.id - 1];
+                return;
+            case "three":
+                hotTeamsVO.value = Tools.change(teamData.getThree()[hotTeamsVO.id - 1]);
+                return;
+
+            case "avgAssist":
+                hotTeamsVO.value = Tools.change(teamData.getAvgAssist()[hotTeamsVO.id - 1]);
+                return;
+            case "avgBlockShot":
+                hotTeamsVO.value = Tools.change(teamData.getAvgBlockShot()[hotTeamsVO.id - 1]);
+                return;
+            case "avgDefendRebound":
+                hotTeamsVO.value = Tools.change(teamData.getAvgDefendRebound()[hotTeamsVO.id - 1]);
+                return;
+            case "avgFault":
+                hotTeamsVO.value = Tools.change(teamData.getAvgFault()[hotTeamsVO.id - 1]);
+                return;
+            case "avgFoul":
+                hotTeamsVO.value = Tools.change(teamData.getAvgFoul()[hotTeamsVO.id - 1]);
+                return;
+            case "avgOffendRebound":
+                hotTeamsVO.value = Tools.change(teamData.getAvgOffendRebound()[hotTeamsVO.id - 1]);
+                return;
+            case "avgPoint":
+                hotTeamsVO.value = Tools.change(teamData.getAvgPoint()[hotTeamsVO.id - 1]);
+                return;
+            case "avgRebound":
+                hotTeamsVO.value = Tools.change(teamData.getAvgRebound()[hotTeamsVO.id - 1]);
+                return;
+            case "avgSteal":
+                hotTeamsVO.value = Tools.change(teamData.getAvgSteal()[hotTeamsVO.id - 1]);
+                return;
+
+            case "assistEfficient":
+                hotTeamsVO.value = Tools.change(teamData.getAssistEfficient()[hotTeamsVO.id - 1]);
+                return;
+            case "defendEfficient":
+                hotTeamsVO.value = Tools.change(teamData.getDefendEfficient()[hotTeamsVO.id - 1]);
+                return;
+            case "defendReboundEfficient":
+                hotTeamsVO.value = Tools.change(teamData.getDefendReboundEfficient()[hotTeamsVO.id - 1]);
+                return;
+            case "offendEfficient":
+                hotTeamsVO.value = Tools.change(teamData.getOffendEfficient()[hotTeamsVO.id - 1]);
+                return;
+            case "offendReboundEfficient":
+                hotTeamsVO.value = Tools.change(teamData.getOffendReboundEfficient()[hotTeamsVO.id - 1]);
+                return;
+            case "offendRound":
+                hotTeamsVO.value = Tools.change(teamData.getOffendRound()[hotTeamsVO.id - 1]);
+                return;
+            case "stealEfficient":
+                hotTeamsVO.value = Tools.change(teamData.getStealEfficient()[hotTeamsVO.id - 1]);
+                return;
+            case "winRate":
+                hotTeamsVO.value = Tools.change(teamData.getWinRate()[hotTeamsVO.id - 1]);
+                return;
+        }
+    }
 }
