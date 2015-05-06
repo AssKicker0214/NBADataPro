@@ -228,13 +228,16 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 
 	public void returnIni(){
 		if(contentPaneChange){
+			System.out.println("contentPaneChange");
+			contentPane.setVisible(false);
 			contentPaneChange = false;
 			this.remove(contentPane);
 			contentPane = bufferedPane;
 			this.add(contentPane);
 			this.repaint();
-			contentPane.repaint();
+			contentPane.setVisible(true);
 		}
+		
 		for(int i=0;i<mainParts.size();i++){
 			mainParts.get(i).setVisible(false);
 		}
@@ -248,12 +251,12 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 	public void update(String s) {
 		// TODO Auto-generated method stub
 		switch(s){
-			case "热点球员": changeMainPart(playerKing); System.out.println(s);break;
-			case "热点球队": changeMainPart(teamKing); System.out.println(s);break;
-			case "进步球员": changeMainPart(hotPlayer);System.out.println(s);break;
-			case "球队": changeMainPart(teamList);System.out.println(s);break;
-			case "球员": changeMainPart(playerList);System.out.println(s);break;
-			case "比赛": changeMainPart(matchList);System.out.println(s);break;
+			case "热点球员": changeMainPart(playerKing); System.out.println(s);restoreIni();break;
+			case "热点球队": changeMainPart(teamKing); System.out.println(s);restoreIni();break;
+			case "进步球员": changeMainPart(hotPlayer);System.out.println(s);restoreIni();break;
+			case "球队": changeMainPart(teamList);System.out.println(s);restoreIni();break;
+			case "球员": changeMainPart(playerList);System.out.println(s);restoreIni();break;
+			case "比赛": changeMainPart(matchList);System.out.println(s);restoreIni();break;
 			default: break;
 		}
 	}
