@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+import data.DataInitial;
 import presentation.floatui.FloatPane;
 import presentation.floatui.IMainFrameSize;
 import presentation.match.MatchListPanel;
@@ -199,6 +200,7 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 	
 	public static  void main(String[] args){
 		Mainframe.getFrame();
+		DataInitial.init();
 	}
 
 	public void returnIni(){
