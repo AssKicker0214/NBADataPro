@@ -2,6 +2,7 @@ package test.dataservice.player;
 
 import data.DataInitial;
 import data.input.Player;
+import data.saver.PlayerSaver;
 import dataservice.player.PlayerDataHandel;
 import org.junit.Test;
 import org.junit.Before; 
@@ -52,6 +53,8 @@ public void testFindPlayerDataPlayerId() throws Exception {
 //    System.out.println(playerVO.name);
 //    System.out.println(playerVO.name);
 //    System.out.println(playerVO.name);
+
+//    PlayerSaver.getPlayerSaver().show();
 }
 
 /** 

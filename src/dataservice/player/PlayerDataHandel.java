@@ -40,6 +40,7 @@ public class PlayerDataHandel implements PlayerDataService {
             allInfo = new ArrayList<>();
             allInfo.add("photo");
             allInfo.add("division");
+            allInfo.add("minute");
             allInfo.add("name");
             allInfo.add("team");
             allInfo.add("teamName");
@@ -59,6 +60,7 @@ public class PlayerDataHandel implements PlayerDataService {
             allInfo.add("avgMinute");
             allInfo.add("numOfGame");
             allInfo.add("avgOffend");
+            allInfo.add("shot");
             allInfo.add("penalty");
             allInfo.add("avgPoint");
             allInfo.add("avgRebound");

@@ -313,7 +313,7 @@ public class PlayerScoreSaver {
         s = s.trim();
         String[] ss = s.split(":");
         int res = Integer.parseInt(ss[1].trim());
-        res = res * 60 + Integer.parseInt(ss[0].trim());
+        res = res * 60 + Integer.parseInt(ss[2].trim());
         return res;
     }
 
@@ -961,7 +961,9 @@ public class PlayerScoreSaver {
                 int pid = PlayerScoreSaver.this.pid[i];
                 int tid = PlayerScoreSaver.this.tid[i];
                 int mid = PlayerScoreSaver.this.mid[i];
-
+                if (pid == 32){
+//                    System.out.println(pid + " " + tid +" "+mid+" "+inplacetime[i]);
+                }
                 if (serialid[i] <= 5) {
                     p_startSession[pid - 1] = p_startSession[pid - 1] + 1;
                 }
@@ -1073,9 +1075,11 @@ public class PlayerScoreSaver {
                 temp = mid_throwin[mid - 1];
                 if (temp[0] == tid) {
                     p_throwinTeam[pid - 1] = p_throwinTeam[pid - 1] + temp[1];
+                    p_throwinTeamB[pid - 1] = p_throwinTeamB[pid - 1] + temp[3];
                 }
                 if (temp[2] == tid) {
                     p_throwinTeam[pid - 1] = p_throwinTeam[pid - 1] + temp[3];
+                    p_throwinTeamB[pid - 1] = p_throwinTeamB[pid - 1] + temp[1];
                 }
 
                 temp = mid_allbas[mid - 1];
@@ -1111,19 +1115,21 @@ public class PlayerScoreSaver {
                 temp = mid_penaltyall[mid - 1];
                 if (temp[0] == tid) {
                     p_penaltyallTeam[pid - 1] = p_penaltyallTeam[pid - 1] + temp[1];
+                    p_penaltyallTeamB[pid - 1] = p_penaltyallTeamB[pid - 1] + temp[3];
                 }
                 if (temp[2] == tid) {
                     p_penaltyallTeam[pid - 1] = p_penaltyallTeam[pid - 1] + temp[3];
+                    p_penaltyallTeamB[pid - 1] = p_penaltyallTeamB[pid - 1] + temp[1];
                 }
 
                 temp = mid_mistake[mid - 1];
                 if (temp[0] == tid) {
                     p_mistakeTeam[pid - 1] = p_mistakeTeam[pid - 1] + temp[1];
-                    p_mistakeTeamB[pid - 1] = p_mistakeTeamB[pid - 1] + p_mistakeTeamB[3];
+                    p_mistakeTeamB[pid - 1] = p_mistakeTeamB[pid - 1] + temp[3];
                 }
                 if (temp[2] == tid) {
                     p_mistakeTeam[pid - 1] = p_mistakeTeam[pid - 1] + temp[3];
-                    p_mistakeTeamB[pid - 1] = p_mistakeTeamB[pid - 1] + p_mistakeTeamB[1];
+                    p_mistakeTeamB[pid - 1] = p_mistakeTeamB[pid - 1] + temp[1];
                 }
 
             }
@@ -1206,12 +1212,15 @@ public class PlayerScoreSaver {
             p_school = new String[playerSaver.getNum()];
             p_birth = new String[playerSaver.getNum()];
             for (int i = 0; i < playerSaver.getNum(); i++) {
-
-                pLegB[i] = p_throwallTeamB[i] + 0.4 * p_penaltyallTeamB[i] - 1.07 * (p_attackbasTeamB[i] / ((p_attackbasTeamB[i] + p_defencebasTeam[i]) * (double) (p_throwallTeamB[i] - p_throwinTeamB[i]))) + 1.07 * p_mistakeTeamB[i];
-
+                pLegB[i] = p_throwallTeamB[i] + 0.4 * p_penaltyallTeamB[i] - 1.07 * ((double)p_attackbasTeamB[i] / (p_attackbasTeamB[i] + p_defencebasTeam[i])) * (double) (p_throwallTeamB[i] - p_throwinTeamB[i]) + 1.07 * p_mistakeTeamB[i];
+//                legB[i] = b_throwall[i] + 0.4 * b_penaltyall[i] - 1.07 * ((double) b_attackbas[i] / (b_attackbas[i] + a_defencebas[i])) * (double) (b_throwall[i] - b_throwin[i]) + 1.07 * b_mistake[i];
+                if (i == 32){
+                    System.out.println("pLegB"+" "+p_throwallTeamB[i]+" "+p_penaltyallTeamB[i]+" "+p_attackbasTeamB[i]+" "+p_defencebasTeam[i]+" "+p_throwinTeamB[i]+" "+p_mistakeTeamB[i]+" "+pLegB[i]);
+                }
 
                 if (this.p_throwall[i] > 0) {
                     p_FGP[i] = this.p_throwin[i] / (double) this.p_throwall[i];
+//                    System.out.println(p_throwin[i]+";;;;;;;;;;;;;;"+p_throwall[i]+"------"+p_FGP[i]);
                 } else {
                     p_FGP[i] = -1;
                 }
@@ -1268,6 +1277,8 @@ public class PlayerScoreSaver {
 
                 if (this.p_inplacetime[i] > 0 || pLegB[i] > 0) {
                     p_stealP[i] = ((this.p_interp[i] * ((double) this.p_inplacetimeTeam[i] / 5)) / (this.p_inplacetime[i])) / (this.pLegB[i]);
+                    if (i == 32)
+                        System.out.println(p_interp[i]+"----"+((double)p_inplacetimeTeam[i] / 5)+"------"+p_inplacetime[i]+"------"+pLegB[i]+"---------"+p_stealP[i]);
                 } else {
                     p_stealP[i] = -1;
                 }
