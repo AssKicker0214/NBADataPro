@@ -51,6 +51,11 @@ public void testFindPlayerDataPlayerId() throws Exception {
     System.out.println(playerVO.gmSc);
     System.out.println(playerVO.blockShotEfficient);
     System.out.println(playerVO.assistEfficient);
+    System.out.println(playerVO.defendReboundEfficient);
+    System.out.println(playerVO.offendReboundEfficient);
+    System.out.println(playerVO.reboundEfficient);
+//    System.out.println(playerVO.assistEfficient);
+//    System.out.println(playerVO.assistEfficient);
 //    System.out.println(playerVO.name);
 //    System.out.println(playerVO.name);
 //    System.out.println(playerVO.name);
