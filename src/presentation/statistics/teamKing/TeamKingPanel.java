@@ -22,7 +22,7 @@ public class TeamKingPanel extends JPanel{
 
 	public TeamKingPanel(){
 		this.setLayout(null);
-		this.setBounds(150, 155,1130,600);
+		this.setBounds(150, 125,1130,600);
 		this.setBackground(Color.WHITE);
 		setTitle();
 		setTeamKingOptionsPanel();

@@ -85,7 +85,7 @@ public class PlayerDataHandel implements PlayerDataService {
     private static ArrayList<String> avgNormalInfo;
 
     public static ArrayList<String> getAvgNormalInfo() {
-        if (avgNormalInfo == null){
+        if (avgNormalInfo == null) {
             avgNormalInfo.add("age");
             avgNormalInfo.add("avgAssist");
             avgNormalInfo.add("avgBlockShot");
@@ -169,13 +169,31 @@ public class PlayerDataHandel implements PlayerDataService {
     public ArrayList<PlayerVO> findPlayers(String msg) {
         ArrayList<PlayerVO> arrayList = new ArrayList<>();
         ArrayList<PlayerVO> playerVOs = findPlayer();
-        for (PlayerVO playerVO : playerVOs) {
-            if (playerVO.name.contains(msg)) {
-                arrayList.add(playerVO);
+        msg = msg.trim().toLowerCase();
+        for (int i = 0; i < 25; i++) {
+            int m = 0;
+            for (int k = 0;k<playerVOs.size();k++){
+                PlayerVO playerVO = playerVOs.get(m);
+                String name = getNPosition(playerVO.name.toLowerCase(),i);
+                if (name.startsWith(msg)) {
+                    arrayList.add(playerVO);
+                    playerVOs.remove(playerVO);
+                    m--;
+                }else {
+                    m++;
+                }
             }
         }
 
         return arrayList;
+    }
+
+    private String getNPosition(String s,int i){
+        if (i >= s.length()){
+            return "";
+        }else {
+            return s.substring(i);
+        }
     }
 
     @Override
@@ -207,7 +225,7 @@ public class PlayerDataHandel implements PlayerDataService {
     }
 
     public ArrayList<PlayerVO> getTeamPlayerVOs(int teamID) {
-        return new PlayerDataManager().getPlayerVOs(getAllInfo(), teamID);
+        return new PlayerDataManager().getTeamPlayerVOs(getAllInfo(), teamID);
     }
 
     private class ComparePlayVO implements Comparator<PlayerVO> {

@@ -72,8 +72,7 @@ public class RowPane extends JPanel {
 			public void mousePressed(MouseEvent e) {
 				
 				Component[] labels =  getComponents();
-				System.out.println(((JLabel) labels[2]).getText());
-				Mainframe.getFrame().setContentPane(new MatchAnalyseTopPanel(Integer.parseInt(((JLabel) labels[2]).getText())));
+				Mainframe.getFrame().changeContent(new MatchAnalyseTopPanel(Integer.parseInt(((JLabel) labels[2]).getText())));
 			}
 		
 		});

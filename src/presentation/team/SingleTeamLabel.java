@@ -108,8 +108,7 @@ public class SingleTeamLabel extends JLabel{
 		@Override
 		public void mouseReleased(MouseEvent e) {
 			
-			Mainframe.getFrame().restoreIni();
-			Mainframe.getFrame().setContentPane(new TeamMiddlePanel(SingleTeamLabel.this.teamName));
+			Mainframe.getFrame().changeContent(new TeamMiddlePanel(SingleTeamLabel.this.teamName));
 		}
 
 		@Override

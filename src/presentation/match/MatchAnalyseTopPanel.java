@@ -75,8 +75,7 @@ public class MatchAnalyseTopPanel extends JPanel{
 		localTeamPhotoLabel.addMouseListener(new MouseAdapter(){
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Mainframe.getFrame().restoreIni();
-				Mainframe.getFrame().setContentPane(new TeamMiddlePanel(vo.homeTeam.name));
+				Mainframe.getFrame().changeContent(new TeamMiddlePanel(vo.homeTeam.name));
 			}
 		
 		});
@@ -93,8 +92,7 @@ public class MatchAnalyseTopPanel extends JPanel{
 		anotherTeamPhotoLabel.addMouseListener(new MouseAdapter(){
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Mainframe.getFrame().restoreIni();
-				Mainframe.getFrame().setContentPane(new TeamMiddlePanel(vo.guestTeam.name));
+				Mainframe.getFrame().changeContent(new TeamMiddlePanel(vo.guestTeam.name));
 			}
 		
 		});
