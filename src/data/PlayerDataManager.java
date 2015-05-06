@@ -527,7 +527,7 @@ public class PlayerDataManager {
 
     public ArrayList<Integer> getFindMatches_p(String start, String end, String playerName) {
         int pid = playerDataDefault.getPlayerId(playerName);
-
+        System.out.println("getFindMatches_p:----------"+pid);
         return playerScoreSaver.getMidPoint(start,end,pid);
     }
 

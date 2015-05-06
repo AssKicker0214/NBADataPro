@@ -11,11 +11,11 @@ import java.util.ArrayList;
  * Created by chenghao on 15/5/4.
  */
 public class MatchDataHandel implements MatchDataService {
-
-    public ArrayList<MatchContentPlayerVO> FindRecentMatches_p(int num, String playerName) {
+    @Override
+    public ArrayList<MatchContentPlayerVO> FindRecentMatches_p(String playerName) {
         ArrayList<Integer> intS = new PlayerDataManager().getFindRecentMatches_p(playerName);
         ArrayList<MatchContentPlayerVO> res = new ArrayList<>();
-        for(int i = 0; i < intS.size();i++){
+        for(int i = intS.size() - 1; i >=0 ;i--){
             res.add(new MatchManager().getMatchContentPlayerVO(intS.get(i)));
         }
         return res;
@@ -42,11 +42,6 @@ public class MatchDataHandel implements MatchDataService {
     }
 
     @Override
-    public ArrayList<MatchContentPlayerVO> FindRecentMatches_p(String playerName) {
-        return null;
-    }
-
-    @Override
     public ArrayList<MatchContentPlayerVO> findByDP(String start, String end, String playerName) {
         return new MatchManager().findByDP(start, end, playerName);
     }
@@ -58,6 +53,6 @@ public class MatchDataHandel implements MatchDataService {
 
     @Override
     public ArrayList<MatchVO> findRecent20() {
-        return null;
+        return new MatchManager().findRecent20();
     }
 }

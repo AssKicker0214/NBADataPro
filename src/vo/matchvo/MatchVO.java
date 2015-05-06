@@ -25,5 +25,23 @@ public class MatchVO {
 	
 	public ArrayList<MatchContentPlayerVO> homeTeamPlayer;	//主场球队上场球员
 	public ArrayList<MatchContentPlayerVO> guestTeamPlayer;	//客场球队上场球员
-	
+
+
+    public void show(){
+        System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        System.out.println("id:"+id+" date:"+date+" team1:"+homeTeam.name+" "+"team2:"+guestTeam.name+" score1:"+homePoint+" score2:"+guestPoint);
+        System.out.println("score1_1:"+homePoint_1+" score2_1:"+guestPoint_1);
+        System.out.println("score1_2:"+homePoint_2+" score2_2:"+guestPoint_2);
+        System.out.println("score1_3:"+homePoint_3+" score2_3:"+guestPoint_3);
+        System.out.println("score1_4:"+homePoint_4+" score2_4:"+guestPoint_4);
+        System.out.println(homeTeam.name+"--------------------------->>>>>>>>>>>>>>>>>>>>>>>>>");
+        for (int i = 0; i< homeTeamPlayer.size();i++){
+            homeTeamPlayer.get(i).show();
+        }
+        System.out.println(guestTeam.name+"--------------------------->>>>>>>>>>>>>>>>>>>>>>>>>");
+        for (int i = 0; i< guestTeamPlayer.size();i++){
+            guestTeamPlayer.get(i).show();
+        }
+        System.out.println("<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+    }
 }

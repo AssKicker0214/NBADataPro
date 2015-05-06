@@ -1,6 +1,7 @@
 package data.saver;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 /**
  * Created by chenghao on 15/4/21.
@@ -129,7 +130,7 @@ public class MatchInfoSaver {
         ArrayList<Integer> res  = new ArrayList<>();
         TidL5Mid tidL5Mid = getTidL5Mid();
         int[] points = tidL5Mid.getPointInL5Mid();
-        for (int i = 0;i<tidL5Mid.getLength();i++){
+        for (int i = 0;i<tidL5Mid.getPointInL5Mid().length;i++){
             int j = points[i];
             if ((teamf[j] == tid || teaml[j] == tid)){
                 res.add(j + 1);
@@ -160,6 +161,32 @@ public class MatchInfoSaver {
             }
         }
         return arrayList;
+    }
+
+    public ArrayList<Integer> findRecent20() {
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        for (int i = 0 ; i <=currentPoint;i++){
+            arrayList.add(i);
+        }
+
+        arrayList.sort(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                int res = MatchInfoSaver.this.matchtime[o1].compareTo(MatchInfoSaver.this.matchtime[o2]);
+                if (res != 0){
+                    return res * -1;
+                }else {
+                    return o2 - o1;
+                }
+            }
+        });
+        return arrayList;
+    }
+
+    public void show() {
+        for (int i = 0; i <= currentPoint;i++){
+            System.out.println("mid:"+mid[i]+" date:"+matchtime[i]);
+        }
     }
 
     private class TidL5Mid {
