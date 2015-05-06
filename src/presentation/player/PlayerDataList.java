@@ -113,6 +113,7 @@ public class PlayerDataList  extends JPanel{
 			default:break;
 		}
 		switch(fst){
+			case"第一优先级":sortBy.add(new sortParam("avgPoint",true));break;
 			case"场均助攻":sortBy.add(new sortParam("avgAssist",true));break;
 			case"场均盖帽":sortBy.add(new sortParam("avgBlockShot",true));break;
 			case"场均防守":sortBy.add(new sortParam("avgDefend",true));break;
@@ -131,6 +132,7 @@ public class PlayerDataList  extends JPanel{
 		}
 			
 		switch(sec){
+			case"第二优先级":break;
 			case"场均助攻":sortBy.add(new sortParam("avgAssist",true));break;
 			case"场均盖帽":sortBy.add(new sortParam("avgBlockShot",true));break;
 			case"场均防守":sortBy.add(new sortParam("avgDefend",true));break;
@@ -149,6 +151,7 @@ public class PlayerDataList  extends JPanel{
 		}
 		
 		switch(third){
+			case"第三优先级":break;
 			case"场均助攻":sortBy.add(new sortParam("avgAssist",true));break;
 			case"场均盖帽":sortBy.add(new sortParam("avgBlockShot",true));break;
 			case"场均防守":sortBy.add(new sortParam("avgDefend",true));break;
