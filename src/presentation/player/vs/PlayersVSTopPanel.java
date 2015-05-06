@@ -95,7 +95,7 @@ public class PlayersVSTopPanel extends JPanel{
 
 	
 	public void setLocalPlayerPhotoLabel (){
-		localPlayerPhotoLabel = new PhotoLabel(new ImageIcon("teamsPNG/" + localVO.photo + ".png").getImage());
+		localPlayerPhotoLabel = new PhotoLabel(new ImageIcon("portrait/" + localVO.photo + ".png").getImage());
 		localPlayerPhotoLabel.setHorizontalAlignment(JLabel.RIGHT);
 		localPlayerPhotoLabel.setBounds(300,-5,230,150);
 		localPlayerPhotoLabel.setBackground(Color.WHITE);
@@ -105,7 +105,7 @@ public class PlayersVSTopPanel extends JPanel{
 	}
 	
 	public void setLocalTeamPhotoLabel (){
-		localTeamPhotoLabel = new PhotoLabel(new ImageIcon("portrait/" + localVO.teamName + ".png").getImage());
+		localTeamPhotoLabel = new PhotoLabel(new ImageIcon("teamsPNG/" + localVO.teamName + ".png").getImage());
 		localTeamPhotoLabel.setHorizontalAlignment(JLabel.RIGHT);
 		localTeamPhotoLabel.setBounds(140,-10,250,120);
 		localTeamPhotoLabel.setBackground(Color.WHITE);
@@ -133,7 +133,7 @@ public class PlayersVSTopPanel extends JPanel{
 	}
 
 	public void setAnotherPlayerPhotoLabel (){
-		anotherPlayerPhotoLabel = new PhotoLabel(new ImageIcon("teamsPNG/" + anotherVO.photo + ".png").getImage());
+		anotherPlayerPhotoLabel = new PhotoLabel(new ImageIcon("portrait/" + anotherVO.photo + ".png").getImage());
 		anotherPlayerPhotoLabel.setHorizontalAlignment(JLabel.RIGHT);
 		anotherPlayerPhotoLabel.setBounds(730,-5,230,150);
 		anotherPlayerPhotoLabel.setBackground(Color.WHITE);
@@ -262,7 +262,9 @@ public class PlayersVSTopPanel extends JPanel{
 		for(int i = 0; i < list.size(); i++){
 			JLabel item = new JLabel();
 			item.setSize(280, 50);
-			
+			item.setBackground(Color.WHITE);
+			item.setOpaque(true);
+
 			JLabel name = new JLabel(list.get(i).name,JLabel.LEADING);
 			name.setBounds(100,0,100,50);
 			name.setForeground(darkest);
@@ -307,9 +309,16 @@ public class PlayersVSTopPanel extends JPanel{
 					PlayersVSTopPanel.this.setVisible(true);
 					PlayersVSTopPanel.this.repaint();
 
+					ArrayList<Double> local = new ArrayList<Double>();
+					ArrayList<Double> another = new ArrayList<Double>();
+					local.add(localVO.avgPoint);local.add(localVO.avgRebound);local.add(localVO.avgAssist);
+					local.add(localVO.three);local.add(localVO.penalty);
+					another.add(anotherVO.avgPoint);another.add(anotherVO.avgRebound);another.add(anotherVO.avgAssist);
+					another.add(anotherVO.three);another.add(anotherVO.penalty);
+					
 					main.setVisible(false);
 					main.remove(main.getComponentAt(new Point(30,300)));
-					((PlayerMiddlePanel) main).setVSPanel();
+					((PlayerMiddlePanel) main).setVSPanel(local,another);
 					main.setVisible(true);
 
 				}

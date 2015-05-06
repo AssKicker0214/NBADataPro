@@ -150,6 +150,7 @@ public class PlayerData_stub implements PlayerDataService{
 		vo.photo = "Aaron Gray";
 		vo.name = "Aaron Gray";
 		vo.team = "Hawks";
+		vo.position = "后卫";
 		return vo;
 	}
 
