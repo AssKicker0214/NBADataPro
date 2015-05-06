@@ -176,42 +176,4 @@ public class TablePane extends JPanel{
 	
 	public void SortContent(String sortBy,boolean isDesc){}
 	
-	
-	public static void main(String args[]){
-		JFrame f = new JFrame();
-		f.setLayout(null);
-		f.setSize(1280,700);
-		f.setLocationRelativeTo(null);
-	
-		ArrayList<String> l1 = new ArrayList<String>();
-		l1.add("bg.png");
-		l1.add("0.1");
-		l1.add("0.2");
-		l1.add("0.1");
-		l1.add("0.2");
-		
-		ArrayList<ArrayList<String>> a = new ArrayList<ArrayList<String>>();
-		a.add(l1);
-		a.add(l1);
-		a.add(l1);
-		a.add(l1);
-		a.add(l1);
-		a.add(l1);
-		a.add(l1);
-		a.add(l1);
-		a.add(l1);
-		a.add(l1);
-		String[] b = {"","**","**","**","**"};
-		ArrayList<Integer> w = new ArrayList<Integer>();
-		w.add(50);
-		w.add(100);
-		w.add(200);
-		w.add(300);
-		w.add(400);
-		TablePane t = new TablePane(a,b,w,0,0,1200,200,40,true,true);
-		f.getContentPane().add(t);
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		f.setVisible(true);
-		
-	}
 }

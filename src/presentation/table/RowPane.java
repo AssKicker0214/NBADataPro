@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 
 import presentation.common.PhotoLabel;
 import presentation.main.Mainframe;
-import presentation.match.MatchDataAnalysePanel;
+import presentation.match.MatchAnalyseTopPanel;
 
 public class RowPane extends JPanel {
 	/**
@@ -74,7 +74,7 @@ public class RowPane extends JPanel {
 				Component[] labels =  getComponents();
 				System.out.println(((JLabel) labels[2]).getText());
 				Mainframe.getFrame().restoreIni();
-				Mainframe.getFrame().setContentPane(new MatchDataAnalysePanel(Integer.parseInt(((JLabel) labels[2]).getText())));
+				Mainframe.getFrame().setContentPane(new MatchAnalyseTopPanel(Integer.parseInt(((JLabel) labels[2]).getText())));
 			}
 		
 		});
