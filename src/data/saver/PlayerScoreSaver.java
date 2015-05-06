@@ -43,6 +43,22 @@ public class PlayerScoreSaver {
     private int[] serialid;
     private int[] d_tid;
 
+    public void show() {
+//        for (int i = 0; i <= currentPoint; i++){
+//            System.out.println(mid[i] + " "+tid[i]+" "+pid[i]+" "
+//                + position[i]+" " + inplacetime[i]+" "+throwin[i]+" "+
+//            throwall[i]+" "+throw3in[i]+" "+throw3all[i]+" "+penaltyin[i]+" "+
+//            penaltyall[i]+" "+attackbas[i]+" "+defencebas[i]+" "+allbas[i]+" "+
+//            helpatt[i]+" "+ interp[i]+" "+block[i]+" "+mistake[i]+" "+foul[i]+" "
+//            +score[i]+" "+serialid[i]+" "+d_tid[i]);
+//        }
+//        int sumFoul = 0;
+        for (int i = 0; i < pidDefaultMid.length; i++) {
+            System.out.println(i + " " + pidDefaultMid[i]);
+        }
+        System.out.println("----------------------");
+    }
+
     private static PlayerScoreSaver playerScoreSaver;
 
     public static PlayerScoreSaver getPlayerScoreSaver() {
@@ -577,8 +593,9 @@ public class PlayerScoreSaver {
             for (int i = 0; i < teamSaver.getNum(); i++) {
                 FGP[i] = ((double) a_throwin[i]) / a_throwall[i];
                 TPSP[i] = ((double) a_throw3in[i]) / a_throw3all[i];
-                leg[i] = a_throwall[i] + 0.4 * a_penaltyall[i] - 1.07 * (a_attackbas[i] / ((a_attackbas[i] + b_defencebas[i]) * (double) (a_throwall[i] - a_throwin[i]))) + 1.07 * a_mistake[i];
-                legB[i] = b_throwall[i] + 0.4 * b_penaltyall[i] - 1.07 * (b_attackbas[i] / ((b_attackbas[i] + a_defencebas[i]) * (double) (b_throwall[i] - b_throwin[i]))) + 1.07 * b_mistake[i];
+//                System.out.println("id:"+i+" "+a_throwall[i]+" "+a_penaltyall[i]+" "+a_attackbas[i]+" "+ b_defencebas[i]+" "+a_throwall[i]+" "+a_throwin[i]+" "+a_mistake[i]);
+                leg[i] = a_throwall[i] + 0.4 * a_penaltyall[i] - 1.07 * ((double) a_attackbas[i] / (a_attackbas[i] + b_defencebas[i])) * (double) (a_throwall[i] - a_throwin[i]) + 1.07 * a_mistake[i];
+                legB[i] = b_throwall[i] + 0.4 * b_penaltyall[i] - 1.07 * ((double) b_attackbas[i] / (b_attackbas[i] + a_defencebas[i])) * (double) (b_throwall[i] - b_throwin[i]) + 1.07 * b_mistake[i];
                 assistP[i] = 100 * a_helpatt[i] / leg[i];
                 stealP[i] = 100 * a_interp[i] / legB[i];
                 ORtg[i] = 100 * a_score[i] / leg[i];
@@ -587,6 +604,7 @@ public class PlayerScoreSaver {
                 defendReboundEfficient[i] = ((double) a_defencebas[i]) / (a_defencebas[i] + b_attackbas[i]);
                 offendReboundEfficient[i] = ((double) a_attackbas[i]) / (a_attackbas[i] + b_defencebas[i]);
                 winRate[i] = ((double) a_winNum[i]) / (a_matchNum[i]);
+//                    System.out.println("id:"+i+" "+a_winNum[i]+" "+a_matchNum[i]+" "+winRate[i]);
                 avgAssist[i] = ((double) a_helpatt[i]) / a_matchNum[i];
                 avgBlockShot[i] = ((double) a_block[i]) / a_matchNum[i];
                 avgDefendRebound[i] = ((double) a_defencebas[i]) / a_matchNum[i];
@@ -632,31 +650,52 @@ public class PlayerScoreSaver {
 
             for (int j = 0; j < length; j++) {
                 int i = points[j];
-                if (PlayerScoreSaver.this.throwin[i] > 0) {
                     int tid = PlayerScoreSaver.this.tid[i];
                     int d_tid = PlayerScoreSaver.this.d_tid[i];
-                    a_throwin[tid - 1] = a_throwin[tid - 1] + PlayerScoreSaver.this.throwin[i];
+                    if (PlayerScoreSaver.this.throwin[i] > 0){
+                        a_throwin[tid - 1] = a_throwin[tid - 1] + PlayerScoreSaver.this.throwin[i];
+                        b_throwin[d_tid - 1] = b_throwin[d_tid - 1] + PlayerScoreSaver.this.throwin[i];
+                    }
+                if (PlayerScoreSaver.this.throwall[i] > 0){
                     a_throwall[tid - 1] = a_throwall[tid - 1] + PlayerScoreSaver.this.throwall[i];
-                    a_throw3in[tid - 1] = a_throw3in[tid - 1] + PlayerScoreSaver.this.throw3in[i];
-                    a_throw3all[tid - 1] = a_throw3all[tid - 1] + PlayerScoreSaver.this.throw3all[i];
-                    a_penaltyin[tid - 1] = a_penaltyin[tid - 1] + PlayerScoreSaver.this.penaltyin[i];
-                    a_penaltyall[tid - 1] = a_penaltyall[tid - 1] + PlayerScoreSaver.this.penaltyall[i];
-                    a_attackbas[tid - 1] = a_attackbas[tid - 1] + PlayerScoreSaver.this.attackbas[i];
-                    a_defencebas[tid - 1] = a_defencebas[tid - 1] + PlayerScoreSaver.this.defencebas[i];
-                    a_allbas[tid - 1] = a_allbas[tid - 1] + PlayerScoreSaver.this.allbas[i];
-                    a_helpatt[tid - 1] = a_helpatt[tid - 1] + PlayerScoreSaver.this.helpatt[i];
-                    a_interp[tid - 1] = a_interp[tid - 1] + PlayerScoreSaver.this.interp[i];
-                    a_mistake[tid - 1] = a_mistake[tid - 1] + PlayerScoreSaver.this.mistake[i];
-                    a_foul[tid - 1] = a_foul[tid - 1] + PlayerScoreSaver.this.foul[i];
-                    a_score[tid - 1] = a_score[tid - 1] + PlayerScoreSaver.this.score[i];
-                    b_throwin[d_tid - 1] = b_throwin[d_tid - 1] + PlayerScoreSaver.this.throwin[i];
                     b_throwall[d_tid - 1] = b_throwall[d_tid - 1] + PlayerScoreSaver.this.throwall[i];
+                }
+                if (PlayerScoreSaver.this.throw3in[i] > 0)
+                    a_throw3in[tid - 1] = a_throw3in[tid - 1] + PlayerScoreSaver.this.throw3in[i];
+                if (PlayerScoreSaver.this.throw3all[i] > 0)
+                    a_throw3all[tid - 1] = a_throw3all[tid - 1] + PlayerScoreSaver.this.throw3all[i];
+                if (PlayerScoreSaver.this.penaltyin[i] > 0)
+                    a_penaltyin[tid - 1] = a_penaltyin[tid - 1] + PlayerScoreSaver.this.penaltyin[i];
+                if (PlayerScoreSaver.this.penaltyall[i] > 0){
+                    a_penaltyall[tid - 1] = a_penaltyall[tid - 1] + PlayerScoreSaver.this.penaltyall[i];
                     b_penaltyall[d_tid - 1] = b_penaltyall[d_tid - 1] + PlayerScoreSaver.this.penaltyall[i];
+                }
+                if (PlayerScoreSaver.this.attackbas[i] > 0){
+                    a_attackbas[tid - 1] = a_attackbas[tid - 1] + PlayerScoreSaver.this.attackbas[i];
                     b_attackbas[d_tid - 1] = b_attackbas[d_tid - 1] + PlayerScoreSaver.this.attackbas[i];
+                }
+                if (PlayerScoreSaver.this.defencebas[i] > 0){
+                    a_defencebas[tid - 1] = a_defencebas[tid - 1] + PlayerScoreSaver.this.defencebas[i];
                     b_defencebas[d_tid - 1] = b_defencebas[d_tid - 1] + PlayerScoreSaver.this.defencebas[i];
+                }
+                if (PlayerScoreSaver.this.allbas[i] > 0)
+                    a_allbas[tid - 1] = a_allbas[tid - 1] + PlayerScoreSaver.this.allbas[i];
+                if (PlayerScoreSaver.this.helpatt[i] > 0)
+                    a_helpatt[tid - 1] = a_helpatt[tid - 1] + PlayerScoreSaver.this.helpatt[i];
+                if (PlayerScoreSaver.this.interp[i] > 0)
+                    a_interp[tid - 1] = a_interp[tid - 1] + PlayerScoreSaver.this.interp[i];
+                if (PlayerScoreSaver.this.mistake[i] > 0){
+                    a_mistake[tid - 1] = a_mistake[tid - 1] + PlayerScoreSaver.this.mistake[i];
                     b_mistake[d_tid - 1] = b_mistake[d_tid - 1] + PlayerScoreSaver.this.mistake[i];
+                }
+                if (PlayerScoreSaver.this.foul[i] > 0)
+                    a_foul[tid - 1] = a_foul[tid - 1] + PlayerScoreSaver.this.foul[i];
+                if (PlayerScoreSaver.this.score[i] > 0){
+                    a_score[tid - 1] = a_score[tid - 1] + PlayerScoreSaver.this.score[i];
                     b_score[d_tid - 1] = b_score[d_tid - 1] + PlayerScoreSaver.this.score[i];
                 }
+                if (PlayerScoreSaver.this.block[i] > 0)
+                    a_block[tid - 1] = a_block[tid - 1] + PlayerScoreSaver.this.block[i];
             }
 
         }
@@ -1162,6 +1201,7 @@ public class PlayerScoreSaver {
             p_number = new int[playerSaver.getNum()];
             p_age = new int[playerSaver.getNum()];
             p_teamName = new String[playerSaver.getNum()];
+            p_teamPhoto = new String[playerSaver.getNum()];
             for (int i = 0; i < playerSaver.getNum(); i++) {
 
                 pLegB[i] = p_throwallTeamB[i] + 0.4 * p_penaltyallTeamB[i] - 1.07 * (p_attackbasTeamB[i] / ((p_attackbasTeamB[i] + p_defencebasTeam[i]) * (double) (p_throwallTeamB[i] - p_throwinTeamB[i]))) + 1.07 * p_mistakeTeamB[i];
@@ -1281,8 +1321,8 @@ public class PlayerScoreSaver {
                     p_teamPhoto[i] = null;
                 }
 
-                p_number[i] = playerSaver.getNumber()[p_tid_mid[i][0] - 1];
-                p_age[i] = playerSaver.getAge()[p_tid_mid[i][0] - 1];
+                p_number[i] = playerSaver.getNumber()[i];
+                p_age[i] = playerSaver.getAge()[i];
             }
 
         }

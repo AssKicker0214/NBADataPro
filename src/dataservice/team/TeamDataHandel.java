@@ -92,8 +92,11 @@ public class TeamDataHandel implements TeamDataService {
         }
 
         for (int i = length - 1; i >= 0; i--) {
-            if ((desc ^ compare(vo, vos[i], sortBy))) {
+            if (!(desc ^ compare(vo, vos[i], sortBy))) {
                 vos[i + 1] = vos[i];
+                if (i == 0){
+                    vos[0] = vo;
+                }
             } else {
                 vos[i + 1] = vo;
                 return length + 1;

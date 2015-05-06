@@ -1,5 +1,6 @@
 package data;
 
+import configure.Configure;
 import data.input.Match;
 import data.input.Player;
 import data.input.Team;
@@ -9,12 +10,14 @@ import data.input.Team;
  * Created by cho on 2015/4/30.
  */
 public class DataInitial {
-    private String teamPath;
-    private String playerPath;
-    private String matchPath;
-    private DataUpdate dataUpdate;
 
-    public void init(){
+    private static DataUpdate dataUpdate;
+    private static boolean flag = false;
+
+    private static void initialData() {
+        String teamPath = Configure.getTeamPath();
+        String playerPath = Configure.getPlayerPath();
+        String matchPath = Configure.getMatchPath();
         Team team = new Team(teamPath);
         team.init();
         Player player = new Player(playerPath);
@@ -23,9 +26,21 @@ public class DataInitial {
         match.init();
         dataUpdate = new DataUpdate(matchPath);
         dataUpdate.start();
+        flag = true;
     }
 
-    public void end(){
-        dataUpdate.end();
+    public static void setPath(String path) {
+        Configure.set(path);
+    }
+
+    public static void end() {
+        if (dataUpdate != null)
+            dataUpdate.end();
+    }
+
+    public static void init(){
+        if (flag == false){
+            initialData();
+        }
     }
 }
