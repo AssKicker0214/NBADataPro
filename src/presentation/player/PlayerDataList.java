@@ -61,7 +61,7 @@ public class PlayerDataList  extends JPanel{
 	
 	public PlayerDataList(){
 		this.setLayout(null);
-		this.setBounds(0,125,1280,540);
+		this.setBounds(0,125,1280,545);
 		this.setBackground(Color.WHITE);
 		setTitle();
 		setButtonsBGLabel();
@@ -514,9 +514,9 @@ public class PlayerDataList  extends JPanel{
 			
 		String[] header = {"","名称","所属球队","联盟","号码","球员位置","球员年龄","身高","体重","毕业学校"};
 		ArrayList<Integer> wid = new ArrayList<Integer>();
-		wid.add(50);wid.add(150);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(200);
+		wid.add(70);wid.add(150);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(200);
 		
-		BasicInfoTable = new playerTablePanel(datas,header,wid,0,60,1280,400,50,true,false);
+		BasicInfoTable = new playerTablePanel(datas,header,wid,0,60,1280,450,50,true,false);
 		this.add(BasicInfoTable);
 	}
 		
@@ -538,10 +538,10 @@ public class PlayerDataList  extends JPanel{
 					"防守","篮板","助攻","抢断","盖帽","失误","犯规","得分"};
 			
 		ArrayList<Integer> wid = new ArrayList<Integer>();
-		wid.add(50);wid.add(150);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);
+		wid.add(70);wid.add(150);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);
 		wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);
 			
-		NormalInfoTable = new playerTablePanel(datas,tbHead,wid,0,60,1280,400,50,true,true);
+		NormalInfoTable = new playerTablePanel(datas,tbHead,wid,0,60,1280,450,50,true,true);
 		NormalInfoTable.type = tableType;
 		this.add(NormalInfoTable);
 	}
@@ -555,10 +555,10 @@ public class PlayerDataList  extends JPanel{
 					"真实命中率","篮板率","投篮效率"};
 			
 		ArrayList<Integer> wid = new ArrayList<Integer>();
-		wid.add(50);wid.add(150);wid.add(50);wid.add(50);wid.add(50);wid.add(100);wid.add(100);wid.add(50);wid.add(50);wid.add(50);
+		wid.add(70);wid.add(150);wid.add(50);wid.add(50);wid.add(50);wid.add(100);wid.add(100);wid.add(50);wid.add(50);wid.add(50);
 		wid.add(100);wid.add(50);wid.add(70);
 			
-		HighInfoTable = new playerTablePanel(datas,tbHead,wid,0,60,1280,400,50,true,true);
+		HighInfoTable = new playerTablePanel(datas,tbHead,wid,0,60,1280,450,50,true,true);
 		HighInfoTable.type = ListType.high;
 
 		this.add(HighInfoTable);
