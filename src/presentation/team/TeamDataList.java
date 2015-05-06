@@ -113,7 +113,7 @@ public class TeamDataList extends JPanel{
 			setBasicInfoTablePanel(); 
 				
 			setVisible(true);
-			repaint();	
+//			repaint();	
 		}
 
 		@Override
@@ -173,7 +173,7 @@ public class TeamDataList extends JPanel{
 			setNormalInfoTablePanel(false); 
 			
 			setVisible(true);
-			repaint();	
+//			repaint();	
 		}
 
 		@Override
@@ -220,9 +220,9 @@ public class TeamDataList extends JPanel{
 
 			setVisible(false);
 			setButtonsBGLabel();
-			NormalInfoButton.isSelected = true;
-			NormalInfoButton.setBackground(pressed);
-			setSelectedGroups(NormalInfoButton);
+			AvgNormalInfoButton.isSelected = true;
+			AvgNormalInfoButton.setBackground(pressed);
+			setSelectedGroups(AvgNormalInfoButton);
 			
 			if(BasicInfoTable!=null)
 				TeamDataList.this.remove(BasicInfoTable);
@@ -233,7 +233,7 @@ public class TeamDataList extends JPanel{
 			setNormalInfoTablePanel(true); 
 			
 			setVisible(true);
-			repaint();	
+//			repaint();	
 		}
 
 		@Override
@@ -292,7 +292,6 @@ public class TeamDataList extends JPanel{
 			if(HighInfoTable!=null)
 				TeamDataList.this.remove(HighInfoTable);
 			setHighInfoTablePanel(); 
-			
 			setVisible(true);
 			repaint();	
 		}

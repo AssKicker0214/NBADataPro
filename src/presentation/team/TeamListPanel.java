@@ -3,6 +3,8 @@ package presentation.team;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -43,6 +45,39 @@ public class TeamListPanel extends JPanel{
 		head2.setBackground(new Color(30,80,140));
 		head2.setBounds(565,0,564,50);		
 		this.add(head2);
+		
+		JLabel more = new JLabel("MORE");
+		more.setFont(new Font("Dialog",0,20));
+		more.setOpaque(true);
+		more.setForeground(Color.WHITE);
+		more.setBackground(new Color(30,80,140));
+		more.setBounds(480,5,64,45);
+		more.addMouseListener(new MouseAdapter() {
+			int select = 0;
+			@Override
+			public void mousePressed(MouseEvent e) {
+				select += 1;
+				if(select%2 == 1){
+					more.setForeground(Color.LIGHT_GRAY);
+				}else{
+					more.setForeground(Color.WHITE);
+				}
+				Mainframe.getFrame().restoreIni();
+				Mainframe.getFrame().setContentPane(new TeamDataList());
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				more.setFont(new Font("Dialog",0,20));
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				more.setFont(new Font("Dialog",1,20));
+			}
+		});
+		head2.add(more);
+
 	}
 	
 	public void setMainFrame(Mainframe mainFrame){
