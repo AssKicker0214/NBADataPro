@@ -30,6 +30,7 @@ public class TeamDataHandelTest {
     @Before
     public void before() throws Exception {
         DataInitial.init();
+//        PlayerScoreSaver.getPlayerScoreSaver().getPlayerDataDefault().showPidTid();
     }
 
     @After
@@ -51,6 +52,7 @@ public class TeamDataHandelTest {
     @Test
     public void testFindTeamInfoTeamId() throws Exception {
         TeamVO teamVO = new TeamDataHandel().findTeamInfo(5);
+        PlayerScoreSaver.getPlayerScoreSaver().getPlayerDataDefault().showPidTid();
         if (teamVO.teamName.equals("Bulls")) {
             System.out.println("-------------find--------Bulls");
             assertEquals(teamVO.avgAssist, 22.5732, 0.0001);
