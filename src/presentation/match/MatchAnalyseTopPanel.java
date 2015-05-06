@@ -186,11 +186,11 @@ public class MatchAnalyseTopPanel extends JPanel{
 		partialScoreLabelGroups.setLayout(new GridLayout(1,5,0,0));
 		
 		
-		partialScoreLabelGroups.add(setSinglePartialScoreLabel("1","24","32"));
-		partialScoreLabelGroups.add(setSinglePartialScoreLabel("2","24","32"));
-		partialScoreLabelGroups.add(setSinglePartialScoreLabel("3","24","32"));
-		partialScoreLabelGroups.add(setSinglePartialScoreLabel("4","24","32"));
-		partialScoreLabelGroups.add(setSinglePartialScoreLabel("","24","32"));
+		partialScoreLabelGroups.add(setSinglePartialScoreLabel("1",vo.homePoint_1+"",vo.guestPoint_1+""));
+		partialScoreLabelGroups.add(setSinglePartialScoreLabel("2",vo.homePoint_2+"",vo.guestPoint_2+""));
+		partialScoreLabelGroups.add(setSinglePartialScoreLabel("3",vo.homePoint_3+"",vo.guestPoint_3+""));
+		partialScoreLabelGroups.add(setSinglePartialScoreLabel("4",vo.homePoint_4+"",vo.guestPoint_4+""));
+		partialScoreLabelGroups.add(setSinglePartialScoreLabel("",vo.homePoint+"",vo.guestPoint+""));
 
 		scoreLabel.add(partialScoreLabelGroups);
 	}

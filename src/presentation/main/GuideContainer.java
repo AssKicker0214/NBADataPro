@@ -64,4 +64,10 @@ public class GuideContainer extends JLabel implements IGuideContainer{
 		}
 			
 	}
+	
+	public void setAllUnselected(){
+		for(GuideLabel label : guides){
+			label.update();
+		}
+	}
 }
