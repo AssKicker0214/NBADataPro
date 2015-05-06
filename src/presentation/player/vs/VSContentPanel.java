@@ -26,7 +26,7 @@ public class VSContentPanel extends JPanel{
 	static Color grey = Color.GRAY;
 	
 	public VSContentPanel(ArrayList<String> itemsNeedAdd,ArrayList<Double> avg1,
-			ArrayList<Double> avg2){
+			ArrayList<Double> avg2, boolean isPlayer){
 		this.avg1 = avg1;
 		this.avg2 = avg2;
 		initArray(itemsNeedAdd);
@@ -38,7 +38,7 @@ public class VSContentPanel extends JPanel{
 		this.setBounds(30, 300, 1280,360);
 		this.setBackground(Color.WHITE);
 		this.setOpaque(true);
-		addBars();
+		addBars(isPlayer);
 		this.setVisible(true);
 	}
 
@@ -49,11 +49,11 @@ public class VSContentPanel extends JPanel{
 		}
 	}
 
-	private void addBars(){
+	private void addBars(boolean isPlayer){
 		for(int i = 0; i < items.size();i++){
 			System.out.println(items.size() + "  " + Double.toString(avg1.get(i)) + "  " + 
 					Double.toString(avg2.get(i)) + "  " + items.get(i) + "");
-			this.add(new SingleVSBarLabel(avg1.get(i),avg2.get(i),items.get(i),length));
+			this.add(new SingleVSBarLabel(avg1.get(i),avg2.get(i),items.get(i),length,isPlayer));
 		}
 	}
 	
@@ -74,7 +74,7 @@ public class VSContentPanel extends JPanel{
 		itemsNeedAdd.add("罚球％");	avg1.add(78.4); avg2.add(74.3);
 //		itemsNeedAdd.add("分钟");
 	
-		jf.add(new VSContentPanel(itemsNeedAdd,avg1,avg2));
+		jf.add(new VSContentPanel(itemsNeedAdd,avg1,avg2,true));
 		jf.setVisible(true);
 	}
 

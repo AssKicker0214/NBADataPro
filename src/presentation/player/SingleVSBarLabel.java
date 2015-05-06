@@ -31,14 +31,16 @@ public class SingleVSBarLabel extends JLabel{
 	int limit;//最高分
 	int length;//bar条长度
 	
-	ArrayList<String> items;
-	ArrayList<Integer> limits;
+	String[] items = {"场均得分","场均篮板","场均助攻","三分％","罚球％"};
+	int[] playerLim = {40,20,30,1,1};
+	int[] TeamLim = {150,100,80,1,1};
 	
-	public SingleVSBarLabel(double avg1,double avg2,String item,int length){
+	public SingleVSBarLabel(double avg1,double avg2,String item,int length,boolean isPlayer){
 		this.avg1 = avg1;
 		this.avg2 = avg2;
 		this.length = length;
-		
+		if(isPlayer)
+			TeamLim = playerLim;
 //		this.setLayout(new GridLayout(1,2,0,20));
 		this.setLayout(null);
 //		this.setBounds(0, 0, 1280,60);
@@ -48,36 +50,17 @@ public class SingleVSBarLabel extends JLabel{
 		this.setOpaque(true);
 		this.setLayout(null);
 		this.setVisible(true);
-		initArray();
 		setLimit(item);
 		setBars(avg1,avg2);
 		setItem(item);
 	}
 	
-	private void initArray(){
-		items = new ArrayList<String>();
-		limits = new ArrayList<Integer>();
-		items.add("场均得分");		limits.add(40);
-		items.add("场均助攻");		limits.add(20);
-		items.add("场均篮板");		limits.add(30);
-		items.add("三分％");			limits.add(100);
-		items.add("罚球％");			limits.add(100);
-		items.add("场数");			limits.add(10);
-		items.add("先发");			limits.add(40);
-		items.add("分钟");			limits.add(60);
-		items.add("投篮命中");		limits.add(100);
-		items.add("进攻篮板");		limits.add(10);
-		items.add("防守篮板");		limits.add(10);
-		items.add("场均抢断");		limits.add(4);
-		items.add("场均盖帽");		limits.add(4);
-		items.add("失误");			limits.add(8);
-		items.add("犯规");			limits.add(8);
-	}
 	
 	private void setLimit(String item){
-		for(int i = 0; i < items.size(); i++){
-			if(items.get(i).equals(item)){
-				this.limit = limits.get(i);
+		for(int i = 0; i < 5; i++){
+			if(items[i].equals(item)){
+				this.limit = TeamLim[i];
+				System.out.println(item+" "+limit);
 			}
 		}
 	}
@@ -121,7 +104,7 @@ public class SingleVSBarLabel extends JLabel{
 		jf.setLayout(null);
 		jf.setSize(1280,700);
 		jf.setLocationRelativeTo(null);
-		jf.add(new SingleVSBarLabel(20.9,30.0,"场均得分",430));
+//		jf.add(new SingleVSBarLabel(20.9,30.0,"场均得分",430));
 		jf.setVisible(true);
 	}
 

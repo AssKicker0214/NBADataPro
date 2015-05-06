@@ -322,7 +322,7 @@ public class PlayerMiddlePanel extends JPanel{
 	}
 	
 	public void setVSPanel(ArrayList<Double> player,ArrayList<Double> leagueAvg){
-		vsContentPanel = new VSContentPanel(itemsNeedAdd,player,leagueAvg);
+		vsContentPanel = new VSContentPanel(itemsNeedAdd,player,leagueAvg,true);
 		this.add(vsContentPanel);
 		repaint();
 	}

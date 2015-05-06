@@ -118,7 +118,7 @@ public class TeamMiddlePanel  extends JPanel{
 	}
 	
 	public void setTeamVSPanel(ArrayList<Double> team,ArrayList<Double> avg){
-		vsContentPanel = new VSContentPanel(itemsNeedAdd,team,avg);
+		vsContentPanel = new VSContentPanel(itemsNeedAdd,team,avg,false);
 		this.add(vsContentPanel);
 		repaint();
 	}
