@@ -171,7 +171,6 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 //		this.setSuboptionLayer();
 	}
 	
-	
 	private void setMainPartPanel(){
 		playerKing = new PlayerKingPanel();
 		contentPane.add(playerKing);
