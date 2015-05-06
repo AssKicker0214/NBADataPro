@@ -62,17 +62,17 @@ public class SingleTeamLabel extends JLabel{
 	/*team name changes*/
 	public void setTeamNameLabel(String TeamName){
 		JLabel TeamNameLabel = new JLabel(TeamName);
-		TeamNameLabel.setFont(new Font("Dialog",1,15));
+		TeamNameLabel.setFont(new Font("Dialog",1,13));
 		TeamNameLabel.setForeground(Color.GRAY);
-		TeamNameLabel.setBounds(90,40,150,30);
+		TeamNameLabel.setBounds(87,40,150,30);
 		this.add(TeamNameLabel);
 
 	}
 	public void setTeamLocationLabel(String location){
 		JLabel TeamLocationLabel = new JLabel(location);
-		TeamLocationLabel.setFont(new Font("Dialog",1,15));
+		TeamLocationLabel.setFont(new Font("Dialog",1,13));
 		TeamLocationLabel.setForeground(Color.GRAY);
-		TeamLocationLabel.setBounds(90,10,150,30);
+		TeamLocationLabel.setBounds(87,10,150,30);
 		this.add(TeamLocationLabel);
 	}
 	
