@@ -23,6 +23,7 @@ import presentation.player.PlayerDataList;
 import presentation.statistics.hotPlayer.HotPlayerPanel;
 import presentation.statistics.playerKing.PlayerKingPanel;
 import presentation.statistics.teamKing.TeamKingPanel;
+import presentation.team.TeamDataList;
 import presentation.team.TeamListPanel;
 import presentation.team.teamDetail.TeamMiddlePanel;
 
@@ -34,6 +35,7 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 	private static final long serialVersionUID = 1L;
 	private static Mainframe frame;
 	JLayeredPane layer;
+
 	JPanel contentPane;
 	JPanel bufferedPane;
 	JPanel jumpPane;
@@ -46,7 +48,11 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 	JPanel teamList;
 	JPanel playerList;
 	JPanel matchList;
+	JPanel teamDataList;
+	
 	ArrayList<JPanel> mainParts = new ArrayList<JPanel>();
+	
+	GuideContainer guideContainer;
 	
 	private  Mainframe(){ 
 		setFrame();
@@ -114,7 +120,7 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 		contentPane = new JPanel();
 		contentPane.setLayout(null);
 		contentPane.setVisible(false);
-		contentPane.setBackground(Color.cyan);
+//		contentPane.setBackground(Color.cyan);
 		contentPane.setBounds(0, 30, 1280, 670);
 		this.add(contentPane);
 	}
@@ -138,27 +144,30 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 	}
 	
 	private void setGuideGroup(){
-		GuideContainer guideContainer = new GuideContainer();
+		guideContainer = new GuideContainer();
 		GuideLabel playerGuide = new GuideLabel("球员");
 		playerGuide.setMainFrame(this);
 		
 		GuideLabel teamGuide = new GuideLabel("球队");
 		teamGuide.setMainFrame(this);
-
+		
+			SuboptionLayer teamSuboptionLayer = new TeamSuboptionLayer();
+			layer.add(teamSuboptionLayer);
+			layer.setLayer(teamSuboptionLayer, 600);
+			teamSuboptionLayer.setMainFrame(this);
+			teamGuide.linkSuboption(teamSuboptionLayer);
+		
 		GuideLabel gameGuide = new GuideLabel("比赛");
 		gameGuide.setMainFrame(this);
 
 		GuideLabel staticGuide = new GuideLabel("统计");
 		staticGuide.setMainFrame(this);
 
-
 			SuboptionLayer staticSuboptionLayer = new StaticSuboptionLayer();
-			
 			layer.add(staticSuboptionLayer);
 			layer.setLayer(staticSuboptionLayer, 500);
 			staticSuboptionLayer.setMainFrame(this);
-			
-		staticGuide.linkSuboption(staticSuboptionLayer);
+			staticGuide.linkSuboption(staticSuboptionLayer);
 			
 		guideContainer.addGuide(playerGuide);
 		guideContainer.addGuide(teamGuide);
@@ -168,7 +177,6 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 		
 //		this.setSuboptionLayer();
 	}
-	
 	
 	private void setMainPartPanel(){
 		playerKing = new PlayerKingPanel();
@@ -196,12 +204,18 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 		contentPane.add(matchList,0);
 		matchList.setVisible(false);
 		
+// 		teamDataList = new TeamDataList();
+//		this.add(teamDataList,0);
+//		matchList.setVisible(false);
+		
 		mainParts.add(playerKing);
 		mainParts.add(teamKing);
 		mainParts.add(hotPlayer);
 		mainParts.add(teamList);
 		mainParts.add(playerList);
 		mainParts.add(matchList);
+		mainParts.add(teamDataList);
+
 	}
 	
 	private void changeMainPart(JPanel target){
@@ -228,13 +242,17 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 
 	public void returnIni(){
 		if(contentPaneChange){
+			System.out.println("contentPaneChange");
+			contentPane.setVisible(false);
 			contentPaneChange = false;
 			this.remove(contentPane);
 			contentPane = bufferedPane;
 			this.add(contentPane);
 			this.repaint();
-			contentPane.repaint();
+			guideContainer.setAllUnselected();
+			contentPane.setVisible(true);
 		}
+		
 		for(int i=0;i<mainParts.size();i++){
 			mainParts.get(i).setVisible(false);
 		}
@@ -248,12 +266,13 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 	public void update(String s) {
 		// TODO Auto-generated method stub
 		switch(s){
-			case "热点球员": changeMainPart(playerKing); System.out.println(s);break;
-			case "热点球队": changeMainPart(teamKing); System.out.println(s);break;
-			case "进步球员": changeMainPart(hotPlayer);System.out.println(s);break;
-			case "球队": changeMainPart(teamList);System.out.println(s);break;
-			case "球员": changeMainPart(playerList);System.out.println(s);break;
-			case "比赛": changeMainPart(matchList);System.out.println(s);break;
+			case "热点球员": changeMainPart(playerKing); System.out.println(s);restoreIni();break;
+			case "热点球队": changeMainPart(teamKing); System.out.println(s);restoreIni();break;
+			case "进步球员": changeMainPart(hotPlayer);System.out.println(s);restoreIni();break;
+			case "球队列表": changeMainPart(teamList);System.out.println(s);restoreIni();break;
+			case "球员": changeMainPart(playerList);System.out.println(s);restoreIni();break;
+			case "比赛": changeMainPart(matchList);System.out.println(s);restoreIni();break;
+			case "球队表格": changeMainPart(teamDataList);System.out.println(s);restoreIni();break;
 			default: break;
 		}
 	}
