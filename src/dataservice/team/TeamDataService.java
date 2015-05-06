@@ -25,6 +25,10 @@ public interface TeamDataService {
 	public TeamVO findTeamInfo(String teamName);
 
 	
+	//返回姓名包含输入的字符串的球员列表，返回值包括id,name,photo
+	public ArrayList<TeamVO> findTeams(String msg);
+
+	
 	/**
 	 * 返回球队普通数据列表
 	 * @Return 返回TeamVO中的normal info以及teamName，photo

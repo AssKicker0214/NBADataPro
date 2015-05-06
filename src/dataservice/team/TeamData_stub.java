@@ -29,9 +29,29 @@ public class TeamData_stub implements TeamDataService{
 
 	@Override
 	public TeamVO findTeamInfo(int teamId) {
-		// TODO Auto-generated method stub
-		return null;
+		TeamVO vo = new TeamVO();
+		vo.teamName = "Hawks";
+		vo.league = 'E';
+		vo.photo = "ATL";
+		vo.location = "Atlanta";
+		return vo;
 	}
+	
+
+	@Override
+	public ArrayList<TeamVO> findTeams(String msg) {
+		ArrayList<TeamVO>  result = new ArrayList<TeamVO>();
+		TeamVO vo = new TeamVO();
+		vo.teamName = "Hawks";
+		vo.location = "Atlanta";
+		vo.photo = "ATL";
+		for(int i = 0;i < 10;i++){
+			result.add(vo);
+		}
+		return result;
+	}
+
+
 
 	@Override
 	public ArrayList<TeamVO> findTeamNormal() {
@@ -91,14 +111,24 @@ public class TeamData_stub implements TeamDataService{
 	@Override
 	public ArrayList<TeamVO> sortTeamNormalAvg(int num, String sortBy,
 			boolean desc) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<TeamVO> vol = new ArrayList<TeamVO>();
+		TeamVO vo = new TeamVO();
+		vo.photo = "BKN";
+		vo.location = "***";
+		vo.teamName = "***";
+		vol.add(vo);
+		return vol;
 	}
 
 	@Override
 	public ArrayList<TeamVO> sortTeamHigh(int num, String sortBy, boolean desc) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<TeamVO> vol = new ArrayList<TeamVO>();
+		TeamVO vo = new TeamVO();
+		vo.photo = "BKN";
+		vo.location = "***";
+		vo.teamName = "***";
+		vol.add(vo);
+		return vol;
 	}
 
 /*	@Override
@@ -109,14 +139,24 @@ public class TeamData_stub implements TeamDataService{
 
 	@Override
 	public ArrayList<PlayerVO> teamMemberList(int teamID) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<PlayerVO> vol = new ArrayList<PlayerVO>();
+		PlayerVO vo = new PlayerVO();
+		vo.photo = "Aaron Brooks";
+		vo.name = "Aaron Brooks";
+		vo.teamName = "***";
+		vol.add(vo);
+		return vol;
 	}
 
 	@Override
 	public TeamVO findTeamInfo(String teamName) {
-		// TODO Auto-generated method stub
-		return null;
+		TeamVO vo = new TeamVO();
+		vo.teamName = "Hawks";
+		vo.league = 'E';
+		vo.photo = "ATL";
+		vo.location = "Atlanta";
+		vo.avgAssist = 4.2;
+		vo.avgPoint = 12.3;
+		return vo;
 	}
-
 }
