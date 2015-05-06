@@ -155,9 +155,6 @@ public class TeamDataList extends JPanel{
 
 		@Override
 		public void mousePressed(MouseEvent e) {
-//			PlayerKingPanel.this.remove(TitleLabel);
-//			PlayerKingPanel.this.remove(everyDay_PlayerKingOptionsPanel);
-
 			setVisible(false);
 			setButtonsBGLabel();
 			NormalInfoButton.isSelected = true;

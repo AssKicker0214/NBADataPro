@@ -3,8 +3,8 @@ package presentation.team;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -52,8 +52,14 @@ public class TeamListPanel extends JPanel{
 		more.setForeground(Color.WHITE);
 		more.setBackground(new Color(30,80,140));
 		more.setBounds(480,5,64,45);
-		more.addMouseListener(new MouseAdapter() {
+		more.addMouseListener(new MouseListener() {
 			int select = 0;
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
 			@Override
 			public void mousePressed(MouseEvent e) {
 				select += 1;
@@ -74,6 +80,12 @@ public class TeamListPanel extends JPanel{
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				more.setFont(new Font("Dialog",1,20));
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
 			}
 		});
 		head2.add(more);

@@ -90,7 +90,8 @@ public class SingleTeamLabel extends JLabel{
 	class SingleTeamAction implements MouseListener{
 
 		@Override
-		public void mouseClicked(MouseEvent e) {
+		public void mouseClicked
+		(MouseEvent e) {
 			// TODO Auto-generated method stub
 			
 		}
