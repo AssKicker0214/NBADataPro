@@ -1,6 +1,7 @@
 package dataservice.player;
 
 import data.PlayerDataManager;
+import data.Tools;
 import data.saver.PlayerScoreSaver;
 import vo.playervo.HotPlayersVO;
 import vo.playervo.PlayerVO;
@@ -241,7 +242,7 @@ public class PlayerDataHandel implements PlayerDataService {
             int m = 0;
             for (int k = 0;k<playerVOs.size();k++){
                 PlayerVO playerVO = playerVOs.get(m);
-                String name = getNPosition(playerVO.name.toLowerCase(),i);
+                String name = Tools.getNPosition(playerVO.name.toLowerCase(),i);
                 if (name.startsWith(msg)) {
                     arrayList.add(playerVO);
                     playerVOs.remove(playerVO);
@@ -255,13 +256,7 @@ public class PlayerDataHandel implements PlayerDataService {
         return arrayList;
     }
 
-    private String getNPosition(String s,int i){
-        if (i >= s.length()){
-            return "";
-        }else {
-            return s.substring(i);
-        }
-    }
+
 
     @Override
     public ArrayList<PlayerVO> sortPlayerInfo(ArrayList<sortParam> sortBy) {
