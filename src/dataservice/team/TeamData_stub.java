@@ -36,6 +36,22 @@ public class TeamData_stub implements TeamDataService{
 		vo.location = "Atlanta";
 		return vo;
 	}
+	
+
+	@Override
+	public ArrayList<TeamVO> findTeams(String msg) {
+		ArrayList<TeamVO>  result = new ArrayList<TeamVO>();
+		TeamVO vo = new TeamVO();
+		vo.teamName = "Hawks";
+		vo.location = "Atlanta";
+		vo.photo = "ATL";
+		for(int i = 0;i < 10;i++){
+			result.add(vo);
+		}
+		return result;
+	}
+
+
 
 	@Override
 	public ArrayList<TeamVO> findTeamNormal() {
@@ -141,5 +157,4 @@ public class TeamData_stub implements TeamDataService{
 		vo.location = "Atlanta";
 		return vo;
 	}
-
 }

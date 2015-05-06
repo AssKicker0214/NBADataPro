@@ -9,14 +9,11 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import dataservice.player.PlayerDataService;
-import dataservice.player.PlayerData_stub;
 import dataservice.team.TeamDataService;
 import dataservice.team.TeamData_stub;
 import presentation.common.SelectLabel;
 import presentation.player.vs.VSContentPanel;
 import presentation.team.vs.TeamVSTopPanel;
-import vo.playervo.PlayerVO;
 import vo.teamvo.TeamVO;
 //过往查询
 public class TeamMiddlePanel  extends JPanel{
@@ -25,6 +22,7 @@ public class TeamMiddlePanel  extends JPanel{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	SelectLabel DataLabel;//球队资料
 	SelectLabel MemberLabel;//球队阵容
 	SelectLabel LatestMatchLabel;//近5场比赛
@@ -43,7 +41,7 @@ public class TeamMiddlePanel  extends JPanel{
 	TeamVO vo;
 	
 	ArrayList<Double> team = new ArrayList<Double>();
-	ArrayList<Double> leagueAvg = new ArrayList<Double>();
+	ArrayList<Double> avg = new ArrayList<Double>();//初始右边为0
 	ArrayList<SelectLabel> selectLabelGroups = new ArrayList<SelectLabel>();
 	ArrayList<String> itemsNeedAdd = new ArrayList<String>();
 
@@ -54,6 +52,7 @@ public class TeamMiddlePanel  extends JPanel{
 		
 		TeamDataService tds =  new TeamData_stub();
 		vo = tds.findTeamInfo(name);
+		setAttri(name);
 		setTopPanel();
 		setContrastLabel();
 		setMemberLabel();
@@ -66,29 +65,16 @@ public class TeamMiddlePanel  extends JPanel{
 	}
 	
 	public void setAttri(String name){
-		TeamDataService pds = new TeamData_stub();
-		PlayerVO voL = pds.avgLeague(); 
-		TeamVO voP = pds.findTeamInfo(name); 
-		vo = voP;
-		setTopPanel(voP);
-		player.add(voP.avgPoint);player.add(voP.avgRebound);player.add(voP.avgAssist);
-		player.add(voP.three);player.add(voP.penalty);
-		leagueAvg.add(voL.avgPoint);leagueAvg.add(voL.avgRebound);leagueAvg.add(voL.avgAssist);
-		leagueAvg.add(voL.three);leagueAvg.add(voL.penalty);
-		//"年度","球队","场数","先发","分钟","％","三分％","罚球％",
-		//"进攻","防守","场均篮板","场均助攻","场均抢断","场均盖帽","失误","犯规","场均得分"
-		avg.add("2012-2013");avg.add(voP.team);avg.add(voP.numOfGame+"");avg.add(voP.start+"");avg.add(voP.avgMinute+"");avg.add(voP.shot+"");avg.add(voP.three+"");
-		avg.add(voP.penalty+"");avg.add(voP.avgOffend+"");avg.add(voP.avgDefend+"");avg.add(voP.avgRebound+"");avg.add(voP.avgAssist+"");avg.add(voP.avgSteal+"");
-		avg.add(voP.avgBlockShot+"");avg.add(voP.avgFault+"");avg.add(voP.avgFoul+"");avg.add(voP.avgPoint+"");
-		total.add("2012-2013");total.add(voP.team);total.add(voP.numOfGame+"");total.add(voP.start+"");total.add(voP.minute+"");total.add(voP.shot+"");total.add(voP.three+"");
-		total.add(voP.penalty+"");total.add(voP.offend+"");total.add(voP.defend+"");total.add(voP.rebound+"");total.add(voP.assist+"");total.add(voP.steal+"");
-		total.add(voP.blockShot+"");total.add(voP.fault+"");total.add(voP.foul+"");total.add(voP.point+"");
+		team.add(vo.avgPoint);team.add(vo.avgRebound);team.add(vo.avgAssist);
+		team.add(vo.three);team.add(vo.penalty);
+		for(int i = 0; i < 5;i++){
+			avg.add(0.0);
+		}
 		itemsNeedAdd.add("场均得分");
 		itemsNeedAdd.add("场均助攻");
 		itemsNeedAdd.add("场均篮板"); 
 		itemsNeedAdd.add("三分％"); 
 		itemsNeedAdd.add("罚球％");
-
 	}
 
 	
@@ -131,14 +117,14 @@ public class TeamMiddlePanel  extends JPanel{
 		repaint();
 	}
 	
-	public void setTeamVSPanel(){
-		vsContentPanel = new VSContentPanel(itemsNeedAdd,team,leagueAvg);
+	public void setTeamVSPanel(ArrayList<Double> team,ArrayList<Double> avg){
+		vsContentPanel = new VSContentPanel(itemsNeedAdd,team,avg);
 		this.add(vsContentPanel);
 		repaint();
 	}
 
 	public void setVSTopPanel(TeamMiddlePanel middle){
-		teamVSTopPanel = new TeamVSTopPanel(middle);
+		teamVSTopPanel = new TeamVSTopPanel(middle,vo);
 		this.add(teamVSTopPanel);
 		repaint();
 	}
@@ -146,6 +132,7 @@ public class TeamMiddlePanel  extends JPanel{
 	public void setTopPanel (){
 		teamDetailTopPanel = new TeamDetailTopPanel(vo);
 		this.add(teamDetailTopPanel);
+		repaint();
 	}
 	
 	public void setContrastLabel(){
@@ -345,7 +332,7 @@ public class TeamMiddlePanel  extends JPanel{
 					remove(teamVSTopPanel);
 				}
 				setVSTopPanel(TeamMiddlePanel.this);
-				setTeamVSPanel();
+				setTeamVSPanel(team,avg);
 				setVisible(true);
 				repaint();		
 			}
