@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.junit.Before;
 import org.junit.After;
 import vo.playervo.PlayerVO;
+import vo.teamvo.HotTeamsVO;
 import vo.teamvo.TeamVO;
 
 import java.util.ArrayList;
@@ -43,7 +44,12 @@ public class TeamDataHandelTest {
      */
     @Test
     public void testHotTeams() throws Exception {
-//TODO: Test goes here... 
+        ArrayList<HotTeamsVO> arrayList = new TeamDataHandel().hotTeams(7,"winRate");
+        assertEquals(0.76, arrayList.get(0).value, 0.0001);
+        assertEquals(0.72, arrayList.get(1).value, 0.0001);
+        assertEquals(0.70, arrayList.get(2).value, 0.0001);
+        assertEquals(0.68, arrayList.get(3).value, 0.0001);
+        assertEquals(0.66, arrayList.get(4).value, 0.0001);
     }
 
     /**

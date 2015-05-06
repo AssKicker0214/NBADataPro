@@ -329,6 +329,7 @@ public class PlayerScoreSaver {
         ArrayList<Integer> res = new ArrayList<>();
         for (int i = 0; i <= currentPoint; i++) {
             if (pid == this.pid[i] && matchInfoSaver.isInDate(mid[i], start, end)) {
+                System.out.println(mid[i]+"-------------------mid "+this.pid[i]+" --------"+MatchInfoSaver.getMatchInfoSaver().getDate(mid[i]));
                 res.add(i);
             }
         }
@@ -1741,8 +1742,9 @@ public class PlayerScoreSaver {
 
     public ArrayList<MatchContentPlayerVO>[] getTeamPlayer(int mid) {
         ArrayList<MatchContentPlayerVO>[] matchContentPlayerVOs = new ArrayList[2];
+        matchContentPlayerVOs[0] = new ArrayList<>();
+        matchContentPlayerVOs[1] = new ArrayList<>();
         int tid1 = matchInfoSaver.getTeamf()[mid - 1];
-        int tid2 = matchInfoSaver.getTeamf()[mid - 1];
         for (int i = 0; i < currentPoint + 1; i++) {
             if (PlayerScoreSaver.this.mid[i] == mid) {
                 MatchContentPlayerVO matchContentPlayerVO = getMatchContentPlayerVO(i);
@@ -1759,25 +1761,26 @@ public class PlayerScoreSaver {
     public MatchContentPlayerVO getMatchContentPlayerVO(int i) {
         int mid = PlayerScoreSaver.this.mid[i];
         MatchContentPlayerVO matchContentPlayerVO = new MatchContentPlayerVO();
+        matchContentPlayerVO.matchID = mid;
         matchContentPlayerVO.date = matchInfoSaver.getDate(mid);
         matchContentPlayerVO.vs = teamSaver.getTeamName()[PlayerScoreSaver.this.d_tid[i] - 1];
         matchContentPlayerVO.name = playerSaver.getName()[PlayerScoreSaver.this.pid[i] - 1];
-        matchContentPlayerVO.position = PlayerScoreSaver.this.position[i - 1];
-        matchContentPlayerVO.minute = PlayerScoreSaver.this.inplacetime[i - 1];
-        matchContentPlayerVO.shot = PlayerScoreSaver.this.throwin[i - 1];
-        matchContentPlayerVO.shotA = PlayerScoreSaver.this.throwall[i - 1];
-        matchContentPlayerVO.three = PlayerScoreSaver.this.throw3in[i - 1];
-        matchContentPlayerVO.threeA = PlayerScoreSaver.this.throw3all[i - 1];
-        matchContentPlayerVO.penalty = PlayerScoreSaver.this.penaltyin[i - 1];
-        matchContentPlayerVO.penaltyA = PlayerScoreSaver.this.penaltyall[i - 1];
-        matchContentPlayerVO.offendRebound = PlayerScoreSaver.this.attackbas[i - 1];
-        matchContentPlayerVO.defendRebound = PlayerScoreSaver.this.defencebas[i - 1];
-        matchContentPlayerVO.rebound = PlayerScoreSaver.this.allbas[i - 1];
-        matchContentPlayerVO.assist = PlayerScoreSaver.this.helpatt[i - 1];
-        matchContentPlayerVO.blockShot = PlayerScoreSaver.this.block[i - 1];
-        matchContentPlayerVO.fault = PlayerScoreSaver.this.mistake[i - 1];
-        matchContentPlayerVO.foul = PlayerScoreSaver.this.foul[i - 1];
-        matchContentPlayerVO.point = PlayerScoreSaver.this.score[i - 1];
+        matchContentPlayerVO.position = PlayerScoreSaver.this.position[i];
+        matchContentPlayerVO.minute = PlayerScoreSaver.this.inplacetime[i];
+        matchContentPlayerVO.shot = PlayerScoreSaver.this.throwin[i];
+        matchContentPlayerVO.shotA = PlayerScoreSaver.this.throwall[i];
+        matchContentPlayerVO.three = PlayerScoreSaver.this.throw3in[i];
+        matchContentPlayerVO.threeA = PlayerScoreSaver.this.throw3all[i];
+        matchContentPlayerVO.penalty = PlayerScoreSaver.this.penaltyin[i];
+        matchContentPlayerVO.penaltyA = PlayerScoreSaver.this.penaltyall[i];
+        matchContentPlayerVO.offendRebound = PlayerScoreSaver.this.attackbas[i];
+        matchContentPlayerVO.defendRebound = PlayerScoreSaver.this.defencebas[i];
+        matchContentPlayerVO.rebound = PlayerScoreSaver.this.allbas[i];
+        matchContentPlayerVO.assist = PlayerScoreSaver.this.helpatt[i];
+        matchContentPlayerVO.blockShot = PlayerScoreSaver.this.block[i];
+        matchContentPlayerVO.fault = PlayerScoreSaver.this.mistake[i];
+        matchContentPlayerVO.foul = PlayerScoreSaver.this.foul[i];
+        matchContentPlayerVO.point = PlayerScoreSaver.this.score[i];
         return matchContentPlayerVO;
     }
 

@@ -51,6 +51,8 @@ public class PlayerDataHandel implements PlayerDataService {
             allInfo.add("birth");
             allInfo.add("exp");
             allInfo.add("age");
+            allInfo.add("hight");
+            allInfo.add("weigth");
             allInfo.add("avgAssist");
             allInfo.add("avgBlockShot");
             allInfo.add("avgDefend");
@@ -81,11 +83,72 @@ public class PlayerDataHandel implements PlayerDataService {
         }
         return allInfo;
     }
+    private static ArrayList<String> allInfoWithAvg;
+
+    public static ArrayList<String> getAllInfoWithAvg() {
+        if (allInfoWithAvg == null) {
+            allInfoWithAvg = new ArrayList<>();
+            allInfoWithAvg.add("photo");
+            allInfoWithAvg.add("division");
+            allInfoWithAvg.add("minute");
+            allInfoWithAvg.add("name");
+            allInfoWithAvg.add("team");
+            allInfoWithAvg.add("teamName");
+            allInfoWithAvg.add("position");
+            allInfoWithAvg.add("league");
+            allInfoWithAvg.add("number");
+            allInfoWithAvg.add("school");
+            allInfoWithAvg.add("birth");
+            allInfoWithAvg.add("exp");
+            allInfoWithAvg.add("age");
+            allInfoWithAvg.add("hight");
+            allInfoWithAvg.add("weigth");
+            allInfoWithAvg.add("avgAssist");
+            allInfoWithAvg.add("avgBlockShot");
+            allInfoWithAvg.add("avgDefend");
+            allInfoWithAvg.add("efficiency");
+            allInfoWithAvg.add("avgFault");
+            allInfoWithAvg.add("avgFoul");
+            allInfoWithAvg.add("avgMinute");
+            allInfoWithAvg.add("numOfGame");
+            allInfoWithAvg.add("avgOffend");
+            allInfoWithAvg.add("shot");
+            allInfoWithAvg.add("penalty");
+            allInfoWithAvg.add("avgPoint");
+            allInfoWithAvg.add("avgRebound");
+            allInfoWithAvg.add("start");
+            allInfoWithAvg.add("avgSteal");
+            allInfoWithAvg.add("three");
+            allInfoWithAvg.add("assistEfficient");
+            allInfoWithAvg.add("blockShotEfficient");
+            allInfoWithAvg.add("defendReboundEfficient");
+            allInfoWithAvg.add("faultEfficient");
+            allInfoWithAvg.add("frequency");
+            allInfoWithAvg.add("gmSc");
+            allInfoWithAvg.add("offendReboundEfficient");
+            allInfoWithAvg.add("realShot");
+            allInfoWithAvg.add("reboundEfficient");
+            allInfoWithAvg.add("shotEfficient");
+            allInfoWithAvg.add("stealEfficient");
+            allInfoWithAvg.add("avgAssist");
+            allInfoWithAvg.add("avgBlockShot");
+            allInfoWithAvg.add("avgDefend");
+            allInfoWithAvg.add("avgFault");
+            allInfoWithAvg.add("avgFoul");
+            allInfoWithAvg.add("avgMinute");
+            allInfoWithAvg.add("avgOffend");
+            allInfoWithAvg.add("avgPoint");
+            allInfoWithAvg.add("avgRebound");
+            allInfoWithAvg.add("avgSteal");
+        }
+        return allInfoWithAvg;
+    }
 
     private static ArrayList<String> avgNormalInfo;
 
     public static ArrayList<String> getAvgNormalInfo() {
         if (avgNormalInfo == null) {
+            avgNormalInfo = new ArrayList<>();
             avgNormalInfo.add("age");
             avgNormalInfo.add("avgAssist");
             avgNormalInfo.add("avgBlockShot");
@@ -110,6 +173,7 @@ public class PlayerDataHandel implements PlayerDataService {
 
     public static ArrayList<String> getNormalInfo() {
         if (normalInfo == null) {
+            normalInfo = new ArrayList<>();
             normalInfo.add("name");
             normalInfo.add("assist");
             normalInfo.add("blockShot");
@@ -126,6 +190,7 @@ public class PlayerDataHandel implements PlayerDataService {
             normalInfo.add("start");
             normalInfo.add("steal");
             normalInfo.add("three");
+            normalInfo.add("shot");
         }
         return normalInfo;
     }
@@ -146,6 +211,8 @@ public class PlayerDataHandel implements PlayerDataService {
             information.add("school");
             information.add("birth");
             information.add("exp");
+            information.add("hight");
+            information.add("weigth");
         }
         return information;
     }
@@ -155,7 +222,7 @@ public class PlayerDataHandel implements PlayerDataService {
         PlayerDataManager playerDataManager = new PlayerDataManager();
         PlayerVO playerVO = new PlayerVO();
         playerVO.id = playerId;
-        playerDataManager.setPlayerVO(getAllInfo(), playerVO, PlayerDataManager.DEFAULT);
+        playerDataManager.setPlayerVO(getAllInfoWithAvg(), playerVO, PlayerDataManager.DEFAULT);
         return playerVO;
     }
 
@@ -227,7 +294,7 @@ public class PlayerDataHandel implements PlayerDataService {
     }
 
     public ArrayList<PlayerVO> getTeamPlayerVOs(int teamID) {
-        return new PlayerDataManager().getTeamPlayerVOs(getAllInfo(), teamID);
+        return new PlayerDataManager().getTeamPlayerVOs(getAllInfoWithAvg(), teamID);
     }
 
     private class ComparePlayVO implements Comparator<PlayerVO> {
@@ -265,9 +332,9 @@ public class PlayerDataHandel implements PlayerDataService {
     private int compare(PlayerVO playerVO1, PlayerVO playerVO2, sortParam sortParam) {
         int com = compare(playerVO1, playerVO2, sortParam.field);
         if (sortParam.isDesc) {
-            return com;
-        } else {
             return -1 * com;
+        } else {
+            return com;
         }
 
     }
@@ -316,186 +383,186 @@ public class PlayerDataHandel implements PlayerDataService {
             case "efficiency":
                 if (playerVO1.efficiency > playerVO2.efficiency) {
                     return 1;
-                } else if (playerVO1.efficiency == playerVO2.efficiency) {
-                    return 0;
-                } else {
+                } else if (playerVO1.efficiency < playerVO2.efficiency) {
                     return -1;
+                } else {
+                    return 0;
                 }
             case "penalty":
                 if (playerVO1.penalty > playerVO2.penalty) {
                     return 1;
-                } else if (playerVO1.penalty == playerVO2.penalty) {
-                    return 0;
-                } else {
+                } else if (playerVO1.penalty < playerVO2.penalty) {
                     return -1;
+                } else {
+                    return 0;
                 }
             case "shot":
                 if (playerVO1.shot > playerVO2.shot) {
                     return 1;
-                } else if (playerVO1.shot == playerVO2.shot) {
-                    return 0;
-                } else {
+                } else if (playerVO1.shot < playerVO2.shot) {
                     return -1;
+                } else {
+                    return 0;
                 }
             case "avgAssist":
                 if (playerVO1.avgAssist > playerVO2.avgAssist) {
                     return 1;
-                } else if (playerVO1.avgAssist == playerVO2.avgAssist) {
-                    return 0;
-                } else {
+                } else if (playerVO1.avgAssist < playerVO2.avgAssist) {
                     return -1;
+                } else {
+                    return 0;
                 }
             case "avgBlockShot":
                 if (playerVO1.avgBlockShot > playerVO2.avgBlockShot) {
                     return 1;
-                } else if (playerVO1.avgBlockShot == playerVO2.avgBlockShot) {
-                    return 0;
-                } else {
+                } else if (playerVO1.avgBlockShot < playerVO2.avgBlockShot) {
                     return -1;
+                } else {
+                    return 0;
                 }
             case "avgDefend":
                 if (playerVO1.avgDefend > playerVO2.avgDefend) {
                     return 1;
-                } else if (playerVO1.avgDefend == playerVO2.avgDefend) {
-                    return 0;
-                } else {
+                } else if (playerVO1.avgDefend < playerVO2.avgDefend) {
                     return -1;
+                } else {
+                    return 0;
                 }
             case "avgFault":
                 if (playerVO1.avgFault > playerVO2.avgFault) {
                     return 1;
-                } else if (playerVO1.avgFault == playerVO2.avgFault) {
-                    return 0;
-                } else {
+                } else if (playerVO1.avgFault < playerVO2.avgFault) {
                     return -1;
+                } else {
+                    return 0;
                 }
             case "avgMinute":
                 if (playerVO1.avgMinute > playerVO2.avgMinute) {
                     return 1;
-                } else if (playerVO1.avgMinute == playerVO2.avgMinute) {
-                    return 0;
-                } else {
+                } else if (playerVO1.avgMinute < playerVO2.avgMinute) {
                     return -1;
+                } else {
+                    return 0;
                 }
             case "avgOffend":
                 if (playerVO1.avgOffend > playerVO2.avgOffend) {
                     return 1;
-                } else if (playerVO1.avgOffend == playerVO2.avgOffend) {
-                    return 0;
-                } else {
+                } else if (playerVO1.avgOffend < playerVO2.avgOffend) {
                     return -1;
+                } else {
+                    return 0;
                 }
             case "avgPoint":
                 if (playerVO1.avgPoint > playerVO2.avgPoint) {
                     return 1;
-                } else if (playerVO1.avgPoint == playerVO2.avgPoint) {
-                    return 0;
-                } else {
+                } else if (playerVO1.avgPoint < playerVO2.avgPoint) {
                     return -1;
+                } else {
+                    return 0;
                 }
             case "avgRebound":
                 if (playerVO1.avgRebound > playerVO2.avgRebound) {
                     return 1;
-                } else if (playerVO1.avgRebound == playerVO2.avgRebound) {
-                    return 0;
-                } else {
+                } else if (playerVO1.avgRebound < playerVO2.avgRebound) {
                     return -1;
+                } else {
+                    return 0;
                 }
             case "avgSteal":
                 if (playerVO1.avgSteal > playerVO2.avgSteal) {
                     return 1;
-                } else if (playerVO1.avgSteal == playerVO2.avgSteal) {
-                    return 0;
-                } else {
+                } else if (playerVO1.avgSteal < playerVO2.avgSteal) {
                     return -1;
+                } else {
+                    return 0;
                 }
             case "assistEfficient":
                 if (playerVO1.assistEfficient > playerVO2.assistEfficient) {
                     return 1;
-                } else if (playerVO1.assistEfficient == playerVO2.assistEfficient) {
-                    return 0;
-                } else {
+                } else if (playerVO1.assistEfficient < playerVO2.assistEfficient) {
                     return -1;
+                } else {
+                    return 0;
                 }
             case "blockShotEfficient":
                 if (playerVO1.blockShotEfficient > playerVO2.blockShotEfficient) {
                     return 1;
-                } else if (playerVO1.blockShotEfficient == playerVO2.blockShotEfficient) {
-                    return 0;
-                } else {
+                } else if (playerVO1.blockShotEfficient < playerVO2.blockShotEfficient) {
                     return -1;
+                } else {
+                    return 0;
                 }
             case "defendReboundEfficient":
                 if (playerVO1.defendReboundEfficient > playerVO2.defendReboundEfficient) {
                     return 1;
-                } else if (playerVO1.defendReboundEfficient == playerVO2.defendReboundEfficient) {
-                    return 0;
-                } else {
+                } else if (playerVO1.defendReboundEfficient < playerVO2.defendReboundEfficient) {
                     return -1;
+                } else {
+                    return 0;
                 }
             case "faultEfficient":
                 if (playerVO1.faultEfficient > playerVO2.faultEfficient) {
                     return 1;
-                } else if (playerVO1.faultEfficient == playerVO2.faultEfficient) {
-                    return 0;
-                } else {
+                } else if (playerVO1.faultEfficient < playerVO2.faultEfficient) {
                     return -1;
+                } else {
+                    return 0;
                 }
             case "frequency":
                 if (playerVO1.frequency > playerVO2.frequency) {
                     return 1;
-                } else if (playerVO1.frequency == playerVO2.frequency) {
-                    return 0;
-                } else {
+                } else if (playerVO1.frequency < playerVO2.frequency) {
                     return -1;
+                } else {
+                    return 0;
                 }
             case "gmSc":
                 if (playerVO1.gmSc > playerVO2.gmSc) {
                     return 1;
-                } else if (playerVO1.gmSc == playerVO2.gmSc) {
-                    return 0;
-                } else {
+                } else if (playerVO1.gmSc < playerVO2.gmSc) {
                     return -1;
+                } else {
+                    return 0;
                 }
             case "offendReboundEfficient":
                 if (playerVO1.offendReboundEfficient > playerVO2.offendReboundEfficient) {
                     return 1;
-                } else if (playerVO1.offendReboundEfficient == playerVO2.offendReboundEfficient) {
-                    return 0;
-                } else {
+                } else if (playerVO1.offendReboundEfficient < playerVO2.offendReboundEfficient) {
                     return -1;
+                } else {
+                    return 0;
                 }
             case "realShot":
                 if (playerVO1.realShot > playerVO2.realShot) {
                     return 1;
-                } else if (playerVO1.realShot == playerVO2.realShot) {
-                    return 0;
-                } else {
+                } else if (playerVO1.realShot < playerVO2.realShot) {
                     return -1;
+                } else {
+                    return 0;
                 }
             case "reboundEfficient":
                 if (playerVO1.reboundEfficient > playerVO2.reboundEfficient) {
                     return 1;
-                } else if (playerVO1.reboundEfficient == playerVO2.reboundEfficient) {
-                    return 0;
-                } else {
+                } else if (playerVO1.reboundEfficient < playerVO2.reboundEfficient) {
                     return -1;
+                } else {
+                    return 0;
                 }
             case "shotEfficient":
                 if (playerVO1.shotEfficient > playerVO2.shotEfficient) {
                     return 1;
-                } else if (playerVO1.shotEfficient == playerVO2.shotEfficient) {
-                    return 0;
-                } else {
+                } else if (playerVO1.shotEfficient < playerVO2.shotEfficient) {
                     return -1;
+                } else {
+                    return 0;
                 }
             case "stealEfficient":
                 if (playerVO1.stealEfficient > playerVO2.stealEfficient) {
                     return 1;
-                } else if (playerVO1.stealEfficient == playerVO2.stealEfficient) {
-                    return 0;
-                } else {
+                } else if (playerVO1.stealEfficient < playerVO2.stealEfficient) {
                     return -1;
+                } else {
+                    return 0;
                 }
 
         }
@@ -622,11 +689,11 @@ public class PlayerDataHandel implements PlayerDataService {
             @Override
             public int compare(HotPlayersVO o1, HotPlayersVO o2) {
                 if (o1.value > o2.value) {
-                    return 1;
-                } else if (o1.value == o2.value) {
-                    return 0;
-                } else {
                     return -1;
+                } else if (o1.value < o2.value) {
+                    return 1;
+                } else {
+                    return 0;
                 }
             }
         });
@@ -640,11 +707,11 @@ public class PlayerDataHandel implements PlayerDataService {
             @Override
             public int compare(HotPlayersVO o1, HotPlayersVO o2) {
                 if (o1.upgradeRate > o2.upgradeRate) {
-                    return 1;
-                } else if (o1.upgradeRate == o2.upgradeRate) {
-                    return 0;
-                } else {
                     return -1;
+                } else if (o1.upgradeRate < o2.upgradeRate) {
+                    return 1;
+                } else {
+                    return 0;
                 }
             }
         });
