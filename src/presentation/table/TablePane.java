@@ -26,7 +26,7 @@ public class TablePane extends JPanel{
 	protected JScrollPane content;
 	protected RowContainerPane rowContainer;
 	
-	protected ListType type;
+	public ListType type;
 	protected ArrayList<Integer> wid;
 	protected String firstV;
 	protected boolean hasIndex;

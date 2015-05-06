@@ -64,6 +64,7 @@ protected void getRows(final ArrayList<ArrayList<String>> rowInfos){
 		SortParamHandler sp = new SortParamHandler();
 		ArrayList<ArrayList<String>> datas = new ArrayList<ArrayList<String>>();
 		remove(content);
+		System.out.print(sortBy);
 		if(type == ListType.normal)
 			datas = sp.TeamNormalHandler(sortBy, isDesc);
 		else if(type == ListType.avg)
