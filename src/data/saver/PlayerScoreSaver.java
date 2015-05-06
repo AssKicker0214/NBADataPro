@@ -1263,9 +1263,11 @@ public class PlayerScoreSaver {
 
                 if (this.p_inplacetime[i] > 0) {
                     p_BSP[i] = (this.p_block[i] * ((double) this.p_inplacetimeTeam[i] / 5) / (this.p_inplacetime[i])) / (this.p_throwallTeamB[i] - this.p_throw3allTeamB[i]);
-                    p_assistP[i] = (this.p_helpatt[i] / ((double) this.p_inplacetime[i] / ((double) this.p_inplacetimeTeam[i] / 5))) * this.p_throwinTeam[i] - this.p_throwin[i];
+                    p_assistP[i] = (this.p_helpatt[i] )/ (((double) this.p_inplacetime[i] / ((double) this.p_inplacetimeTeam[i] / 5)) * this.p_throwinTeam[i] - this.p_throwin[i]);
                     p_reboundP[i] = ((this.p_allbas[i] * ((double) this.p_inplacetimeTeam[i] / 5)) / (this.p_inplacetime[i])) / (this.p_allbasTeam[i] + this.p_allbasTeamB[i]);
                     p_OREB[i] = ((this.p_attackbas[i] * ((double) this.p_inplacetimeTeam[i] / 5)) / (this.p_inplacetime[i])) / (this.p_allbasTeam[i] + this.p_allbasTeamB[i]);
+                    if(i == 32)
+                        System.out.println("p_OREB "+p_attackbas[i]+" "+p_inplacetimeTeam[i]+" "+p_inplacetime[i]+" "+p_allbasTeam[i]+" "+p_allbasTeamB[i]+" "+p_OREB[i]);
                     p_DREB[i] = ((this.p_defencebas[i] * ((double) this.p_inplacetimeTeam[i] / 5)) / (this.p_inplacetime[i])) / (this.p_allbasTeam[i] + this.p_allbasTeamB[i]);
                 } else {
                     p_BSP[i] = -1;
@@ -1445,7 +1447,7 @@ public class PlayerScoreSaver {
                     }
                     if (PlayerScoreSaver.this.allbas[i] > 0) {
                         mid_allbas[mid - 1][2] = tid1;
-                        mid_allbas[mid - 1][3] = mid_allbas[mid - 1][1] + PlayerScoreSaver.this.allbas[i];
+                        mid_allbas[mid - 1][3] = mid_allbas[mid - 1][3] + PlayerScoreSaver.this.allbas[i];
                     }
                 }
 
