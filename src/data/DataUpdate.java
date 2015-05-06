@@ -3,6 +3,7 @@ package data;
 import data.input.FileName;
 import data.input.Match;
 import data.saver.*;
+import dataservice.Updatable;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  */
 public class DataUpdate extends Thread {
     private FileName fileName;
-
+    private ArrayList<Updatable> updatables;
     private String path;
     private boolean flag = true;
     public DataUpdate(String path) {
@@ -56,10 +57,21 @@ public class DataUpdate extends Thread {
                     }
                 }
             }
-            for (int i = 0; i < arrayList.size(); i++) {
-                Match.insert(arrayList.get(i), MatchInfoSaver.getMatchInfoSaver(), TeamSaver.getTeamSaver(), PlayerSaver.getPlayerSaver(), PlayerScoreSaver.getPlayerScoreSaver(), MatchScoreSaver.getMatchScoreSaver());
-            }
+
+            if (arrayList.size() > 0) {
+                for (int i = 0; i < arrayList.size(); i++) {
+                    Match.insert(arrayList.get(i), MatchInfoSaver.getMatchInfoSaver(), TeamSaver.getTeamSaver(), PlayerSaver.getPlayerSaver(), PlayerScoreSaver.getPlayerScoreSaver(), MatchScoreSaver.getMatchScoreSaver());
+                }
 //        new Match().insert();
+                for (int i = 0; i < updatables.size(); i++){
+                    updatables.get(i).update();
+                }
+            }
+
         }
+    }
+
+    public void add(Updatable updatable) {
+        updatables.add(updatable);
     }
 }

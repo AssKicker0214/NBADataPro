@@ -4,6 +4,7 @@ import configure.Configure;
 import data.input.Match;
 import data.input.Player;
 import data.input.Team;
+import dataservice.Updatable;
 
 
 /**
@@ -41,6 +42,12 @@ public class DataInitial {
     public static void init(){
         if (flag == false){
             initialData();
+        }
+    }
+
+    public void addUpdatable(Updatable updatable){
+        if (dataUpdate != null){
+            dataUpdate.add(updatable);
         }
     }
 }
