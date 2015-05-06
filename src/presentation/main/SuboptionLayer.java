@@ -88,6 +88,8 @@ public abstract class SuboptionLayer extends JLabel{
 			public void mouseReleased(MouseEvent e) {
 				// TODO Auto-generated method stub
 				imainframe.update(this.getText());
+				hideSuboptions();
+		
 			}
 
 			@Override
