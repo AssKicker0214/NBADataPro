@@ -9,11 +9,11 @@ public class AtlanticDivision  extends SingleDivisionLabel{
 
 	@Override
 	protected void setTeams() {
-		this.add(new SingleTeamLabel("teamsPNG/BOS.png","波士顿","凯尔特人",g));
-		this.add(new SingleTeamLabel("teamsPNG/BKN.png","布鲁克林","篮网",w));
-		this.add(new SingleTeamLabel("teamsPNG/NYK.png","纽约","尼克斯",g));
-		this.add(new SingleTeamLabel("teamsPNG/PHI.png","费城","76人",w));
-		this.add(new SingleTeamLabel("teamsPNG/TOR.png","多伦多","猛龙",g));
+		this.add(new SingleTeamLabel("teamsPNG/BOS.png","Boston","Celtics",g));
+		this.add(new SingleTeamLabel("teamsPNG/BKN.png","Brooklyn","Nets",w));
+		this.add(new SingleTeamLabel("teamsPNG/NYK.png","NewYork","Knicks",g));
+		this.add(new SingleTeamLabel("teamsPNG/PHI.png","Philadelphia","76ers",w));
+		this.add(new SingleTeamLabel("teamsPNG/TOR.png","Toronto","Raptors ",g));
 	}
 
 }

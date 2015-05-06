@@ -13,6 +13,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import presentation.common.PhotoLabel;
+import presentation.main.Mainframe;
+import presentation.player.playerDetail.PlayerMiddlePanel;
+import presentation.team.teamDetail.TeamMiddlePanel;
 
 
 
@@ -41,10 +44,10 @@ public class SingleTeamLabel extends JLabel{
 		setTeamNameLabel(teamName);
 		setTeamLocationLabel(location);
 		setTeamPicLabel(path);
-		
+		this.teamName = teamName;
 		this.addMouseListener(new SingleTeamAction());
 		
-		this.teamName = teamName;
+		
 	}
 	
 	
@@ -83,7 +86,7 @@ public class SingleTeamLabel extends JLabel{
 		jf.setLayout(null);
 		jf.setSize(1280,700);
 		jf.setLocationRelativeTo(null);
-		jf.getContentPane().add(new SingleTeamLabel("teamsPNG/ATL.png","亚特兰大","老鹰",Color.WHITE));
+		jf.getContentPane().add(new SingleTeamLabel("teamsPNG/ATL.png","Atlanta","Hawks",Color.WHITE));
 		jf.setVisible(true);
 	}
 	
@@ -104,8 +107,9 @@ public class SingleTeamLabel extends JLabel{
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
-			singleDivision.teamChose(SingleTeamLabel.this.teamName);
-			System.out.println("singleTeamLabel: "+ SingleTeamLabel.this.teamName);
+			
+			Mainframe.getFrame().restoreIni();
+			Mainframe.getFrame().setContentPane(new TeamMiddlePanel(SingleTeamLabel.this.teamName));
 		}
 
 		@Override

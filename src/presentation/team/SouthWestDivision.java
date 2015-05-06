@@ -9,11 +9,11 @@ public class SouthWestDivision extends SingleDivisionLabel{
 
 	@Override
 	protected void setTeams() {
-		this.add(new SingleTeamLabel("teamsPNG/DAL.png","达拉斯","小牛",g));
-		this.add(new SingleTeamLabel("teamsPNG/HOU.png","休斯顿","火箭",w));
-		this.add(new SingleTeamLabel("teamsPNG/MEM.png","孟菲斯","灰熊",g));
-		this.add(new SingleTeamLabel("teamsPNG/NOP.png","新奥尔兰","鹈鹕",w));
-		this.add(new SingleTeamLabel("teamsPNG/SAS.png","圣安东尼奥","马刺",g));
+		this.add(new SingleTeamLabel("teamsPNG/DAL.png","Dallas","Mavericks",g));
+		this.add(new SingleTeamLabel("teamsPNG/HOU.png","Houston","Rockets",w));
+		this.add(new SingleTeamLabel("teamsPNG/MEM.png","Memphis","Grizzlies",g));
+		this.add(new SingleTeamLabel("teamsPNG/NOP.png","New Orleans","Pelicans",w));
+		this.add(new SingleTeamLabel("teamsPNG/SAS.png","San Antonio","Spurs",g));
 		
 	}
 

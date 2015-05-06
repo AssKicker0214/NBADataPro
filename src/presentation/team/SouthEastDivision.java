@@ -10,11 +10,11 @@ public class SouthEastDivision extends SingleDivisionLabel{
 
 	@Override
 	protected void setTeams() {
-		SingleTeamLabel ATL = new SingleTeamLabel("teamsPNG/ATL.png","亚特兰大","老鹰",g);
-		SingleTeamLabel CHA = new SingleTeamLabel("teamsPNG/CHA.png","夏洛特","黄蜂",w);
-		SingleTeamLabel MIA = new SingleTeamLabel("teamsPNG/MIA.png","迈阿密","热火",g);
-		SingleTeamLabel ORL = new SingleTeamLabel("teamsPNG/ORL.png","奥兰多","魔术",w);
-		SingleTeamLabel WAS = new SingleTeamLabel("teamsPNG/WAS.png","华盛顿","奇才",g);
+		SingleTeamLabel ATL = new SingleTeamLabel("teamsPNG/ATL.png","Atlanta","Hawks",g);
+		SingleTeamLabel CHA = new SingleTeamLabel("teamsPNG/CHA.png","Charlotte","Hornets",w);
+		SingleTeamLabel MIA = new SingleTeamLabel("teamsPNG/MIA.png","Miami","Heat",g);
+		SingleTeamLabel ORL = new SingleTeamLabel("teamsPNG/ORL.png","Orlando","Magic",w);
+		SingleTeamLabel WAS = new SingleTeamLabel("teamsPNG/WAS.png","Washington","Wizards",g);
 
 		this.addTeam(ATL);
 		this.addTeam(CHA);
