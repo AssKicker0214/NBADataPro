@@ -53,6 +53,7 @@ public class HotPlayerOptionsPanel extends JPanel{
 	
 	public void setHotPlayerContentPanel(String sortBy){
 		PlayerDataService pds = new PlayerDataHandel();
+		System.out.print(sortBy);
 		hotPlayerContentPanel = new HotPlayerContentPanel(pds.hotPlayer(5, sortBy));
 		this.add(hotPlayerContentPanel);
 		repaint();
