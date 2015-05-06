@@ -1,10 +1,12 @@
 package presentation.main;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 public abstract class SuboptionLayer extends JLabel{
 
@@ -61,6 +63,8 @@ public abstract class SuboptionLayer extends JLabel{
 
 			public SubOptionLabel(String option){
 			this.setText(option);
+			this.setFont(new Font("Dialog",1,15));
+			this.setHorizontalAlignment(SwingConstants.CENTER);
 			this.setForeground(Color.WHITE);
 			this.setBackground(exicted);
 			this.setOpaque(true);

@@ -47,7 +47,7 @@ public class TeamDataList extends JPanel{
 	
 	public TeamDataList(){
 		this.setLayout(null);
-		this.setBounds(0,160,1280,540);
+		this.setBounds(0,125,1280,540);
 		this.setBackground(Color.WHITE);
 		setTitle();
 		setButtonsBGLabel();

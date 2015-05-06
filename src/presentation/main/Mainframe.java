@@ -92,25 +92,6 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 	}
 	
 	private void setTitleLabel(){
-//		JLabel titleLabel = new JLabel();
-//		titleLabel.setBounds(0, 0, 1280,30);
-//		titleLabel.setBackground(Color.black);
-//		titleLabel.setOpaque(true);
-//		this.add(titleLabel);
-//		titleLabel.addMouseMotionListener(new  MouseMotionListener() {
-//			
-//			@Override
-//			public void mouseMoved(MouseEvent arg0) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//			
-//			@Override
-//			public void mouseDragged(MouseEvent arg0) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//		});
 		TitleLabel titleLabel = new TitleLabel();
 		this.add(titleLabel);
 	}

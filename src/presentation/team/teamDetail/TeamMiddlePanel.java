@@ -167,7 +167,7 @@ public class TeamMiddlePanel  extends JPanel{
 					remove(teamVSTopPanel);
 				}
 				setTopPanel();
-				teamDetailTopPanel.setLocation(0, 30);
+//				teamDetailTopPanel.setLocation(0, 30);
 				setTeamDataPanel();
 				setVisible(true);
 				repaint();				
