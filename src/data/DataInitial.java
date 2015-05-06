@@ -45,9 +45,10 @@ public class DataInitial {
         }
     }
 
-    public void addUpdatable(Updatable updatable){
-        if (dataUpdate != null){
-            dataUpdate.add(updatable);
+    public static void addUpdatable(Updatable updatable){
+        if (dataUpdate == null){
+            init();
         }
+        dataUpdate.add(updatable);
     }
 }
