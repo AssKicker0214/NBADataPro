@@ -29,6 +29,7 @@ public class TeamListPanel extends JPanel{
 		setDivisionHead();
 		setTeams();
 	}
+	
 	private void setHead(){
 		JLabel head1 = new JLabel(" 东部联盟");
 		head1.setFont(new Font("Dialog",1,30));
