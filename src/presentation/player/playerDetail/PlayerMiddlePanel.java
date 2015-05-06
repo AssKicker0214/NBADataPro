@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import dataservice.player.PlayerDataService;
-import dataservice.player.PlayerData_stub;
+import dataservice.player.PlayerDataHandel;
 import presentation.common.SelectLabel;
 import presentation.player.vs.VSContentPanel;
 import presentation.player.vs.PlayersVSTopPanel;
@@ -61,7 +61,7 @@ public class PlayerMiddlePanel extends JPanel{
 	ArrayList<String> avg = new ArrayList<String>();
 	ArrayList<String> total = new ArrayList<String>();
 	ArrayList<SelectLabel> selectLabelGroups = new ArrayList<SelectLabel>();
-	
+	ArrayList<String> itemsNeedAdd = new ArrayList<String>();
 	
 	public PlayerMiddlePanel(String name){
 		this.setLayout(null);
@@ -79,7 +79,7 @@ public class PlayerMiddlePanel extends JPanel{
 	}
 	
 	public void setAttri(String name){
-		PlayerDataService pds = new PlayerData_stub();
+		PlayerDataService pds = new PlayerDataHandel();
 		PlayerVO voL = pds.avgLeague(); 
 		PlayerVO voP = pds.findPlayerData(name); 
 		vo = voP;
@@ -96,6 +96,11 @@ public class PlayerMiddlePanel extends JPanel{
 		total.add("2012-2013");total.add(voP.team);total.add(voP.numOfGame+"");total.add(voP.start+"");total.add(voP.minute+"");total.add(voP.shot+"");total.add(voP.three+"");
 		total.add(voP.penalty+"");total.add(voP.offend+"");total.add(voP.defend+"");total.add(voP.rebound+"");total.add(voP.assist+"");total.add(voP.steal+"");
 		total.add(voP.blockShot+"");total.add(voP.fault+"");total.add(voP.foul+"");total.add(voP.point+"");
+		itemsNeedAdd.add("场均得分");
+		itemsNeedAdd.add("场均助攻");
+		itemsNeedAdd.add("场均篮板"); 
+		itemsNeedAdd.add("三分％"); 
+		itemsNeedAdd.add("罚球％");
 
 	}
 	
@@ -279,11 +284,11 @@ public class PlayerMiddlePanel extends JPanel{
 				}
 				if(vsTopPanel != null){
 					remove(vsTopPanel);
-					setVSTopPanel(PlayerMiddlePanel.this,vo); 
+					setVSTopPanel(PlayerMiddlePanel.this); 
 				}else{
-					setVSTopPanel(PlayerMiddlePanel.this,vo); 
+					setVSTopPanel(PlayerMiddlePanel.this); 
 				}
-				setVSPanel();
+				setVSPanel(player,leagueAvg);
 				setVisible(true);
 				repaint();
 			}
@@ -316,26 +321,15 @@ public class PlayerMiddlePanel extends JPanel{
 		repaint();
 	}
 	
-	public void setVSPanel(){
-		//
-		ArrayList<String> itemsNeedAdd = new ArrayList<String>();
-		ArrayList<Double> avg1 = new ArrayList<Double>();
-		ArrayList<Double> avg2 = new ArrayList<Double>();
-		
-		itemsNeedAdd.add("场均得分"); avg1.add(5.9); avg2.add(10.043);
-		itemsNeedAdd.add("场均助攻"); avg1.add(1.0); avg2.add(2.159);
-		itemsNeedAdd.add("场均篮板"); avg1.add(4.4); avg2.add(4.469);
-		itemsNeedAdd.add("三分％"); 	avg1.add(30.0); avg2.add(34.5);
-		itemsNeedAdd.add("罚球％");	avg1.add(78.4); avg2.add(74.3);
-		//
-		vsContentPanel = new VSContentPanel(itemsNeedAdd,avg1,avg2);
+	public void setVSPanel(ArrayList<Double> player,ArrayList<Double> leagueAvg){
+		vsContentPanel = new VSContentPanel(itemsNeedAdd,player,leagueAvg);
 		this.add(vsContentPanel);
 		repaint();
 	}
 	
 	
-	public void setVSTopPanel(JPanel middle,PlayerVO localvo){
-		vsTopPanel = new PlayersVSTopPanel(middle,localvo);
+	public void setVSTopPanel(PlayerMiddlePanel middle){
+		vsTopPanel = new PlayersVSTopPanel(middle,vo);
 		this.add(vsTopPanel);
 		repaint();
 	}

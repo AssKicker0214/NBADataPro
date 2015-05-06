@@ -3,13 +3,21 @@ package presentation.match;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import dataservice.match.MatchDataService;
+import dataservice.match.MatchDataHandel;
+import dataservice.match.MatchData_stub;
 import presentation.common.PhotoLabel;
+import presentation.main.Mainframe;
+import presentation.team.teamDetail.TeamMiddlePanel;
+import vo.matchvo.MatchVO;
 
 public class MatchAnalyseTopPanel extends JPanel{
 
@@ -27,10 +35,16 @@ public class MatchAnalyseTopPanel extends JPanel{
 	JLabel partialScoreLabelGroups;//小比分群
 	JLabel scoreLabel;//小比分群
 	
-	public MatchAnalyseTopPanel(){
+	MatchDataAnalysePanel matchDataAnalysePanel;
+	
+	MatchVO vo;
+	public MatchAnalyseTopPanel(int matchID){
 		this.setLayout(null);
 		this.setBounds(0, 0, 1280,700);
 		this.setBackground(Color.WHITE);
+		MatchDataService mds = new MatchData_stub();
+		vo = mds.findMatch(matchID);
+		
 		setDataLabel();
 		setsetLocalTeamPhotoLabel();
 		setAnotherTeamPhotoLabel();
@@ -38,10 +52,11 @@ public class MatchAnalyseTopPanel extends JPanel{
 		setLocalInfoGroupsLabel();
 		setAnotherInfoGroupsLabel();
 		setScoreLabel();
+		setMatchDataAnalysePanel();
 	}
 	
 	public void setDataLabel(){
-		dateLabel = new JLabel("10月7日",JLabel.CENTER);
+		dateLabel = new JLabel(vo.date,JLabel.CENTER);
 		dateLabel.setFont(new Font("Dialog",1,15));
 		dateLabel.setForeground(Color.DARK_GRAY);
 		dateLabel.setBackground(Color.LIGHT_GRAY);
@@ -51,22 +66,38 @@ public class MatchAnalyseTopPanel extends JPanel{
 	}
 	
 	private void setsetLocalTeamPhotoLabel(){
-		localTeamPhotoLabel = new PhotoLabel(new ImageIcon("teamsPNG/ATL.png").getImage());
+		localTeamPhotoLabel = new PhotoLabel(new ImageIcon("teamsPNG/"+vo.homeTeam.photo+".png").getImage());
 //		localTeamPhotoLabel.setHorizontalAlignment(JLabel.RIGHT);
 		localTeamPhotoLabel.setBounds(350,0,200,150);
 		localTeamPhotoLabel.setBackground(Color.WHITE);
 		localTeamPhotoLabel.setOpaque(true);
 		localTeamPhotoLabel.setVisible(true);
+		localTeamPhotoLabel.addMouseListener(new MouseAdapter(){
+			@Override
+			public void mousePressed(MouseEvent e) {
+				Mainframe.getFrame().restoreIni();
+				Mainframe.getFrame().setContentPane(new TeamMiddlePanel(vo.homeTeam.name));
+			}
+		
+		});
 		this.add(localTeamPhotoLabel);
 	}
 	
 	public void setAnotherTeamPhotoLabel (){
-		anotherTeamPhotoLabel = new PhotoLabel(new ImageIcon("teamsPNG/ATL.png").getImage());
+		anotherTeamPhotoLabel = new PhotoLabel(new ImageIcon("teamsPNG/"+vo.guestTeam.photo+".png").getImage());
 		anotherTeamPhotoLabel.setHorizontalAlignment(JLabel.RIGHT);
 		anotherTeamPhotoLabel.setBounds(730,0,180,150);
 		anotherTeamPhotoLabel.setBackground(Color.white);
 		anotherTeamPhotoLabel.setOpaque(true);
 		anotherTeamPhotoLabel.setVisible(true);
+		anotherTeamPhotoLabel.addMouseListener(new MouseAdapter(){
+			@Override
+			public void mousePressed(MouseEvent e) {
+				Mainframe.getFrame().restoreIni();
+				Mainframe.getFrame().setContentPane(new TeamMiddlePanel(vo.guestTeam.name));
+			}
+		
+		});
 		this.add(anotherTeamPhotoLabel);
 	}
 	
@@ -87,13 +118,13 @@ public class MatchAnalyseTopPanel extends JPanel{
 		localInfoGroupsLabel.setOpaque(true);
 		localInfoGroupsLabel.setBackground(Color.BLACK);
 
-		JLabel localScore = new JLabel("87",JLabel.CENTER);
+		JLabel localScore = new JLabel(vo.homePoint+"",JLabel.CENTER);
 		localScore.setFont(new Font("Dialog",1,30));
 		localScore.setForeground(Color.WHITE);
 		localScore.setBounds(250,0,100,55);
 		localInfoGroupsLabel.add(localScore);
 
-		JLabel playerName = new JLabel("新奥尔良 鹈鹕",JLabel.CENTER);
+		JLabel playerName = new JLabel(vo.homeTeam.location+" "+vo.homeTeam.name,JLabel.CENTER);
 		playerName.setFont(new Font("Dialog",1,20));
 		playerName.setForeground(Color.WHITE);
 		playerName.setBounds(55,0,180,55);
@@ -108,13 +139,13 @@ public class MatchAnalyseTopPanel extends JPanel{
 		anotherInfoGroupsLabel.setOpaque(true);
 		anotherInfoGroupsLabel.setBackground(Color.BLACK);
 		
-		JLabel anotherNum = new JLabel("93",JLabel.CENTER);
+		JLabel anotherNum = new JLabel(vo.guestPoint+"",JLabel.CENTER);
 		anotherNum.setFont(new Font("Dialog",1,30));
 		anotherNum.setForeground(Color.WHITE);
 		anotherNum.setBounds(0,0,100,55);
 		anotherInfoGroupsLabel.add(anotherNum);
 		
-		JLabel anotherName = new JLabel("亚特兰大 老鹰");
+		JLabel anotherName = new JLabel(vo.guestTeam.location+" "+vo.guestTeam.name,JLabel.CENTER);
 		anotherName.setFont(new Font("Dialog",1,20));
 		anotherName.setForeground(Color.WHITE);
 		anotherName.setBounds(100,0,180,55);
@@ -156,14 +187,13 @@ public class MatchAnalyseTopPanel extends JPanel{
 		partialScoreLabelGroups.setBackground(Color.LIGHT_GRAY);
 		partialScoreLabelGroups.setLayout(new GridLayout(1,5,0,0));
 		
-		for(int i = 0 ; i < 5 ; i++){
-			if(i == 4){
-				partialScoreLabelGroups.add(setSinglePartialScoreLabel("","24","32"));
-			}else{
-				partialScoreLabelGroups.add(setSinglePartialScoreLabel(i+1+"","24","32"));
-			}
-		}
 		
+		partialScoreLabelGroups.add(setSinglePartialScoreLabel("1","24","32"));
+		partialScoreLabelGroups.add(setSinglePartialScoreLabel("2","24","32"));
+		partialScoreLabelGroups.add(setSinglePartialScoreLabel("3","24","32"));
+		partialScoreLabelGroups.add(setSinglePartialScoreLabel("4","24","32"));
+		partialScoreLabelGroups.add(setSinglePartialScoreLabel("","24","32"));
+
 		scoreLabel.add(partialScoreLabelGroups);
 	}
 	
@@ -175,13 +205,13 @@ public class MatchAnalyseTopPanel extends JPanel{
 		scoreLabel.setOpaque(true);
 		scoreLabel.setBackground(Color.LIGHT_GRAY);
 		
-		JLabel name = new JLabel("鹈鹕",JLabel.CENTER);
+		JLabel name = new JLabel(vo.homeTeam.name,JLabel.CENTER);
 		name.setFont(new Font("Dialog",1,15));
 		name.setForeground(Color.WHITE);
 		name.setBounds(0,20,35,20);
 		scoreLabel.add(name);
 		
-		JLabel anotherName = new JLabel("老鹰",JLabel.CENTER);
+		JLabel anotherName = new JLabel(vo.guestTeam.name,JLabel.CENTER);
 		anotherName.setFont(new Font("Dialog",1,15));
 		anotherName.setForeground(Color.WHITE);
 		anotherName.setBounds(0,40,35,20);
@@ -191,6 +221,13 @@ public class MatchAnalyseTopPanel extends JPanel{
 		setPartialScoreGroupsLabel();
 	}
 
+	public void setMatchDataAnalysePanel(){
+		String[] msg = {vo.homeTeam.location+" "+vo.homeTeam.name,"teamsPNG/"+vo.homeTeam.photo+".png",
+				vo.guestTeam.location+" "+vo.guestTeam.name,"teamsPNG/"+vo.guestTeam.photo+".png"};
+		matchDataAnalysePanel = new MatchDataAnalysePanel(vo.homeTeamPlayer,vo.guestTeamPlayer,msg);
+		this.add(matchDataAnalysePanel);
+		repaint();
+	}
 
 
 	public static void main(String[] args){
@@ -198,7 +235,7 @@ public class MatchAnalyseTopPanel extends JPanel{
 		jf.setLayout(null);
 		jf.setSize(1280,700);
 		jf.setLocationRelativeTo(null);
-		jf.add(new MatchAnalyseTopPanel());
+		jf.add(new MatchAnalyseTopPanel(1));
 		jf.setVisible(true);
 	}
 

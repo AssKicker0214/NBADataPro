@@ -1,6 +1,7 @@
 package presentation.table;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -13,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import presentation.common.PhotoLabel;
+import presentation.main.Mainframe;
+import presentation.match.MatchAnalyseTopPanel;
 
 public class RowPane extends JPanel {
 	/**
@@ -67,7 +70,11 @@ public class RowPane extends JPanel {
 		block.addMouseListener(new MouseAdapter(){
 			@Override
 			public void mousePressed(MouseEvent e) {
-				System.out.println("match");
+				
+				Component[] labels =  getComponents();
+				System.out.println(((JLabel) labels[2]).getText());
+				Mainframe.getFrame().restoreIni();
+				Mainframe.getFrame().setContentPane(new MatchAnalyseTopPanel(Integer.parseInt(((JLabel) labels[2]).getText())));
 			}
 		
 		});

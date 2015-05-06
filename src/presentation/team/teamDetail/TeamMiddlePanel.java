@@ -1,4 +1,4 @@
-package presentation.team.teamDetail;
+ package presentation.team.teamDetail;
 
 import java.awt.Color;
 import java.awt.Point;
@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import dataservice.team.TeamDataService;
-import dataservice.team.TeamData_stub;
+import dataservice.team.TeamDataHandel;
 import presentation.common.SelectLabel;
 import presentation.player.vs.VSContentPanel;
 import presentation.team.vs.TeamVSTopPanel;
@@ -22,6 +22,7 @@ public class TeamMiddlePanel  extends JPanel{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	SelectLabel DataLabel;//球队资料
 	SelectLabel MemberLabel;//球队阵容
 	SelectLabel LatestMatchLabel;//近5场比赛
@@ -39,12 +40,20 @@ public class TeamMiddlePanel  extends JPanel{
 	
 	TeamVO vo;
 	
+	ArrayList<Double> team = new ArrayList<Double>();
+	ArrayList<Double> avg = new ArrayList<Double>();//初始右边为0
 	ArrayList<SelectLabel> selectLabelGroups = new ArrayList<SelectLabel>();
+	ArrayList<String> itemsNeedAdd = new ArrayList<String>();
 
 	public TeamMiddlePanel(String name){
 		this.setLayout(null);
 		this.setBounds(0, 35, 1280,670);
 		this.setBackground(Color.WHITE);
+		
+		TeamDataService tds =  new TeamDataHandel();
+		System.out.println(name);
+		vo = tds.findTeamInfo(name);
+		setAttri(name);
 		setTopPanel();
 		setContrastLabel();
 		setMemberLabel();
@@ -52,11 +61,23 @@ public class TeamMiddlePanel  extends JPanel{
 		setPastLabel();
 		setCompareTeamsLabel();
 		
-		TeamDataService tds =  new TeamData_stub();
-		vo = tds.findTeamInfo(name);
 		setTeamDataPanel();
 		DataLabel.setBackground(Color.GRAY);
 	}
+	
+	public void setAttri(String name){
+		team.add(vo.avgPoint);team.add(vo.avgRebound);team.add(vo.avgAssist);
+		team.add(vo.three);team.add(vo.penalty);
+		for(int i = 0; i < 5;i++){
+			avg.add(0.0);
+		}
+		itemsNeedAdd.add("场均得分");
+		itemsNeedAdd.add("场均助攻");
+		itemsNeedAdd.add("场均篮板"); 
+		itemsNeedAdd.add("三分％"); 
+		itemsNeedAdd.add("罚球％");
+	}
+
 	
 	public void setSelectedGroups(SelectLabel s){
 		selectLabelGroups.clear();
@@ -97,24 +118,14 @@ public class TeamMiddlePanel  extends JPanel{
 		repaint();
 	}
 	
-	public void setTeamVSPanel(){
-		ArrayList<String> itemsNeedAdd = new ArrayList<String>();
-		ArrayList<Double> avg1 = new ArrayList<Double>();
-		ArrayList<Double> avg2 = new ArrayList<Double>();
-		
-		itemsNeedAdd.add("场均得分"); avg1.add(5.9); avg2.add(10.043);
-		itemsNeedAdd.add("场均助攻"); avg1.add(1.0); avg2.add(2.159);
-		itemsNeedAdd.add("场均篮板"); avg1.add(4.4); avg2.add(4.469);
-		itemsNeedAdd.add("三分％"); 	avg1.add(30.0); avg2.add(34.5);
-		itemsNeedAdd.add("罚球％");	avg1.add(78.4); avg2.add(74.3);
-
-		vsContentPanel = new VSContentPanel(itemsNeedAdd,avg1,avg2);
+	public void setTeamVSPanel(ArrayList<Double> team,ArrayList<Double> avg){
+		vsContentPanel = new VSContentPanel(itemsNeedAdd,team,avg);
 		this.add(vsContentPanel);
 		repaint();
 	}
 
-	public void setVSTopPanel(){
-		teamVSTopPanel = new TeamVSTopPanel();
+	public void setVSTopPanel(TeamMiddlePanel middle){
+		teamVSTopPanel = new TeamVSTopPanel(middle,vo);
 		this.add(teamVSTopPanel);
 		repaint();
 	}
@@ -122,6 +133,7 @@ public class TeamMiddlePanel  extends JPanel{
 	public void setTopPanel (){
 		teamDetailTopPanel = new TeamDetailTopPanel(vo);
 		this.add(teamDetailTopPanel);
+		repaint();
 	}
 	
 	public void setContrastLabel(){
@@ -320,7 +332,8 @@ public class TeamMiddlePanel  extends JPanel{
 				if(teamVSTopPanel != null){
 					remove(teamVSTopPanel);
 				}
-				setVSTopPanel();
+				setVSTopPanel(TeamMiddlePanel.this);
+				setTeamVSPanel(team,avg);
 				setVisible(true);
 				repaint();		
 			}
@@ -335,7 +348,7 @@ public class TeamMiddlePanel  extends JPanel{
 		jf.setLayout(null);
 		jf.setSize(1280,700);
 		jf.setLocationRelativeTo(null);
-//		jf.add(new TeamMiddlePanel());
+		jf.add(new TeamMiddlePanel("Hawks"));
 		jf.setVisible(true);
 	}
 	

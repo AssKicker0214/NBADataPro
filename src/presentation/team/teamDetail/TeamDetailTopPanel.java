@@ -31,6 +31,7 @@ public class TeamDetailTopPanel  extends JPanel{
 	
 	public TeamDetailTopPanel(TeamVO v){
 		vo = v;
+
 		this.setLayout(null);
 		this.setBounds(0, 0, 1280,200);
 		this.setBackground(Color.white);

@@ -3,6 +3,7 @@ package presentation.player.vs;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -17,8 +18,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import dataservice.player.PlayerDataService;
-import dataservice.player.PlayerData_stub;
+import dataservice.player.PlayerDataHandel;
 import presentation.common.PhotoLabel;
+import presentation.player.playerDetail.PlayerMiddlePanel;
 import vo.playervo.PlayerVO;
 
 
@@ -38,6 +40,8 @@ public class PlayersVSTopPanel extends JPanel{
 	JLabel localInfoGroupsLabel;
 	JLabel anotherInfoGroupsLabel;
 	
+	VSContentPanel vsContentPanel;
+	
 	JLabel chooseList;
 	
 	JLabel searchLabel;
@@ -51,39 +55,47 @@ public class PlayersVSTopPanel extends JPanel{
 	
 	public String msg;
 	JPanel main;
-	PlayerVO initVO;
+	
+	PlayerVO anotherVO = new PlayerVO();
 	PlayerVO localVO;
 
 	public PlayersVSTopPanel(JPanel middle,PlayerVO localvo){
-		this.localVO = localvo;
 		this.setLayout(null);
 		this.setBounds(0, 0, 1280,197);
 		this.setBackground(Color.WHITE);
+		this.localVO = localvo;
 		
-		setLocalInfoGroupsLabel(localvo);
 		setAttri();
-		setAnotherInfoGroupsLabel(initVO);
-
 		setLocalPlayerPhotoLabel();
 		setAnotherPlayerPhotoLabel();
 		setLocalTeamPhotoLabel();
 		setAnotherTeamPhotoLabel();
 		setVSUpLabel();
 		setVSDownLabel();
+		setLocalInfoGroupsLabel();
+		
+		setAnotherInfoGroupsLabel();
 		setSearchLabel();
 		searchLabel.setVisible(false);
 		this.main = middle;
+		
+//		ArrayList<PlayerVO> list = new ArrayList<PlayerVO>();
+//		PlayerDataService pds = new PlayerDataHandel();
+//		list = pds.findPlayers(searchText.getText());
+//		setChooseList(list);
 	}
 	
 	public void setAttri(){
-		initVO.number = 0;
-		initVO.name = "NBA联盟平均数";
-		initVO.photo = "nba";
-		initVO.teamName = "transparent";
+		
+		anotherVO.number = 0;
+		anotherVO.name = "NBA联盟平均数";
+		anotherVO.photo = "nba";
+		anotherVO.teamName = "transparent";
 	}
+
 	
 	public void setLocalPlayerPhotoLabel (){
-		localPlayerPhotoLabel = new PhotoLabel(new ImageIcon("teamsPNG/" + localVO.photo + ".png").getImage());
+		localPlayerPhotoLabel = new PhotoLabel(new ImageIcon("portrait/" + localVO.photo + ".png").getImage());
 		localPlayerPhotoLabel.setHorizontalAlignment(JLabel.RIGHT);
 		localPlayerPhotoLabel.setBounds(300,-5,230,150);
 		localPlayerPhotoLabel.setBackground(Color.WHITE);
@@ -93,7 +105,7 @@ public class PlayersVSTopPanel extends JPanel{
 	}
 	
 	public void setLocalTeamPhotoLabel (){
-		localTeamPhotoLabel = new PhotoLabel(new ImageIcon("portrait/" + localVO.teamName + ".png").getImage());
+		localTeamPhotoLabel = new PhotoLabel(new ImageIcon("teamsPNG/" + localVO.teamName + ".png").getImage());
 		localTeamPhotoLabel.setHorizontalAlignment(JLabel.RIGHT);
 		localTeamPhotoLabel.setBounds(140,-10,250,120);
 		localTeamPhotoLabel.setBackground(Color.WHITE);
@@ -111,7 +123,7 @@ public class PlayersVSTopPanel extends JPanel{
 	}
 	
 	public void setAnotherTeamPhotoLabel (){
-		anotherTeamPhotoLabel = new PhotoLabel(new ImageIcon("teamsPNG/" + initVO.teamName + ".png").getImage());
+		anotherTeamPhotoLabel = new PhotoLabel(new ImageIcon("portrait/" + anotherVO.teamName + ".png").getImage());
 		anotherTeamPhotoLabel.setHorizontalAlignment(JLabel.RIGHT);
 		anotherTeamPhotoLabel.setBounds(955,-10,250,120);
 		anotherTeamPhotoLabel.setBackground(Color.WHITE);
@@ -121,7 +133,7 @@ public class PlayersVSTopPanel extends JPanel{
 	}
 
 	public void setAnotherPlayerPhotoLabel (){
-		anotherPlayerPhotoLabel = new PhotoLabel(new ImageIcon("portrait/" + initVO.photo + ".png").getImage());
+		anotherPlayerPhotoLabel = new PhotoLabel(new ImageIcon("portrait/" + anotherVO.photo + ".png").getImage());
 		anotherPlayerPhotoLabel.setHorizontalAlignment(JLabel.RIGHT);
 		anotherPlayerPhotoLabel.setBounds(730,-5,230,150);
 		anotherPlayerPhotoLabel.setBackground(Color.WHITE);
@@ -130,13 +142,13 @@ public class PlayersVSTopPanel extends JPanel{
 		this.add(anotherPlayerPhotoLabel);
 	}
 		
-	public void setLocalInfoGroupsLabel(PlayerVO playerVO){
+	public void setLocalInfoGroupsLabel(){
 		localInfoGroupsLabel = new JLabel();
 		localInfoGroupsLabel.setBounds(0,145,535,55);
 		localInfoGroupsLabel.setOpaque(true);
 		localInfoGroupsLabel.setBackground(light);
 
-		JLabel playerNum = new JLabel(playerVO.number + "",JLabel.CENTER);
+		JLabel playerNum = new JLabel(localVO.number + "",JLabel.CENTER);
 		playerNum.setFont(new Font("Dialog",1,30));
 		playerNum.setForeground(Color.WHITE);
 		playerNum.setBackground(darkest);
@@ -144,13 +156,13 @@ public class PlayersVSTopPanel extends JPanel{
 		playerNum.setBounds(0,0,100,60);
 		localInfoGroupsLabel.add(playerNum);
 
-		JLabel playerName = new JLabel(playerVO.name,JLabel.CENTER);
+		JLabel playerName = new JLabel(localVO.name,JLabel.CENTER);
 		playerName.setFont(new Font("Dialog",1,18));
 		playerName.setForeground(Color.WHITE);
 		playerName.setBounds(355,5,180,30);
 		localInfoGroupsLabel.add(playerName);
 		
-		JLabel playerPos = new JLabel(playerVO.position,JLabel.CENTER);
+		JLabel playerPos = new JLabel(localVO.position,JLabel.CENTER);
 		playerPos.setFont(new Font("Dialog",1,13));
 		playerPos.setForeground(Color.WHITE);
 		playerPos.setBounds(390,32,180,15);
@@ -159,13 +171,13 @@ public class PlayersVSTopPanel extends JPanel{
 		this.add(localInfoGroupsLabel);
 	}
 	
-	public void setAnotherInfoGroupsLabel(PlayerVO playerVO){
+	public void setAnotherInfoGroupsLabel(){
 		anotherInfoGroupsLabel = new JLabel();
 		anotherInfoGroupsLabel.setBounds(715,145,565,55);
 		anotherInfoGroupsLabel.setOpaque(true);
 		anotherInfoGroupsLabel.setBackground(light);
 		
-		JLabel anotherNum = new JLabel(playerVO.number + "",JLabel.CENTER);
+		JLabel anotherNum = new JLabel(anotherVO.number + "",JLabel.CENTER);
 		anotherNum.setFont(new Font("Dialog",1,30));
 		anotherNum.setForeground(Color.WHITE);
 		anotherNum.setBackground(darkest);
@@ -173,13 +185,13 @@ public class PlayersVSTopPanel extends JPanel{
 		anotherNum.setBounds(415,0,100,60);
 		anotherInfoGroupsLabel.add(anotherNum);
 		
-		JLabel anotherName = new JLabel(playerVO.name);
+		JLabel anotherName = new JLabel(anotherVO.name);
 		anotherName.setFont(new Font("Dialog",1,18));
 		anotherName.setForeground(Color.WHITE);
 		anotherName.setBounds(15,5,180,30);
 		anotherInfoGroupsLabel.add(anotherName);
 		
-		JLabel anotherPos = new JLabel(playerVO.position);
+		JLabel anotherPos = new JLabel(anotherVO.position);
 		anotherPos.setFont(new Font("Dialog",1,13));
 		anotherPos.setForeground(Color.WHITE);
 		anotherPos.setBounds(15,32,180,15);
@@ -187,10 +199,10 @@ public class PlayersVSTopPanel extends JPanel{
 		settingLabel();
 		this.add(anotherInfoGroupsLabel);
 	}
+
 	
 	public void settingLabel(){
 		settingLabel = new PhotoLabel(new ImageIcon("setting.png").getImage());
-//		settingLabel.setHorizontalAlignment(JLabel.RIGHT);
 		settingLabel.setBounds(525,13,25,25);
 		settingLabel.setBackground(light);
 		settingLabel.setOpaque(true);
@@ -229,7 +241,7 @@ public class PlayersVSTopPanel extends JPanel{
 				msg = searchText.getText();
 //				System.out.println("AAAAAAAAAAA" + msg);
 				ArrayList<PlayerVO> list = new ArrayList<PlayerVO>();
-				PlayerDataService pds = new PlayerData_stub();
+				PlayerDataService pds = new PlayerDataHandel();
 				list = pds.findPlayers(msg);
 				setChooseList(list);
 				main.add(chooseList,0);
@@ -250,7 +262,9 @@ public class PlayersVSTopPanel extends JPanel{
 		for(int i = 0; i < list.size(); i++){
 			JLabel item = new JLabel();
 			item.setSize(280, 50);
-			
+			item.setBackground(Color.WHITE);
+			item.setOpaque(true);
+
 			JLabel name = new JLabel(list.get(i).name,JLabel.LEADING);
 			name.setBounds(100,0,100,50);
 			name.setForeground(darkest);
@@ -276,8 +290,9 @@ public class PlayersVSTopPanel extends JPanel{
 				@Override
 				public void mousePressed(MouseEvent e) {
 					PlayersVSTopPanel.this.setVisible(false);
-					PlayerDataService pds = new PlayerData_stub();
-					initVO = pds.avgLeague(); 
+					PlayerDataService pds = new PlayerDataHandel();
+					anotherVO = pds.findPlayerData(name.getText()); 
+										
 					if(anotherPlayerPhotoLabel != null){
 						remove(anotherPlayerPhotoLabel);
 					}
@@ -287,9 +302,24 @@ public class PlayersVSTopPanel extends JPanel{
 					if(anotherInfoGroupsLabel != null){
 						remove(anotherInfoGroupsLabel);
 					}
-					setAnotherInfoGroupsLabel(initVO);
+					setAnotherInfoGroupsLabel();
 					setAnotherPlayerPhotoLabel();
 					setAnotherTeamPhotoLabel();
+					chooseList.setVisible(false);
+					PlayersVSTopPanel.this.setVisible(true);
+					PlayersVSTopPanel.this.repaint();
+
+					ArrayList<Double> local = new ArrayList<Double>();
+					ArrayList<Double> another = new ArrayList<Double>();
+					local.add(localVO.avgPoint);local.add(localVO.avgRebound);local.add(localVO.avgAssist);
+					local.add(localVO.three);local.add(localVO.penalty);
+					another.add(anotherVO.avgPoint);another.add(anotherVO.avgRebound);another.add(anotherVO.avgAssist);
+					another.add(anotherVO.three);another.add(anotherVO.penalty);
+					
+					main.setVisible(false);
+					main.remove(main.getComponentAt(new Point(30,300)));
+					((PlayerMiddlePanel) main).setVSPanel(local,another);
+					main.setVisible(true);
 
 				}
 				

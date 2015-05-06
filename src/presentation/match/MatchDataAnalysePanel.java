@@ -15,6 +15,8 @@ import javax.swing.JPanel;
 import presentation.common.PhotoLabel;
 import presentation.common.SelectLabel;
 import presentation.table.TablePane;
+import presentation.table.playerTablePanel;
+import vo.matchvo.MatchContentPlayerVO;
 
 public class MatchDataAnalysePanel extends JPanel{
 
@@ -37,15 +39,23 @@ public class MatchDataAnalysePanel extends JPanel{
 	TablePane InfoTable;
 
 	ArrayList<SelectLabel> selectLabelGroups = new ArrayList<SelectLabel>();
+	
+	ArrayList<MatchContentPlayerVO> home; 
+	ArrayList<MatchContentPlayerVO> guest;
+	String[] teamInfo = {"","","",""};
 
-	public MatchDataAnalysePanel(){
+	
+	public MatchDataAnalysePanel(ArrayList<MatchContentPlayerVO> homeTeamPlayer, ArrayList<MatchContentPlayerVO> guestTeamPlayer, String[] msg){
 		this.setLayout(null);
-		this.setBounds(0,212,1280,540);
+		this.setBounds(0,215,1280,540);
 		this.setBackground(Color.WHITE);
+		home = homeTeamPlayer;
+		guest = guestTeamPlayer;
+		teamInfo = msg;
 		setTitle();
 		setButtonsBGLabel();
-		setTeamLabel("亚特兰大 老鹰","teamsPNG/ATL.png");
-		setInfoTablePanel();
+		setTeamLabel(teamInfo[0],teamInfo[1]);
+		setInfoTablePanel(home);
 //		setButtonsBGLabel();
 //		basicInfoButton.setBackground(pressed);
 //		setBasicInfoTablePanel();
@@ -128,11 +138,11 @@ public class MatchDataAnalysePanel extends JPanel{
 			if(InfoTable!=null){
 				MatchDataAnalysePanel.this.remove(InfoTable);
 			}
-			setInfoTablePanel(); 
 			if(teamLabel!=null){
 				MatchDataAnalysePanel.this.remove(teamLabel);
 			}
-//			setTeamLabel();
+			setTeamLabel(teamInfo[0],teamInfo[1]);
+			setInfoTablePanel(home);
 			setVisible(true);
 			repaint();	
 		}
@@ -178,8 +188,21 @@ public class MatchDataAnalysePanel extends JPanel{
 
 		@Override
 		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-			
+			setVisible(false);
+			setButtonsBGLabel();
+			secPageButton.isSelected = true;
+			secPageButton.setBackground(pressed);
+			setSelectedGroups(secPageButton);
+			if(InfoTable!=null){
+				MatchDataAnalysePanel.this.remove(InfoTable);
+			}
+			if(teamLabel!=null){
+				MatchDataAnalysePanel.this.remove(teamLabel);
+			}
+			setTeamLabel(teamInfo[2],teamInfo[3]);
+			setInfoTablePanel(guest);
+			setVisible(true);
+			repaint();				
 		}
 
 		@Override
@@ -212,34 +235,21 @@ public class MatchDataAnalysePanel extends JPanel{
 		TitleLabel.add(ButtonsBGLabel,0);
 	}
 	
-	public void setInfoTablePanel(){
-//		sortParam s = new sortParam("point",true);
-//		ArrayList<sortParam> sortBy = new ArrayList<sortParam>();
-//		sortBy.add(s);
-//		ArrayList<PlayerVO> vo = pds.sortPlayerInfo(sortBy);
-//		PlayerVO2List v2l = new PlayerVO2List();
-//		ArrayList<ArrayList<String>> datas = v2l.basicInfo(vo);
+	public void setInfoTablePanel(ArrayList<MatchContentPlayerVO> playersdata){
+
+		String[] columns = {"姓名","日期","","对手","分钟","％","命中","出手","三分％","罚球％",
+				"进攻篮板","防守篮板","篮板","助攻","盖帽","失误","犯规","得分"};
+				
+		MatchVO2List m2l = new MatchVO2List();
+		ArrayList<ArrayList<String>> datas = m2l.matchDeitail(playersdata);
 		
-		ArrayList<String> l = new ArrayList<String>();
-		for(int i =0;i<21;i++){
-			l.add("20.0");
+		ArrayList<Integer> w = new ArrayList<Integer>();
+		w.add(100);w.add(150);w.add(0);w.add(150);
+		for(int i = 0; i < 14 ; i++){
+			w.add(60);
 		}
-		ArrayList<ArrayList<String>> datas = new ArrayList<ArrayList<String>>();
-		for(int i = 0;i<20;i++){
-			datas.add(l);
-		}
-			
-		String[] header = {"姓名","位置","分钟","％","命中","出手","三分％","三分命中","三分出手",
-				"罚球％","罚球命中","罚球出手","进攻","防守","篮板","助攻","犯规","抢断","失误","盖帽","得分"};
-		ArrayList<Integer> wid = new ArrayList<Integer>();
-		wid.add(50);wid.add(50);
-		wid.add(60);wid.add(60);wid.add(60);wid.add(60);
-		wid.add(60);wid.add(60);wid.add(60);wid.add(60);
-		wid.add(60);wid.add(60);wid.add(60);wid.add(60);
-		wid.add(60);wid.add(60);wid.add(60);wid.add(60);
-		wid.add(60);wid.add(60);wid.add(60);
 		
-		InfoTable = new TablePane(datas,header,wid,0,100,1280,355,30,true,false);
+		InfoTable = new playerTablePanel(datas,columns,w,0,100,1280,340,30,false,false);
 		this.add(InfoTable);
 	}
 
@@ -249,7 +259,7 @@ public class MatchDataAnalysePanel extends JPanel{
 		jf.setLayout(null);
 		jf.setSize(1280,700);
 		jf.setLocationRelativeTo(null);
-		jf.add(new MatchDataAnalysePanel());
+//		jf.add(new MatchDataAnalysePanel());
 		jf.setVisible(true);
 	}
 

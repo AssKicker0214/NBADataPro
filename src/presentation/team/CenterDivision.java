@@ -9,11 +9,11 @@ public class CenterDivision  extends SingleDivisionLabel{
 
 	@Override
 	protected void setTeams() {
-		this.add(new SingleTeamLabel("teamsPNG/CHI.png","芝加哥","公牛",g));
-		this.add(new SingleTeamLabel("teamsPNG/CLE.png","克利夫兰","骑士",w));
-		this.add(new SingleTeamLabel("teamsPNG/DET.png","底特律","活塞",g));
-		this.add(new SingleTeamLabel("teamsPNG/IND.png","印第安纳","步行者",w));
-		this.add(new SingleTeamLabel("teamsPNG/MIL.png","密尔沃基","雄鹿",g));
+		this.add(new SingleTeamLabel("teamsPNG/CHI.png","Chicago","Bulls",g));
+		this.add(new SingleTeamLabel("teamsPNG/CLE.png","Cleveland","Cavaliers",w));
+		this.add(new SingleTeamLabel("teamsPNG/DET.png","Detroit","Pistons",g));
+		this.add(new SingleTeamLabel("teamsPNG/IND.png","Indiana","Pacers",w));
+		this.add(new SingleTeamLabel("teamsPNG/MIL.png","Milwaukee","Bucks",g));
 		
 	}
 

@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import dataservice.match.MatchDataService;
-import dataservice.match.MatchData_stub;
+import dataservice.match.MatchDataHandel;
 import presentation.match.MatchVO2List;
 import presentation.table.TablePane;
 import vo.matchvo.MatchContentPlayerVO;
@@ -46,16 +46,16 @@ public class PlayerMiddle_Recent5Match extends JPanel{
 	}
 
 	public void setTabel(String playerName){
-		MatchDataService mds = new MatchData_stub();
+		MatchDataService mds = new MatchDataHandel();
 		ArrayList<MatchContentPlayerVO> vo = mds.FindRecentMatches_p(playerName);
-		String[] columns = {"日期","对手","分钟","％","命中","出手","三分％","罚球％",
+		String[] columns = {"日期","","对手","分钟","％","命中","出手","三分％","罚球％",
 				"进攻篮板","防守篮板","篮板","助攻","盖帽","失误","犯规","得分"};
 				
 		MatchVO2List m2l = new MatchVO2List();
 		ArrayList<ArrayList<String>> datas = m2l.playerDeitail(vo);
 		
 		ArrayList<Integer> w = new ArrayList<Integer>();
-		w.add(200);w.add(200);
+		w.add(200);w.add(0);w.add(200);
 		for(int i = 0; i < 14 ; i++){
 			w.add(60);
 		}

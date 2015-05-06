@@ -10,8 +10,8 @@ public class TeamVO2List {
 		for(int i=0;i<vo.size();i++){
 			ArrayList<String> temp = new ArrayList<String>();
 			temp.add("teamsPNG/"+vo.get(i).photo+".png");
-			temp.add(vo.get(i).location);
 			temp.add(vo.get(i).teamName);
+			temp.add(vo.get(i).location);
 			temp.add(vo.get(i).league+"");
 			temp.add(vo.get(i).division);
 			temp.add(vo.get(i).homeCourt);

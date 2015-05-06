@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import dataservice.team.TeamDataService;
-import dataservice.team.TeamData_stub;
+import dataservice.team.TeamDataHandel;
 import presentation.common.SelectLabel;
 import presentation.table.TablePane;
 import presentation.table.TeamTablePanel;
@@ -32,7 +32,7 @@ public class TeamDataList extends JPanel{
 	public SelectLabel AvgNormalInfoButton;//平均普通数据
 	public SelectLabel HighInfoButton;//高阶数据
 	
-	TeamDataService tds = new TeamData_stub();
+	TeamDataService tds = new TeamDataHandel();
 	
 	Color entered = new Color(30,80,140);
 	Color pressed = new Color(42,109,183);
@@ -113,7 +113,7 @@ public class TeamDataList extends JPanel{
 			setBasicInfoTablePanel(); 
 				
 			setVisible(true);
-			repaint();	
+//			repaint();	
 		}
 
 		@Override
@@ -155,9 +155,6 @@ public class TeamDataList extends JPanel{
 
 		@Override
 		public void mousePressed(MouseEvent e) {
-//			PlayerKingPanel.this.remove(TitleLabel);
-//			PlayerKingPanel.this.remove(everyDay_PlayerKingOptionsPanel);
-
 			setVisible(false);
 			setButtonsBGLabel();
 			NormalInfoButton.isSelected = true;
@@ -173,7 +170,7 @@ public class TeamDataList extends JPanel{
 			setNormalInfoTablePanel(false); 
 			
 			setVisible(true);
-			repaint();	
+//			repaint();	
 		}
 
 		@Override
@@ -220,9 +217,9 @@ public class TeamDataList extends JPanel{
 
 			setVisible(false);
 			setButtonsBGLabel();
-			NormalInfoButton.isSelected = true;
-			NormalInfoButton.setBackground(pressed);
-			setSelectedGroups(NormalInfoButton);
+			AvgNormalInfoButton.isSelected = true;
+			AvgNormalInfoButton.setBackground(pressed);
+			setSelectedGroups(AvgNormalInfoButton);
 			
 			if(BasicInfoTable!=null)
 				TeamDataList.this.remove(BasicInfoTable);
@@ -233,7 +230,7 @@ public class TeamDataList extends JPanel{
 			setNormalInfoTablePanel(true); 
 			
 			setVisible(true);
-			repaint();	
+//			repaint();	
 		}
 
 		@Override
@@ -292,7 +289,6 @@ public class TeamDataList extends JPanel{
 			if(HighInfoTable!=null)
 				TeamDataList.this.remove(HighInfoTable);
 			setHighInfoTablePanel(); 
-			
 			setVisible(true);
 			repaint();	
 		}
@@ -336,7 +332,7 @@ public class TeamDataList extends JPanel{
 		TeamVO2List v2l = new TeamVO2List();
 		ArrayList<ArrayList<String>> datas = v2l.basicInfo(vo);
 			
-		String[] header = {"","所在地","名称","赛区","分区","主场","建立时间"};
+		String[] header = {"","名称","所在地","赛区","分区","主场","建立时间"};
 		ArrayList<Integer> wid = new ArrayList<Integer>();
 		wid.add(50);wid.add(200);wid.add(200);wid.add(100);wid.add(200);wid.add(400);wid.add(100);
 		
@@ -372,7 +368,7 @@ public class TeamDataList extends JPanel{
 				ArrayList<TeamVO> vo = tds.findTeamBasic();
 		TeamVO2List v2l = new TeamVO2List();
 		ArrayList<ArrayList<String>> datas = v2l.highData(vo);
-				String[] tbHead = {"","姓名","助攻效率","抢断效率","防守效率","进攻效率","防守篮板率","进攻篮板率","进攻回合","胜率"};
+				String[] tbHead = {"","名称","助攻效率","抢断效率","防守效率","进攻效率","防守篮板率","进攻篮板率","进攻回合","胜率"};
 			
 		ArrayList<Integer> wid = new ArrayList<Integer>();
 		wid.add(50);wid.add(150);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);

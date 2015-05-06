@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import dataservice.player.PlayerDataService;
-import dataservice.player.PlayerData_stub;
+import dataservice.player.PlayerDataHandel;
 import dataservice.player.sortParam;
 import presentation.common.PanelMotion;
 import presentation.common.PullDownMenu;
@@ -40,7 +40,7 @@ public class PlayerDataList  extends JPanel{
 	public SelectLabel AvgNormalInfoButton;//平均普通数据
 	public SelectLabel HighInfoButton;//高阶数据
 	
-	PlayerDataService pds = new PlayerData_stub();
+	PlayerDataService pds = new PlayerDataHandel();
 	
 	Color entered = new Color(30,80,140);
 	Color pressed = new Color(42,109,183);

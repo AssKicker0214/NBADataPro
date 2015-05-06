@@ -309,7 +309,7 @@ public class MatchInfoSaver {
             int teaml = this.teaml[i];
 
             int score1 = this.allscoref[i];
-            int score2 = this.allscoref[i];
+            int score2 = this.allscorel[i];
 
             if (score1 > score2) {
                 res[0][teamf - 1] = res[0][teamf - 1] + 1;

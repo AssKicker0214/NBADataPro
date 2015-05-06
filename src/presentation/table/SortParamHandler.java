@@ -5,15 +5,15 @@ import java.util.ArrayList;
 import presentation.player.PlayerVO2List;
 import presentation.team.TeamVO2List;
 import dataservice.player.PlayerDataService;
-import dataservice.player.PlayerData_stub;
+import dataservice.player.PlayerDataHandel;
 import dataservice.player.sortParam;
 import dataservice.team.TeamDataService;
-import dataservice.team.TeamData_stub;
+import dataservice.team.TeamDataHandel;
 
 public class SortParamHandler {
-	TeamDataService tds = new TeamData_stub();
+	TeamDataService tds = new TeamDataHandel();
 	TeamVO2List t2l = new TeamVO2List();
-	PlayerDataService pds = new PlayerData_stub();
+	PlayerDataService pds = new PlayerDataHandel();
 	PlayerVO2List p2l = new PlayerVO2List();
 	
 	public ArrayList<ArrayList<String>> TeamNormalHandler(String sortBy,boolean isDesc){

@@ -13,11 +13,11 @@ import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+import data.DataInitial;
 import presentation.floatui.FloatPane;
 import presentation.floatui.IMainFrameSize;
 import presentation.match.MatchListPanel;
 import presentation.player.PlayerDataList;
-import presentation.player.playerDetail.PlayerMiddlePanel;
 import presentation.statistics.hotPlayer.HotPlayerPanel;
 import presentation.statistics.playerKing.PlayerKingPanel;
 import presentation.statistics.teamKing.TeamKingPanel;
@@ -200,6 +200,7 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 	
 	public static  void main(String[] args){
 		Mainframe.getFrame();
+		DataInitial.init();
 	}
 
 	public void returnIni(){
@@ -234,7 +235,7 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 	public void teamChose(String teamName){
 		contentPaneChange = true;
 		restoreIni();
-		this.setContentPane(new PlayerMiddlePanel("Aaron Gray"));
+		this.setContentPane(new TeamMiddlePanel(teamName));
 //		contentPane = new PlayerMiddlePanel("Aaron Gray");
 //		contentPane.setVisible(false);
 //		contentPane.add(new PlayerMiddlePanel("Aaron Gray"),0);
