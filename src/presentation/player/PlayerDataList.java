@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 
 import dataservice.player.PlayerDataService;
 import dataservice.player.PlayerDataHandel;
+import dataservice.player.PlayerData_stub;
 import dataservice.player.sortParam;
 import presentation.common.PanelMotion;
 import presentation.common.PullDownMenu;
@@ -40,7 +41,7 @@ public class PlayerDataList  extends JPanel{
 	public SelectLabel AvgNormalInfoButton;//平均普通数据
 	public SelectLabel HighInfoButton;//高阶数据
 	
-	PlayerDataService pds = new PlayerDataHandel();
+	PlayerDataService pds = new PlayerData_stub();
 	
 	Color entered = new Color(30,80,140);
 	Color pressed = new Color(42,109,183);
@@ -70,8 +71,8 @@ public class PlayerDataList  extends JPanel{
 		panels.add(BasicInfoTable);
 		panels.add(NormalInfoTable);
 		panels.add(HighInfoTable);
-		upMotion = new PanelMotion(panels, 155);
-		downMotion = new PanelMotion(panels, 245);
+		upMotion = new PanelMotion(panels, 60);
+		downMotion = new PanelMotion(panels, 150);
 	}
 	
 	public void setSelectedGroups(SelectLabel s){
@@ -98,8 +99,9 @@ public class PlayerDataList  extends JPanel{
 		this.updateUI();
 		
 		menu = new PullDownMenu();
-		menu.setLocation(0, 155);
-		this.add(menu, -1);
+		menu.setLocation(0, 55);
+		this.add(menu);
+		menu.setVisible(false);
 	}
 
 	public void setBasicInfoButton(){
@@ -125,9 +127,11 @@ public class PlayerDataList  extends JPanel{
 				if(selected == true){
 					upMotion.upMove();
 					filterButton.setText("筛选");
+					menu.setVisible(false);
 				}else{
 					downMotion.downMove();
 					filterButton.setText("确定");
+					menu.setVisible(true);
 				}
 				selected = !selected;
 			}
