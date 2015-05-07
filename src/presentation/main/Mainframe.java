@@ -15,6 +15,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 import data.DataInitial;
+import dataservice.Updatable;
 import presentation.common.PhotoLabel;
 import presentation.floatui.FloatPane;
 import presentation.floatui.IMainFrameSize;
@@ -184,7 +185,7 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 		matchList = new MatchListPanel();
 		contentPane.add(matchList,0);
 		matchList.setVisible(false);
-	//	DataInitial.addUpdatable((MatchListPanel)matchList);
+		DataInitial.addUpdatable((Updatable)matchList);
 		
  		teamDataList = new TeamDataList();
  		contentPane.add(teamDataList,0);

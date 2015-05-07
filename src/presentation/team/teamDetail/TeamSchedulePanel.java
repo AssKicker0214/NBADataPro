@@ -44,7 +44,7 @@ public class TeamSchedulePanel extends JPanel{
 		this.setBackground(Color.WHITE);
 		setTitle();
 		setDate();
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
+		SimpleDateFormat df = new SimpleDateFormat("yy-MM-dd");//设置日期格式
 		String date = df.format(new Date());
 		setScheduleTablePanel(date,date);
 	}
@@ -84,8 +84,8 @@ public class TeamSchedulePanel extends JPanel{
 			@Override
 			public void mousePressed(MouseEvent e) {
 				commit.setFont(new Font("Dialog",1,15));
-				setScheduleTablePanel(calendarStart.getSelectedDate().toString(),calendarEnd.getSelectedDate().toString());
-
+				setScheduleTablePanel(calendarStart.getSelectedDate().toString().substring(2,10),calendarEnd.getSelectedDate().toString().substring(2,10));
+				
 			}
 			
 			@Override
@@ -110,6 +110,8 @@ public class TeamSchedulePanel extends JPanel{
 	
 	public void setScheduleTablePanel(String start,String end){
 		MatchDataService mds = new MatchDataHandel();
+		System.out.println(start+end+TeamName);
+
 		ArrayList<MatchVO> vo = mds.findByDT(start, end, TeamName);
 	
 		String[] tbHead = {"日期","","对阵球队","总比分","第一节比分","第二节比分","第三节比分","第四节比分"};

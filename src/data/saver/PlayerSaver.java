@@ -43,18 +43,19 @@ public class PlayerSaver {
     }
 
     private PlayerSaver() {
-        pid = new int[500];
-        name = new String[500];
-        number = new int[500];
-        position = new String[500];
-        heightfoot = new int[500];
-        heightinch = new int[500];
-        weight = new int[500];
-        birth = new String[500];
-        age = new int[500];
-        exp = new int[500];
-        school = new String[500];
-        imgsrc = new String[500];
+        int size = 5000;
+        pid = new int[size];
+        name = new String[size];
+        number = new int[size];
+        position = new String[size];
+        heightfoot = new int[size];
+        heightinch = new int[size];
+        weight = new int[size];
+        birth = new String[size];
+        age = new int[size];
+        exp = new int[size];
+        school = new String[size];
+        imgsrc = new String[size];
         currentPoint = -1;
         refreshTime();
     }

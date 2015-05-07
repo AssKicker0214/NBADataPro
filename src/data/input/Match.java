@@ -21,7 +21,7 @@ public class Match {
             PlayerScoreSaver playerScoreSaver = PlayerScoreSaver.getPlayerScoreSaver();
             MatchScoreSaver matchScoreSaver = MatchScoreSaver.getMatchScoreSaver();
             for (int i = 0; i < files.length; i++) {
-                if (files[i].isDirectory() == false)
+                if (files[i].isDirectory() == false && files[i].getName().startsWith(".") == false)
                     insert(files[i], matchInfoSaver, TeamSaver.getTeamSaver(), PlayerSaver.getPlayerSaver(), playerScoreSaver, matchScoreSaver);
             }
             matchInfoSaver.update();
@@ -117,6 +117,7 @@ public class Match {
         String[] seasons = titles[0].split("-");
         //objects[0] = seasons[0];
         //SSobjects[1] = seasons[1];
+//        System.out.println(title+" "+titles.length);
         String[] teams = titles[2].split("-");
         objects[1] = teams[0];
         objects[2] = teams[1];

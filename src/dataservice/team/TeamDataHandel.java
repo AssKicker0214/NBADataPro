@@ -58,6 +58,7 @@ public class TeamDataHandel implements TeamDataService {
     public ArrayList<TeamVO> findTeams(String msg) {
         ArrayList<TeamVO> arrayList = new TeamDataManager().getTeamVOs(getAllInformation(),TeamDataManager.DEFAULT);
         ArrayList<TeamVO> res = new ArrayList<>();
+        msg = msg.toLowerCase();
         for(int i = 0; i < 10; i++){
             int m = 0;
             for (int k = 0;k<arrayList.size();k++){
@@ -66,7 +67,6 @@ public class TeamDataHandel implements TeamDataService {
                 if (name.startsWith(msg)) {
                     res.add(teamVO);
                     arrayList.remove(teamVO);
-                    m--;
                 }else {
                     m++;
                 }

@@ -77,7 +77,7 @@ public class PlayerScoreSaver {
         this.matchInfoSaver = matchInfoSaver;
         this.teamSaver = teamSaver;
 
-        int size = 30000;
+        int size = 300000;
         mid = new int[size];
         tid = new int[size];
         pid = new int[size];

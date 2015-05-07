@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class DataUpdate extends Thread {
     private FileName fileName;
-    private ArrayList<Updatable> updatables;
+    private ArrayList<Updatable> updatables = new ArrayList<>();
     private String path;
     private boolean flag = true;
     public DataUpdate(String path) {
@@ -43,7 +43,8 @@ public class DataUpdate extends Thread {
         File[] files = file.listFiles();
         int size = 0;
         for (int i = 0; i < files.length; i++) {
-            if (!files[i].isDirectory()) {
+            if ((files[i].isDirectory()==false) && (files[i].getName().trim().startsWith(".") == false)) {
+//                System.out.println(files[i].getName());
                 size++;
             }
         }
@@ -52,7 +53,7 @@ public class DataUpdate extends Thread {
             for (int i = 0; i < files.length; i++) {
                 if (!files[i].isDirectory()) {
                     String name = files[i].getName();
-                    if (fileName.isInList(name) == false) {
+                    if ((files[i].isDirectory()==false) && (files[i].getName().trim().startsWith(".") == false) && (fileName.isInFileName(files[i])==false)) {
                         arrayList.add(files[i]);
                     }
                 }
