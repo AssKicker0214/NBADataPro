@@ -11,7 +11,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import dataservice.player.PlayerDataService;
-import dataservice.player.PlayerDataHandel;
 import dataservice.player.PlayerData_stub;
 import presentation.common.SelectLabel;
 
