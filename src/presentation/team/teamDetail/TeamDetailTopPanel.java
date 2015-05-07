@@ -73,7 +73,7 @@ public class TeamDetailTopPanel  extends JPanel{
 	 */
 	public void setTeamName(){
 		TeamNameLabel = new JLabel(vo.location+" "+vo.teamName);
-		TeamNameLabel.setFont(new Font("Dialog",1,50));
+		TeamNameLabel.setFont(new Font("Dialog",1,40));
 		TeamNameLabel.setForeground(Color.GRAY);
 		TeamNameLabel.setBounds(260,40,440,60);
 		this.add(TeamNameLabel);
