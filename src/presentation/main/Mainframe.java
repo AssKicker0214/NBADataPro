@@ -161,7 +161,7 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 	private void setMainPartPanel(){
 /*		playerKing = new PlayerKingPanel();
 		contentPane.add(playerKing);
-		playerKing.setVisible(false);
+		playerKing.setVisible(false);*/
 		
 		teamKing = new TeamKingPanel();
 		contentPane.add(teamKing);
@@ -170,10 +170,9 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 		hotPlayer = new HotPlayerPanel();
 		contentPane.add(hotPlayer);
 		hotPlayer.setVisible(false);
-		*/
+		
 		
 		teamList = new TeamListPanel();
-	//	((TeamListPanel) teamList).setMainFrame(this);
 		contentPane.add(teamList);
 		teamList.setVisible(true);
 		
@@ -190,9 +189,9 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
  		contentPane.add(teamDataList,0);
  		teamDataList.setVisible(false);
 		
-//		mainParts.add(playerKing);
-//		mainParts.add(teamKing);
-//		mainParts.add(hotPlayer);
+	//	mainParts.add(playerKing);
+		mainParts.add(teamKing);
+		mainParts.add(hotPlayer);
 		mainParts.add(teamList);
 		mainParts.add(playerList);
 		mainParts.add(matchList);
