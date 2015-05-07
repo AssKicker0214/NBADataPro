@@ -360,6 +360,7 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 				@Override
 				public void mouseReleased(MouseEvent arg0) {
 					Mainframe.getFrame().dispose();;
+					System.exit(0);
 				}
 				
 				@Override
