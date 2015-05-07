@@ -25,7 +25,6 @@ import presentation.statistics.playerKing.PlayerKingPanel;
 import presentation.statistics.teamKing.TeamKingPanel;
 import presentation.team.TeamDataList;
 import presentation.team.TeamListPanel;
-import presentation.team.teamDetail.TeamMiddlePanel;
 
 public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 
@@ -93,25 +92,6 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 	}
 	
 	private void setTitleLabel(){
-//		JLabel titleLabel = new JLabel();
-//		titleLabel.setBounds(0, 0, 1280,30);
-//		titleLabel.setBackground(Color.black);
-//		titleLabel.setOpaque(true);
-//		this.add(titleLabel);
-//		titleLabel.addMouseMotionListener(new  MouseMotionListener() {
-//			
-//			@Override
-//			public void mouseMoved(MouseEvent arg0) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//			
-//			@Override
-//			public void mouseDragged(MouseEvent arg0) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//		});
 		TitleLabel titleLabel = new TitleLabel();
 		this.add(titleLabel);
 	}
@@ -179,7 +159,7 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 	}
 	
 	private void setMainPartPanel(){
-		playerKing = new PlayerKingPanel();
+/*		playerKing = new PlayerKingPanel();
 		contentPane.add(playerKing);
 		playerKing.setVisible(false);
 		
@@ -190,11 +170,12 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 		hotPlayer = new HotPlayerPanel();
 		contentPane.add(hotPlayer);
 		hotPlayer.setVisible(false);
+		*/
 		
 		teamList = new TeamListPanel();
-		((TeamListPanel) teamList).setMainFrame(this);
+	//	((TeamListPanel) teamList).setMainFrame(this);
 		contentPane.add(teamList);
-		teamList.setVisible(false);
+		teamList.setVisible(true);
 		
 		playerList = new PlayerDataList();
 		contentPane.add(playerList,0);
@@ -203,14 +184,15 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 		matchList = new MatchListPanel();
 		contentPane.add(matchList,0);
 		matchList.setVisible(false);
+	//	DataInitial.addUpdatable((MatchListPanel)matchList);
 		
-		teamDataList = new TeamDataList();
-		this.add(teamDataList,0);
-		matchList.setVisible(false);
+ 		teamDataList = new TeamDataList();
+ 		contentPane.add(teamDataList,0);
+ 		teamDataList.setVisible(false);
 		
-		mainParts.add(playerKing);
-		mainParts.add(teamKing);
-		mainParts.add(hotPlayer);
+//		mainParts.add(playerKing);
+//		mainParts.add(teamKing);
+//		mainParts.add(hotPlayer);
 		mainParts.add(teamList);
 		mainParts.add(playerList);
 		mainParts.add(matchList);
@@ -236,8 +218,8 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 	}
 	
 	public static  void main(String[] args){
-		Mainframe.getFrame();
 		DataInitial.init();
+		Mainframe.getFrame();
 	}
 
 	public void returnIni(){
@@ -269,10 +251,10 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 			case "热点球员": changeMainPart(playerKing); System.out.println(s);restoreIni();break;
 			case "热点球队": changeMainPart(teamKing); System.out.println(s);restoreIni();break;
 			case "进步球员": changeMainPart(hotPlayer);System.out.println(s);restoreIni();break;
-			case "球队": changeMainPart(teamList);System.out.println(s);restoreIni();break;
+			case "球队列表": changeMainPart(teamList);System.out.println(s);restoreIni();break;
 			case "球员": changeMainPart(playerList);System.out.println(s);restoreIni();break;
 			case "比赛": changeMainPart(matchList);System.out.println(s);restoreIni();break;
-
+			case "球队表格": changeMainPart(teamDataList);System.out.println(s);restoreIni();break;
 			default: break;
 		}
 	}

@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import dataservice.player.PlayerDataService;
-import dataservice.player.PlayerData_stub;
+import dataservice.player.PlayerDataHandel;
 import presentation.common.SelectLabel;
 
 public class HotPlayerOptionsPanel extends JPanel{
@@ -52,7 +52,8 @@ public class HotPlayerOptionsPanel extends JPanel{
 	}
 	
 	public void setHotPlayerContentPanel(String sortBy){
-		PlayerDataService pds = new PlayerData_stub();
+		PlayerDataService pds = new PlayerDataHandel();
+		System.out.print(sortBy);
 		hotPlayerContentPanel = new HotPlayerContentPanel(pds.hotPlayer(5, sortBy));
 		this.add(hotPlayerContentPanel);
 		repaint();

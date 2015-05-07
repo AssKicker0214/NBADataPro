@@ -165,10 +165,7 @@ public class PlayerData_stub implements PlayerDataService{
 		vo1.photo = "Aaron Brooks";
 		vo1.name = "Aaron Brooks";
 		vol.add(vo1);
-		PlayerVO vo2 = new PlayerVO();
-		vo2.photo = "Aaron Gray";
-		vo2.name = "Aaron Gray";
-		vol.add(vo2);
+		
 		return vol;
 	}
 
@@ -241,10 +238,6 @@ public class PlayerData_stub implements PlayerDataService{
 			ArrayList<String> position, ArrayList<String> league, int numS,
 			int numE) {
 		ArrayList<PlayerVO> vol = new ArrayList<PlayerVO>();
-		PlayerVO vo1 = new PlayerVO();
-		vo1.photo = "Aaron Brooks";
-		vo1.name = "Aaron Brooks";
-		vol.add(vo1);
 		PlayerVO vo2 = new PlayerVO();
 		vo2.photo = "Aaron Gray";
 		vo2.name = "Aaron Gray";
@@ -262,10 +255,7 @@ public class PlayerData_stub implements PlayerDataService{
 		vo1.photo = "Aaron Brooks";
 		vo1.name = "Aaron Brooks";
 		vol.add(vo1);
-		PlayerVO vo2 = new PlayerVO();
-		vo2.photo = "Aaron Gray";
-		vo2.name = "Aaron Gray";
-		vol.add(vo2);
+		
 		return vol;
 	
 	}

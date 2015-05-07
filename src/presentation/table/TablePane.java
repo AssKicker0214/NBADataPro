@@ -17,16 +17,16 @@ public class TablePane extends JPanel{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public  static int height = 50;
-	public  static int width;
-	public  static int column;
-	public  static int sumHeight;
+	public int height = 50;
+	public int width;
+	public int column;
+	public int sumHeight;
 	
 	protected JPanel header;
 	protected JScrollPane content;
 	protected RowContainerPane rowContainer;
 	
-	protected ListType type;
+	public ListType type;
 	protected ArrayList<Integer> wid;
 	protected String firstV;
 	protected boolean hasIndex;
@@ -63,13 +63,13 @@ public class TablePane extends JPanel{
 				
 				if(firstV.equals(""))
 					for(int i=0;i<rowInfos.size();i++){
-						RowPane row = new RowPane(i+1,hasIndex);		
+						RowPane row = new RowPane(i+1,hasIndex,width,height);		
 						row.addDatas_pic(rowInfos.get(i),wid);
 						rows.add(row);
 					}
 				else
 					for(int i=0;i<rowInfos.size();i++){
-						RowPane row = new RowPane(i+1,hasIndex);		
+						RowPane row = new RowPane(i+1,hasIndex,width,height);		
 						row.addDatas(rowInfos.get(i),wid);
 						rows.add(row);
 					}
@@ -169,7 +169,7 @@ public class TablePane extends JPanel{
 		content.getVerticalScrollBar().setUnitIncrement(40);
 		content.setBounds(0, 30, width+20, sumHeight);
 		content.setBackground(new Color(245,245,245));
-		rowContainer = new RowContainerPane(rows);
+		rowContainer = new RowContainerPane(rows,height,width,sumHeight);
 		this.add(content);
 		content.setViewportView(rowContainer);
 	}

@@ -35,7 +35,8 @@ public class SortParamHandler {
 			case"得分": sort = "point";break;
 			default:return datas;
 		}	
-		datas = t2l.normalData(tds.sortTeamNormal(30, sortBy, isDesc));
+		System.out.println(sort+" "+isDesc);
+		datas = t2l.normalData(tds.sortTeamNormal(30, sort, isDesc));
 		return datas;
 	}
 	public ArrayList<ArrayList<String>> TeamNormalAvgHandler(String sortBy,boolean isDesc){
@@ -57,8 +58,8 @@ public class SortParamHandler {
 			case"得分": sort = "avgPoint";break;
 			default:return datas;
 		}
-		
-		datas = t2l.avgNormalData(tds.sortTeamNormalAvg(30, sortBy, isDesc));
+		System.out.println(sort+" "+isDesc);
+		datas = t2l.avgNormalData(tds.sortTeamNormalAvg(30, sort, isDesc));
 		return datas;
 	}
 	public ArrayList<ArrayList<String>> TeamHighHandler(String sortBy,boolean isDesc){
@@ -75,7 +76,8 @@ public class SortParamHandler {
 			case"胜率": sort = "winRate";break;
 			default:return datas;
 		}
-		datas = t2l.highData(tds.sortTeamHigh(30, sortBy, isDesc));
+		System.out.println(sort+" "+isDesc);
+		datas = t2l.highData(tds.sortTeamHigh(30, sort, isDesc));
 		return datas;
 	}
 	

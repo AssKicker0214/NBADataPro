@@ -211,7 +211,7 @@ public class TeamMemberPanel extends JPanel{
 		String[] tbHead = {"","姓名","位置","号码","年龄","球龄","身高","体重","毕业学校"};
 		
 		ArrayList<Integer> wid = new ArrayList<Integer>();
-		wid.add(50);wid.add(300);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);
+		wid.add(70);wid.add(300);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);
 		
 		membersBasicInfoTable = new playerTablePanel(datas,tbHead,wid,0,60,1280,350,50,true,false);
 		this.add(membersBasicInfoTable);
@@ -226,7 +226,7 @@ public class TeamMemberPanel extends JPanel{
 				"防守","篮板","助攻","抢断","盖帽","失误","犯规","得分"};
 			
 		ArrayList<Integer> wid = new ArrayList<Integer>();
-		wid.add(50);wid.add(150);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);
+		wid.add(70);wid.add(150);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);
 		wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);wid.add(50);
 			
 		membersDataTable = new playerTablePanel(datas,tbHead,wid,0,60,1280,320,50,true,false);

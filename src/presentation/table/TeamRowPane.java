@@ -12,26 +12,26 @@ import presentation.team.teamDetail.TeamMiddlePanel;
 
 public class TeamRowPane extends RowPane{
 
+	public TeamRowPane(int index, boolean hasIndex, int width, int h) {
+		super(index, hasIndex, width, h);
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public TeamRowPane(int index, boolean hasIndex) {
-		super(index, hasIndex);
-		// TODO Auto-generated constructor stub
-	}
+	
 	
 	public void addData(String data,int width){		
 		JLabel block = new JLabel(data,JLabel.CENTER);
-		block.setPreferredSize(new Dimension(width, TablePane.height));
+		block.setPreferredSize(new Dimension(width,height));
 		block.addMouseListener(new MouseAdapter(){
 			@Override
 			public void mousePressed(MouseEvent e) {
 				Component[] labels =  getComponents();
-				System.out.println(((JLabel) labels[2]).getText());
-				Mainframe.getFrame().restoreIni();
-				Mainframe.getFrame().setContentPane(new TeamMiddlePanel(((JLabel) labels[2]).getText()));
+				Mainframe.getFrame().changeContent(new TeamMiddlePanel(((JLabel) labels[2]).getText()));
 			}
 		
 		});

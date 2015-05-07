@@ -57,8 +57,7 @@ public class PlayerKingContentPanel extends JPanel{
 		firstPlayerPhotoLabel.addMouseListener(new MouseAdapter(){
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Mainframe.getFrame().restoreIni();
-				Mainframe.getFrame().setContentPane(new PlayerMiddlePanel(vo.get(0).name));
+				Mainframe.getFrame().changeContent(new PlayerMiddlePanel(vo.get(0).name));
 			}
 		
 		});
@@ -163,8 +162,7 @@ public class PlayerKingContentPanel extends JPanel{
 				PlayerPhotoLabel.addMouseListener(new MouseAdapter(){
 					@Override
 					public void mousePressed(MouseEvent e) {
-						Mainframe.getFrame().restoreIni();
-						Mainframe.getFrame().setContentPane(new PlayerMiddlePanel(n));
+						Mainframe.getFrame().changeContent(new PlayerMiddlePanel(n));
 					}
 				
 				});

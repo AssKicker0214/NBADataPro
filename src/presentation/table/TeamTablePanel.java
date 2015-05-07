@@ -30,13 +30,13 @@ protected void getRows(final ArrayList<ArrayList<String>> rowInfos){
 				
 				if(firstV.equals(""))
 					for(int i=0;i<rowInfos.size();i++){
-						TeamRowPane row = new TeamRowPane(i+1,hasIndex);		
+						TeamRowPane row = new TeamRowPane(i+1,hasIndex,width,height);		
 						row.addDatas_pic(rowInfos.get(i),wid);
 						rows.add(row);
 					}
 				else
 					for(int i=0;i<rowInfos.size();i++){
-						TeamRowPane row = new TeamRowPane(i+1,hasIndex);		
+						TeamRowPane row = new TeamRowPane(i+1,hasIndex,width,height);		
 						row.addDatas(rowInfos.get(i),wid);
 						rows.add(row);
 					}
@@ -64,6 +64,7 @@ protected void getRows(final ArrayList<ArrayList<String>> rowInfos){
 		SortParamHandler sp = new SortParamHandler();
 		ArrayList<ArrayList<String>> datas = new ArrayList<ArrayList<String>>();
 		remove(content);
+		System.out.print(sortBy);
 		if(type == ListType.normal)
 			datas = sp.TeamNormalHandler(sortBy, isDesc);
 		else if(type == ListType.avg)

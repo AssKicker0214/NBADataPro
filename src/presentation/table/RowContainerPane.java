@@ -15,10 +15,10 @@ public class RowContainerPane extends JPanel{
 	private static final long serialVersionUID = 1L;
 	ArrayList<? extends RowPane> rowPanes;
 
-	public RowContainerPane(ArrayList<? extends RowPane> rows){
+	public RowContainerPane(ArrayList<? extends RowPane> rows,int width,int height,int sumHeight){
 		FlowLayout fl = (FlowLayout) this.getLayout();
 		fl.setVgap(0);
-		this.setPreferredSize(new Dimension(TablePane.width, Math.max(TablePane.height*(rows.size()+1),TablePane.sumHeight)));
+		this.setPreferredSize(new Dimension(width, Math.max(height*(rows.size()+1),sumHeight)));
 
 		this.setBackground(new Color(245,245,245));
 		setRows(rows);

@@ -2,6 +2,8 @@ package dataservice.team;
 
 import data.PlayerDataManager;
 import data.TeamDataManager;
+import data.Tools;
+import data.input.Team;
 import data.saver.PlayerScoreSaver;
 import dataservice.player.PlayerDataHandel;
 import vo.playervo.PlayerVO;
@@ -9,6 +11,7 @@ import vo.teamvo.HotTeamsVO;
 import vo.teamvo.TeamVO;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 /**
  * Created by cho on 2015/4/30.
@@ -17,7 +20,25 @@ public class TeamDataHandel implements TeamDataService {
 
     @Override
     public ArrayList<HotTeamsVO> hotTeams(int num, String sortBy) {
-        return null;
+        ArrayList<HotTeamsVO> arrayList = new TeamDataManager().getHotTeams(sortBy);
+        arrayList.sort(new Comparator<HotTeamsVO>() {
+            @Override
+            public int compare(HotTeamsVO o1, HotTeamsVO o2) {
+                if (o1.value < o2.value)
+                    return 1;
+                else if (o1.value > o2.value){
+                    return -1;
+                }else {
+                    return 0;
+                }
+            }
+        });
+        int length = num > arrayList.size() ? arrayList.size():num;
+        ArrayList<HotTeamsVO> res = new ArrayList<>();
+        for (int i = 0; i < length ; i++){
+            res.add(arrayList.get(i));
+        }
+        return res;
     }
 
     @Override
@@ -35,7 +56,23 @@ public class TeamDataHandel implements TeamDataService {
 
     @Override
     public ArrayList<TeamVO> findTeams(String msg) {
-        return null;
+        ArrayList<TeamVO> arrayList = new TeamDataManager().getTeamVOs(getAllInformation(),TeamDataManager.DEFAULT);
+        ArrayList<TeamVO> res = new ArrayList<>();
+        for(int i = 0; i < 10; i++){
+            int m = 0;
+            for (int k = 0;k<arrayList.size();k++){
+                TeamVO teamVO = arrayList.get(m);
+                String name = Tools.getNPosition(teamVO.teamName.toLowerCase(), i);
+                if (name.startsWith(msg)) {
+                    res.add(teamVO);
+                    arrayList.remove(teamVO);
+                    m--;
+                }else {
+                    m++;
+                }
+            }
+        }
+        return res;
     }
 
     @Override

@@ -51,7 +51,6 @@ public class TeamMiddlePanel  extends JPanel{
 		this.setBackground(Color.WHITE);
 		
 		TeamDataService tds =  new TeamDataHandel();
-		System.out.println(name);
 		vo = tds.findTeamInfo(name);
 		setAttri(name);
 		setTopPanel();
@@ -119,7 +118,7 @@ public class TeamMiddlePanel  extends JPanel{
 	}
 	
 	public void setTeamVSPanel(ArrayList<Double> team,ArrayList<Double> avg){
-		vsContentPanel = new VSContentPanel(itemsNeedAdd,team,avg);
+		vsContentPanel = new VSContentPanel(itemsNeedAdd,team,avg,false);
 		this.add(vsContentPanel);
 		repaint();
 	}
@@ -168,7 +167,7 @@ public class TeamMiddlePanel  extends JPanel{
 					remove(teamVSTopPanel);
 				}
 				setTopPanel();
-				teamDetailTopPanel.setLocation(0, 30);
+//				teamDetailTopPanel.setLocation(0, 30);
 				setTeamDataPanel();
 				setVisible(true);
 				repaint();				

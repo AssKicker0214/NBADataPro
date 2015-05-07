@@ -2,6 +2,7 @@ package test.dataservice.player;
 
 import data.DataInitial;
 import dataservice.player.PlayerDataHandel;
+import dataservice.player.sortParam;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -28,7 +29,7 @@ public class PlayerDataHandelTest {
 
     @After
     public void after() throws Exception {
-        DataInitial.end();
+//        DataInitial.end();
     }
 
     /**
@@ -150,7 +151,15 @@ public class PlayerDataHandelTest {
      */
     @Test
     public void testSortPlayerInfo() throws Exception {
-//TODO: Test goes here... 
+//        ArrayList<sortParam> arrayList1 = new ArrayList<>();
+//        sortParam sortParam1 = new sortParam();
+//        sortParam1.isDesc =false;
+//        sortParam1.field = "name";
+//        arrayList1.add(sortParam1);
+//        ArrayList<PlayerVO> arrayList = new PlayerDataHandel().sortPlayerInfo(arrayList1);
+//        for (int i = 0; i<arrayList.size();i++){
+//            System.out.println(arrayList.get(i).name);
+//        }
     }
 
     /**
@@ -158,7 +167,24 @@ public class PlayerDataHandelTest {
      */
     @Test
     public void testSortPlayerNormal() throws Exception {
-//TODO: Test goes here... 
+        ArrayList<sortParam> arrayList1 = new ArrayList<>();
+        sortParam sortParam1 = new sortParam();
+        sortParam1.isDesc =true;
+        sortParam1.field = "assist";
+        sortParam sortParam2 = new sortParam();
+        sortParam2.isDesc =true;
+        sortParam2.field = "blockShot";
+        sortParam sortParam3 = new sortParam();
+        sortParam3.isDesc =true;
+        sortParam3.field = "shot";
+        arrayList1.add(sortParam1);
+        arrayList1.add(sortParam2);
+        arrayList1.add(sortParam3);
+        ArrayList<PlayerVO> arrayList = new PlayerDataHandel().sortPlayerNormal(arrayList1);
+        for (int i = 0; i<arrayList.size();i++){
+            PlayerVO playerVO = arrayList.get(i);
+            System.out.println(playerVO.assist+" "+playerVO.blockShot+" "+playerVO.shot);
+        }
     }
 
     /**
@@ -174,7 +200,7 @@ public class PlayerDataHandelTest {
      */
     @Test
     public void testGetToday() throws Exception {
-//TODO: Test goes here... 
+
     }
 
     /**
@@ -190,7 +216,24 @@ public class PlayerDataHandelTest {
      */
     @Test
     public void testSortPlayerHigh() throws Exception {
-//TODO: Test goes here... 
+        ArrayList<sortParam> arrayList1 = new ArrayList<>();
+        sortParam sortParam1 = new sortParam();
+        sortParam1.isDesc =true;
+        sortParam1.field = "assistEfficient";
+        sortParam sortParam2 = new sortParam();
+        sortParam2.isDesc =true;
+        sortParam2.field = "blockShotEfficient";
+        sortParam sortParam3 = new sortParam();
+        sortParam3.isDesc =true;
+        sortParam3.field = "gmSc";
+        arrayList1.add(sortParam1);
+        arrayList1.add(sortParam2);
+        arrayList1.add(sortParam3);
+        ArrayList<PlayerVO> arrayList = new PlayerDataHandel().sortPlayerHigh(arrayList1);
+        for (int i = 0; i<arrayList.size();i++){
+            PlayerVO playerVO = arrayList.get(i);
+            System.out.println(playerVO.assistEfficient+" "+playerVO.blockShotEfficient+" "+playerVO.gmSc);
+        }
     }
 
     /**

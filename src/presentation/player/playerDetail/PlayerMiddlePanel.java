@@ -81,6 +81,7 @@ public class PlayerMiddlePanel extends JPanel{
 	public void setAttri(String name){
 		PlayerDataService pds = new PlayerDataHandel();
 		PlayerVO voL = pds.avgLeague(); 
+		System.out.println(name);
 		PlayerVO voP = pds.findPlayerData(name); 
 		vo = voP;
 		setTopPanel(voP);
@@ -322,7 +323,7 @@ public class PlayerMiddlePanel extends JPanel{
 	}
 	
 	public void setVSPanel(ArrayList<Double> player,ArrayList<Double> leagueAvg){
-		vsContentPanel = new VSContentPanel(itemsNeedAdd,player,leagueAvg);
+		vsContentPanel = new VSContentPanel(itemsNeedAdd,player,leagueAvg,true);
 		this.add(vsContentPanel);
 		repaint();
 	}

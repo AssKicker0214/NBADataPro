@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import dataservice.player.PlayerDataService;
-import dataservice.player.PlayerData_stub;
+import dataservice.player.PlayerDataHandel;
 import presentation.common.SelectLabel;
 
 public class Season_PlayerKingOptionsPanel extends JPanel {
@@ -69,7 +69,7 @@ public class Season_PlayerKingOptionsPanel extends JPanel {
 
 	
 	public void setPlayerKingContentPanel(String sortBy){
-		PlayerDataService pds = new PlayerData_stub();
+		PlayerDataService pds = new PlayerDataHandel();
 		playerKingContentPanel = new PlayerKingContentPanel(pds.SeasonKing(5, sortBy));		
 		this.add(playerKingContentPanel);
 		repaint();

@@ -19,7 +19,7 @@ import javax.swing.JTextField;
 
 import dataservice.team.TeamDataHandel;
 import dataservice.team.TeamDataService;
-import dataservice.team.TeamData_stub;
+import dataservice.team.TeamDataHandel;
 import presentation.common.PhotoLabel;
 import presentation.team.teamDetail.TeamMiddlePanel;
 import vo.teamvo.TeamVO;
@@ -80,9 +80,10 @@ public class TeamVSTopPanel extends JPanel{
 	}
 
 	public void setLocalTeamPhotoLabel (){
-		localTeamPhotoLabel = new PhotoLabel(new ImageIcon("teamsPNG/" + localVO.teamName + ".png").getImage());
+		localTeamPhotoLabel = new PhotoLabel(new ImageIcon("teamsPNG/" + localVO.photo + ".png").getImage());
+		System.out.println(localVO.teamName);
 		localTeamPhotoLabel.setHorizontalAlignment(JLabel.RIGHT);
-		localTeamPhotoLabel.setBounds(300,-5,230,150);
+		localTeamPhotoLabel.setBounds(300,10,230,135);
 		localTeamPhotoLabel.setBackground(Color.WHITE);
 		localTeamPhotoLabel.setOpaque(true);
 		localTeamPhotoLabel.setVisible(true);
@@ -90,9 +91,9 @@ public class TeamVSTopPanel extends JPanel{
 	}
 	
 	public void setAnotherTeamPhotoLabel (){
-		anotherTeamPhotoLabel = new PhotoLabel(new ImageIcon("teamsPNG/" + anotherVO.teamName + ".png").getImage());
+		anotherTeamPhotoLabel = new PhotoLabel(new ImageIcon("teamsPNG/" + anotherVO.photo + ".png").getImage());
 		anotherTeamPhotoLabel.setHorizontalAlignment(JLabel.RIGHT);
-		anotherTeamPhotoLabel.setBounds(730,-5,230,150);
+		anotherTeamPhotoLabel.setBounds(730,10,230,135);
 		anotherTeamPhotoLabel.setBackground(Color.WHITE);
 		anotherTeamPhotoLabel.setOpaque(true);
 		anotherTeamPhotoLabel.setVisible(true);
@@ -181,7 +182,7 @@ public class TeamVSTopPanel extends JPanel{
 				msg = searchText.getText();
 //				System.out.println("AAAAAAAAAAA" + msg);
 				ArrayList<TeamVO> list = new ArrayList<TeamVO>();
-				TeamDataService pds = new TeamData_stub();
+				TeamDataService pds = new TeamDataHandel();
 				list = pds.findTeams(msg);
 				setChooseList(list);
 				main.add(chooseList,0);

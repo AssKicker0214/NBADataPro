@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 
 import dataservice.team.TeamDataService;
 import dataservice.team.TeamDataHandel;
+import presentation.common.ListType;
 import presentation.common.SelectLabel;
 import presentation.table.TablePane;
 import presentation.table.TeamTablePanel;
@@ -46,7 +47,7 @@ public class TeamDataList extends JPanel{
 	
 	public TeamDataList(){
 		this.setLayout(null);
-		this.setBounds(0,160,1280,540);
+		this.setBounds(0,125,1280,540);
 		this.setBackground(Color.WHITE);
 		setTitle();
 		setButtonsBGLabel();
@@ -326,7 +327,6 @@ public class TeamDataList extends JPanel{
 		TitleLabel.add(ButtonsBGLabel,0);
 	}
 
-	
 	public void setBasicInfoTablePanel(){
 		ArrayList<TeamVO> vo = tds.findTeamBasic();
 		TeamVO2List v2l = new TeamVO2List();
@@ -336,18 +336,21 @@ public class TeamDataList extends JPanel{
 		ArrayList<Integer> wid = new ArrayList<Integer>();
 		wid.add(50);wid.add(200);wid.add(200);wid.add(100);wid.add(200);wid.add(400);wid.add(100);
 		
-		BasicInfoTable = new TeamTablePanel(datas,header,wid,0,60,1280,350,50,true,false);
+		BasicInfoTable = new TeamTablePanel(datas,header,wid,0,60,1280,500,50,true,false);
+		BasicInfoTable.type = ListType.info; 
 		this.add(BasicInfoTable);
 	}
 		
 	public void setNormalInfoTablePanel(boolean isAvg){
 		ArrayList<TeamVO> vo = new ArrayList<TeamVO>();
 		TeamVO2List v2l = new TeamVO2List();
-		ArrayList<ArrayList<String>> datas = new ArrayList<ArrayList<String>>();			
+		ArrayList<ArrayList<String>> datas = new ArrayList<ArrayList<String>>();	
+		ListType tableType = ListType.avg;
 		if(isAvg){
 			vo = tds.findTeamNormalAvg();
 			datas = v2l.avgNormalData(vo);
 		}else{
+			tableType = ListType.normal;
 			vo = tds.findTeamNormal();
 			datas = v2l.normalData(vo);
 		}
@@ -360,7 +363,8 @@ public class TeamDataList extends JPanel{
 		wid.add(50);wid.add(150);wid.add(60);wid.add(60);wid.add(60);wid.add(60);wid.add(60);wid.add(60);wid.add(60);
 		wid.add(60);wid.add(60);wid.add(60);wid.add(60);wid.add(60);wid.add(60);
 			
-		NormalInfoTable = new TeamTablePanel(datas,tbHead,wid,0,60,1280,320,50,true,true);
+		NormalInfoTable = new TeamTablePanel(datas,tbHead,wid,0,60,1280,500,50,true,true);
+		NormalInfoTable.type = tableType;
 		this.add(NormalInfoTable);
 	}
 	
@@ -374,8 +378,9 @@ public class TeamDataList extends JPanel{
 		wid.add(50);wid.add(150);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);wid.add(100);
 		wid.add(100);
 			
-		NormalInfoTable = new TeamTablePanel(datas,tbHead,wid,0,60,1280,320,50,true,true);
-		this.add(NormalInfoTable);
+		HighInfoTable = new TeamTablePanel(datas,tbHead,wid,0,60,1280,500,50,true,true);
+		HighInfoTable.type = ListType.high;
+		this.add(HighInfoTable);
 	}
 	
 

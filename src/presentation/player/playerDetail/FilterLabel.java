@@ -2,10 +2,13 @@ package presentation.player.playerDetail;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
+import dataservice.player.sortParam;
 import presentation.common.TF;
+import vo.playervo.PlayerVO;
 
 public class FilterLabel extends JLabel{
 	
@@ -14,11 +17,11 @@ public class FilterLabel extends JLabel{
 	 */
 	private static final long serialVersionUID = 1L;
 
-	FilterComboBox leagueCombo;
-	FilterComboBox positionCombo;
-	FilterComboBox firstCombo;
-	FilterComboBox secondCombo;
-	FilterComboBox thirdCombo;
+	public FilterComboBox leagueCombo;
+	public FilterComboBox positionCombo;
+	public FilterComboBox firstCombo;
+	public FilterComboBox secondCombo;
+	public FilterComboBox thirdCombo;
 	
 
 	public FilterLabel(){
@@ -29,7 +32,7 @@ public class FilterLabel extends JLabel{
 		this.setLayout(null);
 		this.setSize(1280, 90);
 		this.setOpaque(true);
-		this.setBackground(Color.DARK_GRAY);
+		this.setBackground(Color.GRAY);
 		
 		chooseLeague();
 		choosePosition();
@@ -41,6 +44,7 @@ public class FilterLabel extends JLabel{
 	
 	private void chooseLeague(){
 		leagueCombo = new FilterComboBox();
+		leagueCombo.addItem("筛选－联盟");
 		leagueCombo.addItem("全部");
 		leagueCombo.addItem("东部联盟");
 		leagueCombo.addItem("西部联盟");
@@ -51,6 +55,7 @@ public class FilterLabel extends JLabel{
 	
 	private void choosePosition(){
 		positionCombo = new FilterComboBox();
+		positionCombo.addItem("筛选－位置");
 		positionCombo.addItem("全部");
 		positionCombo.addItem("前锋");
 		positionCombo.addItem("中锋");
@@ -61,25 +66,25 @@ public class FilterLabel extends JLabel{
 	}
 	
 	private void setFirst(){
-		firstCombo = new AccordFilterComboBox();
+		firstCombo = new AccordFilterComboBox("第一优先级");
 		firstCombo.setLocation(350, 10);
 		this.add(firstCombo);
 	}
 	
 	private void setSecond(){
 
-		secondCombo = new AccordFilterComboBox();
+		secondCombo = new AccordFilterComboBox("第二优先级");
 		secondCombo.setLocation(500, 10);
 		this.add(secondCombo);
 	}
 	
 	private void setThird(){
 
-		thirdCombo = new AccordFilterComboBox();
+		thirdCombo = new AccordFilterComboBox("第三优先级");
 		thirdCombo.setLocation(650, 10);
 		this.add(thirdCombo);
 	}
-	
+		
 	private void setConfirm(){
 		JButton confirmButton = new JButton("确定");
 		confirmButton.setBounds(850, 10, 150, 30);
@@ -96,7 +101,7 @@ public class FilterLabel extends JLabel{
 //		f.pack();
 	}
 	
-	class FilterComboBox extends JComboBox<String>{
+	public class FilterComboBox extends JComboBox<String>{
 		
 		/**
 		 * 
@@ -108,7 +113,7 @@ public class FilterLabel extends JLabel{
 		}
 		
 		private void initialise(){
-			this.setBackground(Color.blue);
+			this.setBackground(Color.LIGHT_GRAY);
 			this.setBorder(null);
 			this.setSize(120, 30);
 		}
@@ -122,11 +127,12 @@ public class FilterLabel extends JLabel{
 		 */
 		private static final long serialVersionUID = 1L;
 		
-		public AccordFilterComboBox(){
-			this.initialise();
+		public AccordFilterComboBox(String piority){
+			this.initialise(piority);
 		}
 		
-		private void initialise(){
+		private void initialise(String piority){
+			this.addItem(piority);
 			this.addItem("场均助攻");
 			this.addItem("场均盖帽");
 			this.addItem("场均防守");
