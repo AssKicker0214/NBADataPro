@@ -11,7 +11,7 @@ public class PlayerData_stub implements PlayerDataService{
 
 
 	@Override
-	public ArrayList<HotPlayersVO> DailyKing(int num, String sortBy) {
+	public ArrayList<HotPlayersVO> DailyKing(int num, String sortBy,String Date) {
 		ArrayList<HotPlayersVO>  result = new ArrayList<HotPlayersVO>();
 		HotPlayersVO vo = new HotPlayersVO();
 		vo.name = "Aaron Brooks";
