@@ -4,6 +4,7 @@ import configure.Configure;
 import data.input.Match;
 import data.input.Player;
 import data.input.Team;
+import data.saver.PlayerScoreSaver;
 import dataservice.Updatable;
 
 
@@ -26,6 +27,7 @@ public class DataInitial {
         Match match = new Match(matchPath);
         match.init();
         dataUpdate = new DataUpdate(matchPath);
+        PlayerScoreSaver.getPlayerScoreSaver().update();
         dataUpdate.start();
         flag = true;
     }
