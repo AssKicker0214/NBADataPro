@@ -66,6 +66,7 @@ public class SingleVSBarLabel extends JLabel{
 	}
 
 	private void setBars(double avg1, double avg2){
+		System.out.println(avg1+" "+avg2);
 		if(avg1 > avg2){
 			local = new DynamicBar(blue,this.limit,avg1,this.length);
 			another = new DynamicBar(grey,this.limit,avg2,this.length);

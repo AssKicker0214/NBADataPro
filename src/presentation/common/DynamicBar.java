@@ -89,7 +89,7 @@ public class DynamicBar extends JLabel{
 		dVal.setFont(new Font("Î¢ÈíÑÅºÚ", Font.BOLD, 11));
 		this.add(dVal);
 
-		timer = new Timer(10, new UpAction());
+		timer = new Timer(5, new UpAction());
 	}
 	
 	public void showOut(){
@@ -105,7 +105,7 @@ public class DynamicBar extends JLabel{
 			if(height<value){
 				int valY = dVal.getY();
 		//		double tempValue = Double.parseDouble(dVal.getText()) + 1.0;
-				dVal.setText(String.format("%.1f",(wholeLength-valY)*((double)length)/((double)wholeLength)));
+				dVal.setText(String.format("%.2f",(wholeLength-valY)*((double)length)/((double)wholeLength)));
 				dVal.setLocation(0, valY-1);
 				
 				int barY = dBar.getY();
@@ -113,7 +113,7 @@ public class DynamicBar extends JLabel{
 				
 				
 			}else{
-				dVal.setText(value*((double)length)/((double)wholeLength)+"");
+				dVal.setText(String.format("%.2f",(value*((double)length)/((double)wholeLength))));
 				timer.stop();
 			}
 			
@@ -129,7 +129,7 @@ public class DynamicBar extends JLabel{
 			if(width<value){
 				int valX = dVal.getX();
 		//		double tempValue = Double.parseDouble(dVal.getText()) + 1;
-				dVal.setText(String.format("%.1f",(wholeLength-valX)*((double)length)/((double)wholeLength)));
+				dVal.setText(String.format("%.2f",(wholeLength-valX)*((double)length)/((double)wholeLength)));
 				dVal.setLocation(valX-1, 0);
 				
 				int barX = dBar.getX();
@@ -137,7 +137,7 @@ public class DynamicBar extends JLabel{
 				
 //				System.out.println(dBar.getLocation());
 			}else{
-				dVal.setText(value*((double)length)/((double)wholeLength)+"");
+				dVal.setText(String.format("%.2f",(value*((double)length)/((double)wholeLength))));
 				timer.stop();
 			}
 		}
@@ -153,14 +153,14 @@ public class DynamicBar extends JLabel{
 			if(width<value){
 				int valX = dVal.getX();
 	//			double tempValue = Double.parseDouble(dVal.getText()) + 1;
-				dVal.setText(String.format("%.1f",valX*((double)length)/((double)wholeLength)));
+				dVal.setText(String.format("%.2f",valX*((double)length)/((double)wholeLength)));
 				dVal.setLocation(valX+1, 0);
 				
 				int barX = dBar.getX();
 				dBar.setLocation(barX+1, 0);
 				
 			}else{
-				dVal.setText(value*((double)length)/((double)wholeLength)+"");
+				dVal.setText(String.format("%.2f",(value*((double)length)/((double)wholeLength))));
 				timer.stop();
 			}
 		}

@@ -83,7 +83,7 @@ public class TeamVSTopPanel extends JPanel{
 		localTeamPhotoLabel = new PhotoLabel(new ImageIcon("teamsPNG/" + localVO.photo + ".png").getImage());
 		System.out.println(localVO.teamName);
 		localTeamPhotoLabel.setHorizontalAlignment(JLabel.RIGHT);
-		localTeamPhotoLabel.setBounds(300,5,230,135);
+		localTeamPhotoLabel.setBounds(300,25,230,115);
 		localTeamPhotoLabel.setBackground(Color.WHITE);
 		localTeamPhotoLabel.setOpaque(true);
 		localTeamPhotoLabel.setVisible(true);
@@ -93,7 +93,7 @@ public class TeamVSTopPanel extends JPanel{
 	public void setAnotherTeamPhotoLabel (){
 		anotherTeamPhotoLabel = new PhotoLabel(new ImageIcon("teamsPNG/" + anotherVO.photo + ".png").getImage());
 		anotherTeamPhotoLabel.setHorizontalAlignment(JLabel.RIGHT);
-		anotherTeamPhotoLabel.setBounds(730,5,230,135);
+		anotherTeamPhotoLabel.setBounds(730,20,230,115);
 		anotherTeamPhotoLabel.setBackground(Color.WHITE);
 		anotherTeamPhotoLabel.setOpaque(true);
 		anotherTeamPhotoLabel.setVisible(true);
@@ -213,7 +213,7 @@ public class TeamVSTopPanel extends JPanel{
 			name.setOpaque(true);
 			item.add(name);
 			
-			JLabel photo = new PhotoLabel(new ImageIcon("portrait/" + list.get(i).photo + ".png").getImage());
+			JLabel photo = new PhotoLabel(new ImageIcon("teamsPNG/" + list.get(i).photo + ".png").getImage());
 			photo.setBounds(10,0,80,50);
 			photo.setBackground(Color.WHITE);
 			photo.setOpaque(true);
@@ -238,7 +238,7 @@ public class TeamVSTopPanel extends JPanel{
 						remove(anotherTeamPhotoLabel);
 					}
 					if(localTeamPhotoLabel != null){
-						remove(localTeamPhotoLabel);
+//						remove(localTeamPhotoLabel);
 					}
 					if(anotherInfoGroupsLabel != null){
 						remove(anotherInfoGroupsLabel);

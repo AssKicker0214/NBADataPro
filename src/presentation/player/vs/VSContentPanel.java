@@ -40,6 +40,9 @@ public class VSContentPanel extends JPanel{
 		this.setOpaque(true);
 		addBars(isPlayer);
 		this.setVisible(true);
+		
+		System.out.println(avg1);
+		System.out.println(avg2);
 	}
 
 	private void initArray(ArrayList<String> itemsNeedAdd){
@@ -51,8 +54,6 @@ public class VSContentPanel extends JPanel{
 
 	private void addBars(boolean isPlayer){
 		for(int i = 0; i < items.size();i++){
-			System.out.println(items.size() + "  " + Double.toString(avg1.get(i)) + "  " + 
-					Double.toString(avg2.get(i)) + "  " + items.get(i) + "");
 			this.add(new SingleVSBarLabel(avg1.get(i),avg2.get(i),items.get(i),length,isPlayer));
 		}
 	}

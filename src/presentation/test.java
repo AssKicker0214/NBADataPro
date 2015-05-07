@@ -1,5 +1,8 @@
 package presentation;
 
+import data.DataInitial;
+import dataservice.match.MatchDataHandel;
+import dataservice.match.MatchDataService;
 import dataservice.player.PlayerDataHandel;
 import dataservice.player.PlayerDataService;
 import dataservice.team.TeamDataHandel;
@@ -9,7 +12,9 @@ public class test {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		PlayerDataService tds =  new PlayerDataHandel();
+		DataInitial.init();
+		MatchDataService tds =  new MatchDataHandel();
+		tds.findByDT("13-14-15", "15-11-11", "Hawks").get(0).show();
 		
 	}
 
