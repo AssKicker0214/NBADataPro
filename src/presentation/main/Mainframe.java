@@ -282,6 +282,9 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 	}
 
 	class TitleLabel extends JLabel{
+		Mainframe frame;
+		int offsetX;
+		int offsetY;
 
 		/**
 		 * 
@@ -305,7 +308,38 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 				}
 				
 				@Override
-				public void mouseDragged(MouseEvent arg0) {
+				public void mouseDragged(MouseEvent e) {
+					frame.setLocation(e.getXOnScreen()-offsetX, e.getYOnScreen()-offsetY);
+				}
+			});
+			
+			this.addMouseListener(new MouseListener() {
+				
+				@Override
+				public void mouseReleased(MouseEvent arg0) {
+					
+				}
+				
+				@Override
+				public void mousePressed(MouseEvent e) {
+					frame = Mainframe.getFrame();
+					offsetX = e.getX();
+					offsetY = e.getY();
+				}
+				
+				@Override
+				public void mouseExited(MouseEvent arg0) {
+					
+				}
+				
+				@Override
+				public void mouseEntered(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void mouseClicked(MouseEvent arg0) {
 					// TODO Auto-generated method stub
 					
 				}
@@ -328,6 +362,7 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 				@Override
 				public void mouseReleased(MouseEvent arg0) {
 					Mainframe.getFrame().dispose();;
+					System.exit(0);
 				}
 				
 				@Override
