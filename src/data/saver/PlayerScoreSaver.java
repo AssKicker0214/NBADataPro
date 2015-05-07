@@ -964,6 +964,7 @@ public class PlayerScoreSaver {
         private int[][] p_tid_mid;
         private int[] p_matchNum;
         private int[] p_startSession;
+        private int num;
 
         private void setPlayerDataLevel2() {
             p_inplacetime = new int[playerSaver.getNum()];
@@ -1006,6 +1007,9 @@ public class PlayerScoreSaver {
             for (int i = 0; i < p_tid_mid.length; i++) {
                 p_tid_mid[i][0] = -1;
             }
+
+
+
 
             for (int j = 0; j < length; j++) {
                 int i = points[j];
@@ -1227,46 +1231,46 @@ public class PlayerScoreSaver {
 
         private void setPlayerDataLevel3() {
 
-            pLegB = new double[playerSaver.getNum()];
-            p_FGP = new double[playerSaver.getNum()];
-            p_BSP = new double[playerSaver.getNum()];
-            p_TPSP = new double[playerSaver.getNum()];
-            p_FTP = new double[playerSaver.getNum()];
-            p_assistP = new double[playerSaver.getNum()];
-            p_reboundP = new double[playerSaver.getNum()];
-            p_OREB = new double[playerSaver.getNum()];
-            p_DREB = new double[playerSaver.getNum()];
-            p_stealP = new double[playerSaver.getNum()];
-            p_turnoverP = new double[playerSaver.getNum()];
-            p_effiency = new double[playerSaver.getNum()];
-            p_GmSc = new double[playerSaver.getNum()];
-            p_TSP = new double[playerSaver.getNum()];
-            p_OSE = new double[playerSaver.getNum()];
-            p_utiliation = new double[playerSaver.getNum()];
-            p_avgAssist = new double[playerSaver.getNum()];
-            p_avgBlockShot = new double[playerSaver.getNum()];
-            p_avgDefend = new double[playerSaver.getNum()];
-            p_avgFault = new double[playerSaver.getNum()];
-            p_avgFoul = new double[playerSaver.getNum()];
-            p_avgMinute = new double[playerSaver.getNum()];
-            p_avgOffend = new double[playerSaver.getNum()];
-            p_avgPoint = new double[playerSaver.getNum()];
-            p_avgRebound = new double[playerSaver.getNum()];
-            p_avgSteal = new double[playerSaver.getNum()];
-            p_division = new String[playerSaver.getNum()];
-            p_team = new String[playerSaver.getNum()];
-            p_teamName = new String[playerSaver.getNum()];
-            p_league = new char[playerSaver.getNum()];
-            p_number = new int[playerSaver.getNum()];
-            p_age = new int[playerSaver.getNum()];
-            p_exp = new int[playerSaver.getNum()];
-            p_teamName = new String[playerSaver.getNum()];
-            p_teamPhoto = new String[playerSaver.getNum()];
-            p_school = new String[playerSaver.getNum()];
-            p_birth = new String[playerSaver.getNum()];
-            p_weigth = new String[playerSaver.getNum()];
-            p_hight = new String[playerSaver.getNum()];
-            for (int i = 0; i < playerSaver.getNum(); i++) {
+            pLegB = new double[getNum()];
+            p_FGP = new double[getNum()];
+            p_BSP = new double[getNum()];
+            p_TPSP = new double[getNum()];
+            p_FTP = new double[getNum()];
+            p_assistP = new double[getNum()];
+            p_reboundP = new double[getNum()];
+            p_OREB = new double[getNum()];
+            p_DREB = new double[getNum()];
+            p_stealP = new double[getNum()];
+            p_turnoverP = new double[getNum()];
+            p_effiency = new double[getNum()];
+            p_GmSc = new double[getNum()];
+            p_TSP = new double[getNum()];
+            p_OSE = new double[getNum()];
+            p_utiliation = new double[getNum()];
+            p_avgAssist = new double[getNum()];
+            p_avgBlockShot = new double[getNum()];
+            p_avgDefend = new double[getNum()];
+            p_avgFault = new double[getNum()];
+            p_avgFoul = new double[getNum()];
+            p_avgMinute = new double[getNum()];
+            p_avgOffend = new double[getNum()];
+            p_avgPoint = new double[getNum()];
+            p_avgRebound = new double[getNum()];
+            p_avgSteal = new double[getNum()];
+            p_division = new String[getNum()];
+            p_team = new String[getNum()];
+            p_teamName = new String[getNum()];
+            p_league = new char[getNum()];
+            p_number = new int[getNum()];
+            p_age = new int[getNum()];
+            p_exp = new int[getNum()];
+            p_teamName = new String[getNum()];
+            p_teamPhoto = new String[getNum()];
+            p_school = new String[getNum()];
+            p_birth = new String[getNum()];
+            p_weigth = new String[getNum()];
+            p_hight = new String[getNum()];
+            for (int i = 0; i < getNum(); i++) {
                 pLegB[i] = p_throwallTeamB[i] + 0.4 * p_penaltyallTeamB[i] - 1.07 * ((double) p_attackbasTeamB[i] / (p_attackbasTeamB[i] + p_defencebasTeam[i])) * (double) (p_throwallTeamB[i] - p_throwinTeamB[i]) + 1.07 * p_mistakeTeamB[i];
 //                legB[i] = b_throwall[i] + 0.4 * b_penaltyall[i] - 1.07 * ((double) b_attackbas[i] / (b_attackbas[i] + a_defencebas[i])) * (double) (b_throwall[i] - b_throwin[i]) + 1.07 * b_mistake[i];
                 if (i == 32) {
@@ -1530,6 +1534,7 @@ public class PlayerScoreSaver {
         private PlayerData(int[] points, int length) {
             this.points = points;
             this.length = length;
+            this.num = playerSaver.getNum();
             setPlayerDataLevel1();
             setPlayerDataLevel2();
             setPlayerDataLevel3();
@@ -1739,6 +1744,7 @@ public class PlayerScoreSaver {
 
             this.points = getArray(arrayList);
             this.length = this.points.length;
+            this.num = playerSaver.getNum();
             setPlayerDataLevel1();
             setPlayerDataLevel2();
             setPlayerDataLevel3();
