@@ -34,7 +34,7 @@ public class FloatButton extends JLabel implements MouseMotionListener, MouseLis
 	
 	public FloatButton(){
 //		this.setOpaque(true);
-		this.setBounds(400, 300, 100, 100);
+		this.setBounds(600, 40, 100, 100);
 		this.setIcon(new ImageIcon("return out.png"));
 //		this.setBackground(new Color(134, 150, 178, 200));
 		this.setFont(new Font("微软雅黑", Font.BOLD, 16));
@@ -139,25 +139,25 @@ public class FloatButton extends JLabel implements MouseMotionListener, MouseLis
 		
 		if(x<0 && y>=0){
 			this.setLocation(0, y);
-			this.setIcon(new ImageIcon("切换left.png"));
+//			this.setIcon(new ImageIcon("切换left.png"));
 			this.setOpaque(false);
 		}else if(y<0 && x>=0){
 			this.setLocation(x, 0);
-			this.setIcon(new ImageIcon("切换top.png"));
+//			this.setIcon(new ImageIcon("切换top.png"));
 			this.setOpaque(false);
 		}else if(x<0 && y<0){
 			this.setLocation(0, 0);
-			this.setIcon(new ImageIcon("切换top.png"));
+//			this.setIcon(new ImageIcon("切换top.png"));
 			this.setOpaque(false);
 		}
 		
 		if(x+bWidth>fWidth && y+bHeight<=fHeight){
 			this.setLocation(fWidth-bWidth, y);
-			this.setIcon(new ImageIcon("切换right.png"));
+//			this.setIcon(new ImageIcon("切换right.png"));
 			this.setOpaque(false);
 		}else if(y+bHeight>fHeight && x+bWidth<=fWidth){
 			this.setLocation(x, fHeight-bHeight);
-			this.setIcon(new ImageIcon("切换top.png"));
+//			this.setIcon(new ImageIcon("切换top.png"));
 			this.setOpaque(false);
 		}else if(x+bWidth>fWidth && y+bHeight>fHeight){//右下角
 			this.setLocation(fWidth-bWidth, fHeight-bHeight);
