@@ -619,6 +619,26 @@ public class PlayerDataHandel implements PlayerDataService {
         return filter(getHighInfo(), sortBy, position, league, numS, numE);
     }
 
+    @Override
+    public ArrayList<HotPlayersVO> DailyKing(int num, String sortBy, String date) {
+        ArrayList<HotPlayersVO> arrayList = new PlayerDataManager(date).getHotPlayers(sortBy, PlayerDataManager.DATE);
+        arrayList.sort(new Comparator<HotPlayersVO>() {
+            @Override
+            public int compare(HotPlayersVO o1, HotPlayersVO o2) {
+                if (o1.value > o2.value) {
+                    return -1;
+                } else if (o1.value < o2.value) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+        });
+        ArrayList<HotPlayersVO> res = Tools.getFirstNum(num,arrayList);
+
+        return res;
+    }
+
     private ArrayList<PlayerVO> filter(ArrayList<String> attributes, ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, int numS, int numE) {
         ArrayList<PlayerVO> playerVOs = new PlayerDataManager().getPlayerVOs(attributes, PlayerDataManager.DEFAULT);
         ArrayList<PlayerVO> res = new ArrayList<>();
@@ -701,26 +721,6 @@ public class PlayerDataHandel implements PlayerDataService {
     }
 
     @Override
-    public ArrayList<HotPlayersVO> DailyKing(int num, String sortBy) {
-        ArrayList<HotPlayersVO> arrayList = new PlayerDataManager(getToday()).getHotPlayers(sortBy, PlayerDataManager.DATE);
-        arrayList.sort(new Comparator<HotPlayersVO>() {
-            @Override
-            public int compare(HotPlayersVO o1, HotPlayersVO o2) {
-                if (o1.value > o2.value) {
-                    return -1;
-                } else if (o1.value < o2.value) {
-                    return 1;
-                } else {
-                    return 0;
-                }
-            }
-        });
-        ArrayList<HotPlayersVO> res = Tools.getFirstNum(num,arrayList);
-
-        return res;
-    }
-
-    @Override
     public ArrayList<HotPlayersVO> SeasonKing(int num, String sortBy) {
         ArrayList<HotPlayersVO> arrayList = new PlayerDataManager().getHotPlayers(sortBy, PlayerDataManager.DEFAULT);
         arrayList.sort(new Comparator<HotPlayersVO>() {
@@ -763,7 +763,7 @@ public class PlayerDataHandel implements PlayerDataService {
 
     @Override
     public PlayerVO avgLeague() {
-//        ArrayList<PlayerVO> playerVOs = new TeamDataManager().getTeamVOs(getNormalInfo(),PlayerDataManager.DEFAULT);
+        ArrayList<PlayerVO> playerVOs = new PlayerDataManager().getPlayerVOs(getNormalInfo(), PlayerDataManager.DEFAULT);
         return null;
     }
 

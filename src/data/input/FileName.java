@@ -1,5 +1,6 @@
 package data.input;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -37,5 +38,14 @@ public class FileName {
 
     public int getSize() {
         return arrayList.size();
+    }
+
+    public boolean isInFileName(File file) {
+        for (String m_fileName :arrayList){
+            if (file.getName().trim().equals(m_fileName.trim())){
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -68,7 +68,7 @@ public class MatchManager {
         ArrayList<Integer> arrayList = matchInfoSaver.getMids(start,end);
         ArrayList<MatchVO> matchVOs = new ArrayList<>();
         for (int i = 0; i < arrayList.size();i++){
-            matchVOs.add(getMatchVO(arrayList.get(i) + 1));
+            matchVOs.add(getMatchVO(arrayList.get(i)));
         }
         return matchVOs;
     }
