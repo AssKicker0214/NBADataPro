@@ -185,7 +185,7 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 		matchList = new MatchListPanel();
 		contentPane.add(matchList,0);
 		matchList.setVisible(false);
-	//	DataInitial.addUpdatable((Updatable)matchList);
+		DataInitial.addUpdatable((Updatable)matchList);
 		
  		teamDataList = new TeamDataList();
  		contentPane.add(teamDataList,0);

@@ -110,6 +110,8 @@ public class TeamSchedulePanel extends JPanel{
 	
 	public void setScheduleTablePanel(String start,String end){
 		MatchDataService mds = new MatchDataHandel();
+		System.out.println(start+end+TeamName);
+
 		ArrayList<MatchVO> vo = mds.findByDT(start, end, TeamName);
 	
 		String[] tbHead = {"日期","","对阵球队","总比分","第一节比分","第二节比分","第三节比分","第四节比分"};
