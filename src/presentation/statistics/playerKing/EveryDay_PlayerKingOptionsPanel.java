@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import dataservice.player.PlayerDataService;
-import dataservice.player.PlayerData_stub;
+import dataservice.player.PlayerDataHandel;
 import presentation.common.SelectLabel;
 
 public class EveryDay_PlayerKingOptionsPanel extends JPanel{
@@ -69,7 +69,7 @@ public class EveryDay_PlayerKingOptionsPanel extends JPanel{
 		if(playerKingContentPanel!=null)
 			remove(playerKingContentPanel);
 		setVisible(false);
-		PlayerDataService pds = new PlayerData_stub();
+		PlayerDataService pds = new PlayerDataHandel();
 		System.out.println("PlayerKing"+sortBy+Date);
 		playerKingContentPanel = new PlayerKingContentPanel(pds.DailyKing(5, sortBy,Date));
 		this.add(playerKingContentPanel);
