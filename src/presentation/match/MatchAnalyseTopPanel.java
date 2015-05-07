@@ -203,13 +203,13 @@ public class MatchAnalyseTopPanel extends JPanel{
 		scoreLabel.setOpaque(true);
 		scoreLabel.setBackground(Color.LIGHT_GRAY);
 		
-		JLabel name = new JLabel(vo.homeTeam.name,JLabel.CENTER);
+		JLabel name = new JLabel(vo.homeTeam.photo,JLabel.CENTER);
 		name.setFont(new Font("Dialog",1,15));
 		name.setForeground(Color.WHITE);
 		name.setBounds(0,20,35,20);
 		scoreLabel.add(name);
 		
-		JLabel anotherName = new JLabel(vo.guestTeam.name,JLabel.CENTER);
+		JLabel anotherName = new JLabel(vo.guestTeam.photo,JLabel.CENTER);
 		anotherName.setFont(new Font("Dialog",1,15));
 		anotherName.setForeground(Color.WHITE);
 		anotherName.setBounds(0,40,35,20);
