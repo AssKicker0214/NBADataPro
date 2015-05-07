@@ -133,11 +133,13 @@ public class PlayerMiddle_ContrastLeaguePanel extends JPanel {
 		BarsGroupLabel.setOpaque(true);
 		BarsGroupLabel.setVisible(true);
 
-		JLabel FS_BarLabel = new SingleBarLabel(player.get(0),leagueAvg.get(0),blue,100,100);
-		JLabel REB_BarLabel = new SingleBarLabel(player.get(1),leagueAvg.get(1),blue,100,100);
-		JLabel Assist_BarLabel = new SingleBarLabel(player.get(2),leagueAvg.get(2),blue,100,100);
-		JLabel FTP_BarLabel = new SingleBarLabel(player.get(3),leagueAvg.get(3),blue,100,100);
-		JLabel TPTP_BarLabel = new SingleBarLabel(player.get(4),leagueAvg.get(4),blue,100,100);
+//		int[] playerLim = {40,20,30,1,1};
+
+		JLabel FS_BarLabel = new SingleBarLabel(player.get(0),leagueAvg.get(0),blue,40,100);
+		JLabel REB_BarLabel = new SingleBarLabel(player.get(1),leagueAvg.get(1),blue,20,100);
+		JLabel Assist_BarLabel = new SingleBarLabel(player.get(2),leagueAvg.get(2),blue,30,100);
+		JLabel FTP_BarLabel = new SingleBarLabel(player.get(3),leagueAvg.get(3),blue,1,100);
+		JLabel TPTP_BarLabel = new SingleBarLabel(player.get(4),leagueAvg.get(4),blue,1,100);
 
 		BarsGroupLabel.removeAll();
 		BarsGroupLabel.add(FS_BarLabel);

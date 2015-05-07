@@ -106,6 +106,9 @@ public class PlayerMiddle_PastPanel extends JPanel{
 		MatchDataService mds = new MatchDataHandel();
 		System.out.println(start+end+PlayerName);
 		ArrayList<MatchContentPlayerVO> vo = mds.findByDP(start, end, PlayerName);
+		
+		if(vo.size()==0)
+			return;
 		String[] columns = {"日期","","对手","分钟","％","命中","出手","三分％","罚球％",
 				"进攻篮板","防守篮板","篮板","助攻","盖帽","失误","犯规","得分"};
 				

@@ -140,17 +140,17 @@ public class TeamDetailTopPanel  extends JPanel{
 		TeamAvgFieldPanel.add(AvgFieldAssistLabel);
 		
 		JLabel AvgFieldScore = new JLabel(vo.avgPoint+"");
-		AvgFieldScore.setFont(new Font("Dialog",1,25));
+		AvgFieldScore.setFont(new Font("Dialog",1,20));
 		AvgFieldScore.setForeground(Color.GRAY);
 		TeamAvgFieldPanel.add(AvgFieldScore);
 		
 		JLabel AvgFieldREB = new JLabel(vo.avgRebound+"");
-		AvgFieldREB.setFont(new Font("Dialog",1,25));
+		AvgFieldREB.setFont(new Font("Dialog",1,20));
 		AvgFieldREB.setForeground(Color.GRAY);
 		TeamAvgFieldPanel.add(AvgFieldREB);
 		
 		JLabel AvgFieldAssist = new JLabel(vo.avgAssist+"");
-		AvgFieldAssist.setFont(new Font("Dialog",1,25));
+		AvgFieldAssist.setFont(new Font("Dialog",1,20));
 		AvgFieldAssist.setForeground(Color.GRAY);
 		TeamAvgFieldPanel.add(AvgFieldAssist);
 				
