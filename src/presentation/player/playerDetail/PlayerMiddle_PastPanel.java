@@ -41,7 +41,7 @@ public class PlayerMiddle_PastPanel extends JPanel{
 		setPastTitleLabel();
 		setDate();
 		this.setBackground(Color.WHITE);
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
+		SimpleDateFormat df = new SimpleDateFormat("yy-MM-dd");//设置日期格式
 		String date = df.format(new Date());
 		setTabel(date,date);
 	}
@@ -80,7 +80,7 @@ public class PlayerMiddle_PastPanel extends JPanel{
 			@Override
 			public void mousePressed(MouseEvent e) {
 				commit.setFont(new Font("Dialog",1,15));
-				setTabel(calendarStart.getSelectedDate().toString(),calendarEnd.getSelectedDate().toString());
+				setTabel(calendarStart.getSelectedDate().toString().substring(2,10),calendarEnd.getSelectedDate().toString().substring(2,10));
 			}
 			
 			@Override
