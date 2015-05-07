@@ -2,7 +2,6 @@ package data;
 
 import data.saver.PlayerSaver;
 import data.saver.PlayerScoreSaver;
-import data.saver.Tools;
 import vo.playervo.HotPlayersVO;
 import vo.playervo.PlayerVO;
 
@@ -256,6 +255,7 @@ public class PlayerDataManager {
         playersVO.id = id;
         setHotPlayerInfo(playersVO,playerData);
         setHotPlayerValue(sortBy,playersVO,playerData);
+        playersVO.value = Tools.change(playersVO.value);
         return playersVO;
     }
 
@@ -263,8 +263,10 @@ public class PlayerDataManager {
         HotPlayersVO playersVO = new HotPlayersVO();
         playersVO.id = id;
         setHotPlayerInfo(playersVO,playerData);
-        setUpgrade(sortBy,playersVO);
-        setHotPlayerValue(sortBy,playersVO,playerData);
+        setUpgrade(sortBy, playersVO);
+        setHotPlayerValue(sortBy, playersVO, playerData);
+        playersVO.upgradeRate = Tools.change(playersVO.upgradeRate);
+        playersVO.value = Tools.change(playersVO.value);
         return playersVO;
     }
 
@@ -272,7 +274,7 @@ public class PlayerDataManager {
         PlayerScoreSaver.PlayerData playerData = getPlayerData(type);
         ArrayList<HotPlayersVO> playersVOs = new ArrayList<>();
         for (int i = 0; i< playerData.getNum();i++){
-            playersVOs.add(getHotPlayer(sortBy,playerData,i++));
+            playersVOs.add(getHotPlayer(sortBy,playerData,i+1));
         }
         return playersVOs;
     }
@@ -280,7 +282,7 @@ public class PlayerDataManager {
     public ArrayList<HotPlayersVO> getUpgrade(String sortBy){
         ArrayList<HotPlayersVO> playersVOs = new ArrayList<>();
         for (int i = 0; i< playerDataDefault.getNum();i++){
-            playersVOs.add(getHotPlayer(sortBy,playerDataDefault,i++));
+            playersVOs.add(getUpgrade(sortBy, playerDataDefault, i + 1));
         }
         return playersVOs;
     }

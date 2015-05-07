@@ -153,7 +153,7 @@ public class PlayerKingContentPanel extends JPanel{
 		playerP.setPreferredSize(new Dimension(510,93));
 		playerP.setBackground(Color.WHITE);
 		
-		//添加球员图片
+				//添加球员图片
 				PhotoLabel PlayerPhotoLabel = new PhotoLabel(new ImageIcon(p).getImage());
 				PlayerPhotoLabel.setBounds(0,20,75,60);
 				PlayerPhotoLabel.setBackground(Color.WHITE);
@@ -184,11 +184,11 @@ public class PlayerKingContentPanel extends JPanel{
 				JLabel value = new JLabel(v);
 				value.setFont(new Font("Vrinda",1,40));
 				value.setForeground(Color.DARK_GRAY);
-				value.setBounds(400,25,105,40);
+				value.setBounds(340,25,145,40);
 				playerP.add(value);
 				//添加球队图片
 				PhotoLabel teamPic = new PhotoLabel(new ImageIcon(t).getImage());
-				teamPic.setBounds(300,15,75,70);
+				teamPic.setBounds(250,15,75,70);
 				teamPic.setBackground(Color.WHITE);
 				teamPic.setOpaque(true);
 				teamPic.setVisible(true);
