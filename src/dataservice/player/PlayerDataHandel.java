@@ -22,6 +22,8 @@ public class PlayerDataHandel implements PlayerDataService {
         if (highInfo == null) {
             highInfo = new ArrayList<>();
             highInfo.add("name");
+            highInfo.add("id");
+            highInfo.add("photo");
             highInfo.add("age");
             highInfo.add("position");
             highInfo.add("league");
@@ -45,6 +47,7 @@ public class PlayerDataHandel implements PlayerDataService {
     public static ArrayList<String> getAllInfo() {
         if (allInfo == null) {
             allInfo = new ArrayList<>();
+            highInfo.add("id");
             allInfo.add("photo");
             allInfo.add("division");
             allInfo.add("minute");
@@ -95,6 +98,7 @@ public class PlayerDataHandel implements PlayerDataService {
     public static ArrayList<String> getAllInfoWithAvg() {
         if (allInfoWithAvg == null) {
             allInfoWithAvg = new ArrayList<>();
+            highInfo.add("id");
             allInfoWithAvg.add("photo");
             allInfoWithAvg.add("division");
             allInfoWithAvg.add("minute");
@@ -156,7 +160,9 @@ public class PlayerDataHandel implements PlayerDataService {
     public static ArrayList<String> getAvgNormalInfo() {
         if (avgNormalInfo == null) {
             avgNormalInfo = new ArrayList<>();
-            avgNormalInfo.add("age");
+            avgNormalInfo.add("name");
+            avgNormalInfo.add("id");
+            avgNormalInfo.add("photo");
             avgNormalInfo.add("age");
             avgNormalInfo.add("position");
             avgNormalInfo.add("league");
@@ -185,6 +191,8 @@ public class PlayerDataHandel implements PlayerDataService {
         if (normalInfo == null) {
             normalInfo = new ArrayList<>();
             normalInfo.add("name");
+            normalInfo.add("id");
+            normalInfo.add("photo");
             normalInfo.add("position");
             normalInfo.add("league");
             normalInfo.add("age");
@@ -214,6 +222,7 @@ public class PlayerDataHandel implements PlayerDataService {
         if (information == null) {
             information = new ArrayList<>();
             information.add("photo");
+            information.add("id");
             information.add("division");
             information.add("name");
             information.add("age");
