@@ -153,15 +153,15 @@ public class PlayerDataHandelTest {
      */
     @Test
     public void testSortPlayerInfo() throws Exception {
-//        ArrayList<sortParam> arrayList1 = new ArrayList<>();
-//        sortParam sortParam1 = new sortParam();
-//        sortParam1.isDesc =false;
-//        sortParam1.field = "name";
-//        arrayList1.add(sortParam1);
-//        ArrayList<PlayerVO> arrayList = new PlayerDataHandel().sortPlayerInfo(arrayList1);
-//        for (int i = 0; i<arrayList.size();i++){
-//            System.out.println(arrayList.get(i).name);
-//        }
+        ArrayList<sortParam> arrayList1 = new ArrayList<>();
+        sortParam sortParam1 = new sortParam();
+        sortParam1.isDesc =false;
+        sortParam1.field = "avgPoint";
+        arrayList1.add(sortParam1);
+        ArrayList<PlayerVO> arrayList = new PlayerDataHandel().sortPlayerInfo(arrayList1);
+        for (int i = 0; i<arrayList.size();i++){
+            System.out.println(arrayList.get(i).name);
+        }
     }
 
     /**

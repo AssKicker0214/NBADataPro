@@ -61,10 +61,10 @@ public class MatchDataHandelTest {
      */
     @Test
     public void testFindByDate() throws Exception {
-//        ArrayList<MatchVO> arrayList = new MatchDataHandel().findByDate("14-01-01", "14-01-16");
-//        for (int i = 0; i < arrayList.size(); i++) {
-//            arrayList.get(i).show();
-//        }
+        ArrayList<MatchVO> arrayList = new MatchDataHandel().findByDate("14-04-16", "14-04-16");
+        for (int i = 0; i < arrayList.size(); i++) {
+            arrayList.get(i).show();
+        }
     }
 
     /**

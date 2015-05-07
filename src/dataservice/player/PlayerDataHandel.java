@@ -763,7 +763,7 @@ public class PlayerDataHandel implements PlayerDataService {
 
     @Override
     public PlayerVO avgLeague() {
-//        ArrayList<PlayerVO> playerVOs = new TeamDataManager().getTeamVOs(getNormalInfo(),PlayerDataManager.DEFAULT);
+        ArrayList<PlayerVO> playerVOs = new PlayerDataManager().getPlayerVOs(getNormalInfo(),PlayerDataManager.DEFAULT);
         return null;
     }
 
