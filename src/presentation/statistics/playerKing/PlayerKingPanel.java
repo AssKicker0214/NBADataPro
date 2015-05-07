@@ -233,7 +233,6 @@ public class PlayerKingPanel extends JPanel{
 			@Override
 			public void mousePressed(MouseEvent e) {
 				commit.setFont(new Font("Dialog",1,15));
-				System.out.println(calendar.getSelectedDate().toString().substring(2,10));
 				everyDay_PlayerKingOptionsPanel.Date = calendar.getSelectedDate().toString().substring(2,10);
 				everyDay_PlayerKingOptionsPanel.setPlayerKingContentPanel();
 			}

@@ -39,9 +39,10 @@ public class EveryDay_PlayerKingOptionsPanel extends JPanel{
 		this.setLayout(null);
 		this.setBounds(0, 105,1130,430);
 		this.setBackground(Color.WHITE);
-		SimpleDateFormat df = new SimpleDateFormat("yy-MM-dd HH:mm:ss");//设置日期格式
+		SimpleDateFormat df = new SimpleDateFormat("yy-MM-dd");//设置日期格式
 		Date = df.format(new java.util.Date());
-		
+		System.out.println("...."+Date);
+
 		setScoreButton();
 		setREBButton();
 		setAssitButton();
@@ -67,6 +68,7 @@ public class EveryDay_PlayerKingOptionsPanel extends JPanel{
 	
 	public void setPlayerKingContentPanel(){
 		PlayerDataService pds = new PlayerData_stub();
+		System.out.println(Date);
 		playerKingContentPanel = new PlayerKingContentPanel(pds.DailyKing(5, sortBy,Date));
 		this.add(playerKingContentPanel);
 		repaint();

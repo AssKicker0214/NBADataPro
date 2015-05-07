@@ -30,10 +30,13 @@ public class PlayerData_stub implements PlayerDataService{
 		vo3.teamPhoto = "ATL";
 		vo3.value = 39;
 		
-		if(sortBy.equals("avgPoint"))
-			result.add(vo);
-		else
-			result.add(vo3);
+		if(Date.equals("15-05-07")){
+			System.out.print("=");
+			result.add(vo);}
+		else{			
+			System.out.print("!=");
+
+			result.add(vo3);}
 		
 		HotPlayersVO vo2 = new HotPlayersVO();
 		vo2.name = "Aaron Brooks";
