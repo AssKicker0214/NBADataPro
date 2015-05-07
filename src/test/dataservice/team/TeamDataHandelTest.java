@@ -74,6 +74,15 @@ public class TeamDataHandelTest {
         }
     }
 
+    @Test
+    public void testFindTeams(){
+        ArrayList<TeamVO> arrayList = new TeamDataHandel().findTeams("Hawks");
+        for (int i = 0; i < arrayList.size();i++){
+            TeamVO teamVO = arrayList.get(i);
+            System.out.println(teamVO.teamName);
+        }
+    }
+
     /**
      * Method: findTeamInfo(String teamName)
      */

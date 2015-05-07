@@ -15,6 +15,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 import data.DataInitial;
+import dataservice.Updatable;
 import presentation.common.PhotoLabel;
 import presentation.floatui.FloatPane;
 import presentation.floatui.IMainFrameSize;
@@ -159,7 +160,8 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 	}
 	
 	private void setMainPartPanel(){
-/*		playerKing = new PlayerKingPanel();
+		
+		playerKing = new PlayerKingPanel();
 		contentPane.add(playerKing);
 		playerKing.setVisible(false);
 		
@@ -170,10 +172,9 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 		hotPlayer = new HotPlayerPanel();
 		contentPane.add(hotPlayer);
 		hotPlayer.setVisible(false);
-		*/
+		
 		
 		teamList = new TeamListPanel();
-	//	((TeamListPanel) teamList).setMainFrame(this);
 		contentPane.add(teamList);
 		teamList.setVisible(true);
 		
@@ -184,15 +185,16 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 		matchList = new MatchListPanel();
 		contentPane.add(matchList,0);
 		matchList.setVisible(false);
-	//	DataInitial.addUpdatable((MatchListPanel)matchList);
+		DataInitial.addUpdatable((Updatable)matchList);
 		
  		teamDataList = new TeamDataList();
  		contentPane.add(teamDataList,0);
  		teamDataList.setVisible(false);
 		
-//		mainParts.add(playerKing);
-//		mainParts.add(teamKing);
-//		mainParts.add(hotPlayer);
+
+		mainParts.add(playerKing);
+		mainParts.add(teamKing);
+		mainParts.add(hotPlayer);
 		mainParts.add(teamList);
 		mainParts.add(playerList);
 		mainParts.add(matchList);

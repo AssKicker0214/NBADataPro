@@ -1,6 +1,7 @@
 package presentation.statistics.playerKing;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
@@ -11,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import presentation.common.DateLabel;
 import presentation.common.SelectLabel;
 
 public class PlayerKingPanel extends JPanel{
@@ -29,6 +31,9 @@ public class PlayerKingPanel extends JPanel{
 	Color entered = new Color(30,80,140);
 	Color pressed = new Color(42,109,183);
 	Color exicted= new Color(26,70,122);
+	
+	JLabel commit;
+	DateLabel calendar;
 
 	Season_PlayerKingOptionsPanel season_PlayerKingOptionsPanel;
 	EveryDay_PlayerKingOptionsPanel everyDay_PlayerKingOptionsPanel;
@@ -41,6 +46,7 @@ public class PlayerKingPanel extends JPanel{
 		this.setBackground(Color.WHITE);
 		setTitle(" 每日  联盟球员数据王");
 		setButtonsBGLabel();
+		setDateLabel();
 		everyDayButton.setBackground(pressed);
 		setEveryDay_PlayerKingOptionsPanel();
 		setSeason_PlayerKingOptionsPanel();
@@ -62,7 +68,6 @@ public class PlayerKingPanel extends JPanel{
 
 	
 	public void setTitle(String text){
-		
 		TitleLabel = new JLabel(text,JLabel.LEADING);
 		TitleLabel.setFont(new Font("Dialog",1,25));
 		TitleLabel.setForeground(Color.WHITE);
@@ -98,6 +103,11 @@ public class PlayerKingPanel extends JPanel{
 			PlayerKingPanel.this.remove(TitleLabel);
 			setVisible(false);
 			setTitle(" 每日  联盟球员数据王");
+			
+			setDateLabel();
+			calendar.setVisible(true);
+			commit.setVisible(true);
+
 			setButtonsBGLabel();
 			everyDayButton.isSelected = true;
 			everyDayButton.setBackground(pressed);
@@ -107,7 +117,7 @@ public class PlayerKingPanel extends JPanel{
 			season_PlayerKingOptionsPanel.setVisible(false);
 			everyDay_PlayerKingOptionsPanel.setVisible(true);
 
-			
+						
 			setVisible(true);
 			repaint();	
 		}
@@ -167,6 +177,10 @@ public class PlayerKingPanel extends JPanel{
 			everyDay_PlayerKingOptionsPanel.setVisible(false);
 			season_PlayerKingOptionsPanel.setVisible(true);
 			
+			setDateLabel();
+			calendar.setVisible(false);
+			commit.setVisible(false);
+			
 			setVisible(true);
 			repaint();	
 		}
@@ -198,6 +212,48 @@ public class PlayerKingPanel extends JPanel{
 		setEveryDayButton();
 		setSeasonButton();
 		TitleLabel.add(ButtonsBGLabel,0);
+	}
+	
+	public void setDateLabel(){
+		calendar = new DateLabel();
+		calendar.setBounds(600,10,100,70);
+		TitleLabel.add(calendar);
+		
+		commit = new JLabel("commit");
+		commit.setForeground(Color.WHITE);
+		commit.setFont(new Font("Dialog",0,18));
+		commit.setBounds(750,20,100,50);
+		commit.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				commit.setFont(new Font("Dialog",1,15));
+				System.out.println(calendar.getSelectedDate().toString().substring(2,10));
+				everyDay_PlayerKingOptionsPanel.Date = calendar.getSelectedDate().toString().substring(2,10);
+				everyDay_PlayerKingOptionsPanel.setPlayerKingContentPanel();
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				commit.setCursor(new Cursor(Cursor.HAND_CURSOR));	
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+			}
+		});
+		TitleLabel.add(commit);
 	}
 
 	

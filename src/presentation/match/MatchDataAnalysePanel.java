@@ -91,7 +91,7 @@ public class MatchDataAnalysePanel extends JPanel{
 		teamLabel.setBackground(Color.WHITE);
 
 		JLabel TeamPhotoLabel = new PhotoLabel(new ImageIcon(photo).getImage());
-		TeamPhotoLabel.setBounds(20,0,100,60);
+		TeamPhotoLabel.setBounds(20,0,90,60);
 		TeamPhotoLabel.setBackground(Color.WHITE);
 		TeamPhotoLabel.setOpaque(true);
 		TeamPhotoLabel.setVisible(true);
@@ -99,7 +99,7 @@ public class MatchDataAnalysePanel extends JPanel{
 		
 		JLabel TeamNameLabel = new JLabel(teamName,JLabel.CENTER);
 		TeamNameLabel.setFont(new Font("Dialog",1,20));
-		TeamNameLabel.setBounds(100,0,200,60);
+		TeamNameLabel.setBounds(100,0,300,60);
 		TeamNameLabel.setForeground(Color.DARK_GRAY);
 		TeamNameLabel.setBackground(Color.WHITE);
 		TeamNameLabel.setOpaque(true);

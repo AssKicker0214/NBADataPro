@@ -101,7 +101,7 @@ public class PlayerDetailTopPanel extends JPanel{
 		playerNumLabel = new JLabel(vo.number+"");
 		playerNumLabel.setFont(new Font("Dialog",1,60));
 		playerNumLabel.setForeground(Color.GRAY);
-		playerNumLabel.setBounds(390,40,60,60);
+		playerNumLabel.setBounds(340,40,170,60);
 		this.add(playerNumLabel);
 		
 	}

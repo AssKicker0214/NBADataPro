@@ -29,11 +29,11 @@ public interface PlayerDataService {
 	//以下默认返回平均数据
 	
 	//返回HotPlayersVO中除upgradeRate外的全部数据
-	public ArrayList<HotPlayersVO> DailyKing(int num, String sortBy);//当日热门球员
+	public ArrayList<HotPlayersVO> DailyKing(int num, String sortBy,String date);//当日热门球员
 	public ArrayList<HotPlayersVO> SeasonKing(int num, String sortBy);//赛季热门球员
 	//返回HotPlayersVO中的全部数据，其中value属性为赛季平均数据（暂定）
 	public ArrayList<HotPlayersVO> hotPlayer(int num, String sortBy);//进步最快球员
 	
-	public PlayerVO avgLeague();//联盟平均数据 返回值包括 场均得分，场均篮板，场均助攻，罚球命中率，三分命中率
+	public PlayerVO avgLeague(char league);//联盟平均数据 返回值包括 场均得分，场均篮板，场均助攻，罚球命中率，三分命中率
 
 }

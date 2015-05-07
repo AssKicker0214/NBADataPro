@@ -41,7 +41,7 @@ public class PlayerMiddle_PastPanel extends JPanel{
 		setPastTitleLabel();
 		setDate();
 		this.setBackground(Color.WHITE);
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
+		SimpleDateFormat df = new SimpleDateFormat("yy-MM-dd");//设置日期格式
 		String date = df.format(new Date());
 		setTabel(date,date);
 	}
@@ -80,7 +80,7 @@ public class PlayerMiddle_PastPanel extends JPanel{
 			@Override
 			public void mousePressed(MouseEvent e) {
 				commit.setFont(new Font("Dialog",1,15));
-				setTabel(calendarStart.getSelectedDate().toString(),calendarEnd.getSelectedDate().toString());
+				setTabel(calendarStart.getSelectedDate().toString().substring(2,10),calendarEnd.getSelectedDate().toString().substring(2,10));
 			}
 			
 			@Override
@@ -104,8 +104,11 @@ public class PlayerMiddle_PastPanel extends JPanel{
 	
 	public void setTabel(String start,String end){
 		MatchDataService mds = new MatchDataHandel();
-		
+		System.out.println(start+end+PlayerName);
 		ArrayList<MatchContentPlayerVO> vo = mds.findByDP(start, end, PlayerName);
+		
+		if(vo.size()==0)
+			return;
 		String[] columns = {"日期","","对手","分钟","％","命中","出手","三分％","罚球％",
 				"进攻篮板","防守篮板","篮板","助攻","盖帽","失误","犯规","得分"};
 				

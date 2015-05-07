@@ -68,7 +68,7 @@ public class MatchAnalyseTopPanel extends JPanel{
 	private void setsetLocalTeamPhotoLabel(){
 		localTeamPhotoLabel = new PhotoLabel(new ImageIcon("teamsPNG/"+vo.homeTeam.photo+".png").getImage());
 //		localTeamPhotoLabel.setHorizontalAlignment(JLabel.RIGHT);
-		localTeamPhotoLabel.setBounds(350,0,200,150);
+		localTeamPhotoLabel.setBounds(350,23,200,125);
 		localTeamPhotoLabel.setBackground(Color.WHITE);
 		localTeamPhotoLabel.setOpaque(true);
 		localTeamPhotoLabel.setVisible(true);
@@ -85,7 +85,7 @@ public class MatchAnalyseTopPanel extends JPanel{
 	public void setAnotherTeamPhotoLabel (){
 		anotherTeamPhotoLabel = new PhotoLabel(new ImageIcon("teamsPNG/"+vo.guestTeam.photo+".png").getImage());
 		anotherTeamPhotoLabel.setHorizontalAlignment(JLabel.RIGHT);
-		anotherTeamPhotoLabel.setBounds(730,0,180,150);
+		anotherTeamPhotoLabel.setBounds(730,23,180,125);
 		anotherTeamPhotoLabel.setBackground(Color.white);
 		anotherTeamPhotoLabel.setOpaque(true);
 		anotherTeamPhotoLabel.setVisible(true);
@@ -119,13 +119,13 @@ public class MatchAnalyseTopPanel extends JPanel{
 		JLabel localScore = new JLabel(vo.homePoint+"",JLabel.CENTER);
 		localScore.setFont(new Font("Dialog",1,30));
 		localScore.setForeground(Color.WHITE);
-		localScore.setBounds(250,0,100,55);
+		localScore.setBounds(270,0,80,55);
 		localInfoGroupsLabel.add(localScore);
 
-		JLabel playerName = new JLabel(vo.homeTeam.location+" "+vo.homeTeam.name,JLabel.CENTER);
+		JLabel playerName = new JLabel(vo.homeTeam.location+" "+vo.homeTeam.name,JLabel.LEADING);
 		playerName.setFont(new Font("Dialog",1,20));
 		playerName.setForeground(Color.WHITE);
-		playerName.setBounds(55,0,180,55);
+		playerName.setBounds(5,0,260,55);
 		localInfoGroupsLabel.add(playerName);
 		
 		this.add(localInfoGroupsLabel);
@@ -140,13 +140,13 @@ public class MatchAnalyseTopPanel extends JPanel{
 		JLabel anotherNum = new JLabel(vo.guestPoint+"",JLabel.CENTER);
 		anotherNum.setFont(new Font("Dialog",1,30));
 		anotherNum.setForeground(Color.WHITE);
-		anotherNum.setBounds(0,0,100,55);
+		anotherNum.setBounds(0,0,80,55);
 		anotherInfoGroupsLabel.add(anotherNum);
 		
-		JLabel anotherName = new JLabel(vo.guestTeam.location+" "+vo.guestTeam.name,JLabel.CENTER);
+		JLabel anotherName = new JLabel(vo.guestTeam.location+" "+vo.guestTeam.name,JLabel.RIGHT);
 		anotherName.setFont(new Font("Dialog",1,20));
 		anotherName.setForeground(Color.WHITE);
-		anotherName.setBounds(100,0,180,55);
+		anotherName.setBounds(80,0,230,55);
 		anotherInfoGroupsLabel.add(anotherName);
 
 		this.add(anotherInfoGroupsLabel);
@@ -203,13 +203,13 @@ public class MatchAnalyseTopPanel extends JPanel{
 		scoreLabel.setOpaque(true);
 		scoreLabel.setBackground(Color.LIGHT_GRAY);
 		
-		JLabel name = new JLabel(vo.homeTeam.name,JLabel.CENTER);
+		JLabel name = new JLabel(vo.homeTeam.photo,JLabel.CENTER);
 		name.setFont(new Font("Dialog",1,15));
 		name.setForeground(Color.WHITE);
 		name.setBounds(0,20,35,20);
 		scoreLabel.add(name);
 		
-		JLabel anotherName = new JLabel(vo.guestTeam.name,JLabel.CENTER);
+		JLabel anotherName = new JLabel(vo.guestTeam.photo,JLabel.CENTER);
 		anotherName.setFont(new Font("Dialog",1,15));
 		anotherName.setForeground(Color.WHITE);
 		anotherName.setBounds(0,40,35,20);

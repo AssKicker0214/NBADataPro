@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -26,6 +27,9 @@ public class EveryDay_PlayerKingOptionsPanel extends JPanel{
 	SelectLabel BSButton;//场均盖帽
 	SelectLabel StealButton;//场均抢断
 	
+	public String sortBy = "avgPoint";
+	public String Date;
+	
 	ArrayList<SelectLabel> selectLabelGroups = new ArrayList<SelectLabel>();
 
 	PlayerKingContentPanel playerKingContentPanel;
@@ -34,12 +38,15 @@ public class EveryDay_PlayerKingOptionsPanel extends JPanel{
 		this.setLayout(null);
 		this.setBounds(0, 105,1130,430);
 		this.setBackground(Color.WHITE);
+		SimpleDateFormat df = new SimpleDateFormat("yy-MM-dd");//设置日期格式
+		Date = df.format(new java.util.Date());
+		
 		setScoreButton();
 		setREBButton();
 		setAssitButton();
 		setBSButton();
 		setStealButton();
-		setPlayerKingContentPanel("avgPoint");
+		setPlayerKingContentPanel();
 	}
 	
 	public void setOptionsSelectedGroups(SelectLabel s){
@@ -57,11 +64,18 @@ public class EveryDay_PlayerKingOptionsPanel extends JPanel{
 	
 	}
 	
-	public void setPlayerKingContentPanel(String sortBy){
+	public void setPlayerKingContentPanel(){
+		setOptionsSelectedGroups(AssitButton);
+		if(playerKingContentPanel!=null)
+			remove(playerKingContentPanel);
+		setVisible(false);
 		PlayerDataService pds = new PlayerDataHandel();
-		playerKingContentPanel = new PlayerKingContentPanel(pds.DailyKing(5, sortBy));
+		System.out.println("PlayerKing"+sortBy+Date);
+		playerKingContentPanel = new PlayerKingContentPanel(pds.DailyKing(5, sortBy,Date));
 		this.add(playerKingContentPanel);
+		setVisible(true);
 		repaint();
+		
 	}
 
 
@@ -76,11 +90,8 @@ public class EveryDay_PlayerKingOptionsPanel extends JPanel{
 			public void mousePressed(MouseEvent e) {
 				
 				setOptionsSelectedGroups(ScoreButton);
-				remove(playerKingContentPanel);
-				setVisible(false);
-				setPlayerKingContentPanel("avgPoint");
-				setVisible(true);
-				repaint();
+				sortBy = "avgPoint";
+				setPlayerKingContentPanel();
 			}
 		});
 
@@ -98,11 +109,8 @@ public class EveryDay_PlayerKingOptionsPanel extends JPanel{
 			@Override
 			public void mousePressed(MouseEvent e) {
 				setOptionsSelectedGroups(REBButton);
-				remove(playerKingContentPanel);
-				setVisible(false);
-				setPlayerKingContentPanel("avgRebound");
-				setVisible(true);
-				repaint();
+				sortBy = "avgRebound";
+				setPlayerKingContentPanel();
 			}
 		});
 
@@ -119,11 +127,8 @@ public class EveryDay_PlayerKingOptionsPanel extends JPanel{
 			@Override
 			public void mousePressed(MouseEvent e) {
 				setOptionsSelectedGroups(AssitButton);
-				remove(playerKingContentPanel);
-				setVisible(false);
-				setPlayerKingContentPanel("avgAssist");
-				setVisible(true);
-				repaint();
+				sortBy = "avgAssist";
+				setPlayerKingContentPanel();
 			}
 		});
 
@@ -140,11 +145,9 @@ public class EveryDay_PlayerKingOptionsPanel extends JPanel{
 			@Override
 			public void mousePressed(MouseEvent e) {
 				setOptionsSelectedGroups(BSButton);
-				remove(playerKingContentPanel);
-				setVisible(false);
-				setPlayerKingContentPanel("avgBlockShot");
+				sortBy = "avgBlockShot";
+				setPlayerKingContentPanel();
 				setVisible(true);
-				repaint();
 			}
 		});
 
@@ -162,11 +165,8 @@ public class EveryDay_PlayerKingOptionsPanel extends JPanel{
 			@Override
 			public void mousePressed(MouseEvent e) {
 				setOptionsSelectedGroups(StealButton);
-				remove(playerKingContentPanel);
-				setVisible(false);
-				setPlayerKingContentPanel("avgSteal");
-				setVisible(true);
-				repaint();
+				sortBy = "avgSteal";
+				setPlayerKingContentPanel();
 			}
 		});
 

@@ -90,7 +90,7 @@ public class TeamKingContentPanel  extends JPanel{
 		JLabel value = new JLabel(vo.get(0).value+"");
 		value.setFont(new Font("Vrinda",1,60));
 		value.setForeground(Color.DARK_GRAY);
-		value.setBounds(260,230,200,60);
+		value.setBounds(260,230,230,60);
 		FirstTeam.add(value);
 		
 		this.add(FirstTeam);

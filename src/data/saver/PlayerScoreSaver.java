@@ -44,13 +44,13 @@ public class PlayerScoreSaver {
     private int[] d_tid;
 
     public void show() {
-        for (int i = 0; i <= currentPoint; i++){
-            System.out.println(mid[i] + " "+tid[i]+" "+pid[i]+" "
-                + position[i]+" " + inplacetime[i]+" "+throwin[i]+" "+
-            throwall[i]+" "+throw3in[i]+" "+throw3all[i]+" "+penaltyin[i]+" "+
-            penaltyall[i]+" "+attackbas[i]+" "+defencebas[i]+" "+allbas[i]+" "+
-            helpatt[i]+" "+ interp[i]+" "+block[i]+" "+mistake[i]+" "+foul[i]+" "
-            +score[i]+" "+serialid[i]+" "+d_tid[i]);
+        for (int i = 0; i <= currentPoint; i++) {
+            System.out.println(mid[i] + " " + tid[i] + " " + pid[i] + " "
+                    + position[i] + " " + inplacetime[i] + " " + throwin[i] + " " +
+                    throwall[i] + " " + throw3in[i] + " " + throw3all[i] + " " + penaltyin[i] + " " +
+                    penaltyall[i] + " " + attackbas[i] + " " + defencebas[i] + " " + allbas[i] + " " +
+                    helpatt[i] + " " + interp[i] + " " + block[i] + " " + mistake[i] + " " + foul[i] + " "
+                    + score[i] + " " + serialid[i] + " " + d_tid[i]);
         }
 ////        int sumFoul = 0;
 //        for (int i = 0; i < pidDefaultMid.length; i++) {
@@ -77,7 +77,7 @@ public class PlayerScoreSaver {
         this.matchInfoSaver = matchInfoSaver;
         this.teamSaver = teamSaver;
 
-        int size = 30000;
+        int size = 300000;
         mid = new int[size];
         tid = new int[size];
         pid = new int[size];
@@ -329,7 +329,7 @@ public class PlayerScoreSaver {
         ArrayList<Integer> res = new ArrayList<>();
         for (int i = 0; i <= currentPoint; i++) {
             if (pid == this.pid[i] && matchInfoSaver.isInDate(mid[i], start, end)) {
-                System.out.println(mid[i]+"-------------------mid "+this.pid[i]+" --------"+MatchInfoSaver.getMatchInfoSaver().getDate(mid[i]));
+                System.out.println(mid[i] + "-------------------mid " + this.pid[i] + " --------" + MatchInfoSaver.getMatchInfoSaver().getDate(mid[i]));
                 res.add(i);
             }
         }
@@ -591,29 +591,79 @@ public class PlayerScoreSaver {
             FTP = new double[teamSaver.getNum()];
             FTP = new double[teamSaver.getNum()];
             for (int i = 0; i < teamSaver.getNum(); i++) {
-                FGP[i] = ((double) a_throwin[i]) / a_throwall[i];
-                TPSP[i] = ((double) a_throw3in[i]) / a_throw3all[i];
+                if (a_throwall[i] > 0) {
+                    FGP[i] = ((double) a_throwin[i]) / a_throwall[i];
+                } else {
+                    FGP[i] = -1;
+                }
+                if (a_throw3all[i] > 0) {
+                    TPSP[i] = ((double) a_throw3in[i]) / a_throw3all[i];
+                } else {
+                    TPSP[i] = -1;
+                }
+
 //                System.out.println("id:"+i+" "+a_throwall[i]+" "+a_penaltyall[i]+" "+a_attackbas[i]+" "+ b_defencebas[i]+" "+a_throwall[i]+" "+a_throwin[i]+" "+a_mistake[i]);
-                leg[i] = a_throwall[i] + 0.4 * a_penaltyall[i] - 1.07 * ((double) a_attackbas[i] / (a_attackbas[i] + b_defencebas[i])) * (double) (a_throwall[i] - a_throwin[i]) + 1.07 * a_mistake[i];
-                legB[i] = b_throwall[i] + 0.4 * b_penaltyall[i] - 1.07 * ((double) b_attackbas[i] / (b_attackbas[i] + a_defencebas[i])) * (double) (b_throwall[i] - b_throwin[i]) + 1.07 * b_mistake[i];
-                assistP[i] = 100 * a_helpatt[i] / leg[i];
-                stealP[i] = 100 * a_interp[i] / legB[i];
-                ORtg[i] = 100 * a_score[i] / leg[i];
-                DRtg[i] = 100 * b_score[i] / legB[i];
-                FTP[i] = ((double) a_penaltyin[i]) / a_penaltyall[i];
-                defendReboundEfficient[i] = ((double) a_defencebas[i]) / (a_defencebas[i] + b_attackbas[i]);
-                offendReboundEfficient[i] = ((double) a_attackbas[i]) / (a_attackbas[i] + b_defencebas[i]);
-                winRate[i] = ((double) a_winNum[i]) / (a_matchNum[i]);
+                if ((a_attackbas[i] + b_defencebas[i]) > 0) {
+                    leg[i] = a_throwall[i] + 0.4 * a_penaltyall[i] - 1.07 * ((double) a_attackbas[i] / (a_attackbas[i] + b_defencebas[i])) * (double) (a_throwall[i] - a_throwin[i]) + 1.07 * a_mistake[i];
+                    offendReboundEfficient[i] = ((double) a_attackbas[i]) / (a_attackbas[i] + b_defencebas[i]);
+                } else {
+                    leg[i] = -1;
+                    offendReboundEfficient[i] = -1;
+                }
+                if ((b_attackbas[i] + a_defencebas[i]) > 0) {
+                    legB[i] = b_throwall[i] + 0.4 * b_penaltyall[i] - 1.07 * ((double) b_attackbas[i] / (b_attackbas[i] + a_defencebas[i])) * (double) (b_throwall[i] - b_throwin[i]) + 1.07 * b_mistake[i];
+                    defendReboundEfficient[i] = ((double) a_defencebas[i]) / (a_defencebas[i] + b_attackbas[i]);
+                } else {
+                    legB[i] = -1;
+                    defendReboundEfficient[i] = -1;
+                }
+
+                if (leg[i] > 0) {
+                    assistP[i] = 100 * a_helpatt[i] / leg[i];
+                    ORtg[i] = 100 * a_score[i] / leg[i];
+                } else {
+                    assistP[i] = -1;
+                    ORtg[i] = -1;
+                }
+
+                if (legB[i] > 0) {
+                    stealP[i] = 100 * a_interp[i] / legB[i];
+                    DRtg[i] = 100 * b_score[i] / legB[i];
+                } else {
+                    stealP[i] = -1;
+                    DRtg[i] = -1;
+                }
+
+                if (a_penaltyall[i] > 0) {
+                    FTP[i] = ((double) a_penaltyin[i]) / a_penaltyall[i];
+                } else {
+                    FTP[i] = -1;
+                }
+                if (a_matchNum[i] > 0) {
+                    winRate[i] = ((double) a_winNum[i]) / (a_matchNum[i]);
 //                    System.out.println("id:"+i+" "+a_winNum[i]+" "+a_matchNum[i]+" "+winRate[i]);
-                avgAssist[i] = ((double) a_helpatt[i]) / a_matchNum[i];
-                avgBlockShot[i] = ((double) a_block[i]) / a_matchNum[i];
-                avgDefendRebound[i] = ((double) a_defencebas[i]) / a_matchNum[i];
-                avgFault[i] = ((double) a_mistake[i]) / a_matchNum[i];
-                avgOffendRebound[i] = ((double) a_attackbas[i]) / a_matchNum[i];
-                avgPoint[i] = ((double) a_score[i]) / a_matchNum[i];
-                avgRebound[i] = ((double) a_allbas[i]) / a_matchNum[i];
-                avgSteal[i] = ((double) a_interp[i]) / a_matchNum[i];
-                avgFoul[i] = ((double) a_foul[i]) / a_matchNum[i];
+                    avgAssist[i] = ((double) a_helpatt[i]) / a_matchNum[i];
+                    avgBlockShot[i] = ((double) a_block[i]) / a_matchNum[i];
+                    avgDefendRebound[i] = ((double) a_defencebas[i]) / a_matchNum[i];
+                    avgFault[i] = ((double) a_mistake[i]) / a_matchNum[i];
+                    avgOffendRebound[i] = ((double) a_attackbas[i]) / a_matchNum[i];
+                    avgPoint[i] = ((double) a_score[i]) / a_matchNum[i];
+                    avgRebound[i] = ((double) a_allbas[i]) / a_matchNum[i];
+                    avgSteal[i] = ((double) a_interp[i]) / a_matchNum[i];
+                    avgFoul[i] = ((double) a_foul[i]) / a_matchNum[i];
+                }else {
+                    winRate[i] = -1;
+//                    System.out.println("id:"+i+" "+a_winNum[i]+" "+a_matchNum[i]+" "+winRate[i]);
+                    avgAssist[i] = -1;
+                    avgBlockShot[i] = -1;
+                    avgDefendRebound[i] = -1;
+                    avgFault[i] = -1;
+                    avgOffendRebound[i] = -1;
+                    avgPoint[i] = -1;
+                    avgRebound[i] = -1;
+                    avgSteal[i] = -1;
+                    avgFoul[i] = -1;
+                }
             }
         }
 
@@ -650,13 +700,13 @@ public class PlayerScoreSaver {
 
             for (int j = 0; j < length; j++) {
                 int i = points[j];
-                    int tid = PlayerScoreSaver.this.tid[i];
-                    int d_tid = PlayerScoreSaver.this.d_tid[i];
-                    if (PlayerScoreSaver.this.throwin[i] > 0){
-                        a_throwin[tid - 1] = a_throwin[tid - 1] + PlayerScoreSaver.this.throwin[i];
-                        b_throwin[d_tid - 1] = b_throwin[d_tid - 1] + PlayerScoreSaver.this.throwin[i];
-                    }
-                if (PlayerScoreSaver.this.throwall[i] > 0){
+                int tid = PlayerScoreSaver.this.tid[i];
+                int d_tid = PlayerScoreSaver.this.d_tid[i];
+                if (PlayerScoreSaver.this.throwin[i] > 0) {
+                    a_throwin[tid - 1] = a_throwin[tid - 1] + PlayerScoreSaver.this.throwin[i];
+                    b_throwin[d_tid - 1] = b_throwin[d_tid - 1] + PlayerScoreSaver.this.throwin[i];
+                }
+                if (PlayerScoreSaver.this.throwall[i] > 0) {
                     a_throwall[tid - 1] = a_throwall[tid - 1] + PlayerScoreSaver.this.throwall[i];
                     b_throwall[d_tid - 1] = b_throwall[d_tid - 1] + PlayerScoreSaver.this.throwall[i];
                 }
@@ -666,15 +716,15 @@ public class PlayerScoreSaver {
                     a_throw3all[tid - 1] = a_throw3all[tid - 1] + PlayerScoreSaver.this.throw3all[i];
                 if (PlayerScoreSaver.this.penaltyin[i] > 0)
                     a_penaltyin[tid - 1] = a_penaltyin[tid - 1] + PlayerScoreSaver.this.penaltyin[i];
-                if (PlayerScoreSaver.this.penaltyall[i] > 0){
+                if (PlayerScoreSaver.this.penaltyall[i] > 0) {
                     a_penaltyall[tid - 1] = a_penaltyall[tid - 1] + PlayerScoreSaver.this.penaltyall[i];
                     b_penaltyall[d_tid - 1] = b_penaltyall[d_tid - 1] + PlayerScoreSaver.this.penaltyall[i];
                 }
-                if (PlayerScoreSaver.this.attackbas[i] > 0){
+                if (PlayerScoreSaver.this.attackbas[i] > 0) {
                     a_attackbas[tid - 1] = a_attackbas[tid - 1] + PlayerScoreSaver.this.attackbas[i];
                     b_attackbas[d_tid - 1] = b_attackbas[d_tid - 1] + PlayerScoreSaver.this.attackbas[i];
                 }
-                if (PlayerScoreSaver.this.defencebas[i] > 0){
+                if (PlayerScoreSaver.this.defencebas[i] > 0) {
                     a_defencebas[tid - 1] = a_defencebas[tid - 1] + PlayerScoreSaver.this.defencebas[i];
                     b_defencebas[d_tid - 1] = b_defencebas[d_tid - 1] + PlayerScoreSaver.this.defencebas[i];
                 }
@@ -684,13 +734,13 @@ public class PlayerScoreSaver {
                     a_helpatt[tid - 1] = a_helpatt[tid - 1] + PlayerScoreSaver.this.helpatt[i];
                 if (PlayerScoreSaver.this.interp[i] > 0)
                     a_interp[tid - 1] = a_interp[tid - 1] + PlayerScoreSaver.this.interp[i];
-                if (PlayerScoreSaver.this.mistake[i] > 0){
+                if (PlayerScoreSaver.this.mistake[i] > 0) {
                     a_mistake[tid - 1] = a_mistake[tid - 1] + PlayerScoreSaver.this.mistake[i];
                     b_mistake[d_tid - 1] = b_mistake[d_tid - 1] + PlayerScoreSaver.this.mistake[i];
                 }
                 if (PlayerScoreSaver.this.foul[i] > 0)
                     a_foul[tid - 1] = a_foul[tid - 1] + PlayerScoreSaver.this.foul[i];
-                if (PlayerScoreSaver.this.score[i] > 0){
+                if (PlayerScoreSaver.this.score[i] > 0) {
                     a_score[tid - 1] = a_score[tid - 1] + PlayerScoreSaver.this.score[i];
                     b_score[d_tid - 1] = b_score[d_tid - 1] + PlayerScoreSaver.this.score[i];
                 }
@@ -962,7 +1012,7 @@ public class PlayerScoreSaver {
                 int pid = PlayerScoreSaver.this.pid[i];
                 int tid = PlayerScoreSaver.this.tid[i];
                 int mid = PlayerScoreSaver.this.mid[i];
-                if (pid == 32){
+                if (pid == 32) {
 //                    System.out.println(pid + " " + tid +" "+mid+" "+inplacetime[i]);
                 }
                 if (serialid[i] <= 5) {
@@ -1217,10 +1267,10 @@ public class PlayerScoreSaver {
             p_weigth = new String[playerSaver.getNum()];
             p_hight = new String[playerSaver.getNum()];
             for (int i = 0; i < playerSaver.getNum(); i++) {
-                pLegB[i] = p_throwallTeamB[i] + 0.4 * p_penaltyallTeamB[i] - 1.07 * ((double)p_attackbasTeamB[i] / (p_attackbasTeamB[i] + p_defencebasTeam[i])) * (double) (p_throwallTeamB[i] - p_throwinTeamB[i]) + 1.07 * p_mistakeTeamB[i];
+                pLegB[i] = p_throwallTeamB[i] + 0.4 * p_penaltyallTeamB[i] - 1.07 * ((double) p_attackbasTeamB[i] / (p_attackbasTeamB[i] + p_defencebasTeam[i])) * (double) (p_throwallTeamB[i] - p_throwinTeamB[i]) + 1.07 * p_mistakeTeamB[i];
 //                legB[i] = b_throwall[i] + 0.4 * b_penaltyall[i] - 1.07 * ((double) b_attackbas[i] / (b_attackbas[i] + a_defencebas[i])) * (double) (b_throwall[i] - b_throwin[i]) + 1.07 * b_mistake[i];
-                if (i == 32){
-                    System.out.println("pLegB"+" "+p_throwallTeamB[i]+" "+p_penaltyallTeamB[i]+" "+p_attackbasTeamB[i]+" "+p_defencebasTeam[i]+" "+p_throwinTeamB[i]+" "+p_mistakeTeamB[i]+" "+pLegB[i]);
+                if (i == 32) {
+                    System.out.println("pLegB" + " " + p_throwallTeamB[i] + " " + p_penaltyallTeamB[i] + " " + p_attackbasTeamB[i] + " " + p_defencebasTeam[i] + " " + p_throwinTeamB[i] + " " + p_mistakeTeamB[i] + " " + pLegB[i]);
                 }
 
                 if (this.p_throwall[i] > 0) {
@@ -1268,11 +1318,11 @@ public class PlayerScoreSaver {
 
                 if (this.p_inplacetime[i] > 0) {
                     p_BSP[i] = (this.p_block[i] * ((double) this.p_inplacetimeTeam[i] / 5) / (this.p_inplacetime[i])) / (this.p_throwallTeamB[i] - this.p_throw3allTeamB[i]);
-                    p_assistP[i] = (this.p_helpatt[i] )/ (((double) this.p_inplacetime[i] / ((double) this.p_inplacetimeTeam[i] / 5)) * this.p_throwinTeam[i] - this.p_throwin[i]);
+                    p_assistP[i] = (this.p_helpatt[i]) / (((double) this.p_inplacetime[i] / ((double) this.p_inplacetimeTeam[i] / 5)) * this.p_throwinTeam[i] - this.p_throwin[i]);
                     p_reboundP[i] = ((this.p_allbas[i] * ((double) this.p_inplacetimeTeam[i] / 5)) / (this.p_inplacetime[i])) / (this.p_allbasTeam[i] + this.p_allbasTeamB[i]);
                     p_OREB[i] = ((this.p_attackbas[i] * ((double) this.p_inplacetimeTeam[i] / 5)) / (this.p_inplacetime[i])) / (this.p_allbasTeam[i] + this.p_allbasTeamB[i]);
-                    if(i == 32)
-                        System.out.println("p_OREB "+p_attackbas[i]+" "+p_inplacetimeTeam[i]+" "+p_inplacetime[i]+" "+p_allbasTeam[i]+" "+p_allbasTeamB[i]+" "+p_OREB[i]);
+                    if (i == 32)
+                        System.out.println("p_OREB " + p_attackbas[i] + " " + p_inplacetimeTeam[i] + " " + p_inplacetime[i] + " " + p_allbasTeam[i] + " " + p_allbasTeamB[i] + " " + p_OREB[i]);
                     p_DREB[i] = ((this.p_defencebas[i] * ((double) this.p_inplacetimeTeam[i] / 5)) / (this.p_inplacetime[i])) / (this.p_allbasTeam[i] + this.p_allbasTeamB[i]);
                 } else {
                     p_BSP[i] = -1;
@@ -1285,7 +1335,7 @@ public class PlayerScoreSaver {
                 if (this.p_inplacetime[i] > 0 || pLegB[i] > 0) {
                     p_stealP[i] = ((this.p_interp[i] * ((double) this.p_inplacetimeTeam[i] / 5)) / (this.p_inplacetime[i])) / (this.pLegB[i]);
                     if (i == 32)
-                        System.out.println(p_interp[i]+"----"+((double)p_inplacetimeTeam[i] / 5)+"------"+p_inplacetime[i]+"------"+pLegB[i]+"---------"+p_stealP[i]);
+                        System.out.println(p_interp[i] + "----" + ((double) p_inplacetimeTeam[i] / 5) + "------" + p_inplacetime[i] + "------" + pLegB[i] + "---------" + p_stealP[i]);
                 } else {
                     p_stealP[i] = -1;
                 }
@@ -1297,7 +1347,7 @@ public class PlayerScoreSaver {
                 }
 
                 if (p_inplacetime[i] > 0 || p_throwall[i] > 0 || p_throw3all[i] > 0 || p_mistake[i] > 0) {
-                    p_utiliation[i] = (((double) p_throwall[i]  + 0.44 * p_penaltyall[i] + p_mistake[i]) * ((double) p_inplacetimeTeam[i] / 5) / (p_inplacetime[i])) / ((double) p_throwallTeam[i] + 0.44 * p_penaltyallTeam[i] + p_mistakeTeam[i]);
+                    p_utiliation[i] = (((double) p_throwall[i] + 0.44 * p_penaltyall[i] + p_mistake[i]) * ((double) p_inplacetimeTeam[i] / 5) / (p_inplacetime[i])) / ((double) p_throwallTeam[i] + 0.44 * p_penaltyallTeam[i] + p_mistakeTeam[i]);
                 } else {
                     p_utiliation[i] = -1;
                 }
@@ -1351,8 +1401,8 @@ public class PlayerScoreSaver {
                 p_exp[i] = playerSaver.getExp()[i];
                 p_school[i] = playerSaver.getSchool()[i];
                 p_birth[i] = playerSaver.getBirth()[i];
-                p_weigth[i] = playerSaver.getWeight()[i] < 0 ? null:String.valueOf(playerSaver.getWeight()[i]);
-                p_hight[i] = (playerSaver.getHeight1()[i] < 0 || playerSaver.getHeight2()[i] < 0)?null:playerSaver.getHeight1()[i] + "."+ playerSaver.getHeight2()[i];
+                p_weigth[i] = playerSaver.getWeight()[i] < 0 ? null : String.valueOf(playerSaver.getWeight()[i]);
+                p_hight[i] = (playerSaver.getHeight1()[i] < 0 || playerSaver.getHeight2()[i] < 0) ? null : playerSaver.getHeight1()[i] + "." + playerSaver.getHeight2()[i];
             }
 
         }
@@ -1367,13 +1417,13 @@ public class PlayerScoreSaver {
         private int[][] mid_penaltyall;
         private int[][] mid_allbas;
 
-        public void showPidTid(){
-            for (int i = 0; i < p_tid_mid.length;i++){
-                System.out.println(i+" "+p_tid_mid[i][0]+" "+p_tid_mid[i][1]);
+        public void showPidTid() {
+            for (int i = 0; i < p_tid_mid.length; i++) {
+                System.out.println(i + " " + p_tid_mid[i][0] + " " + p_tid_mid[i][1]);
             }
 
-            for (int i = 0; i< p_teamName.length;i++){
-                System.out.println(i+" "+p_teamName[i]);
+            for (int i = 0; i < p_teamName.length; i++) {
+                System.out.println(i + " " + p_teamName[i]);
             }
         }
 
@@ -1741,6 +1791,76 @@ public class PlayerScoreSaver {
 
         public String[] getHight() {
             return p_hight;
+        }
+
+        public double getLeaguePlayerPointAvg(char league) {
+            int numOfGame = 0;
+            int point = 0;
+            for (int j = 0; j < league; j++) {
+                int i = points[j];
+                if (isLeague(i, league) && score[i] >= 0) {
+                    point += score[i];
+                    numOfGame++;
+                }
+            }
+            return ((double) point) / numOfGame;
+        }
+
+        private boolean isLeague(int i, char league) {
+            int pid = PlayerScoreSaver.this.pid[i];
+            return getLeague()[pid] == league;
+        }
+
+        public double getLeaguePlayerAssistAvg(char league) {
+            int numOfGame = 0;
+            int assist = 0;
+            for (int j = 0; j < league; j++) {
+                int i = points[j];
+                if (isLeague(i, league) && score[i] >= 0) {
+                    assist += helpatt[i];
+                    numOfGame++;
+                }
+            }
+            return ((double) assist) / numOfGame;
+        }
+
+        public double getLeaguePlayerReboundAvg(char league) {
+            int numOfGame = 0;
+            int rebound = 0;
+            for (int j = 0; j < league; j++) {
+                int i = points[j];
+                if (isLeague(i, league) && score[i] >= 0) {
+                    rebound += allbas[i];
+                    numOfGame++;
+                }
+            }
+            return ((double) rebound) / numOfGame;
+        }
+
+        public double getLeaguePlayerPenalty(char league) {
+            int all = 0;
+            int in = 0;
+            for (int j = 0; j < league; j++) {
+                int i = points[j];
+                if (isLeague(i, league) && penaltyin[i] >= 0 && penaltyall[i] >= 0) {
+                    in += penaltyin[i];
+                    all += penaltyall[i];
+                }
+            }
+            return ((double) in) / all;
+        }
+
+        public double getLeaguePlayerThree(char league) {
+            int all = 0;
+            int in = 0;
+            for (int j = 0; j < league; j++) {
+                int i = points[j];
+                if (isLeague(i, league) && throw3in[i] >= 0 && throw3all[i] >= 0) {
+                    in += throw3in[i];
+                    all += throw3all[i];
+                }
+            }
+            return ((double) in) / all;
         }
     }
 

@@ -21,6 +21,7 @@ public class PlayerDataManager {
     private PlayerScoreSaver.PlayerData playerDataL5;
     private PlayerScoreSaver.PlayerData playerDataBefore;
     private String date;
+    private double leaguePlayerPenalty;
 
     public PlayerDataManager() {
         update();
@@ -551,5 +552,25 @@ public class PlayerDataManager {
                 res.add(i + 1);
         }
         return res;
+    }
+
+    public double getLeaguePlayerPointAvg(char league) {
+        return playerDataDefault.getLeaguePlayerPointAvg(league);
+    }
+
+    public double getLeaguePlayerReboundAvg(char league) {
+        return playerDataDefault.getLeaguePlayerReboundAvg(league);
+    }
+
+    public double getLeaguePlayerAssistAvg(char league) {
+        return playerDataDefault.getLeaguePlayerAssistAvg(league);
+    }
+
+    public double getLeaguePlayerPenalty(char league) {
+        return playerDataDefault.getLeaguePlayerPenalty(league);
+    }
+
+    public double getLeaguePlayerThree(char league) {
+        return playerDataDefault.getLeaguePlayerThree(league);
     }
 }

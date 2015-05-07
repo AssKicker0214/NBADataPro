@@ -66,8 +66,11 @@ public class PlayerDataList  extends JPanel{
 		setTitle();
 		setButtonsBGLabel();
 		basicInfoButton.setBackground(pressed);
+		sortBy.add(new sortParam("point",true));
+		position.add("F");position.add("C");position.add("G");
+		league.add("w");league.add("E");
 		setBasicInfoTablePanel();
-		
+
 		setMotion();
 		setFilterButton();
 	}

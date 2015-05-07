@@ -11,7 +11,7 @@ public class PlayerData_stub implements PlayerDataService{
 
 
 	@Override
-	public ArrayList<HotPlayersVO> DailyKing(int num, String sortBy) {
+	public ArrayList<HotPlayersVO> DailyKing(int num, String sortBy,String Date) {
 		ArrayList<HotPlayersVO>  result = new ArrayList<HotPlayersVO>();
 		HotPlayersVO vo = new HotPlayersVO();
 		vo.name = "Aaron Brooks";
@@ -262,7 +262,7 @@ public class PlayerData_stub implements PlayerDataService{
 	
 	//联盟平均数据 返回值包括 场均得分，场均篮板，场均助攻，罚球命中率，三分命中率
 	@Override
-	public PlayerVO avgLeague() {
+	public PlayerVO avgLeague(char l) {
 		PlayerVO vo = new PlayerVO();
 		vo.avgPoint = 5;
 		vo.avgRebound = 10;
