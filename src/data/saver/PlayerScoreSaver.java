@@ -44,19 +44,19 @@ public class PlayerScoreSaver {
     private int[] d_tid;
 
     public void show() {
-//        for (int i = 0; i <= currentPoint; i++){
-//            System.out.println(mid[i] + " "+tid[i]+" "+pid[i]+" "
-//                + position[i]+" " + inplacetime[i]+" "+throwin[i]+" "+
-//            throwall[i]+" "+throw3in[i]+" "+throw3all[i]+" "+penaltyin[i]+" "+
-//            penaltyall[i]+" "+attackbas[i]+" "+defencebas[i]+" "+allbas[i]+" "+
-//            helpatt[i]+" "+ interp[i]+" "+block[i]+" "+mistake[i]+" "+foul[i]+" "
-//            +score[i]+" "+serialid[i]+" "+d_tid[i]);
-//        }
-//        int sumFoul = 0;
-        for (int i = 0; i < pidDefaultMid.length; i++) {
-            System.out.println(i + " " + pidDefaultMid[i]);
+        for (int i = 0; i <= currentPoint; i++){
+            System.out.println(mid[i] + " "+tid[i]+" "+pid[i]+" "
+                + position[i]+" " + inplacetime[i]+" "+throwin[i]+" "+
+            throwall[i]+" "+throw3in[i]+" "+throw3all[i]+" "+penaltyin[i]+" "+
+            penaltyall[i]+" "+attackbas[i]+" "+defencebas[i]+" "+allbas[i]+" "+
+            helpatt[i]+" "+ interp[i]+" "+block[i]+" "+mistake[i]+" "+foul[i]+" "
+            +score[i]+" "+serialid[i]+" "+d_tid[i]);
         }
-        System.out.println("----------------------");
+////        int sumFoul = 0;
+//        for (int i = 0; i < pidDefaultMid.length; i++) {
+//            System.out.println(i + " " + pidDefaultMid[i]);
+//        }
+//        System.out.println("----------------------");
     }
 
     private static PlayerScoreSaver playerScoreSaver;
@@ -1352,7 +1352,7 @@ public class PlayerScoreSaver {
                 p_school[i] = playerSaver.getSchool()[i];
                 p_birth[i] = playerSaver.getBirth()[i];
                 p_weigth[i] = playerSaver.getWeight()[i] < 0 ? null:String.valueOf(playerSaver.getWeight()[i]);
-                p_hight[i] = (playerSaver.getHeight1()[i] < 0 || playerSaver.getHeight2()[i] < 0)?null:playerSaver.getHeight1()[i] + " "+ playerSaver.getHeight2()[i];
+                p_hight[i] = (playerSaver.getHeight1()[i] < 0 || playerSaver.getHeight2()[i] < 0)?null:playerSaver.getHeight1()[i] + "."+ playerSaver.getHeight2()[i];
             }
 
         }
@@ -1657,7 +1657,7 @@ public class PlayerScoreSaver {
         }
 
         public String[] getPosition() {
-            return position;
+            return playerSaver.getPosition();
         }
 
         public char[] getLeague() {
@@ -1689,6 +1689,10 @@ public class PlayerScoreSaver {
 
             this.points = getArray(arrayList);
             this.length = this.points.length;
+            setPlayerDataLevel1();
+            setPlayerDataLevel2();
+            setPlayerDataLevel3();
+            lastModifiedTime = System.currentTimeMillis();
         }
 
         private int[] getArray(ArrayList<Integer> arrayList) {

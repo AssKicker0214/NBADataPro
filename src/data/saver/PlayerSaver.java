@@ -229,4 +229,8 @@ public class PlayerSaver {
     public int[] getHeight2() {
         return heightinch;
     }
+
+    public String[] getPosition() {
+        return position;
+    }
 }
