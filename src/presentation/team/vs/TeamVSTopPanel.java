@@ -83,7 +83,7 @@ public class TeamVSTopPanel extends JPanel{
 		localTeamPhotoLabel = new PhotoLabel(new ImageIcon("teamsPNG/" + localVO.photo + ".png").getImage());
 		System.out.println(localVO.teamName);
 		localTeamPhotoLabel.setHorizontalAlignment(JLabel.RIGHT);
-		localTeamPhotoLabel.setBounds(300,10,230,135);
+		localTeamPhotoLabel.setBounds(300,5,230,135);
 		localTeamPhotoLabel.setBackground(Color.WHITE);
 		localTeamPhotoLabel.setOpaque(true);
 		localTeamPhotoLabel.setVisible(true);
@@ -93,7 +93,7 @@ public class TeamVSTopPanel extends JPanel{
 	public void setAnotherTeamPhotoLabel (){
 		anotherTeamPhotoLabel = new PhotoLabel(new ImageIcon("teamsPNG/" + anotherVO.photo + ".png").getImage());
 		anotherTeamPhotoLabel.setHorizontalAlignment(JLabel.RIGHT);
-		anotherTeamPhotoLabel.setBounds(730,10,230,135);
+		anotherTeamPhotoLabel.setBounds(730,5,230,135);
 		anotherTeamPhotoLabel.setBackground(Color.WHITE);
 		anotherTeamPhotoLabel.setOpaque(true);
 		anotherTeamPhotoLabel.setVisible(true);
