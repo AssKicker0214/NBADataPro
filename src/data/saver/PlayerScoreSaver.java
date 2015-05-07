@@ -1742,6 +1742,76 @@ public class PlayerScoreSaver {
         public String[] getHight() {
             return p_hight;
         }
+
+        public double getLeaguePlayerPointAvg(char league) {
+            int numOfGame = 0;
+            int point = 0;
+            for (int j = 0;j<league;j++){
+                int i = points[j];
+                if (isLeague(i, league) && score[i] >= 0){
+                    point += score[i];
+                    numOfGame ++;
+                }
+            }
+            return ((double) point) / numOfGame;
+        }
+
+        private boolean isLeague(int i, char league) {
+            int pid = PlayerScoreSaver.this.pid[i];
+            return getLeague()[pid] == league;
+        }
+
+        public double getLeaguePlayerAssistAvg(char league) {
+            int numOfGame = 0;
+            int assist = 0;
+            for (int j = 0;j<league;j++){
+                int i = points[j];
+                if (isLeague(i, league) && score[i] >= 0){
+                    assist += helpatt[i];
+                    numOfGame ++;
+                }
+            }
+            return ((double) assist) / numOfGame;
+        }
+
+        public double getLeaguePlayerReboundAvg(char league) {
+            int numOfGame = 0;
+            int rebound = 0;
+            for (int j = 0;j<league;j++){
+                int i = points[j];
+                if (isLeague(i, league) && score[i] >= 0){
+                    rebound += allbas[i];
+                    numOfGame ++;
+                }
+            }
+            return ((double) rebound) / numOfGame;
+        }
+
+        public double getLeaguePlayerPenalty(char league) {
+            int all = 0;
+            int in = 0;
+            for (int j = 0;j<league;j++){
+                int i = points[j];
+                if (isLeague(i, league) && penaltyin[i] >= 0 && penaltyall[i] >=0){
+                    in += penaltyin[i];
+                    all += penaltyall[i];
+                }
+            }
+            return ((double) in) / all;
+        }
+
+        public double getLeaguePlayerThree(char league) {
+            int all = 0;
+            int in = 0;
+            for (int j = 0;j<league;j++){
+                int i = points[j];
+                if (isLeague(i, league) && throw3in[i] >= 0 && throw3all[i] >=0){
+                    in += throw3in[i];
+                    all += throw3all[i];
+                }
+            }
+            return ((double) in) / all;
+        }
     }
 
     public ArrayList<MatchContentPlayerVO>[] getTeamPlayer(int mid) {

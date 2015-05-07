@@ -343,7 +343,7 @@ public class PlayerDataHandelTest {
      */
     @Test
     public void testDailyKing() throws Exception {
-        ArrayList<HotPlayersVO> arrayList = new PlayerDataHandel().DailyKing(100, "three");
+        ArrayList<HotPlayersVO> arrayList = new PlayerDataHandel().DailyKing(100, "three","13-12-10");
         for (int i = 0; i < arrayList.size();i++){
             HotPlayersVO hotPlayersVO = arrayList.get(i);
             System.out.println(hotPlayersVO.name+" "+hotPlayersVO.value);

@@ -94,11 +94,11 @@ public class MatchDataHandelTest {
      */
     @Test
     public void testFindByDT() throws Exception {
-//    ArrayList<MatchVO> arrayList = new MatchDataHandel().findByDT("13-11-01","13-12-30","Celtics");
-//    System.out.println(arrayList.size());
-//    for (int i = 0; i < arrayList.size();i++){
-//        arrayList.get(i).show();
-//    }
+    ArrayList<MatchVO> arrayList = new MatchDataHandel().findByDT("13-04-15","15-05-11","Hawks");
+    System.out.println(arrayList.size());
+    for (int i = 0; i < arrayList.size();i++){
+        arrayList.get(i).show();
+    }
     }
 
     /**

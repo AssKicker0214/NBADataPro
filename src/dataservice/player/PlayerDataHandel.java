@@ -316,6 +316,10 @@ public class PlayerDataHandel implements PlayerDataService {
         return new PlayerDataManager().getTeamPlayerVOs(getAllInfoWithAvg(), teamID);
     }
 
+    public double getLeaguePlayerPenalty(char league) {
+        return new PlayerDataManager().getLeaguePlayerPenalty(league);
+    }
+
     private class ComparePlayVO implements Comparator<PlayerVO> {
         @Override
         public int compare(PlayerVO o1, PlayerVO o2) {
@@ -762,9 +766,16 @@ public class PlayerDataHandel implements PlayerDataService {
     }
 
     @Override
-    public PlayerVO avgLeague() {
-        ArrayList<PlayerVO> playerVOs = new PlayerDataManager().getPlayerVOs(getNormalInfo(), PlayerDataManager.DEFAULT);
-        return null;
+    public PlayerVO avgLeague(char league) {
+        PlayerVO playerVO = new PlayerVO();
+        playerVO.avgPoint = Tools.change(new PlayerDataManager().getLeaguePlayerPointAvg(league));
+        playerVO.avgRebound =Tools.change(new PlayerDataManager().getLeaguePlayerReboundAvg(league));
+        playerVO.avgAssist = Tools.change(new PlayerDataManager().getLeaguePlayerAssistAvg(league));
+        playerVO.penalty = Tools.change(new PlayerDataManager().getLeaguePlayerPenalty(league));
+        playerVO.three = Tools.change(new PlayerDataManager().getLeaguePlayerThree(league));
+        return playerVO;
     }
+
+
 
 }
