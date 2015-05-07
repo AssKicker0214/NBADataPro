@@ -47,7 +47,7 @@ public class PlayerDataHandel implements PlayerDataService {
     public static ArrayList<String> getAllInfo() {
         if (allInfo == null) {
             allInfo = new ArrayList<>();
-            highInfo.add("id");
+            allInfo.add("id");
             allInfo.add("photo");
             allInfo.add("division");
             allInfo.add("minute");
@@ -98,7 +98,7 @@ public class PlayerDataHandel implements PlayerDataService {
     public static ArrayList<String> getAllInfoWithAvg() {
         if (allInfoWithAvg == null) {
             allInfoWithAvg = new ArrayList<>();
-            highInfo.add("id");
+            allInfoWithAvg.add("id");
             allInfoWithAvg.add("photo");
             allInfoWithAvg.add("division");
             allInfoWithAvg.add("minute");
