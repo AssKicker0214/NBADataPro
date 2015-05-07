@@ -1,11 +1,13 @@
 package test.dataservice.player;
 
 import data.DataInitial;
+import data.saver.PlayerScoreSaver;
 import dataservice.player.PlayerDataHandel;
 import dataservice.player.sortParam;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import vo.playervo.HotPlayersVO;
 import vo.playervo.PlayerVO;
 
 import java.util.ArrayList;
@@ -200,7 +202,7 @@ public class PlayerDataHandelTest {
      */
     @Test
     public void testGetToday() throws Exception {
-
+        assertEquals("15-05-07",new PlayerDataHandel().getToday());
     }
 
     /**
@@ -241,7 +243,25 @@ public class PlayerDataHandelTest {
      */
     @Test
     public void testFilterInfo() throws Exception {
-//TODO: Test goes here... 
+        ArrayList<sortParam> sortBy = new ArrayList<>();
+        sortParam sortParam1 = new sortParam();
+        sortParam1.field="name";
+        sortParam1.isDesc = true;
+        sortBy.add(sortParam1);
+        ArrayList<String> position = new ArrayList<>();
+        String position1 = "F";
+        String position2 = "G";
+        position.add(position1);
+        position.add(position2);
+        ArrayList<String> league = new ArrayList<>();
+        league.add("E");
+        ArrayList<PlayerVO> playerVOs = new PlayerDataHandel().filterInfo(sortBy,position,league,10,30);
+        for (int i = 0; i < playerVOs.size(); i++){
+            PlayerVO playerVO = playerVOs.get(i);
+            System.out.println(playerVO.name+" "+playerVO.position+" "+playerVO.league+" "+playerVO.age+" "+playerVO.hight+" "+playerVO.weigth);
+        }
+
+//        PlayerScoreSaver.getPlayerScoreSaver().show();
     }
 
     /**
@@ -249,7 +269,32 @@ public class PlayerDataHandelTest {
      */
     @Test
     public void testFilterNormal() throws Exception {
-//TODO: Test goes here... 
+        ArrayList<sortParam> sortBy = new ArrayList<>();
+        sortParam sortParam1 = new sortParam();
+        sortParam sortParam2 = new sortParam();
+        sortParam sortParam3 = new sortParam();
+        sortParam1.field="numOfGame";
+        sortParam1.isDesc = true;
+        sortParam2.field="shot";
+        sortParam2.isDesc = true;
+        sortParam3.field="three";
+        sortParam3.isDesc = true;
+        sortBy.add(sortParam1);
+        sortBy.add(sortParam2);
+        sortBy.add(sortParam3);
+        ArrayList<String> position = new ArrayList<>();
+        String position1 = "F";
+        String position2 = "G";
+        position.add(position1);
+        position.add(position2);
+        ArrayList<String> league = new ArrayList<>();
+        league.add("E");
+        ArrayList<PlayerVO> playerVOs = new PlayerDataHandel().filterNormal(sortBy, position, league, 10, 30);
+        for (int i = 0; i < playerVOs.size(); i++){
+            PlayerVO playerVO = playerVOs.get(i);
+            System.out.println(playerVO.numOfGame+" "+playerVO.shot+" "+playerVO.shot+" "+playerVO.three);
+//            System.out.println(playerVO.three);
+        }
     }
 
     /**
@@ -265,7 +310,32 @@ public class PlayerDataHandelTest {
      */
     @Test
     public void testFilterHigh() throws Exception {
-//TODO: Test goes here... 
+        ArrayList<sortParam> sortBy = new ArrayList<>();
+        sortParam sortParam1 = new sortParam();
+        sortParam sortParam2 = new sortParam();
+        sortParam sortParam3 = new sortParam();
+        sortParam1.field="assistEfficient";
+        sortParam1.isDesc = true;
+        sortParam2.field="blockShotEfficient";
+        sortParam2.isDesc = true;
+        sortParam3.field="faultEfficient";
+        sortParam3.isDesc = true;
+        sortBy.add(sortParam1);
+        sortBy.add(sortParam2);
+        sortBy.add(sortParam3);
+        ArrayList<String> position = new ArrayList<>();
+        String position1 = "F";
+        String position2 = "G";
+        position.add(position1);
+        position.add(position2);
+        ArrayList<String> league = new ArrayList<>();
+        league.add("E");
+        ArrayList<PlayerVO> playerVOs = new PlayerDataHandel().filterHigh(sortBy, position, league, 10, 30);
+        for (int i = 0; i < playerVOs.size(); i++){
+            PlayerVO playerVO = playerVOs.get(i);
+            System.out.println(playerVO.assistEfficient+" "+playerVO.blockShotEfficient+" "+playerVO.faultEfficient);
+//            System.out.println(playerVO.three);
+        }
     }
 
     /**
@@ -273,7 +343,11 @@ public class PlayerDataHandelTest {
      */
     @Test
     public void testDailyKing() throws Exception {
-//TODO: Test goes here... 
+        ArrayList<HotPlayersVO> arrayList = new PlayerDataHandel().DailyKing(100, "three");
+        for (int i = 0; i < arrayList.size();i++){
+            HotPlayersVO hotPlayersVO = arrayList.get(i);
+            System.out.println(hotPlayersVO.name+" "+hotPlayersVO.value);
+        }
     }
 
     /**
@@ -281,7 +355,11 @@ public class PlayerDataHandelTest {
      */
     @Test
     public void testSeasonKing() throws Exception {
-//TODO: Test goes here... 
+        ArrayList<HotPlayersVO> arrayList = new PlayerDataHandel().SeasonKing(100, "three");
+        for (int i = 0; i < arrayList.size();i++){
+            HotPlayersVO hotPlayersVO = arrayList.get(i);
+            System.out.println(hotPlayersVO.name+" "+hotPlayersVO.value);
+        }
     }
 
     /**
@@ -289,7 +367,11 @@ public class PlayerDataHandelTest {
      */
     @Test
     public void testHotPlayer() throws Exception {
-//TODO: Test goes here... 
+        ArrayList<HotPlayersVO> arrayList = new PlayerDataHandel().hotPlayer(100,"three");
+        for (int i = 0; i < arrayList.size();i++){
+            HotPlayersVO hotPlayersVO = arrayList.get(i);
+            System.out.println(hotPlayersVO.name+" "+hotPlayersVO.value+" "+hotPlayersVO.upgradeRate);
+        }
     }
 
     /**

@@ -1,13 +1,16 @@
 package dataservice.player;
 
 import data.PlayerDataManager;
+import data.TeamDataManager;
 import data.Tools;
 import data.saver.PlayerScoreSaver;
 import vo.playervo.HotPlayersVO;
 import vo.playervo.PlayerVO;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Date;
 
 /**
  * Created by chenghao on 15/4/30.
@@ -19,6 +22,11 @@ public class PlayerDataHandel implements PlayerDataService {
         if (highInfo == null) {
             highInfo = new ArrayList<>();
             highInfo.add("name");
+            highInfo.add("id");
+            highInfo.add("photo");
+            highInfo.add("age");
+            highInfo.add("position");
+            highInfo.add("league");
             highInfo.add("assistEfficient");
             highInfo.add("blockShotEfficient");
             highInfo.add("defendReboundEfficient");
@@ -39,6 +47,7 @@ public class PlayerDataHandel implements PlayerDataService {
     public static ArrayList<String> getAllInfo() {
         if (allInfo == null) {
             allInfo = new ArrayList<>();
+            highInfo.add("id");
             allInfo.add("photo");
             allInfo.add("division");
             allInfo.add("minute");
@@ -89,6 +98,7 @@ public class PlayerDataHandel implements PlayerDataService {
     public static ArrayList<String> getAllInfoWithAvg() {
         if (allInfoWithAvg == null) {
             allInfoWithAvg = new ArrayList<>();
+            highInfo.add("id");
             allInfoWithAvg.add("photo");
             allInfoWithAvg.add("division");
             allInfoWithAvg.add("minute");
@@ -150,7 +160,12 @@ public class PlayerDataHandel implements PlayerDataService {
     public static ArrayList<String> getAvgNormalInfo() {
         if (avgNormalInfo == null) {
             avgNormalInfo = new ArrayList<>();
+            avgNormalInfo.add("name");
+            avgNormalInfo.add("id");
+            avgNormalInfo.add("photo");
             avgNormalInfo.add("age");
+            avgNormalInfo.add("position");
+            avgNormalInfo.add("league");
             avgNormalInfo.add("avgAssist");
             avgNormalInfo.add("avgBlockShot");
             avgNormalInfo.add("avgDefend");
@@ -176,6 +191,11 @@ public class PlayerDataHandel implements PlayerDataService {
         if (normalInfo == null) {
             normalInfo = new ArrayList<>();
             normalInfo.add("name");
+            normalInfo.add("id");
+            normalInfo.add("photo");
+            normalInfo.add("position");
+            normalInfo.add("league");
+            normalInfo.add("age");
             normalInfo.add("assist");
             normalInfo.add("blockShot");
             normalInfo.add("defend");
@@ -202,8 +222,10 @@ public class PlayerDataHandel implements PlayerDataService {
         if (information == null) {
             information = new ArrayList<>();
             information.add("photo");
+            information.add("id");
             information.add("division");
             information.add("name");
+            information.add("age");
             information.add("team");
             information.add("teamName");
             information.add("position");
@@ -242,7 +264,7 @@ public class PlayerDataHandel implements PlayerDataService {
             int m = 0;
             for (int k = 0;k<playerVOs.size();k++){
                 PlayerVO playerVO = playerVOs.get(m);
-                String name = Tools.getNPosition(playerVO.name.toLowerCase(),i);
+                String name = Tools.getNPosition(playerVO.name.toLowerCase(), i);
                 if (name.startsWith(msg)) {
                     arrayList.add(playerVO);
                     playerVOs.remove(playerVO);
@@ -285,7 +307,9 @@ public class PlayerDataHandel implements PlayerDataService {
     }
 
     public String getToday() {
-        return null;
+        SimpleDateFormat df = new SimpleDateFormat("yy-MM-dd");
+        String today = df.format(new Date());
+        return today;
     }
 
     public ArrayList<PlayerVO> getTeamPlayerVOs(int teamID) {
@@ -335,7 +359,6 @@ public class PlayerDataHandel implements PlayerDataService {
     }
 
     private int compare(PlayerVO playerVO1, PlayerVO playerVO2, String field) {
-        System.out.println(field);
         switch (field) {
             case "name":
                 return playerVO1.name.compareTo(playerVO2.name);
@@ -353,8 +376,6 @@ public class PlayerDataHandel implements PlayerDataService {
                 return playerVO1.blockShot - playerVO2.blockShot;
             case "defend":
                 return playerVO1.defend - playerVO2.defend;
-            case "three":
-                return (int) (playerVO1.three - playerVO2.three);
             case "fault":
                 return playerVO1.fault - playerVO2.fault;
             case "foul":
@@ -373,7 +394,14 @@ public class PlayerDataHandel implements PlayerDataService {
                 return playerVO1.steal - playerVO2.steal;
             case "numOfGame":
                 return playerVO1.numOfGame - playerVO2.numOfGame;
-
+            case "three":
+                if (playerVO1.three > playerVO2.three) {
+                    return 1;
+                } else if (playerVO1.three < playerVO2.three) {
+                    return -1;
+                } else {
+                    return 0;
+                }
 
             case "efficiency":
                 if (playerVO1.efficiency > playerVO2.efficiency) {
@@ -595,6 +623,7 @@ public class PlayerDataHandel implements PlayerDataService {
         ArrayList<PlayerVO> playerVOs = new PlayerDataManager().getPlayerVOs(attributes, PlayerDataManager.DEFAULT);
         ArrayList<PlayerVO> res = new ArrayList<>();
         for (int i = 0; i < playerVOs.size(); i++) {
+            PlayerVO playerVO = playerVOs.get(i);
             if (isInPosition(position, playerVOs.get(i)) && isInLeague(league, playerVOs.get(i)) && isInAge(numS, numE, playerVOs.get(i))) {
                 res.add(playerVOs.get(i));
             }
@@ -607,15 +636,18 @@ public class PlayerDataHandel implements PlayerDataService {
     private boolean isInPosition(ArrayList<String> position, PlayerVO playerVO) {
         for (int i = 0; i < position.size(); i++) {
             if (isInPosition(position.get(i), playerVO)) {
-                continue;
+                return true;
             } else {
-                return false;
+                continue;
             }
         }
-        return true;
+        return false;
     }
 
     private boolean isInPosition(String position, PlayerVO playerVO) {
+        if (playerVO.position == null){
+            return false;
+        }
         if (position.length() != 1) {
             return false;
         } else if (position.equals("-") == false) {
@@ -628,12 +660,12 @@ public class PlayerDataHandel implements PlayerDataService {
     private boolean isInLeague(ArrayList<String> league, PlayerVO playerVO) {
         for (int i = 0; i < league.size(); i++) {
             if (isInLeague(league.get(i), playerVO)) {
-                continue;
+                return true;
             } else {
-                return false;
+                continue;
             }
         }
-        return true;
+        return false;
     }
 
     private boolean isInLeague(String league, PlayerVO playerVO) {
@@ -645,13 +677,22 @@ public class PlayerDataHandel implements PlayerDataService {
 
     private boolean isInAge(int numS, int numE, PlayerVO playerVO) {
         if (numE == -1) {
+            if (numS == -1){
+                return true;
+            }
             if (playerVO.age >= numS) {
                 return true;
             } else {
                 return false;
             }
         } else {
-            if (playerVO.age >= numS && playerVO.age < numE) {
+            if (numS == -1){
+                if (playerVO.age < numE){
+                    return true;
+                }else {
+                    return false;
+                }
+            }else if (playerVO.age >= numS && playerVO.age < numE) {
                 return true;
             } else {
                 return false;
@@ -661,20 +702,22 @@ public class PlayerDataHandel implements PlayerDataService {
 
     @Override
     public ArrayList<HotPlayersVO> DailyKing(int num, String sortBy) {
-        ArrayList<HotPlayersVO> arrayList = new PlayerDataManager().getHotPlayers(sortBy, PlayerDataManager.DATE);
+        ArrayList<HotPlayersVO> arrayList = new PlayerDataManager(getToday()).getHotPlayers(sortBy, PlayerDataManager.DATE);
         arrayList.sort(new Comparator<HotPlayersVO>() {
             @Override
             public int compare(HotPlayersVO o1, HotPlayersVO o2) {
                 if (o1.value > o2.value) {
-                    return 1;
-                } else if (o1.value == o2.value) {
-                    return 0;
-                } else {
                     return -1;
+                } else if (o1.value < o2.value) {
+                    return 1;
+                } else {
+                    return 0;
                 }
             }
         });
-        return arrayList;
+        ArrayList<HotPlayersVO> res = Tools.getFirstNum(num,arrayList);
+
+        return res;
     }
 
     @Override
@@ -692,7 +735,9 @@ public class PlayerDataHandel implements PlayerDataService {
                 }
             }
         });
-        return arrayList;
+        ArrayList<HotPlayersVO> res = Tools.getFirstNum(num,arrayList);
+
+        return res;
     }
 
     @Override
@@ -710,11 +755,15 @@ public class PlayerDataHandel implements PlayerDataService {
                 }
             }
         });
-        return arrayList;
+
+        ArrayList<HotPlayersVO> res = Tools.getFirstNum(num,arrayList);
+
+        return res;
     }
 
     @Override
     public PlayerVO avgLeague() {
+//        ArrayList<PlayerVO> playerVOs = new TeamDataManager().getTeamVOs(getNormalInfo(),PlayerDataManager.DEFAULT);
         return null;
     }
 

@@ -307,14 +307,7 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 				
 				@Override
 				public void mouseDragged(MouseEvent e) {
-					
-					
-//					int mouseX = e.getX();
-//					int mouseY = e.getY();
-					
 					frame.setLocation(e.getXOnScreen()-offsetX, e.getYOnScreen()-offsetY);
-					System.out.println("mouse loc: "+e.getX()+" "+e.getY());
-					System.out.println("set loc: "+frame.getLocation());
 				}
 			});
 			
@@ -322,7 +315,6 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 				
 				@Override
 				public void mouseReleased(MouseEvent arg0) {
-					// TODO Auto-generated method stub
 					
 				}
 				
@@ -335,7 +327,6 @@ public class Mainframe extends JFrame implements IMainFrame,IMainFrameSize{
 				
 				@Override
 				public void mouseExited(MouseEvent arg0) {
-					// TODO Auto-generated method stub
 					
 				}
 				
