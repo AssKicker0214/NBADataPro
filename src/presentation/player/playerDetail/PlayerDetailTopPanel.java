@@ -86,8 +86,7 @@ public class PlayerDetailTopPanel extends JPanel{
 		teamPicLabel.addMouseListener(new MouseAdapter(){
 			@Override
 			public void mousePressed(MouseEvent e) {
-				Mainframe.getFrame().restoreIni();
-				Mainframe.getFrame().setContentPane(new TeamMiddlePanel(vo.team));
+				Mainframe.getFrame().changeContent(new TeamMiddlePanel(vo.teamName));
 			}
 		
 		});
@@ -101,7 +100,7 @@ public class PlayerDetailTopPanel extends JPanel{
 		playerNumLabel = new JLabel(vo.number+"");
 		playerNumLabel.setFont(new Font("Dialog",1,60));
 		playerNumLabel.setForeground(Color.GRAY);
-		playerNumLabel.setBounds(390,40,60,60);
+		playerNumLabel.setBounds(340,40,170,60);
 		this.add(playerNumLabel);
 		
 	}
