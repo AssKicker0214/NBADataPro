@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Tools {
     public static double change(double d1){
         BigDecimal bg = new BigDecimal(d1);
-        double f1 = bg.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        double f1 = bg.setScale(4, BigDecimal.ROUND_HALF_UP).doubleValue();
         return f1;
     }
 

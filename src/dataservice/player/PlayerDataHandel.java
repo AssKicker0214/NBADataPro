@@ -268,7 +268,6 @@ public class PlayerDataHandel implements PlayerDataService {
                 if (name.startsWith(msg)) {
                     arrayList.add(playerVO);
                     playerVOs.remove(playerVO);
-                    m--;
                 }else {
                     m++;
                 }
@@ -314,10 +313,6 @@ public class PlayerDataHandel implements PlayerDataService {
 
     public ArrayList<PlayerVO> getTeamPlayerVOs(int teamID) {
         return new PlayerDataManager().getTeamPlayerVOs(getAllInfoWithAvg(), teamID);
-    }
-
-    public double getLeaguePlayerPenalty(char league) {
-        return new PlayerDataManager().getLeaguePlayerPenalty(league);
     }
 
     private class ComparePlayVO implements Comparator<PlayerVO> {
@@ -608,8 +603,23 @@ public class PlayerDataHandel implements PlayerDataService {
         return filter(getInformation(), sortBy, position, league, numS, numE);
     }
 
+    public ArrayList<PlayerVO> filterInfo(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, int numS, int numE, int num) {
+        ArrayList<PlayerVO> arrayList = filter(getInformation(), sortBy, position, league, numS, numE);
+        if (arrayList.size() < num)
+            return arrayList;
+        ArrayList<PlayerVO> res = new ArrayList<>();
+        for (int i = 0; i < num; i++){
+            res.add(arrayList.get(i));
+        }
+        return res;
+    }
+
     @Override
     public ArrayList<PlayerVO> filterNormal(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, int numS, int numE) {
+        return filter(getNormalInfo(), sortBy, position, league, numS, numE);
+    }
+
+    public ArrayList<PlayerVO> filterNormal(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, int numS, int numE,int num) {
         return filter(getNormalInfo(), sortBy, position, league, numS, numE);
     }
 

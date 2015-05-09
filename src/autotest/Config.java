@@ -1,12 +1,15 @@
 package autotest;
 
+import data.DataInitial;
 import de.tototec.cmdoption.CmdOption;
 
 public class Config {
 	
 	@CmdOption(names={"--datasourse"},args={"dataSourse"})
 	public void setData(String dataSourse){
-		//设置数据源
+		DataInitial.setPath(dataSourse);
+		DataInitial.init();
+
 		System.out.println(dataSourse);
 	}
 }

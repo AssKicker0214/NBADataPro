@@ -78,6 +78,23 @@ public class PlayerCommand extends TeamCommand{
 		}
 	}
 	
+	public String AVGParam(String sortBy){
+		String sort = "";
+		switch(sortBy){
+		case "score":sort = "avgPoint";break;
+		case "point":sort = "avgPoint";break;
+		case "rebound":sort = "avgRebound";break;
+		case "assist":sort = "avgAssist";break;
+		case "blockShot":sort = "avgBlockShot";break;
+		case "steal":sort = "avgSteal";break;
+		case "foul":sort = "avgFoul";break;
+		case "minute":sort = "avgMinute";break;
+		default :return sortBy;
+		
+		}
+		return sort;
+	}
+	
 	public void optionHandler(PrintStream out){
 		PlayerTransfer pt = new PlayerTransfer();
 		PlayerDataService pds = new PlayerData_stub();

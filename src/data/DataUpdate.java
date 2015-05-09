@@ -67,7 +67,7 @@ public class DataUpdate extends Thread {
                 for (int i = 0; i < updatables.size(); i++){
                     updatables.get(i).update();
                 }
-                
+
                 PlayerScoreSaver.getPlayerScoreSaver().update();
             }
 

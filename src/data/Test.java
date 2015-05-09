@@ -1,5 +1,6 @@
 package data;
 
+import data.saver.PlayerSaver;
 import data.saver.PlayerScoreSaver;
 
 /**
@@ -12,7 +13,7 @@ public class Test {
             try {
                 Thread.sleep(1000);
                 System.out.println("---------------start----------------");
-                PlayerScoreSaver.getPlayerScoreSaver().show();
+                PlayerSaver.getPlayerSaver().show();
                 System.out.println("---------------end----------------");
             } catch (InterruptedException e) {
                 e.printStackTrace();

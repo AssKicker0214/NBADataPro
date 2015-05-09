@@ -36,9 +36,8 @@ public class TeamCommand {
 	public void hot(String sort){
 		isAvg = true;
 		isHot = true;
-		if(sort.equals("score"))
-			sort = "point";
-		sortBy = sort;
+		
+		sortBy = AVGParam(sort);
 	}
 	@CmdOption(names={"-n"},args={"num"},description="the number of teams to show(all)")
 	public void changeNum(int num){
@@ -95,6 +94,7 @@ public class TeamCommand {
 	public String AVGParam(String sortBy){
 		String sort = "";
 		switch(sortBy){
+		case "score":sort = "avgPoint";break;
 		case "point":sort = "avgPoint";break;
 		case "rebound":sort = "avgRebound";break;
 		case "assist":sort = "avgAssist";break;
@@ -102,12 +102,9 @@ public class TeamCommand {
 		case "steal":sort = "avgSteal";break;
 		case "foul":sort = "avgFoul";break;
 		case "fault":sort = "avgFault";break;
-		case "shot":sort = "shot";break;
-		case "three":sort = "three";break;
-		case "penalty":sort = "penalty";break;
 		case "defendRebound":sort = "avgDefendRebound";break;
 		case "offendRebound":sort = "avgOffendRebound";break;
-		
+		default :return sortBy;
 		
 		}
 		return sort;
