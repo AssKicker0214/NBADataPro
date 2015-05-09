@@ -1117,7 +1117,7 @@ public class PlayerScoreSaver {
                 }
 
                 if (dd >= 2){
-                    p_doubleTwo[i]++;
+                    p_doubleTwo[pid - 1]++;
                 }
 
                 int[] temp = mid_inplacetime[mid - 1];
