@@ -154,6 +154,9 @@ public class PlayerDataManager {
             case "minute":
                 playerVO.minute = playerData.getMinute()[playerVO.id - 1];
                 return;
+            case  "doubleTwo":
+                playerVO.doubleTwo = playerData.getDoubleTwo()[playerVO.id - 1];
+                return;
             case "numOfGame":
                 playerVO.numOfGame = playerData.getNumOfGame()[playerVO.id - 1];
                 return;
@@ -299,6 +302,9 @@ public class PlayerDataManager {
 
     private void setHotPlayerValue(String sortBy,HotPlayersVO hotPlayersVO,PlayerScoreSaver.PlayerData playerData){
         switch (sortBy){
+            case "doubleTwo":
+                hotPlayersVO.value = playerData.getDoubleTwo()[hotPlayersVO.id - 1];
+                return;
             case "assist":
                 hotPlayersVO.value = playerData.getAssist()[hotPlayersVO.id - 1];
                 return;
@@ -412,6 +418,9 @@ public class PlayerDataManager {
 
     private void setUpgrade(String sortBy,HotPlayersVO hotPlayersVO){
         switch (sortBy){
+            case "doubleTwo":
+                hotPlayersVO.upgradeRate = (playerDataBefore.getDoubleTwo()[hotPlayersVO.id - 1]) <= 0?-1:((double)playerDataL5.getDoubleTwo()[hotPlayersVO.id - 1] -playerDataBefore.getDoubleTwo()[hotPlayersVO.id - 1])/(playerDataBefore.getDoubleTwo()[hotPlayersVO.id - 1]);
+                return;
             case "assist":
                 hotPlayersVO.upgradeRate = (playerDataBefore.getAssist()[hotPlayersVO.id - 1]) <= 0?-1:((double)playerDataL5.getAssist()[hotPlayersVO.id - 1] -playerDataBefore.getAssist()[hotPlayersVO.id - 1])/(playerDataBefore.getAssist()[hotPlayersVO.id - 1]);
                 return;
@@ -572,5 +581,10 @@ public class PlayerDataManager {
 
     public double getLeaguePlayerThree(char league) {
         return playerDataDefault.getLeaguePlayerThree(league);
+    }
+
+    public String getLastDay() {
+
+        return new MatchManager().getLastDay();
     }
 }

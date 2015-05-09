@@ -35,6 +35,7 @@ public class PlayerVO {
 	public double 	shot;			//投篮命中率
 	public int 		start;			//首发次数
 	public int 	steal;				//抢断数
+    public int doubleTwo;
 	public double 	three;			//三分命中率
 	
 	//avg normal info

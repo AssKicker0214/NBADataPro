@@ -965,6 +965,7 @@ public class PlayerScoreSaver {
         private int[] p_matchNum;
         private int[] p_startSession;
         private int num;
+        private int[] p_doubleTwo;
 
         private void setPlayerDataLevel2() {
             p_inplacetime = new int[playerSaver.getNum()];
@@ -1004,12 +1005,10 @@ public class PlayerScoreSaver {
             p_tid_mid = new int[playerSaver.getNum()][2];
             p_matchNum = new int[playerSaver.getNum()];
             p_startSession = new int[playerSaver.getNum()];
+            p_doubleTwo = new int[playerSaver.getNum()];
             for (int i = 0; i < p_tid_mid.length; i++) {
                 p_tid_mid[i][0] = -1;
             }
-
-
-
 
             for (int j = 0; j < length; j++) {
                 int i = points[j];
@@ -1098,6 +1097,27 @@ public class PlayerScoreSaver {
 
                 if (score[i] > 0) {
                     p_score[pid - 1] = p_score[pid - 1] + score[i];
+                }
+
+                int dd = 0;
+                if (score[i] >= 10){
+                    dd++;
+                }
+                if (allbas[i] >= 10){
+                    dd++;
+                }
+                if (helpatt[i] >= 0){
+                    dd++;
+                }
+                if (interp[i] >= 0){
+                    dd++;
+                }
+                if (block[i] >= 0){
+                    dd++;
+                }
+
+                if (dd >= 2){
+                    p_doubleTwo[i]++;
                 }
 
                 int[] temp = mid_inplacetime[mid - 1];
@@ -1867,6 +1887,10 @@ public class PlayerScoreSaver {
                 }
             }
             return ((double) in) / all;
+        }
+
+        public int[] getDoubleTwo() {
+            return p_doubleTwo;
         }
     }
 
