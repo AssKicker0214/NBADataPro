@@ -655,6 +655,9 @@ public class PlayerDataHandel implements PlayerDataService {
 
     @Override
     public ArrayList<HotPlayersVO> DailyKing(int num, String sortBy, String date) {
+        if (date == null){
+            return new ArrayList<>();
+        }
         ArrayList<HotPlayersVO> arrayList = new PlayerDataManager(date).getHotPlayers(sortBy, PlayerDataManager.DATE);
         arrayList.sort(new Comparator<HotPlayersVO>() {
             @Override
