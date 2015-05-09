@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 import vo.teamvo.HotTeamsVO;
 import vo.teamvo.TeamVO;
+import dataservice.team.TeamDataHandel;
 import dataservice.team.TeamDataService;
-import dataservice.team.TeamData_stub;
 import de.tototec.cmdoption.CmdCommand;
 import de.tototec.cmdoption.CmdOption;
 
@@ -36,6 +36,8 @@ public class TeamCommand {
 	public void hot(String sort){
 		isAvg = true;
 		isHot = true;
+		if(sort.equals("score"))
+			sort = "point";
 		sortBy = sort;
 	}
 	@CmdOption(names={"-n"},args={"num"},description="the number of teams to show(all)")
@@ -52,6 +54,8 @@ public class TeamCommand {
 	@CmdOption(names={"-sort"},args={"sort"},description="sort data")
 	public void sort(String sort){
 		String[] result = sort.split("."); 
+		if(result[0].equals("score"))
+			result[0] = "point";
 		sortBy = result[0];
 		if(result[1].equals("asc"))
 			isDesc = false;
@@ -59,26 +63,53 @@ public class TeamCommand {
 	
 	public void optionHandler(PrintStream out){
 		TeamTransfer tt = new TeamTransfer();
-		TeamDataService tds = new TeamData_stub();
+		TeamDataService tds = new TeamDataHandel();
 		if(isHot){
+			System.out.println(hotNum+sortBy);
 			ArrayList<HotTeamsVO> vo = tds.hotTeams(hotNum,sortBy);
 			tt.transfer_hot(out, vo, sortBy);
 		}else if(isHigh){
 			if(sortBy.equals("-"))
 				sortBy = "winRate";
+			System.out.println(number+sortBy+isDesc);
 			ArrayList<TeamVO> vo = tds.sortTeamHigh(number,sortBy, isDesc);
 			tt.transfer_h(out, vo);
 		}else{
 			if(sortBy.equals("-"))
 				sortBy = "point";
+			System.out.println(number+sortBy+isDesc);
 			ArrayList<TeamVO> vo = new ArrayList<TeamVO>();
 			if(isAvg){
-				vo = tds.sortTeamNormalAvg(number,sortBy, isDesc);
+				System.out.println("AVG");
+				vo = tds.sortTeamNormalAvg(number,AVGParam(sortBy), isDesc);
+				//System.out.println();
 				tt.transfer_avgn(out, vo);
 			}else{
 				vo = tds.sortTeamNormal(number,sortBy, isDesc);
+				System.out.println(vo);
 				tt.transfer_n(out, vo);
 			}
 		}
+	}
+	
+	public String AVGParam(String sortBy){
+		String sort = "";
+		switch(sortBy){
+		case "point":sort = "avgPoint";break;
+		case "rebound":sort = "avgRebound";break;
+		case "assist":sort = "avgAssist";break;
+		case "blockShot":sort = "avgBlockShot";break;
+		case "steal":sort = "avgSteal";break;
+		case "foul":sort = "avgFoul";break;
+		case "fault":sort = "avgFault";break;
+		case "shot":sort = "shot";break;
+		case "three":sort = "three";break;
+		case "penalty":sort = "penalty";break;
+		case "defendRebound":sort = "avgDefendRebound";break;
+		case "offendRebound":sort = "avgOffendRebound";break;
+		
+		
+		}
+		return sort;
 	}
 }

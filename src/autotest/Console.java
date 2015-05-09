@@ -1,11 +1,14 @@
 package autotest;
 
 import java.io.PrintStream;
+
+import data.DataInitial;
 import de.tototec.cmdoption.CmdlineParser;
 import de.tototec.cmdoption.CmdlineParserException;
 
 public class Console {
 	public void execute(PrintStream out, String[] args){
+		DataInitial.init();
 //		TeamCommand CmdObj = null;
 		Config c = new Config();
 		TeamCommand tc = new TeamCommand();

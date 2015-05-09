@@ -19,7 +19,8 @@ public class TeamTransfer {
 			temp.setTeamName(vo.get(i).name);
 			temp.setValue(vo.get(i).value);
 			
-			out.print(temp);
+	//		out.print(temp);
+			out.append(temp.toString());
 		}
 	}
 	
