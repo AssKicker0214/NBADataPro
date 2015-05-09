@@ -216,49 +216,9 @@ public class PlayerData_stub implements PlayerDataService{
 	
 	}
 
-	@Override
-	public ArrayList<PlayerVO> filterNormal(ArrayList<sortParam> sortBy,
-			ArrayList<String> position, ArrayList<String> league, int numS,
-			int numE) {
-		ArrayList<PlayerVO> vol = new ArrayList<PlayerVO>();
-		PlayerVO vo1 = new PlayerVO();
-		vo1.photo = "Aaron Brooks";
-		vo1.name = "Aaron Brooks";
-		vol.add(vo1);
-		PlayerVO vo2 = new PlayerVO();
-		vo2.photo = "Aaron Gray";
-		vo2.name = "Aaron Gray";
-		vol.add(vo2);
-		return vol;
-	
-	}
 
-	@Override
-	public ArrayList<PlayerVO> filterNormalAvg(ArrayList<sortParam> sortBy,
-			ArrayList<String> position, ArrayList<String> league, int numS,
-			int numE) {
-		ArrayList<PlayerVO> vol = new ArrayList<PlayerVO>();
-		PlayerVO vo2 = new PlayerVO();
-		vo2.photo = "Aaron Gray";
-		vo2.name = "Aaron Gray";
-		vol.add(vo2);
-		return vol;
-	}
-	
 
-	@Override
-	public ArrayList<PlayerVO> filterHigh(ArrayList<sortParam> sortBy,
-			ArrayList<String> position, ArrayList<String> league, int numS,
-			int numE) {
-		ArrayList<PlayerVO> vol = new ArrayList<PlayerVO>();
-		PlayerVO vo1 = new PlayerVO();
-		vo1.photo = "Aaron Brooks";
-		vo1.name = "Aaron Brooks";
-		vol.add(vo1);
-		
-		return vol;
-	
-	}
+
 	
 	//联盟平均数据 返回值包括 场均得分，场均篮板，场均助攻，罚球命中率，三分命中率
 	@Override
@@ -283,6 +243,63 @@ public class PlayerData_stub implements PlayerDataService{
 			result.add(vo);
 		}
 		return result;
+	}
+
+	@Override
+	public ArrayList<PlayerVO> filterNormal(ArrayList<sortParam> sortBy,
+			ArrayList<String> position, ArrayList<String> league, int numS,
+			int numE, int num) {
+		ArrayList<PlayerVO> vol = new ArrayList<PlayerVO>();
+		PlayerVO vo1 = new PlayerVO();
+		vo1.photo = "Aaron Brooks";
+		vo1.name = "Aaron Brooks";
+		vol.add(vo1);
+		PlayerVO vo2 = new PlayerVO();
+		vo2.photo = "Aaron Gray";
+		vo2.name = "Aaron Gray";
+		vol.add(vo2);
+		return vol;
+	
+	}
+
+	@Override
+	public ArrayList<PlayerVO> filterNormalAvg(ArrayList<sortParam> sortBy,
+			ArrayList<String> position, ArrayList<String> league, int numS,
+			int numE, int num) {
+		ArrayList<PlayerVO> vol = new ArrayList<PlayerVO>();
+		PlayerVO vo1 = new PlayerVO();
+		vo1.photo = "Aaron Brooks";
+		vo1.name = "Aaron Brooks";
+		vol.add(vo1);
+		PlayerVO vo2 = new PlayerVO();
+		vo2.photo = "Aaron Gray";
+		vo2.name = "Aaron Gray";
+		vol.add(vo2);
+		return vol;
+	
+	}
+
+	@Override
+	public ArrayList<PlayerVO> filterHigh(ArrayList<sortParam> sortBy,
+			ArrayList<String> position, ArrayList<String> league, int numS,
+			int numE, int num) {
+		ArrayList<PlayerVO> vol = new ArrayList<PlayerVO>();
+		PlayerVO vo1 = new PlayerVO();
+		vo1.photo = "Aaron Brooks";
+		vo1.name = "Aaron Brooks";
+		vol.add(vo1);
+		PlayerVO vo2 = new PlayerVO();
+		vo2.photo = "Aaron Gray";
+		vo2.name = "Aaron Gray";
+		vol.add(vo2);
+		return vol;
+	
+	}
+
+	@Override
+	public String getLastDay() {
+		
+		return "";
 	}
 
 	

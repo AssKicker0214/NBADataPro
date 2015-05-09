@@ -37,7 +37,8 @@ public class TeamTransfer {
 			temp.setTeamName(vo.get(i).teamName);
 			temp.setWinRate(vo.get(i).winRate);
 			
-			out.print(temp);
+//			out.print(temp);
+				out.append(temp.toString());
 		}
 	}
 	public void transfer_n(PrintStream out,ArrayList<TeamVO> vo){
@@ -58,7 +59,8 @@ public class TeamTransfer {
 			temp.setTeamName(vo.get(i).teamName);
 			temp.setThree(vo.get(i).three);
 			
-			out.print(temp);
+//			out.print(temp);
+				out.append(temp.toString());
 		}
 	}
 	public void transfer_avgn(PrintStream out,ArrayList<TeamVO> vo){
@@ -79,7 +81,8 @@ public class TeamTransfer {
 			temp.setTeamName(vo.get(i).teamName);
 			temp.setThree(vo.get(i).three);
 			
-			out.print(temp);
+//			out.print(temp);
+				out.append(temp.toString());
 		}
 	}
 }

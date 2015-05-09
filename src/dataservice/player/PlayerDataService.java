@@ -22,9 +22,9 @@ public interface PlayerDataService {
 
 	//返回筛选球员普通数据列表
 	public ArrayList<PlayerVO> filterInfo(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, int numS, int numE);
-	public ArrayList<PlayerVO> filterNormal(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, int numS, int numE);
-	public ArrayList<PlayerVO> filterNormalAvg(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, int numS, int numE);
-	public ArrayList<PlayerVO> filterHigh(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, int numS, int numE);
+	public ArrayList<PlayerVO> filterNormal(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, int numS, int numE,int num);
+	public ArrayList<PlayerVO> filterNormalAvg(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, int numS, int numE,int num);
+	public ArrayList<PlayerVO> filterHigh(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, int numS, int numE,int num);
 
 	//以下默认返回平均数据
 	
@@ -35,5 +35,5 @@ public interface PlayerDataService {
 	public ArrayList<HotPlayersVO> hotPlayer(int num, String sortBy);//进步最快球员
 	
 	public PlayerVO avgLeague(char league);//联盟平均数据 返回值包括 场均得分，场均篮板，场均助攻，罚球命中率，三分命中率
-
+	public String getLastDay();
 }

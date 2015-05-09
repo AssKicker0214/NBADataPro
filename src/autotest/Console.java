@@ -8,6 +8,7 @@ import de.tototec.cmdoption.CmdlineParserException;
 
 public class Console {
 	public void execute(PrintStream out, String[] args){
+//		DataInitial.init();
 //		TeamCommand CmdObj = null;
 		Config c = new Config();
 		TeamCommand tc = new TeamCommand();

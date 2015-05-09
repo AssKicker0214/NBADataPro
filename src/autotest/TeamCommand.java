@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import vo.teamvo.HotTeamsVO;
 import vo.teamvo.TeamVO;
-import dataservice.team.TeamDataHandel;
+import dataservice.team.TeamData_stub;
 import dataservice.team.TeamDataService;
 import de.tototec.cmdoption.CmdCommand;
 import de.tototec.cmdoption.CmdOption;
@@ -61,31 +61,32 @@ public class TeamCommand {
 	}
 	
 	public void optionHandler(PrintStream out){
+		System.out.print("team | ");
 		TeamTransfer tt = new TeamTransfer();
-		TeamDataService tds = new TeamDataHandel();
+		TeamDataService tds = new TeamData_stub();
 		if(isHot){
-			System.out.println(hotNum+sortBy);
+			System.out.println("hotTeams: "+hotNum+" "+sortBy);
 			ArrayList<HotTeamsVO> vo = tds.hotTeams(hotNum,sortBy);
 			tt.transfer_hot(out, vo, sortBy);
 		}else if(isHigh){
 			if(sortBy.equals("-"))
 				sortBy = "winRate";
-			System.out.println(number+sortBy+isDesc);
+			System.out.println("sortTeamHigh: "+number+" "+sortBy+" "+isDesc);
 			ArrayList<TeamVO> vo = tds.sortTeamHigh(number,sortBy, isDesc);
 			tt.transfer_h(out, vo);
 		}else{
 			if(sortBy.equals("-"))
 				sortBy = "point";
-			System.out.println(number+sortBy+isDesc);
+
 			ArrayList<TeamVO> vo = new ArrayList<TeamVO>();
 			if(isAvg){
-				System.out.println("AVG");
+				
+				System.out.println("sortTeamNormalAvg: "+number+" "+AVGParam(sortBy)+" "+isDesc);
 				vo = tds.sortTeamNormalAvg(number,AVGParam(sortBy), isDesc);
-				//System.out.println();
 				tt.transfer_avgn(out, vo);
 			}else{
+				System.out.println("sortTeamNormal: "+number+" "+sortBy+" "+isDesc);
 				vo = tds.sortTeamNormal(number,sortBy, isDesc);
-				System.out.println(vo);
 				tt.transfer_n(out, vo);
 			}
 		}

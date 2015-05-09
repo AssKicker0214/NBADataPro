@@ -624,30 +624,29 @@ public class PlayerDataHandel implements PlayerDataService {
         return res;
     }
 
-    @Override
+    
     public ArrayList<PlayerVO> filterNormal(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, int numS, int numE) {
         return filter(getNormalInfo(), sortBy, position, league, numS, numE);
     }
-
+    @Override
     public ArrayList<PlayerVO> filterNormal(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, int numS, int numE,int num) {
         ArrayList<PlayerVO> arrayList = filter(getNormalInfo(), sortBy, position, league, numS, numE);
         return getNum(arrayList,num);
     }
 
-    @Override
     public ArrayList<PlayerVO> filterNormalAvg(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, int numS, int numE) {
         return filter(getAvgNormalInfo(), sortBy, position, league, numS, numE);
     }
-
+    @Override
     public ArrayList<PlayerVO> filterNormalAvg(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, int numS, int numE, int num) {
         ArrayList<PlayerVO> arrayList =  filter(getAvgNormalInfo(), sortBy, position, league, numS, numE);
         return getNum(arrayList,num);
     }
-    @Override
     public ArrayList<PlayerVO> filterHigh(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, int numS, int numE) {
         return filter(getHighInfo(), sortBy, position, league, numS, numE);
     }
 
+    @Override
     public ArrayList<PlayerVO> filterHigh(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, int numS, int numE,int num) {
         ArrayList<PlayerVO> arrayList =  filter(getHighInfo(), sortBy, position, league, numS, numE);
         return getNum(arrayList,num);
