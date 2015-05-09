@@ -84,7 +84,7 @@ public class PlayerDataManager {
     }
 
     public int getNum() {
-        return PlayerSaver.getPlayerSaver().getNum();
+        return playerDataDefault.getNum();
     }
 
     private void setAttribute(String s, PlayerVO playerVO, PlayerScoreSaver.PlayerData playerData) {
