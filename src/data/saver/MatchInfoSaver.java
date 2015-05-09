@@ -189,6 +189,21 @@ public class MatchInfoSaver {
         }
     }
 
+    public String getLastDay() {
+        String lastDay = null;
+        for (int i = 0; i <= currentPoint; i++){
+            if (lastDay == null){
+                lastDay = this.matchtime[i];
+                continue;
+            }
+
+            if (this.matchtime[i].compareTo(lastDay) > 0){
+                lastDay = this.matchtime[i];
+            }
+        }
+        return lastDay;
+    }
+
     private class TidL5Mid {
         private long lastModifiedTime;
         private int length;

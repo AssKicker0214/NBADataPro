@@ -107,4 +107,8 @@ public class MatchManager {
         }
         return arrayList;
     }
+
+    public String getLastDay() {
+        return matchInfoSaver.getLastDay();
+    }
 }

@@ -63,6 +63,7 @@ public class PlayerDataHandel implements PlayerDataService {
             allInfo.add("age");
             allInfo.add("hight");
             allInfo.add("weigth");
+            allInfo.add("doubleTwo");
             allInfo.add("avgAssist");
             allInfo.add("avgBlockShot");
             allInfo.add("avgDefend");
@@ -124,6 +125,7 @@ public class PlayerDataHandel implements PlayerDataService {
             allInfoWithAvg.add("numOfGame");
             allInfoWithAvg.add("avgOffend");
             allInfoWithAvg.add("shot");
+            allInfoWithAvg.add("doubleTwo");
             allInfoWithAvg.add("penalty");
             allInfoWithAvg.add("avgPoint");
             allInfoWithAvg.add("avgRebound");
@@ -170,6 +172,7 @@ public class PlayerDataHandel implements PlayerDataService {
             avgNormalInfo.add("avgBlockShot");
             avgNormalInfo.add("avgDefend");
             avgNormalInfo.add("efficiency");
+            avgNormalInfo.add("doubleTwo");
             avgNormalInfo.add("avgFault");
             avgNormalInfo.add("avgFoul");
             avgNormalInfo.add("avgMinute");
@@ -204,6 +207,7 @@ public class PlayerDataHandel implements PlayerDataService {
             normalInfo.add("foul");
             normalInfo.add("minute");
             normalInfo.add("numOfGame");
+            normalInfo.add("doubleTwo");
             normalInfo.add("offend");
             normalInfo.add("penalty");
             normalInfo.add("point");
@@ -383,6 +387,8 @@ public class PlayerDataHandel implements PlayerDataService {
                 return playerVO1.minute - playerVO2.minute;
             case "offend":
                 return playerVO1.offend - playerVO2.offend;
+            case "doubleTwo":
+                return playerVO1.doubleTwo - playerVO2.doubleTwo;
             case "point":
                 return playerVO1.point - playerVO2.point;
             case "rebound":
@@ -605,6 +611,10 @@ public class PlayerDataHandel implements PlayerDataService {
 
     public ArrayList<PlayerVO> filterInfo(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, int numS, int numE, int num) {
         ArrayList<PlayerVO> arrayList = filter(getInformation(), sortBy, position, league, numS, numE);
+        return getNum(arrayList,num);
+    }
+
+    private ArrayList<PlayerVO> getNum(ArrayList<PlayerVO> arrayList,int num){
         if (arrayList.size() < num)
             return arrayList;
         ArrayList<PlayerVO> res = new ArrayList<>();
@@ -620,7 +630,8 @@ public class PlayerDataHandel implements PlayerDataService {
     }
 
     public ArrayList<PlayerVO> filterNormal(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, int numS, int numE,int num) {
-        return filter(getNormalInfo(), sortBy, position, league, numS, numE);
+        ArrayList<PlayerVO> arrayList = filter(getNormalInfo(), sortBy, position, league, numS, numE);
+        return getNum(arrayList,num);
     }
 
     @Override
@@ -628,9 +639,18 @@ public class PlayerDataHandel implements PlayerDataService {
         return filter(getAvgNormalInfo(), sortBy, position, league, numS, numE);
     }
 
+    public ArrayList<PlayerVO> filterNormalAvg(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, int numS, int numE, int num) {
+        ArrayList<PlayerVO> arrayList =  filter(getAvgNormalInfo(), sortBy, position, league, numS, numE);
+        return getNum(arrayList,num);
+    }
     @Override
     public ArrayList<PlayerVO> filterHigh(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, int numS, int numE) {
         return filter(getHighInfo(), sortBy, position, league, numS, numE);
+    }
+
+    public ArrayList<PlayerVO> filterHigh(ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, int numS, int numE,int num) {
+        ArrayList<PlayerVO> arrayList =  filter(getHighInfo(), sortBy, position, league, numS, numE);
+        return getNum(arrayList,num);
     }
 
     @Override
@@ -651,6 +671,10 @@ public class PlayerDataHandel implements PlayerDataService {
         ArrayList<HotPlayersVO> res = Tools.getFirstNum(num,arrayList);
 
         return res;
+    }
+
+    public String getLastDay(){
+        return new PlayerDataManager().getLastDay();
     }
 
     private ArrayList<PlayerVO> filter(ArrayList<String> attributes, ArrayList<sortParam> sortBy, ArrayList<String> position, ArrayList<String> league, int numS, int numE) {
