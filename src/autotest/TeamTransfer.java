@@ -18,9 +18,9 @@ public class TeamTransfer {
 			temp.setLeague(vo.get(i).league+"");
 			temp.setTeamName(vo.get(i).name);
 			temp.setValue(vo.get(i).value);
-			
-			out.println(temp);
-	//		out.append(temp.toString());
+			out.print(i);
+			out.print(temp);
+			out.print("/n");
 		}
 	}
 	
@@ -37,8 +37,9 @@ public class TeamTransfer {
 			temp.setTeamName(vo.get(i).teamName);
 			temp.setWinRate(vo.get(i).winRate);
 			
-			out.println(temp);
-		//		out.append(temp.toString());
+			out.print(i);
+			out.print(temp);
+			out.print("/n");
 		}
 	}
 	public void transfer_n(PrintStream out,ArrayList<TeamVO> vo){
@@ -59,8 +60,9 @@ public class TeamTransfer {
 			temp.setTeamName(vo.get(i).teamName);
 			temp.setThree(vo.get(i).three);
 			
+			out.print(i);
 			out.println(temp);
-//				out.append(temp.toString());
+			out.print("/n");
 		}
 	}
 	public void transfer_avgn(PrintStream out,ArrayList<TeamVO> vo){
@@ -81,8 +83,9 @@ public class TeamTransfer {
 			temp.setTeamName(vo.get(i).teamName);
 			temp.setThree(vo.get(i).three);
 			
+			out.print(i);
 			out.println(temp);
-	//			out.append(temp.toString());
+			out.print("/n");
 		}
 	}
 }
