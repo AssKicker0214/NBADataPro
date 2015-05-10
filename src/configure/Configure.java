@@ -1,12 +1,5 @@
 package configure;
 
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.Element;
-import org.dom4j.io.OutputFormat;
-import org.dom4j.io.SAXReader;
-import org.dom4j.io.XMLWriter;
-
 import java.io.*;
 
 /**
@@ -29,7 +22,7 @@ public class Configure {
     public static void set(String path) {
         BufferedWriter bw = null;
         try {
-            bw = new BufferedWriter(new OutputStreamWriter((new FileOutputStream(new File("src/conf.xml")))));
+            bw = new BufferedWriter(new OutputStreamWriter((new FileOutputStream(new File("conf.xml")))));
             bw.write(path);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -53,7 +46,7 @@ public class Configure {
     private static String getRootPath() {
         BufferedReader br = null;
         try {
-            br = new BufferedReader(new InputStreamReader(new FileInputStream(new File("src/conf.xml"))));
+            br = new BufferedReader(new InputStreamReader(new FileInputStream(new File("conf.xml"))));
             String path = br.readLine();
             if (path != null){
                 return path;
