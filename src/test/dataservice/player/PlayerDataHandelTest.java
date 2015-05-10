@@ -39,7 +39,7 @@ public class PlayerDataHandelTest {
      */
     @Test
     public void testFindPlayerDataPlayerId() throws Exception {
-        PlayerVO playerVO = new PlayerDataHandel().findPlayerData(70);
+        PlayerVO playerVO = new PlayerDataHandel().findPlayerData(69);
 //    System.out.println(playerVO.name);
         assertEquals("Chauncey Billups", playerVO.name);
 //    System.out.println(playerVO.minute);
@@ -96,6 +96,8 @@ public class PlayerDataHandelTest {
     @Test
     public void testFindPlayerDataName() throws Exception {
         PlayerVO playerVO = new PlayerDataHandel().findPlayerData("Gerald Green");
+        System.out.println(playerVO.teamName);
+        System.out.println(playerVO.age);
         //    System.out.println(playerVO.name);
         assertEquals("Gerald Green", playerVO.name);
 //    System.out.println(playerVO.minute);
@@ -142,11 +144,17 @@ public class PlayerDataHandelTest {
      */
     @Test
     public void testFindPlayers() throws Exception {
-        ArrayList<PlayerVO> arrayList = new PlayerDataHandel().findPlayers("dan");
-        assertEquals("Danilo Gallinari",arrayList.get(0).name);
-        assertEquals("Danny Granger",arrayList.get(1).name);
-        assertEquals("Danny Green",arrayList.get(2).name);
-        assertEquals("Dante Cunningham",arrayList.get(3).name);
+        while (true){
+            Thread.sleep(1000);
+            ArrayList<PlayerVO> arrayList = new PlayerDataHandel().findPlayers("");
+//        assertEquals("Danilo Gallinari",arrayList.get(0).name);
+//        assertEquals("Danny Granger",arrayList.get(1).name);
+//        assertEquals("Danny Green",arrayList.get(2).name);
+//        assertEquals("Dante Cunningham",arrayList.get(3).name);
+            for (int i = 0; i< arrayList.size();i++){
+                System.out.println(arrayList.get(i).name);
+            }
+        }
     }
     /**
      * Method: sortPlayerInfo(ArrayList<sortParam> sortBy)
@@ -302,7 +310,32 @@ public class PlayerDataHandelTest {
      */
     @Test
     public void testFilterNormalAvg() throws Exception {
-//TODO: Test goes here... 
+        ArrayList<sortParam> sortBy = new ArrayList<>();
+        sortParam sortParam1 = new sortParam();
+        sortParam sortParam2 = new sortParam();
+        sortParam sortParam3 = new sortParam();
+        sortParam1.field="numOfGame";
+        sortParam1.isDesc = true;
+        sortParam2.field="shot";
+        sortParam2.isDesc = true;
+        sortParam3.field="three";
+        sortParam3.isDesc = true;
+        sortBy.add(sortParam1);
+        sortBy.add(sortParam2);
+        sortBy.add(sortParam3);
+        ArrayList<String> position = new ArrayList<>();
+        String position1 = "F";
+        String position2 = "G";
+        position.add(position1);
+        position.add(position2);
+        ArrayList<String> league = new ArrayList<>();
+        league.add("E");
+        ArrayList<PlayerVO> playerVOs = new PlayerDataHandel().filterNormal(sortBy, position, league, 10, 30);
+        for (int i = 0; i < playerVOs.size(); i++){
+            PlayerVO playerVO = playerVOs.get(i);
+            System.out.println(playerVO.id+" "+playerVO.name+" "+playerVO.teamName+" "+playerVO.numOfGame+" "+playerVO.start+" "+playerVO.shot+" "+playerVO.shot+" "+playerVO.three+" "+playerVO.efficiency);
+//            System.out.println(playerVO.three);
+        }
     }
 
     /**
@@ -379,7 +412,8 @@ public class PlayerDataHandelTest {
      */
     @Test
     public void testAvgLeague() throws Exception {
-//TODO: Test goes here... 
+        PlayerVO playerVO = new PlayerDataHandel().avgLeague('E');
+        System.out.println(playerVO.avgAssist+" "+playerVO.avgPoint+" "+playerVO.avgRebound+" "+playerVO.penalty+" "+playerVO.three);
     }
 
     /**
