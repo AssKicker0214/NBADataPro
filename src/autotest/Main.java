@@ -4,9 +4,9 @@ public class Main {
 
 	public static void main(String[] args) {
 		Console console = new Console();
-//		console.execute(System.out, args);
-		console.execute(System.out, new String[] {"--datasourse","F:/软件工程与计算3/迭代1/迭代一数据"});
-		console.execute(System.out, new String[] {"-player","-sort","start.desc"});
+		console.execute(System.out, args);
+//		console.execute(System.out, new String[] {"--datasourse","F:/软件工程与计算3/迭代1/迭代一数据"});
+//		console.execute(System.out, new String[] {"-player","-sort","numOfGame.desc"});
 //		console.execute(System.out, new String[] {"-player","-all","-n","10"});
 //		console.execute(System.out, new String[] {"-player","-high","-n","10","-sort","frequency.desc"});
 //		console.execute(System.out, new String[] {"-player","-hot","assist","-n","5"});

@@ -26,7 +26,7 @@ public class PlayerDataHandelTest {
 
     @Before
     public void before() throws Exception {
-    	DataInitial.setPath("F:/软件工程与计算3/迭代1/迭代一数据");
+    	DataInitial.setPath("/Users/chenghao/Desktop/迭代一数据");
         DataInitial.init();
     }
 
@@ -315,15 +315,15 @@ public class PlayerDataHandelTest {
         sortParam sortParam1 = new sortParam();
         sortParam sortParam2 = new sortParam();
         sortParam sortParam3 = new sortParam();
-        sortParam1.field="numOfGame";
+        sortParam1.field="start";
         sortParam1.isDesc = true;
-        sortParam2.field="shot";
-        sortParam2.isDesc = true;
-        sortParam3.field="three";
-        sortParam3.isDesc = true;
+//        sortParam2.field="shot";
+//        sortParam2.isDesc = true;
+//        sortParam3.field="three";
+//        sortParam3.isDesc = true;
         sortBy.add(sortParam1);
-        sortBy.add(sortParam2);
-        sortBy.add(sortParam3);
+//        sortBy.add(sortParam2);
+//        sortBy.add(sortParam3);
         ArrayList<String> position = new ArrayList<>();
         String position1 = "F";
         String position2 = "G";
@@ -331,7 +331,7 @@ public class PlayerDataHandelTest {
         position.add(position2);
         ArrayList<String> league = new ArrayList<>();
         league.add("E");
-        ArrayList<PlayerVO> playerVOs = new PlayerDataHandel().filterNormal(sortBy, position, league, 10, 30);
+        ArrayList<PlayerVO> playerVOs = new PlayerDataHandel().filterNormal(sortBy, position, league, -1, -1,50);
         for (int i = 0; i < playerVOs.size(); i++){
             PlayerVO playerVO = playerVOs.get(i);
             System.out.println(playerVO.id+" "+playerVO.name+" "+playerVO.teamName+" "+playerVO.numOfGame+" "+playerVO.start+" "+playerVO.shot+" "+playerVO.shot+" "+playerVO.three+" "+playerVO.efficiency);
