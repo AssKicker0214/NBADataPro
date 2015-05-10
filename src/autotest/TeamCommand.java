@@ -81,7 +81,6 @@ public class TeamCommand {
 				vo = tds.sortTeamNormalAvg(number,AVGParam(sortBy), isDesc);
 				tt.transfer_avgn(out, vo);
 			}else{
-				out.append(number+" "+sortBy+" "+isDesc);
 				vo = tds.sortTeamNormal(number,sortBy, isDesc);
 				tt.transfer_n(out, vo);
 			}

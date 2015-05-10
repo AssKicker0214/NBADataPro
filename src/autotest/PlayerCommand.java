@@ -58,7 +58,6 @@ public class PlayerCommand extends TeamCommand{
 	}
 	@CmdOption(names={"-filter"},args={"filter"},description="filter the players")
 	public void fliter(String filter){
-		System.out.println(filter);
 		String[] result = filter.split(",");
 		String[] temp = {"",""};
 		for(int i=0;i<result.length;i++){
