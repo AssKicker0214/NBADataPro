@@ -695,6 +695,11 @@ public class PlayerDataHandel implements PlayerDataService {
     }
 
     private boolean isInPosition(ArrayList<String> position, PlayerVO playerVO) {
+        if (position.size() > 0){
+            if (position.get(0).equals("all")){
+                return true;
+            }
+        }
         for (int i = 0; i < position.size(); i++) {
             if (isInPosition(position.get(i), playerVO)) {
                 return true;
