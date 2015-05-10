@@ -4,6 +4,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		Console console = new Console();
+//		console.execute(System.out, args);
 		console.execute(System.out, new String[] {"--datasourse","F:/软件工程与计算3/迭代1/迭代一数据"});
 		console.execute(System.out, new String[] {"-player"});
 /*		console.execute(System.out, new String[] {"-player","-all","-n","10"});
