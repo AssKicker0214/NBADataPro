@@ -46,7 +46,7 @@ public class Match {
             FileName.getFileName().add(title);
             String input = null;
             br = new BufferedReader(new InputStreamReader(
-                    new FileInputStream(file)));
+                    new FileInputStream(file),"utf-8"));
             input = br.readLine();
             String[] matchinfo = getMatchInfo(title, input);
             int teamf = teamSaver.getTid(matchinfo[1]);

@@ -35,7 +35,7 @@ public class Player {
                     BufferedReader br = null;
                     try {
                         br = new BufferedReader(new InputStreamReader(
-                                new FileInputStream(files[m])));
+                                new FileInputStream(files[m]),"utf-8"));
                         String input = null;
                         br.readLine();
                         String[] buffs = new String[9];

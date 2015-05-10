@@ -25,7 +25,7 @@ public class Team {
         try {
             File file = new File(path);
             br = new BufferedReader(new InputStreamReader(
-                    new FileInputStream(file)));
+                    new FileInputStream(file),"utf-8"));
             String input = null;
             br.readLine();
             while ((input = br.readLine()) != null) {
