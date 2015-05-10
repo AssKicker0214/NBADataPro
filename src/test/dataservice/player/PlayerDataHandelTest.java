@@ -26,6 +26,7 @@ public class PlayerDataHandelTest {
 
     @Before
     public void before() throws Exception {
+    	DataInitial.setPath("F:/软件工程与计算3/迭代1/迭代一数据");
         DataInitial.init();
     }
 

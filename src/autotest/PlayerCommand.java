@@ -97,19 +97,15 @@ public class PlayerCommand extends TeamCommand{
 	}
 	
 	public void optionHandler(PrintStream out){
-		System.out.print("player | ");
 		PlayerTransfer pt = new PlayerTransfer();
 		PlayerDataService pds = new PlayerDataHandel();
 		if(isHot){
-			System.out.println("hotPlayer: "+hotNum+" "+sortBy);
 			ArrayList<HotPlayersVO> po = pds.hotPlayer(hotNum, sortBy); 
 			pt.transfer_hot(out, po, sortBy);			
 		}else if(isDailyKing){
-			System.out.println("DailyKing: "+hotNum+" "+sortBy);
 			ArrayList<HotPlayersVO> po = pds.DailyKing(hotNum, sortBy,pds.getLastDay()); 
 			pt.transfer_king(out, po, sortBy);
 		}else if(isSeasonKing){
-			System.out.println("SeasonKing: "+hotNum+" "+sortBy);
 			ArrayList<HotPlayersVO> po = pds.SeasonKing(hotNum, sortBy); 
 			pt.transfer_king(out, po, sortBy);
 		}else{
@@ -127,23 +123,22 @@ public class PlayerCommand extends TeamCommand{
 			if(isHigh){
 				if(sortField.size()==0)
 					sortField.add(new sortParam("realShot",true));
-				System.out.println("filterHigh: "+sortField.get(0).field+sortField.get(0).isDesc+" "+positionFilterField+" "+leagueFilterField
-						+" "+startAge+" "+endAge+" "+number);
 				po = pds.filterHigh(sortField, positionFilterField, leagueFilterField, startAge, endAge, number);
 				pt.transfer_h(out, po);
 			}else{
 				if(isAvg){
 					if(sortField.size()==0)
 						sortField.add(new sortParam("avgPoint",true));
-					System.out.println("filterNormalAvg: "+sortField.get(0).field+sortField.get(0).isDesc+" "+positionFilterField+" "+leagueFilterField
-							+" "+startAge+" "+endAge+" "+number);
+					System.out.println(sortField.get(0).field+" "+sortField.get(0).isDesc+positionFilterField+leagueFilterField+startAge+" "+endAge+" "+number);
 					po = pds.filterNormalAvg(sortField, positionFilterField, leagueFilterField, startAge, endAge, number);
+					for (int i = 0; i <po.size();i++){
+						PlayerVO vo = po.get(i);
+						System.out.println(vo.name+" "+vo.teamName+" "+vo.numOfGame+" "+vo.start);
+					}
 					pt.transfer_avgn(out, po);
 				}else{
 					if(sortField.size()==0)
 						sortField.add(new sortParam("point",true));
-					System.out.println("filterNormal: "+sortField.get(0).field+sortField.get(0).isDesc+" "+positionFilterField+" "+leagueFilterField
-							+" "+startAge+" "+endAge+" "+number);
 					po = pds.filterNormal(sortField, positionFilterField, leagueFilterField, startAge, endAge, number);
 					pt.transfer_n(out, po);
 				}

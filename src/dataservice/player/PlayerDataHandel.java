@@ -691,7 +691,8 @@ public class PlayerDataHandel implements PlayerDataService {
                 res.add(playerVOs.get(i));
             }
         }
-
+        
+        System.out.println(sortBy.get(0).field);
         res.sort(new ComparePlayVO(sortBy));
         return res;
     }

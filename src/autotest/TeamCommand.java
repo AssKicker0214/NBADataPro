@@ -61,17 +61,14 @@ public class TeamCommand {
 	}
 	
 	public void optionHandler(PrintStream out){
-		System.out.print("team | ");
 		TeamTransfer tt = new TeamTransfer();
 		TeamDataService tds = new TeamDataHandel();
 		if(isHot){
-			System.out.println("hotTeams: "+hotNum+" "+sortBy);
 			ArrayList<HotTeamsVO> vo = tds.hotTeams(hotNum,sortBy);
 			tt.transfer_hot(out, vo, sortBy);
 		}else if(isHigh){
 			if(sortBy.equals("-"))
 				sortBy = "winRate";
-			System.out.println("sortTeamHigh: "+number+" "+sortBy+" "+isDesc);
 			ArrayList<TeamVO> vo = tds.sortTeamHigh(number,sortBy, isDesc);
 			tt.transfer_h(out, vo);
 		}else{
@@ -81,11 +78,9 @@ public class TeamCommand {
 			ArrayList<TeamVO> vo = new ArrayList<TeamVO>();
 			if(isAvg){
 				
-				System.out.println("sortTeamNormalAvg: "+number+" "+AVGParam(sortBy)+" "+isDesc);
 				vo = tds.sortTeamNormalAvg(number,AVGParam(sortBy), isDesc);
 				tt.transfer_avgn(out, vo);
 			}else{
-				System.out.println("sortTeamNormal: "+number+" "+sortBy+" "+isDesc);
 				vo = tds.sortTeamNormal(number,sortBy, isDesc);
 				tt.transfer_n(out, vo);
 			}

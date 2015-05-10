@@ -9,7 +9,5 @@ public class Config {
 	public void setData(String dataSourse){
 		DataInitial.setPath(dataSourse);
 		DataInitial.init();
-
-		System.out.println(dataSourse);
 	}
 }

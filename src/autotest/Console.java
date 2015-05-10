@@ -2,7 +2,6 @@ package autotest;
 
 import java.io.PrintStream;
 
-import data.DataInitial;
 import de.tototec.cmdoption.CmdlineParser;
 import de.tototec.cmdoption.CmdlineParserException;
 
