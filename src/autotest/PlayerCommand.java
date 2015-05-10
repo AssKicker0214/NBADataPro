@@ -110,10 +110,7 @@ public class PlayerCommand extends TeamCommand{
 			pt.transfer_king(out, po, sortBy);
 		}else{
 			if(positionFilterField.size()==0){
-				positionFilterField.add("F");
-				positionFilterField.add("G");
-				positionFilterField.add("C");
-				
+				positionFilterField.add("all");
 			}
 			if(leagueFilterField.size()==0){
 				leagueFilterField.add("W"); 

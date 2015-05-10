@@ -1,12 +1,16 @@
 package autotest;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
+
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException {
 		Console console = new Console();
 //		console.execute(System.out, args);
-		console.execute(System.out, new String[] {"--datasource","F:/软件工程与计算3/迭代1/迭代一数据"});
-		console.execute(System.out, new String[] {"-player","-sort","numOfGame.desc"});
+		console.execute(new PrintStream(new File("a.txt")), new String[] {"--datasource","F:/软件工程与计算3/迭代1/迭代一数据"});
+		console.execute(new PrintStream(new File("a.txt")), new String[] {"-team","-all","-total"});
 //		console.execute(System.out, new String[] {"-player","-all","-n","10"});
 //		console.execute(System.out, new String[] {"-player","-high","-n","10","-sort","frequency.desc"});
 //		console.execute(System.out, new String[] {"-player","-hot","assist","-n","5"});
