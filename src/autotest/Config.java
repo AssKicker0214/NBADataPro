@@ -5,7 +5,7 @@ import de.tototec.cmdoption.CmdOption;
 
 public class Config {
 	
-	@CmdOption(names={"--datasourse"},args={"dataSourse"})
+	@CmdOption(names={"--datasource"},args={"dataSourse"})
 	public void setData(String dataSourse){
 		DataInitial.setPath(dataSourse);
 		DataInitial.init();
