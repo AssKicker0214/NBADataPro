@@ -26,6 +26,7 @@ public class PlayerDataHandel implements PlayerDataService {
             highInfo.add("photo");
             highInfo.add("age");
             highInfo.add("position");
+            highInfo.add("teamName");
             highInfo.add("league");
             highInfo.add("assistEfficient");
             highInfo.add("blockShotEfficient");
@@ -167,6 +168,7 @@ public class PlayerDataHandel implements PlayerDataService {
             avgNormalInfo.add("photo");
             avgNormalInfo.add("age");
             avgNormalInfo.add("position");
+            avgNormalInfo.add("teamName");
             avgNormalInfo.add("league");
             avgNormalInfo.add("avgAssist");
             avgNormalInfo.add("avgBlockShot");
@@ -197,6 +199,7 @@ public class PlayerDataHandel implements PlayerDataService {
             normalInfo.add("id");
             normalInfo.add("photo");
             normalInfo.add("position");
+            normalInfo.add("teamName");
             normalInfo.add("league");
             normalInfo.add("age");
             normalInfo.add("assist");
@@ -740,19 +743,19 @@ public class PlayerDataHandel implements PlayerDataService {
             if (numS == -1){
                 return true;
             }
-            if (playerVO.age >= numS) {
+            if (playerVO.age > numS) {
                 return true;
             } else {
                 return false;
             }
         } else {
             if (numS == -1){
-                if (playerVO.age < numE){
+                if (playerVO.age <= numE){
                     return true;
                 }else {
                     return false;
                 }
-            }else if (playerVO.age >= numS && playerVO.age < numE) {
+            }else if (playerVO.age > numS && playerVO.age <= numE) {
                 return true;
             } else {
                 return false;
