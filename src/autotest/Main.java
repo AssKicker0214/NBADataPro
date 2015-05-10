@@ -1,10 +1,15 @@
 package autotest;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintStream;
+
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException {
 		Console console = new Console();
 //		console.execute(System.out, args);
+
 		console.execute(System.out, new String[] {"--datasourse","/Users/chenghao/Desktop/迭代一数据"});
 //		console.execute(System.out, new String[] {"-player","-sort","numOfGame.desc"});
 //		console.execute(System.out, new String[] {"-player","-all","-n","10"});

@@ -110,10 +110,7 @@ public class PlayerCommand extends TeamCommand{
 			pt.transfer_king(out, po, sortBy);
 		}else{
 			if(positionFilterField.size()==0){
-				positionFilterField.add("F");
-				positionFilterField.add("G");
-				positionFilterField.add("C");
-				
+				positionFilterField.add("all");
 			}
 			if(leagueFilterField.size()==0){
 				leagueFilterField.add("W"); 
@@ -129,6 +126,7 @@ public class PlayerCommand extends TeamCommand{
 				if(isAvg){
 					if(sortField.size()==0)
 						sortField.add(new sortParam("avgPoint",true));
+
 					po = pds.filterNormalAvg(sortField, positionFilterField, leagueFilterField, startAge, endAge, number);
 					pt.transfer_avgn(out, po);
 				}else{
@@ -146,6 +144,9 @@ public class PlayerCommand extends TeamCommand{
 		hotNum = 5;
 		sortBy = "-";
 		isDesc = true;
+		positionFilterField.clear();
+		leagueFilterField.clear();
+		sortField.clear();
 	}
 	
 }
