@@ -4,30 +4,32 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 
 import vo.playervo.*;
+import dataservice.player.PlayerDataHandel;
 import dataservice.player.PlayerDataService;
-import dataservice.player.PlayerData_stub;
 import dataservice.player.sortParam;
 import de.tototec.cmdoption.CmdCommand;
 import de.tototec.cmdoption.CmdOption;
 
 @CmdCommand(names={"-player","-p"},description="Show Player Infomation")
 public class PlayerCommand extends TeamCommand{
-	
+//	int number = 50;
 	public PlayerCommand(){
 		number = 50;
 	}
 	
 	boolean isDailyKing = false;
 	boolean isSeasonKing = false;
+	int startAge=-1;
+	int endAge=-1;
 	ArrayList<String> positionFilterField = new ArrayList<String>();
 	ArrayList<String> leagueFilterField = new ArrayList<String>();
-	ArrayList<String> ageFilterField = new ArrayList<String>();
 	ArrayList<sortParam> sortField = new ArrayList<sortParam>();
 	
 	@CmdOption(names={"-king"},args={"sort"},description="show the king of **",
-			conflictsWith={"-avg","-total","-sort","-fliter","-hot","-all"})
+			conflictsWith={"-avg","-total","-sort","-filter","-hot","-all"})
 	public void king(String sort){
-		sortBy = sort;
+		
+		sortBy = AVGParam(sort);
 	}
 	@CmdOption(names={"-season"},description="season king",requires={"-king"},conflictsWith={"-daily"})
 	public void seasonKing(){
@@ -42,7 +44,10 @@ public class PlayerCommand extends TeamCommand{
 		String[] result = sort.split(",");
 		for(int i=0;i<result.length;i++){
 			sortParam sp = new sortParam();
-			String[] temp = sort.split("."); 
+			String[] temp = sort.split("\\."); 
+			
+			if(isAvg)
+				temp[0] = AVGParam(temp[0]);
 			sp.field = temp[0];
 			if(temp[1].equals("desc"))
 				sp.isDesc = true;
@@ -53,54 +58,104 @@ public class PlayerCommand extends TeamCommand{
 	}
 	@CmdOption(names={"-filter"},args={"filter"},description="filter the players")
 	public void fliter(String filter){
+		System.out.println(filter);
 		String[] result = filter.split(",");
 		String[] temp = {"",""};
 		for(int i=0;i<result.length;i++){
-			temp = result[i].split(".");
+			temp = result[i].split("\\.");
 			if(temp[0].equals("position"))
-				positionFilterField.add(temp[1]);
+				positionFilterField.add(temp[1].toUpperCase());
 			else if(temp[0].equals("league"))
-				leagueFilterField.add(temp[1]);
-			else if(temp[0].equals("age"))
-				ageFilterField.add(temp[1]);
+				leagueFilterField.add(temp[1].substring(0,1).toUpperCase());
+			else if(temp[0].equals("age")){
+				switch(temp[1]){
+				case "<=22": endAge = 22;break;
+				case "22< X <=25": startAge = 22;endAge = 25;break;
+				case "25< X <=30": startAge = 25;endAge = 30;break;
+				case ">30": startAge = 30;break;
+				}
+				
+			}
 		}
 	}
 	
+	public String AVGParam(String sortBy){
+		String sort = "";
+		switch(sortBy){
+		case "score":sort = "avgPoint";break;
+		case "point":sort = "avgPoint";break;
+		case "rebound":sort = "avgRebound";break;
+		case "assist":sort = "avgAssist";break;
+		case "blockShot":sort = "avgBlockShot";break;
+		case "steal":sort = "avgSteal";break;
+		case "foul":sort = "avgFoul";break;
+		case "minute":sort = "avgMinute";break;
+		default :return sortBy;
+		
+		}
+		return sort;
+	}
+	
 	public void optionHandler(PrintStream out){
-	/*	PlayerTransfer pt = new PlayerTransfer();
-		PlayerDataService pds = new PlayerData_stub();
+		System.out.print("player | ");
+		PlayerTransfer pt = new PlayerTransfer();
+		PlayerDataService pds = new PlayerDataHandel();
 		if(isHot){
+			System.out.println("hotPlayer: "+hotNum+" "+sortBy);
 			ArrayList<HotPlayersVO> po = pds.hotPlayer(hotNum, sortBy); 
 			pt.transfer_hot(out, po, sortBy);			
 		}else if(isDailyKing){
-			ArrayList<HotPlayersVO> po = pds.DailyKing(hotNum, sortBy); 
+			System.out.println("DailyKing: "+hotNum+" "+sortBy);
+			ArrayList<HotPlayersVO> po = pds.DailyKing(hotNum, sortBy,pds.getLastDay()); 
 			pt.transfer_king(out, po, sortBy);
 		}else if(isSeasonKing){
+			System.out.println("SeasonKing: "+hotNum+" "+sortBy);
 			ArrayList<HotPlayersVO> po = pds.SeasonKing(hotNum, sortBy); 
 			pt.transfer_king(out, po, sortBy);
 		}else{
-			if(positionFilterField.size()==0)
-				positionFilterField.add("All");
-			if(leagueFilterField.size()==0)
-				leagueFilterField.add("All");
-			if(ageFilterField.size()==0)
-				ageFilterField.add("All");
-			
+			if(positionFilterField.size()==0){
+				positionFilterField.add("F");
+				positionFilterField.add("G");
+				positionFilterField.add("C");
+				
+			}
+			if(leagueFilterField.size()==0){
+				leagueFilterField.add("W"); 
+				leagueFilterField.add("E");
+			}
+			ArrayList<PlayerVO> po  = new ArrayList<PlayerVO>();
 			if(isHigh){
 				if(sortField.size()==0)
-					sortField.add(new sortParam("point",true));
-				ArrayList<PlayerVO> po = pds.filterNormal(sortField, positionFilterField, leagueFilterField, ageFilterField, number, isAvg);
+					sortField.add(new sortParam("realShot",true));
+				System.out.println("filterHigh: "+sortField.get(0).field+sortField.get(0).isDesc+" "+positionFilterField+" "+leagueFilterField
+						+" "+startAge+" "+endAge+" "+number);
+				po = pds.filterHigh(sortField, positionFilterField, leagueFilterField, startAge, endAge, number);
 				pt.transfer_h(out, po);
 			}else{
-				if(sortField.size()==0)
-					sortField.add(new sortParam("realShot",true));
-				ArrayList<PlayerVO> po = pds.filterHigh(sortField, positionFilterField, leagueFilterField, ageFilterField, number, isAvg);
-				if(isAvg)
+				if(isAvg){
+					if(sortField.size()==0)
+						sortField.add(new sortParam("avgPoint",true));
+					System.out.println("filterNormalAvg: "+sortField.get(0).field+sortField.get(0).isDesc+" "+positionFilterField+" "+leagueFilterField
+							+" "+startAge+" "+endAge+" "+number);
+					po = pds.filterNormalAvg(sortField, positionFilterField, leagueFilterField, startAge, endAge, number);
 					pt.transfer_avgn(out, po);
-				else
+				}else{
+					if(sortField.size()==0)
+						sortField.add(new sortParam("point",true));
+					System.out.println("filterNormal: "+sortField.get(0).field+sortField.get(0).isDesc+" "+positionFilterField+" "+leagueFilterField
+							+" "+startAge+" "+endAge+" "+number);
+					po = pds.filterNormal(sortField, positionFilterField, leagueFilterField, startAge, endAge, number);
 					pt.transfer_n(out, po);
+				}
 			}
-		}*/
+		}
+		isAvg = true;
+		isHot = false;
+		isHigh = false;
+		number = 50;
+		hotNum = 5;
+		sortBy = "-";
+		isDesc = true;
 	}
 	
 }

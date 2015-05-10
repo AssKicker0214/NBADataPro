@@ -20,7 +20,8 @@ public class PlayerTransfer {
 			temp.setUpgradeRate(vo.get(i).upgradeRate);
 			temp.setValue(vo.get(i).value);
 			
-			out.print(temp);
+//			out.print(temp);
+				out.append(temp.toString());
 		}
 	}
 	public void transfer_king(PrintStream out,ArrayList<HotPlayersVO> vo,String field){
@@ -32,7 +33,8 @@ public class PlayerTransfer {
 			temp.setTeamName(vo.get(i).teamName);
 			temp.setValue(vo.get(i).value);
 			
-			out.print(temp);
+//			out.print(temp);
+				out.append(temp.toString());
 		}
 	}
 	public void transfer_h(PrintStream out,ArrayList<PlayerVO> vo){
@@ -57,7 +59,8 @@ public class PlayerTransfer {
 			temp.setStealEfficient(vo.get(i).stealEfficient);
 			temp.setTeamName(vo.get(i).teamName);
 			
-			out.print(temp);
+//			out.print(temp);
+				out.append(temp.toString());
 		}
 	}
 	public void transfer_n(PrintStream out,ArrayList<PlayerVO> vo){
@@ -83,7 +86,8 @@ public class PlayerTransfer {
 			temp.setTeamName(vo.get(i).teamName);
 			temp.setThree(vo.get(i).three);
 			
-			out.print(temp);
+//			out.print(temp);
+				out.append(temp.toString());
 		}
 	}
 	public void transfer_avgn(PrintStream out,ArrayList<PlayerVO> vo){
@@ -98,18 +102,19 @@ public class PlayerTransfer {
 			temp.setFoul(vo.get(i).avgFoul);
 			temp.setMinute(vo.get(i).avgMinute);
 			temp.setName(vo.get(i).name);
-			temp.setNumOfGame(vo.get(i).numOfGame);
+			temp.setNumOfGame(vo.get(i).numOfGame);	
 			temp.setOffend(vo.get(i).avgOffend);
 			temp.setPenalty(vo.get(i).penalty);
 			temp.setPoint(vo.get(i).avgPoint);
 			temp.setRebound(vo.get(i).avgRebound);
 			temp.setShot(vo.get(i).shot);
-			temp.setStart(vo.get(i).start);
+			temp.setStart(vo.get(i).start);	
 			temp.setSteal(vo.get(i).avgSteal);
 			temp.setTeamName(vo.get(i).teamName);
 			temp.setThree(vo.get(i).three);
 			
-			out.print(temp);
+//			out.print(temp);
+				out.append(temp.toString());
 		}
 	}
 }
