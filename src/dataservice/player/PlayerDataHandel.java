@@ -170,6 +170,7 @@ public class PlayerDataHandel implements PlayerDataService {
             avgNormalInfo.add("position");
             avgNormalInfo.add("teamName");
             avgNormalInfo.add("league");
+            avgNormalInfo.add("shot");
             avgNormalInfo.add("avgAssist");
             avgNormalInfo.add("avgBlockShot");
             avgNormalInfo.add("avgDefend");
@@ -325,11 +326,7 @@ public class PlayerDataHandel implements PlayerDataService {
     private class ComparePlayVO implements Comparator<PlayerVO> {
         @Override
         public int compare(PlayerVO o1, PlayerVO o2) {
-            if (PlayerDataHandel.this.compare(o1, o2, sortBy)) {
-                return 1;
-            } else {
-                return -1;
-            }
+            return PlayerDataHandel.this.compareAll(o1, o2, sortBy);
         }
 
         private ArrayList<sortParam> sortBy;
@@ -339,19 +336,19 @@ public class PlayerDataHandel implements PlayerDataService {
         }
     }
 
-    private boolean compare(PlayerVO playerVO1, PlayerVO playerVO2, ArrayList<sortParam> sortBy) {
+    private int compareAll(PlayerVO playerVO1, PlayerVO playerVO2, ArrayList<sortParam> sortBy) {
         for (int i = 0; i < sortBy.size(); i++) {
             int res = compare(playerVO1, playerVO2, sortBy.get(i));
             if (res > 0) {
-                return true;
+                return 1;
             } else if (res == 0) {
                 continue;
             } else {
-                return false;
+                return -1;
             }
         }
 
-        return true;
+        return 0;
     }
 
     private int compare(PlayerVO playerVO1, PlayerVO playerVO2, sortParam sortParam) {
@@ -692,7 +689,7 @@ public class PlayerDataHandel implements PlayerDataService {
             }
         }
         
-        System.out.println(sortBy.get(0).field);
+//        System.out.println(sortBy.get(0).field);
         res.sort(new ComparePlayVO(sortBy));
         return res;
     }

@@ -129,12 +129,7 @@ public class PlayerCommand extends TeamCommand{
 				if(isAvg){
 					if(sortField.size()==0)
 						sortField.add(new sortParam("avgPoint",true));
-					System.out.println(sortField.get(0).field+" "+sortField.get(0).isDesc+positionFilterField+leagueFilterField+startAge+" "+endAge+" "+number);
 					po = pds.filterNormalAvg(sortField, positionFilterField, leagueFilterField, startAge, endAge, number);
-					for (int i = 0; i <po.size();i++){
-						PlayerVO vo = po.get(i);
-						System.out.println(vo.name+" "+vo.teamName+" "+vo.numOfGame+" "+vo.start);
-					}
 					pt.transfer_avgn(out, po);
 				}else{
 					if(sortField.size()==0)
