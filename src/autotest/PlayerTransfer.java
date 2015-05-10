@@ -102,13 +102,13 @@ public class PlayerTransfer {
 			temp.setFoul(vo.get(i).avgFoul);
 			temp.setMinute(vo.get(i).avgMinute);
 			temp.setName(vo.get(i).name);
-			temp.setNumOfGame(vo.get(i).numOfGame);
+			temp.setNumOfGame(vo.get(i).numOfGame);	System.out.println("-----------"+vo.get(i).numOfGame+"----------");
 			temp.setOffend(vo.get(i).avgOffend);
 			temp.setPenalty(vo.get(i).penalty);
 			temp.setPoint(vo.get(i).avgPoint);
 			temp.setRebound(vo.get(i).avgRebound);
 			temp.setShot(vo.get(i).shot);
-			temp.setStart(vo.get(i).start);
+			temp.setStart(vo.get(i).start);	System.out.println("-----------"+vo.get(i).numOfGame+"----------");
 			temp.setSteal(vo.get(i).avgSteal);
 			temp.setTeamName(vo.get(i).teamName);
 			temp.setThree(vo.get(i).three);

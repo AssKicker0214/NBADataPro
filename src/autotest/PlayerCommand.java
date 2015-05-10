@@ -4,7 +4,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 
 import vo.playervo.*;
-import dataservice.player.PlayerData_stub;
+import dataservice.player.PlayerDataHandel;
 import dataservice.player.PlayerDataService;
 import dataservice.player.sortParam;
 import de.tototec.cmdoption.CmdCommand;
@@ -12,7 +12,7 @@ import de.tototec.cmdoption.CmdOption;
 
 @CmdCommand(names={"-player","-p"},description="Show Player Infomation")
 public class PlayerCommand extends TeamCommand{
-	int number = 50;
+//	int number = 50;
 	public PlayerCommand(){
 		number = 50;
 	}
@@ -44,7 +44,7 @@ public class PlayerCommand extends TeamCommand{
 		String[] result = sort.split(",");
 		for(int i=0;i<result.length;i++){
 			sortParam sp = new sortParam();
-			String[] temp = sort.split("."); 
+			String[] temp = sort.split("\\."); 
 			
 			if(isAvg)
 				temp[0] = AVGParam(temp[0]);
@@ -62,9 +62,9 @@ public class PlayerCommand extends TeamCommand{
 		String[] result = filter.split(",");
 		String[] temp = {"",""};
 		for(int i=0;i<result.length;i++){
-			temp = result[i].split(".");
+			temp = result[i].split("\\.");
 			if(temp[0].equals("position"))
-				positionFilterField.add(temp[1]);
+				positionFilterField.add(temp[1].toUpperCase());
 			else if(temp[0].equals("league"))
 				leagueFilterField.add(temp[1].substring(0,1).toUpperCase());
 			else if(temp[0].equals("age")){
@@ -99,7 +99,7 @@ public class PlayerCommand extends TeamCommand{
 	public void optionHandler(PrintStream out){
 		System.out.print("player | ");
 		PlayerTransfer pt = new PlayerTransfer();
-		PlayerDataService pds = new PlayerData_stub();
+		PlayerDataService pds = new PlayerDataHandel();
 		if(isHot){
 			System.out.println("hotPlayer: "+hotNum+" "+sortBy);
 			ArrayList<HotPlayersVO> po = pds.hotPlayer(hotNum, sortBy); 
@@ -127,7 +127,7 @@ public class PlayerCommand extends TeamCommand{
 			if(isHigh){
 				if(sortField.size()==0)
 					sortField.add(new sortParam("realShot",true));
-				System.out.println("filterHigh: "+sortField+" "+positionFilterField+" "+leagueFilterField
+				System.out.println("filterHigh: "+sortField.get(0).field+sortField.get(0).isDesc+" "+positionFilterField+" "+leagueFilterField
 						+" "+startAge+" "+endAge+" "+number);
 				po = pds.filterHigh(sortField, positionFilterField, leagueFilterField, startAge, endAge, number);
 				pt.transfer_h(out, po);
@@ -135,20 +135,27 @@ public class PlayerCommand extends TeamCommand{
 				if(isAvg){
 					if(sortField.size()==0)
 						sortField.add(new sortParam("avgPoint",true));
-					System.out.println("filterNormalAvg: "+sortField+" "+positionFilterField+" "+leagueFilterField
+					System.out.println("filterNormalAvg: "+sortField.get(0).field+sortField.get(0).isDesc+" "+positionFilterField+" "+leagueFilterField
 							+" "+startAge+" "+endAge+" "+number);
 					po = pds.filterNormalAvg(sortField, positionFilterField, leagueFilterField, startAge, endAge, number);
 					pt.transfer_avgn(out, po);
 				}else{
 					if(sortField.size()==0)
 						sortField.add(new sortParam("point",true));
-					System.out.println("filterNormal: "+sortField+" "+positionFilterField+" "+leagueFilterField
+					System.out.println("filterNormal: "+sortField.get(0).field+sortField.get(0).isDesc+" "+positionFilterField+" "+leagueFilterField
 							+" "+startAge+" "+endAge+" "+number);
 					po = pds.filterNormal(sortField, positionFilterField, leagueFilterField, startAge, endAge, number);
 					pt.transfer_n(out, po);
 				}
 			}
 		}
+		isAvg = true;
+		isHot = false;
+		isHigh = false;
+		number = 50;
+		hotNum = 5;
+		sortBy = "-";
+		isDesc = true;
 	}
 	
 }

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import vo.teamvo.HotTeamsVO;
 import vo.teamvo.TeamVO;
-import dataservice.team.TeamData_stub;
+import dataservice.team.TeamDataHandel;
 import dataservice.team.TeamDataService;
 import de.tototec.cmdoption.CmdCommand;
 import de.tototec.cmdoption.CmdOption;
@@ -52,7 +52,7 @@ public class TeamCommand {
 	}
 	@CmdOption(names={"-sort"},args={"sort"},description="sort data")
 	public void sort(String sort){
-		String[] result = sort.split("."); 
+		String[] result = sort.split("\\."); 
 		if(result[0].equals("score"))
 			result[0] = "point";
 		sortBy = result[0];
@@ -63,7 +63,7 @@ public class TeamCommand {
 	public void optionHandler(PrintStream out){
 		System.out.print("team | ");
 		TeamTransfer tt = new TeamTransfer();
-		TeamDataService tds = new TeamData_stub();
+		TeamDataService tds = new TeamDataHandel();
 		if(isHot){
 			System.out.println("hotTeams: "+hotNum+" "+sortBy);
 			ArrayList<HotTeamsVO> vo = tds.hotTeams(hotNum,sortBy);
@@ -90,6 +90,13 @@ public class TeamCommand {
 				tt.transfer_n(out, vo);
 			}
 		}
+		isAvg = true;
+		isHot = false;
+		isHigh = false;
+		number = 30;
+		hotNum = 5;
+		sortBy = "-";
+		isDesc = true;
 	}
 	
 	public String AVGParam(String sortBy){
