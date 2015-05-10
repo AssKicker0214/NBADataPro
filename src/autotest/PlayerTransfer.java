@@ -20,7 +20,7 @@ public class PlayerTransfer {
 			temp.setUpgradeRate(vo.get(i).upgradeRate);
 			temp.setValue(vo.get(i).value);
 			
-			out.print(i+1);
+			out.println(i+1);
 			out.println(temp);
 		}
 	}
@@ -33,7 +33,7 @@ public class PlayerTransfer {
 			temp.setTeamName(vo.get(i).teamName);
 			temp.setValue(vo.get(i).value);
 			
-			out.print(i+1);
+			out.println(i+1);
 			out.println(temp);
 		}
 	}
@@ -59,7 +59,7 @@ public class PlayerTransfer {
 			temp.setStealEfficient(vo.get(i).stealEfficient);
 			temp.setTeamName(vo.get(i).teamName);
 			
-			out.print(i+1);
+			out.println(i+1);
 			out.println(temp);
 		}
 	}
@@ -86,7 +86,7 @@ public class PlayerTransfer {
 			temp.setTeamName(vo.get(i).teamName);
 			temp.setThree(vo.get(i).three);
 			
-			out.print(i+1);
+			out.println(i+1);
 			out.println(temp);
 		}
 	}
@@ -113,7 +113,7 @@ public class PlayerTransfer {
 			temp.setTeamName(vo.get(i).teamName);
 			temp.setThree(vo.get(i).three);
 			
-			out.print(i+1);
+			out.println(i+1);
 			out.println(temp);
 		}
 	}
