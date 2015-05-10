@@ -7,9 +7,7 @@ import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * Created by chenghao on 15/5/5.
@@ -29,41 +27,50 @@ public class Configure {
     }
 
     public static void set(String path) {
-        Document document = getConfigureDocument();
-        Element root = document.getRootElement();
-        Element pathElement = root.element("path");
-        pathElement.setText(path);
-        OutputFormat format = OutputFormat.createPrettyPrint();
-        XMLWriter output = null;
+        BufferedWriter bw = null;
         try {
-            output = new XMLWriter(new FileWriter("src/conf.xml"), format);
-            output.write(document);
+            bw = new BufferedWriter(new OutputStreamWriter((new FileOutputStream(new File("src/conf.xml")))));
+            bw.write(path);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                output.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+        }finally {
+            if (bw != null) {
+                try {
+                    bw.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
 
-    private static Document getConfigureDocument() {
-        SAXReader saxReader = new SAXReader();
-        try {
-            Document document = saxReader.read(new File("src/conf.xml"));
-            return document;
-        } catch (DocumentException e) {
-            e.printStackTrace();
-        }
+    private static String getConfigureDocument() {
         return null;
     }
 
     private static String getRootPath() {
-        Element root = getConfigureDocument().getRootElement();
-        Element pathElement = root.element("path");
-        String rootPath = pathElement.getTextTrim();
-        return rootPath;
+        BufferedReader br = null;
+        try {
+            br = new BufferedReader(new InputStreamReader(new FileInputStream(new File("src/conf.xml"))));
+            String path = br.readLine();
+            if (path != null){
+                return path;
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return "";
     }
 }
