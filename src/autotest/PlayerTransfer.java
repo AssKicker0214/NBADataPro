@@ -73,7 +73,7 @@ public class PlayerTransfer {
 			temp.setEfficiency(vo.get(i).efficiency);
 			temp.setFault(vo.get(i).fault);
 			temp.setFoul(vo.get(i).foul);
-			temp.setMinute(vo.get(i).minute);
+			temp.setMinute(vo.get(i).minute/60);
 			temp.setName(vo.get(i).name);
 			temp.setNumOfGame(vo.get(i).numOfGame);
 			temp.setOffend(vo.get(i).offend);
@@ -100,7 +100,7 @@ public class PlayerTransfer {
 			temp.setEfficiency(vo.get(i).efficiency);
 			temp.setFault(vo.get(i).avgFault);
 			temp.setFoul(vo.get(i).avgFoul);
-			temp.setMinute(vo.get(i).avgMinute);
+			temp.setMinute(vo.get(i).avgMinute/60);
 			temp.setName(vo.get(i).name);
 			temp.setNumOfGame(vo.get(i).numOfGame);	
 			temp.setOffend(vo.get(i).avgOffend);
