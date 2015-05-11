@@ -151,6 +151,9 @@ public class PlayerDataManager {
             case "fault":
                 playerVO.fault = playerData.getFault()[playerVO.id - 1];
                 return;
+            case "foul":
+                playerVO.foul = playerData.getFoul()[playerVO.id - 1];
+                return;
             case "minute":
                 playerVO.minute = playerData.getMinute()[playerVO.id - 1];
                 return;
